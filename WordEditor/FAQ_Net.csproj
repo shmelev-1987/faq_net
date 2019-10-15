@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{31346F86-AA42-4D08-8411-D7E476A83264}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FAQ_Net</RootNamespace>
+    <AssemblyName>FAQ_Net</AssemblyName>
+    <StartupObject>FAQ_Net.MainApp</StartupObject>
+    <ApplicationIcon>help.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_DLL\x64\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ColorTable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Constants.cs" />
+    <Compile Include="FindForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Format.cs" />
+    <Compile Include="G.cs" />
+    <Compile Include="IViewQuestion.cs" />
+    <Compile Include="MainApp.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintRichText.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FindForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FindForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RichTextBoxCustom.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RichTextBoxCustom.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Question.cs" />
+    <Compile Include="QuestionDgvControl.cs" />
+    <Compile Include="QuestionListViewControl.cs" />
+    <Compile Include="RenderColors.cs" />
+    <Compile Include="RichTextBoxCustom.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RtfTable.cs" />
+    <Compile Include="SettingsXml.cs" />
+    <Compile Include="SQLiteUpperLower.cs" />
+    <Compile Include="TwipsConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bino.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BoldSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bullets.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ColorSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copy.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cover_0.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CtrSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cut.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ItalSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LeftSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OpenSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paste.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Prev.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PrevSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PrintSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ReDisSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedoSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RightSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SaveSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TopLeft.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UnderSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UnDisSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UndoSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\binoculars.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LineSpSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HLiteSml.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="help.ico" />
+    <None Include="Resources\up.png" />
+    <None Include="Resources\down.png" />
+    <None Include="Resources\sort_desc.png" />
+    <None Include="Resources\sort_asc.png" />
+    <None Include="Resources\strikeout.png" />
+    <None Include="Resources\No.png" />
+    <None Include="Resources\OK.png" />
+    <None Include="Resources\Favorite.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\Folder.png" />
+    <None Include="Resources\expand.png" />
+    <None Include="Resources\collapse.png" />
+    <None Include="Resources\NewFolder2.png" />
+    <None Include="Resources\NewFolder1.png" />
+    <None Include="Resources\NewDoc.png" />
+    <None Include="Resources\Normal.bmp" />
+    <None Include="Resources\Sub.bmp" />
+    <None Include="Resources\Super.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IndentGrip\IndentGrip.csproj">
+      <Project>{86D83ABB-6547-4FEC-99BE-8BACD41A3A01}</Project>
+      <Name>IndentGrip</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IndentLine\IndentLine.csproj">
+      <Project>{10145BEA-0BBD-48D7-850D-8E9C09A2A85E}</Project>
+      <Name>IndentLine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ruler\Ruler.csproj">
+      <Project>{F9935C11-1BB0-4174-B9B2-EFD6580390D8}</Project>
+      <Name>Ruler</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>Клиентский профиль .NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Установщик Windows 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
