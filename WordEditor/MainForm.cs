@@ -2634,31 +2634,19 @@ namespace FAQ_Net
         switch (e.KeyCode)
         {
           case Keys.B:
-            FontStyle style = richText.SelectionFont.Style;
             e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
-            if (richText.SelectionFont.Bold)
-              style &= ~FontStyle.Bold;
-            else
-              style |= FontStyle.Bold;
-            richText.SelectionFont = new Font(richText.SelectionFont, style);
+            bold.Checked = !bold.Checked;
+            Tools_Click(bold, new EventArgs());
             break;
           case Keys.U:
-            style = richText.SelectionFont.Style;
             e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
-            if (richText.SelectionFont.Underline)
-              style &= ~FontStyle.Underline;
-            else
-             style |= FontStyle.Underline;
-            richText.SelectionFont = new Font(richText.SelectionFont, style);
+            under.Checked = !under.Checked;
+            Tools_Click(under, new EventArgs());
             break;
           case Keys.I:
-            style = richText.SelectionFont.Style;
             e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
-            if (richText.SelectionFont.Italic)
-              style &= ~FontStyle.Italic;
-            else
-              style |= FontStyle.Italic;
-            richText.SelectionFont = new Font(richText.SelectionFont, style);
+            italic.Checked = !italic.Checked;
+            Tools_Click(italic, new EventArgs());
             break;
         }
       }
