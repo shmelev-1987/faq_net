@@ -57,6 +57,7 @@ namespace FAQ_Net
         bool DGVQuestionsDrag = false;          //Отметка переноса вопроса из DGVQuestions
         FindForm fnd;
         bool lastOrderByDesc = false;
+    tools.TablePropertyUserControl _tablePropertyUserControl;
 
         public MainForm()
         {
@@ -83,12 +84,58 @@ namespace FAQ_Net
             this.richText.SelectionChanged += new System.EventHandler(this.RichText_SelectionChanged);
             this.richText.TextChanged += new System.EventHandler(this.RichText_TextChanged);
             this.richText.Enter += new System.EventHandler(this.richText_Enter);
+            this.richText.KeyDown += richText_KeyDown;
             _settingsXml = new SettingsXml();
             _settingsXml.LoadFormPosition(this);
             _settingsXml.SaveFormPosition(this);
 
+            // Компонент добавления таблицы
+            var dropDown = new tools.ToolStripTableSizeSelector();
+            dropDown.Opening += DropDown_Opening;
+            dropDown.Selector.TableSizeSelected += Selector_TableSizeSelected;
+            tsddbInsertTable.DropDown = dropDown;
+            var tsmiInsertTable = new ToolStripMenuItem
+            {
+              Name = "tsmiInsertTable",
+              Size = new Size(152, 22),
+              Text = "Создать большую таблицу",
+              Tag = "InsertTable"
+            };
+            tsmiInsertTable.Click += tsmiInsertTable_Click;
+            tsddbInsertTable.DropDownItems.Add(tsmiInsertTable);
+
+            // Компонент для создания таблиц с расширенными настройками
+            _tablePropertyUserControl = new tools.TablePropertyUserControl();
+            _tablePropertyUserControl.OnCreateTableClickButton += Selector_TableSizeSelected;
             // Set Rich Textbox and right margin line.
             //ruler1.InitializeObjects(this.richText, this.rightMarginLine);
+        }
+
+        private void tsmiInsertTable_Click(object sender, EventArgs e)
+        {
+          _tablePropertyUserControl.Parent = splitContainer1.Panel2;
+          _tablePropertyUserControl.BringToFront();
+          _tablePropertyUserControl.Location = new Point(MainSC.Panel1.ClientSize.Width + 100, 100);
+        }
+
+        private void DropDown_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+          var c = tsddbInsertTable.DropDown as tools.ToolStripTableSizeSelector;
+          if (c != null)
+          {
+            c.Selector.SelectedSize = new Size(0, 0);
+            c.Selector.VisibleRange = new Size(10, 10);
+          }
+        }
+
+        private void CreateRtfTable(int countRows, int countColumns)
+        {
+          richText.SelectedRtf = RtfTable.InsertTableInRichTextBox(countRows, countColumns, 1000);
+        }
+
+        private void Selector_TableSizeSelected(object sender, tools.TableSizeEventArgs e)
+        {
+          CreateRtfTable(e.SelectedSize.Height, e.SelectedSize.Width);
         }
 
         //        Вопервых импортируем функцию из user32 - SendMessage
@@ -2580,14 +2627,48 @@ namespace FAQ_Net
           cutRichText.Enabled = (richText.SelectedText.Length > 0);
         }
 
-    private void tsmiAddTable_Click(object sender, EventArgs e)
+    private void richText_KeyDown(object sender, KeyEventArgs e)
     {
-      // TODO: доработать создание таблицы, создать интерфейс для ввода параметров таблицы
-      System.Data.DataTable dt = new System.Data.DataTable();
-      dt.Columns.Add("test");
-      dt.Rows.Add("row1");
-      dt.Rows.Add("row2");
-      richText.Rtf = RtfTable.InsertTableInRichTextBox(dt, 100);
+      if (e.Control)
+      {
+        FontStyle style = richText.SelectionFont.Style;
+        switch (e.KeyCode)
+        {
+          case Keys.B:
+            e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            if (richText.SelectionFont.Bold)
+              style &= ~FontStyle.Bold;
+            else
+              style |= FontStyle.Bold;
+            richText.SelectionFont = new Font(richText.SelectionFont, style);
+            break;
+          case Keys.U:
+            e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            if (richText.SelectionFont.Underline)
+              style &= ~FontStyle.Underline;
+            else
+             style |= FontStyle.Underline;
+            richText.SelectionFont = new Font(richText.SelectionFont, style);
+            break;
+          case Keys.I:
+            e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
+            if (richText.SelectionFont.Italic)
+              style &= ~FontStyle.Italic;
+            else
+              style |= FontStyle.Italic;
+            richText.SelectionFont = new Font(richText.SelectionFont, style);
+            break;
+        }
+      }
+    }
+
+    private void tsmiAboutProgram_Click(object sender, EventArgs e)
+    {
+      using (AboutProgramForm aboutProgramForm = new AboutProgramForm())
+      {
+        aboutProgramForm.ShowInTaskbar = false;
+        aboutProgramForm.ShowDialog();
+      }
     }
   }
 }

@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FAQ.Net 2.0 - Документы с возможностью поиска и редактирования. Разработчик - shmelev-1987@mail.ru")]
-[assembly: AssemblyDescription("FAQ.Net 2.0 - Документы с возможностью поиска и редактирования")]
+[assembly: AssemblyTitle("FAQ.Net - Документы с возможностью поиска и редактирования")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FAQ_Net 2.0")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyProduct("FAQ_Net")]
+[assembly: AssemblyCopyright("Copyright ©  2013-2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,6 +30,6 @@ using System.Resources;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("2.4.0.0")]
-[assembly: AssemblyFileVersion("2.4.0.0")]
+[assembly: AssemblyVersion("2.5.0.0")]
+[assembly: AssemblyFileVersion("2.5.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("ru")]

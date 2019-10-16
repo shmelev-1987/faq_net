@@ -84,6 +84,12 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutProgramForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutProgramForm.Designer.cs">
+      <DependentUpon>AboutProgramForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ColorTable.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     </Compile>
     <Compile Include="PrintRichText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutProgramForm.resx">
+      <DependentUpon>AboutProgramForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FindForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FindForm.cs</DependentUpon>
@@ -125,6 +134,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="tools\TablePropertyUserControl.resx">
+      <DependentUpon>TablePropertyUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -145,6 +157,16 @@
     <Compile Include="RtfTable.cs" />
     <Compile Include="SettingsXml.cs" />
     <Compile Include="SQLiteUpperLower.cs" />
+    <Compile Include="tools\TablePropertyUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="tools\TablePropertyUserControl.Designer.cs">
+      <DependentUpon>TablePropertyUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tools\TableSizeControl.cs" />
+    <Compile Include="tools\ToolStripTableSizeSelector.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TwipsConverter.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="help.ico" />
+    <None Include="Resources\InsertTable.png" />
     <None Include="Resources\up.png" />
     <None Include="Resources\down.png" />
     <None Include="Resources\sort_desc.png" />

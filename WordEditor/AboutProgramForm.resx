@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="rtbAboutApplication.Text" xml:space="preserve">
+    <value>FAQ Net - это десктопное Windows приложение, позволяющее хранить документы Word в единой базе данных с возможностью быстрого поиска информации и иерархической структурой хранения. Приложение портативное (не нужно устанавливать на компьютер, а можно запускать, например, с флешки).
+В приложении встроена функция резервного копирования БД, печати и предварительного просмотра. При этом не обязательно, чтобы Word был установлен на компьютере.
+
+Сайт для поддержки пользователей: https://vk.com/faq_net_free_soft
+Исходный код: https://github.com/shmelev-1987/faq_net
+</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAADAAAAEQcHB3AGBgaLKBsRkF05HpVdOR6XXTkemV05HphdOh+WXTofk106H49eOyCJOiQUXgAA
+        ABEAAAADAAAAAAMDAwEiIiLxGRkZ/2lLNP/ciUv/3IpM/92LTf/ei03/3oxO/9+NT//fjlD/4I5R/9WI
+        Tr8AAAAAAAAAAAAAAAAEBAQLMjIy/yQkJP90VkD/4Y9S/+GQU//ikFT/6ap8/+qtgP/kk1f/5ZRY/+aV
+        Wf/nllvGAAAAAAAAAAAAAAAAAwMDCzExMf8lJSX/c1ZB/+WUWP/mlFn/5pVa//ji0f/55tf/6Jhd/+mZ
+        X//qmmD/65phywAAAAAAAAAAAAAAAAICAgwtLS3/IyMj/3BUP//ol1z/6Zhe/+qZX//tqHb/7qp5/+yb
+        Yv/tnWT/7Z5l/+6eZdEAAAAAAAAAAAAAAAABAQEMKioq/yIiIv9tUDz/6Zhe/+mZXv/qmV//7KNv/+6q
+        ef/rnGP/7J1l/+ydZP/tnWTXAAAAAAAAAAAAAAAAAQEBDCYmJv8gICD/aEw4/+eWW//nllv/6Jdc/+qd
+        Zv/xv5r/6Ztj/+qaYf/qmmD/65ph3QAAAAAAAAAAAAAAAAAAAA0jIyP/Hh4e/2NHM//lk1f/5ZRY/+aV
+        Wf/mlVr/88+1/+mhbP/ol1z/6Jhe/+mYXeMAAAAAAAAAAAAAAAAAAAANHh4e/xsbG/9dQi7/45FU/+OS
+        Vf/kklb/5JZc/+ejcf/23Mr/6aFs/+aWW//nlVrqAAAAAAAAAAAAAAAAAAAADhgYGP8XFxf/Vz0p/+GP
+        Uf/qsIX/7bqU/+KaY//jklb/7LSK//Xbxv/kk1j/5ZNX8AAAAAAAAAAAAAAAAAAAAA4TExP/ExMT/1E3
+        JP/ejE7/89W+//PbyP/gkFX/4Y5R/+ajcP/459r/4pBT/+ORVPYAAAAAAAAAAAAAAAAAAAAPDg4O/w8P
+        D/9KMh//3IpL/+Wqff/03cr/459r/+KZYv/y0rr/6bKI/+COUP/gjlH8AAAAAAAAAAAAAAAAAAAADwkJ
+        Cf8LCwv/RC0a/9uKTP/enm3/3ZBU/+Woef/lqnz/4Jtm/92LTP/ei03/3oxO/31OKwQAAAAAAAAAAAAA
+        AA8EBAT/BgYG/z8pF//cmWX/25Ja/9mGRv/ah0f/245S/9uMUP/biEn/3IlK/9yKS/94TCoJAAAAAAAA
+        AAABAQEPVVVV/35+fv+RjYr/wLGl/8Kwof/DsaP/xbKk/8a1p//HtKb/yLWn/8m2qP+qfFfdAAAAAAAA
+        AAAAAAAAAQEBASAgIHQuLi57ZFRHeJt7YHeaeF11mXZZc5p1VnGcd1pvknFXb49tUm6MaU1tf1QxTwAA
+        AAAAAAAAAAAAAIADAACAAwAAgAMAAIADAACAAwAAgAMAAIADAACAAwAAgAMAAIADAACAAwAAgAEAAIAB
+        AACAAwAAgAMAAA==
+</value>
+  </data>
+</root>
