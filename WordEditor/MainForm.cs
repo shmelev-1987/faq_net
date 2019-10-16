@@ -2631,10 +2631,10 @@ namespace FAQ_Net
     {
       if (e.Control)
       {
-        FontStyle style = richText.SelectionFont.Style;
         switch (e.KeyCode)
         {
           case Keys.B:
+            FontStyle style = richText.SelectionFont.Style;
             e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
             if (richText.SelectionFont.Bold)
               style &= ~FontStyle.Bold;
@@ -2643,6 +2643,7 @@ namespace FAQ_Net
             richText.SelectionFont = new Font(richText.SelectionFont, style);
             break;
           case Keys.U:
+            style = richText.SelectionFont.Style;
             e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
             if (richText.SelectionFont.Underline)
               style &= ~FontStyle.Underline;
@@ -2651,6 +2652,7 @@ namespace FAQ_Net
             richText.SelectionFont = new Font(richText.SelectionFont, style);
             break;
           case Keys.I:
+            style = richText.SelectionFont.Style;
             e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
             if (richText.SelectionFont.Italic)
               style &= ~FontStyle.Italic;
