@@ -314,12 +314,12 @@ namespace FAQ_Net
             string xmlUpdateText = reader.ReadToEnd();
             System.Xml.XmlDocument xmlDocUpdate = new System.Xml.XmlDocument();
             xmlDocUpdate.LoadXml(xmlUpdateText);
-            Version lastVersion = new Version(xmlDocUpdate.SelectSingleNode("//VersionConfig/LastVersion").Value);
+            Version lastVersion = new Version(xmlDocUpdate.SelectSingleNode("//VersionConfig/LastVersion").InnerText);
             if (lastVersion > System.Reflection.Assembly.GetExecutingAssembly().GetName().Version)
             {
               // Отобразить информацию о новой версии
               UpdateUserControl updateUserControl = new UpdateUserControl();
-              updateUserControl.UpdateInfoText = xmlDocUpdate.SelectSingleNode("//VersionConfig/LatestChanges").Value;
+              updateUserControl.UpdateInfoText = xmlDocUpdate.SelectSingleNode("//VersionConfig/LatestChanges").InnerText;
               updateUserControl.DownloadReleaseUrl = "https://github.com/shmelev-1987/faq_net/releases";
               updateUserControl.Parent = this;
               updateUserControl.BringToFront();
