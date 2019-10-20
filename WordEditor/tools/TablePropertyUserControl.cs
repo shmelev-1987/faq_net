@@ -52,11 +52,11 @@ namespace FAQ_Net.tools
       }
     }
 
+    #endregion Перемещение контрола
+
     public void _btnClose_Click(object sender, EventArgs e)
     {
       this.Parent = null;
     }
-
-    #endregion Перемещение контрола
   }
 }

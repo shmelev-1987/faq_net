@@ -109,6 +109,12 @@
     </Compile>
     <Compile Include="PrintRichText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UpdateUserControl.Designer.cs">
+      <DependentUpon>UpdateUserControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AboutProgramForm.resx">
       <DependentUpon>AboutProgramForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -136,6 +142,9 @@
     </Compile>
     <EmbeddedResource Include="tools\TablePropertyUserControl.resx">
       <DependentUpon>TablePropertyUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateUserControl.resx">
+      <DependentUpon>UpdateUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
@@ -252,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="help.ico" />
+    <None Include="LastUpdateInfo.xml" />
     <None Include="Resources\InsertTable.png" />
     <None Include="Resources\up.png" />
     <None Include="Resources\down.png" />

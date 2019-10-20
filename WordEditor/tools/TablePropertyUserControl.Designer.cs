@@ -88,7 +88,7 @@
       // 
       this._btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this._btnClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
-      this._btnClose.Location = new System.Drawing.Point(214, 4);
+      this._btnClose.Location = new System.Drawing.Point(212, 4);
       this._btnClose.Name = "_btnClose";
       this._btnClose.Size = new System.Drawing.Size(20, 20);
       this._btnClose.TabIndex = 56;
@@ -103,7 +103,7 @@
       this._lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
       this._lblHeader.Location = new System.Drawing.Point(0, 0);
       this._lblHeader.Name = "_lblHeader";
-      this._lblHeader.Size = new System.Drawing.Size(237, 28);
+      this._lblHeader.Size = new System.Drawing.Size(235, 28);
       this._lblHeader.TabIndex = 55;
       this._lblHeader.Text = "Создание таблицы";
       this._lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -115,6 +115,7 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+      this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.Controls.Add(this._btnClose);
       this.Controls.Add(this._lblHeader);
       this.Controls.Add(this.numCountColumns);
@@ -123,7 +124,7 @@
       this.Controls.Add(this.label1);
       this.Controls.Add(this.btnCreateTable);
       this.Name = "TablePropertyUserControl";
-      this.Size = new System.Drawing.Size(237, 82);
+      this.Size = new System.Drawing.Size(235, 80);
       this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Control_MouseDown);
       this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Control_MouseMove);
       ((System.ComponentModel.ISupportInitialize)(this.numCountRows)).EndInit();

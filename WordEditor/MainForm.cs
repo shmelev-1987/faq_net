@@ -18,7 +18,7 @@ namespace FAQ_Net
         QuestionDgvControl _questionDgvControl;
         QuestionListViewControl _questionListViewControl;
         private RichTextBoxCustom richText;
-        private SettingsXml _settingsXml;
+        private SharedLibrary.SettingsXml _settingsXml;
         private Format format;
         private System.Drawing.Printing.PageSettings pageSettings;
         private PrintRichText printRtf;
@@ -85,7 +85,7 @@ namespace FAQ_Net
             this.richText.TextChanged += new System.EventHandler(this.RichText_TextChanged);
             this.richText.Enter += new System.EventHandler(this.richText_Enter);
             this.richText.KeyDown += richText_KeyDown;
-            _settingsXml = new SettingsXml();
+            _settingsXml = new SharedLibrary.SettingsXml(Application.ProductName);
             _settingsXml.LoadFormPosition(this);
             _settingsXml.SaveFormPosition(this);
 
@@ -130,7 +130,7 @@ namespace FAQ_Net
 
         private void CreateRtfTable(int countRows, int countColumns)
         {
-          richText.SelectedRtf = RtfTable.InsertTableInRichTextBox(countRows, countColumns, 1000);
+          richText.SelectedRtf = RtfTable.InsertTableInRichTextBox(countRows, countColumns, 16000 / countColumns);
         }
 
         private void Selector_TableSizeSelected(object sender, tools.TableSizeEventArgs e)
@@ -214,6 +214,9 @@ namespace FAQ_Net
             G.CancelRunSecondaryApp();
 
             this.Text = "FAQ.Net v." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            string headerTitle = _settingsXml.GetSetting("HeaderTitle");
+            if (!string.IsNullOrEmpty(headerTitle))
+              this.Text = string.Format("{0} [{1}]", headerTitle, this.Text);
             fnd = new FindForm(ref richText);
             fnd.Dock = DockStyle.Bottom;
             fnd.Parent = splitContainer1.Panel2;
@@ -293,7 +296,39 @@ namespace FAQ_Net
             t.IsBackground = true;
             t.Priority = System.Threading.ThreadPriority.Highest;
             t.Start();
+            CheckUpdate();
         }
+
+    /// <summary>
+    /// Проверить обновление приложения
+    /// </summary>
+    private void CheckUpdate()
+    {
+      try
+      {
+        System.Net.WebClient webCli = new System.Net.WebClient();
+        using (Stream stream = webCli.OpenRead("https://raw.githubusercontent.com/shmelev-1987/faq_net/master/WordEditor/LastUpdateInfo.xml"))
+        {
+          using (StreamReader reader = new StreamReader(stream))
+          {
+            string xmlUpdateText = reader.ReadToEnd();
+            System.Xml.XmlDocument xmlDocUpdate = new System.Xml.XmlDocument();
+            xmlDocUpdate.LoadXml(xmlUpdateText);
+            Version lastVersion = new Version(xmlDocUpdate.SelectSingleNode("//VersionConfig/LastVersion").Value);
+            if (lastVersion > System.Reflection.Assembly.GetExecutingAssembly().GetName().Version)
+            {
+              // Отобразить информацию о новой версии
+              UpdateUserControl updateUserControl = new UpdateUserControl();
+              updateUserControl.UpdateInfoText = xmlDocUpdate.SelectSingleNode("//VersionConfig/LatestChanges").Value;
+              updateUserControl.DownloadReleaseUrl = "https://github.com/shmelev-1987/faq_net/releases";
+              updateUserControl.Parent = this;
+              updateUserControl.BringToFront();
+            }
+          }
+        }
+      }
+      catch(Exception) { }
+    }
 
     private void InitializeUserControls()
     {
