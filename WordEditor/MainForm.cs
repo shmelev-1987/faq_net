@@ -2280,7 +2280,19 @@ namespace FAQ_Net
 
         private void CreateBackupTSMI_Click(object sender, EventArgs e)
         {
-            G.CreateBackup();
+          tsslStatus.Text = "Создается резервная копия БД";
+          string currentTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+          string err;
+          if (G.CreateBackup(this, out err))
+          {
+            tsslStatus.Text = string.Format("{0} - Успешное создание резервной копии БД", currentTime);
+          }
+          else
+          {
+            tsslStatus.Text = string.Format("{0} - {1}", currentTime, err);
+            tsslStatus.Text = err;
+            MessageBox.Show("Ошибка создания резервной копии БД", err, MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
         }
 
         private void QuestionsCMS_Opening(object sender, System.ComponentModel.CancelEventArgs e)

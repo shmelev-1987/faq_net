@@ -115,6 +115,13 @@
     <Compile Include="UpdateUserControl.Designer.cs">
       <DependentUpon>UpdateUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="WaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaitForm.Designer.cs">
+      <DependentUpon>WaitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaitWndFun.cs" />
     <EmbeddedResource Include="AboutProgramForm.resx">
       <DependentUpon>AboutProgramForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="help.ico" />
+    <None Include="Resources\wait.gif" />
     <None Include="Resources\JustifySml.bmp" />
     <None Include="LastUpdateInfo.xml" />
     <None Include="Resources\InsertTable.png" />

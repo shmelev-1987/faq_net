@@ -63,8 +63,11 @@ namespace FAQ_Net
         }
         #endregion Добавить выполненный запрос в лог-файл (log.xml)
 
-        public static void CreateBackup()
+        public static bool CreateBackup(Form parentForm, out string err)
         {
+            err = string.Empty;
+            bool result = false;
+            MainApp.WaitForm.Show(parentForm);
             try
             {
                 string NewFileDB = G.CurDir + "FAQ_" + DateTime.Now.ToString("yyyyMMdd_HH_mm") + ".sqlite";
@@ -80,17 +83,17 @@ namespace FAQ_Net
                 c.Dispose();
                 SQLiteConnBackup.Close();
                 SQLiteConnBackup.Dispose();
-                MessageBox.Show("Создание резервной копии БД успешно завершено.");
+                MainApp.WaitForm.Close();
+                OpenExplorerWithSelect(NewFileDB);
+                result = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка создания резервной копии БД", ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MainApp.WaitForm.Close();
+                err = ex.Message;
+                //MessageBox.Show("Ошибка создания резервной копии БД", ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-        }
-
-        private void CreateBackupThread()
-        {
-
+            return result;
         }
 
         public static bool ExecSQLiteQuery(string SqlQuery)
@@ -491,6 +494,21 @@ namespace FAQ_Net
       dgv.EnableHeadersVisualStyles = false;
       dgv.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 244, 249, 255);
       dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9);
+    }
+
+    /// <summary>
+    /// Открыть проводник с одним выделенным файлом
+    /// </summary>
+    /// <param name="fileName"></param>
+    public static void OpenExplorerWithSelect(string fileName)
+    {
+      if (System.IO.File.Exists(fileName))
+      {
+        System.Diagnostics.Process.Start("explorer.exe", "/select," + fileName);
+        return;
+      }
+      if (System.IO.Directory.Exists(fileName))
+        System.Diagnostics.Process.Start("explorer.exe", fileName);
     }
   }
 }

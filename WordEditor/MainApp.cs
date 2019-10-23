@@ -6,6 +6,8 @@ namespace FAQ_Net
 {
     public class MainApp
     {
+        public static WaitWnd.WaitWndFun WaitForm = new WaitWnd.WaitWndFun();
+
         //public const string DISPLAY_NAME = "FAQ.Net v." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         [STAThread]
         static void Main(string[] args)

@@ -189,6 +189,7 @@ namespace FAQ_Net
       this.alignLeft = new System.Windows.Forms.ToolStripButton();
       this.alignCenter = new System.Windows.Forms.ToolStripButton();
       this.alignRight = new System.Windows.Forms.ToolStripButton();
+      this.alignJustify = new System.Windows.Forms.ToolStripButton();
       this.lineSpacing = new System.Windows.Forms.ToolStripSplitButton();
       this.lineSpace1 = new System.Windows.Forms.ToolStripMenuItem();
       this.lineSpace1pt5 = new System.Windows.Forms.ToolStripMenuItem();
@@ -253,7 +254,8 @@ namespace FAQ_Net
       this.CountAnswLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountCategoriesLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountCategoriesVal = new System.Windows.Forms.ToolStripStatusLabel();
-      this.alignJustify = new System.Windows.Forms.ToolStripButton();
+      this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
+      this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
       this.menuTop.SuspendLayout();
       this.MainSC.Panel1.SuspendLayout();
       this.MainSC.Panel2.SuspendLayout();
@@ -1911,6 +1913,22 @@ namespace FAQ_Net
       this.alignRight.ToolTipText = "Выровнять текст по правому краю";
       this.alignRight.Click += new System.EventHandler(this.Tools_Click);
       // 
+      // alignJustify
+      // 
+      this.alignJustify.Checked = true;
+      this.alignJustify.CheckOnClick = true;
+      this.alignJustify.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.alignJustify.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.alignJustify.Image = global::FAQ_Net.Properties.Resources.JustifySml;
+      this.alignJustify.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.alignJustify.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.alignJustify.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+      this.alignJustify.Name = "alignJustify";
+      this.alignJustify.Size = new System.Drawing.Size(23, 24);
+      this.alignJustify.ToolTipText = "Выровнять текст по правому краю";
+      this.alignJustify.Visible = false;
+      this.alignJustify.Click += new System.EventHandler(this.Tools_Click);
+      // 
       // lineSpacing
       // 
       this.lineSpacing.AutoSize = false;
@@ -1932,21 +1950,21 @@ namespace FAQ_Net
       this.lineSpace1.Checked = true;
       this.lineSpace1.CheckState = System.Windows.Forms.CheckState.Checked;
       this.lineSpace1.Name = "lineSpace1";
-      this.lineSpace1.Size = new System.Drawing.Size(152, 22);
+      this.lineSpace1.Size = new System.Drawing.Size(89, 22);
       this.lineSpace1.Text = "1.0";
       this.lineSpace1.Click += new System.EventHandler(this.lineSpace1_Click);
       // 
       // lineSpace1pt5
       // 
       this.lineSpace1pt5.Name = "lineSpace1pt5";
-      this.lineSpace1pt5.Size = new System.Drawing.Size(152, 22);
+      this.lineSpace1pt5.Size = new System.Drawing.Size(89, 22);
       this.lineSpace1pt5.Text = "1.5";
       this.lineSpace1pt5.Click += new System.EventHandler(this.lineSpace1pt5_Click);
       // 
       // lineSpace2
       // 
       this.lineSpace2.Name = "lineSpace2";
-      this.lineSpace2.Size = new System.Drawing.Size(152, 22);
+      this.lineSpace2.Size = new System.Drawing.Size(89, 22);
       this.lineSpace2.Text = "2.0";
       this.lineSpace2.Click += new System.EventHandler(this.lineSpace2_Click);
       // 
@@ -2238,7 +2256,7 @@ namespace FAQ_Net
       // 
       this.cover1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.cover1.BackColor = System.Drawing.SystemColors.Control;
-      this.cover1.Location = new System.Drawing.Point(2626, 46);
+      this.cover1.Location = new System.Drawing.Point(2628, 46);
       this.cover1.Name = "cover1";
       this.cover1.Size = new System.Drawing.Size(3, 2);
       this.cover1.TabIndex = 15;
@@ -2451,14 +2469,16 @@ namespace FAQ_Net
       // status
       // 
       this.status.AutoSize = false;
-      this.status.BackColor = System.Drawing.SystemColors.Control;
+      this.status.BackColor = System.Drawing.SystemColors.Info;
       this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CountQuestTitLbl,
             this.CountQuestLbl,
             this.CountAnswTitLbl,
             this.CountAnswLbl,
             this.CountCategoriesLbl,
-            this.CountCategoriesVal});
+            this.CountCategoriesVal,
+            this.toolStripStatusLabel3,
+            this.tsslStatus});
       this.status.Location = new System.Drawing.Point(0, 275);
       this.status.Name = "status";
       this.status.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -2516,21 +2536,21 @@ namespace FAQ_Net
       this.CountCategoriesVal.Text = "0";
       this.CountCategoriesVal.Visible = false;
       // 
-      // alignJustify
+      // tsslStatus
       // 
-      this.alignJustify.Checked = true;
-      this.alignJustify.CheckOnClick = true;
-      this.alignJustify.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.alignJustify.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.alignJustify.Image = global::FAQ_Net.Properties.Resources.JustifySml;
-      this.alignJustify.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.alignJustify.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.alignJustify.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
-      this.alignJustify.Name = "alignJustify";
-      this.alignJustify.Size = new System.Drawing.Size(23, 24);
-      this.alignJustify.ToolTipText = "Выровнять текст по правому краю";
-      this.alignJustify.Visible = false;
-      this.alignJustify.Click += new System.EventHandler(this.Tools_Click);
+      this.tsslStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+      this.tsslStatus.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+      this.tsslStatus.Name = "tsslStatus";
+      this.tsslStatus.Size = new System.Drawing.Size(117, 15);
+      this.tsslStatus.Text = "Нет фоновых задач";
+      // 
+      // toolStripStatusLabel3
+      // 
+      this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+      this.toolStripStatusLabel3.Size = new System.Drawing.Size(211, 15);
+      this.toolStripStatusLabel3.Text = "Фоновый статус выполнения задачи:";
       // 
       // MainForm
       // 
@@ -2806,6 +2826,8 @@ namespace FAQ_Net
     private ToolStripMenuItem справкаToolStripMenuItem;
     private ToolStripMenuItem tsmiAboutProgram;
     private ToolStripButton alignJustify;
+    private ToolStripStatusLabel tsslStatus;
+    private ToolStripStatusLabel toolStripStatusLabel3;
   }
 
 }
