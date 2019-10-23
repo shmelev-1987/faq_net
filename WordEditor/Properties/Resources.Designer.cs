@@ -233,6 +233,16 @@ namespace FAQ_Net.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap JustifySml {
+            get {
+                object obj = ResourceManager.GetObject("JustifySml", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap LeftSml {
             get {
                 object obj = ResourceManager.GetObject("LeftSml", resourceCulture);

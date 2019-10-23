@@ -261,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="help.ico" />
+    <None Include="Resources\JustifySml.bmp" />
     <None Include="LastUpdateInfo.xml" />
     <None Include="Resources\InsertTable.png" />
     <None Include="Resources\up.png" />

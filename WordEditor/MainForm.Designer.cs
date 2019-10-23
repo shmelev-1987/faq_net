@@ -253,6 +253,7 @@ namespace FAQ_Net
       this.CountAnswLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountCategoriesLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountCategoriesVal = new System.Windows.Forms.ToolStripStatusLabel();
+      this.alignJustify = new System.Windows.Forms.ToolStripButton();
       this.menuTop.SuspendLayout();
       this.MainSC.Panel1.SuspendLayout();
       this.MainSC.Panel2.SuspendLayout();
@@ -763,7 +764,7 @@ namespace FAQ_Net
       // tsmiAboutProgram
       // 
       this.tsmiAboutProgram.Name = "tsmiAboutProgram";
-      this.tsmiAboutProgram.Size = new System.Drawing.Size(152, 22);
+      this.tsmiAboutProgram.Size = new System.Drawing.Size(149, 22);
       this.tsmiAboutProgram.Text = "О программе";
       this.tsmiAboutProgram.Click += new System.EventHandler(this.tsmiAboutProgram_Click);
       // 
@@ -1568,6 +1569,7 @@ namespace FAQ_Net
             this.alignLeft,
             this.alignCenter,
             this.alignRight,
+            this.alignJustify,
             this.lineSpacing,
             this.sep7,
             this.bullet,
@@ -1929,21 +1931,21 @@ namespace FAQ_Net
       this.lineSpace1.Checked = true;
       this.lineSpace1.CheckState = System.Windows.Forms.CheckState.Checked;
       this.lineSpace1.Name = "lineSpace1";
-      this.lineSpace1.Size = new System.Drawing.Size(89, 22);
+      this.lineSpace1.Size = new System.Drawing.Size(152, 22);
       this.lineSpace1.Text = "1.0";
       this.lineSpace1.Click += new System.EventHandler(this.lineSpace1_Click);
       // 
       // lineSpace1pt5
       // 
       this.lineSpace1pt5.Name = "lineSpace1pt5";
-      this.lineSpace1pt5.Size = new System.Drawing.Size(89, 22);
+      this.lineSpace1pt5.Size = new System.Drawing.Size(152, 22);
       this.lineSpace1pt5.Text = "1.5";
       this.lineSpace1pt5.Click += new System.EventHandler(this.lineSpace1pt5_Click);
       // 
       // lineSpace2
       // 
       this.lineSpace2.Name = "lineSpace2";
-      this.lineSpace2.Size = new System.Drawing.Size(89, 22);
+      this.lineSpace2.Size = new System.Drawing.Size(152, 22);
       this.lineSpace2.Text = "2.0";
       this.lineSpace2.Click += new System.EventHandler(this.lineSpace2_Click);
       // 
@@ -2235,7 +2237,7 @@ namespace FAQ_Net
       // 
       this.cover1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.cover1.BackColor = System.Drawing.SystemColors.Control;
-      this.cover1.Location = new System.Drawing.Point(2622, 46);
+      this.cover1.Location = new System.Drawing.Point(2626, 46);
       this.cover1.Name = "cover1";
       this.cover1.Size = new System.Drawing.Size(3, 2);
       this.cover1.TabIndex = 15;
@@ -2513,6 +2515,22 @@ namespace FAQ_Net
       this.CountCategoriesVal.Text = "0";
       this.CountCategoriesVal.Visible = false;
       // 
+      // alignJustify
+      // 
+      this.alignJustify.Checked = true;
+      this.alignJustify.CheckOnClick = true;
+      this.alignJustify.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.alignJustify.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.alignJustify.Image = global::FAQ_Net.Properties.Resources.JustifySml;
+      this.alignJustify.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.alignJustify.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.alignJustify.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+      this.alignJustify.Name = "alignJustify";
+      this.alignJustify.Size = new System.Drawing.Size(23, 24);
+      this.alignJustify.ToolTipText = "Выровнять текст по правому краю";
+      this.alignJustify.Visible = false;
+      this.alignJustify.Click += new System.EventHandler(this.Tools_Click);
+      // 
       // MainForm
       // 
       this.BackColor = System.Drawing.SystemColors.Window;
@@ -2786,6 +2804,7 @@ namespace FAQ_Net
     private ToolStripMenuItem tsmiAddTable;
     private ToolStripMenuItem справкаToolStripMenuItem;
     private ToolStripMenuItem tsmiAboutProgram;
+    private ToolStripButton alignJustify;
   }
 
 }

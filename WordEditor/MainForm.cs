@@ -602,6 +602,7 @@ namespace FAQ_Net
             alignCenter.Checked = (selAlign == HorizontalAlignment.Center);
             alignLeft.Checked = (selAlign == HorizontalAlignment.Left);
             alignRight.Checked = (selAlign == HorizontalAlignment.Right);
+            //alignJustify.Checked = false;
             // Change right indent as needed.
             setFormRightIndent();
         }
@@ -844,18 +845,29 @@ namespace FAQ_Net
                 case "alignLeft":
                     alignCenter.Checked = false;
                     alignRight.Checked = false;
+                    //alignJustify.Checked = false;
                     richText.SelectionAlignment = HorizontalAlignment.Left;
                     break;
                 case "alignCenter":
                     alignLeft.Checked = false;
                     alignRight.Checked = false;
+                    //alignJustify.Checked = false;
                     richText.SelectionAlignment = HorizontalAlignment.Center;
                     break;
                 case "alignRight":
                     alignLeft.Checked = false;
                     alignCenter.Checked = false;
+                    //alignJustify.Checked = false;
                     richText.SelectionAlignment = HorizontalAlignment.Right;
                     break;
+                // Этот код не работает по непонятным причинам, поэтому кнопка "выравнивания по ширине" скрыта
+                // скорее всего это связано с отсутствием свойства HorizontalAlignment.Justify в .NET
+                //case "alignJustify":
+                //    alignLeft.Checked = false;
+                //    alignCenter.Checked = false;
+                //    alignRight.Checked = false;
+                //    richText_KeyDown(alignJustify, new KeyEventArgs(Keys.Control | Keys.J));                    
+                //    break;
                 case "bullet":
                     richText.SelectionBullet = bullet.Checked;
                     break;
@@ -2682,6 +2694,19 @@ namespace FAQ_Net
             e.SuppressKeyPress = true;  // Stops other controls on the form receiving event.
             italic.Checked = !italic.Checked;
             Tools_Click(italic, new EventArgs());
+            break;
+          case Keys.J:
+            // Выравнивание текста по ширине
+            const string JUSTIFIED_ALIGN_RTF = "\\pard\\qj";
+              if (richText.SelectedRtf.Length == 0)
+                richText.SelectedRtf = @"{\rtf1\qj}";
+              else
+                richText.SelectedRtf = richText.SelectedRtf
+                  .Replace("\\pard\\f0", JUSTIFIED_ALIGN_RTF)
+                  .Replace("\\pard\\cf1", JUSTIFIED_ALIGN_RTF)
+                  .Replace("\\pard\\ql", JUSTIFIED_ALIGN_RTF)
+                  .Replace("\\pard\\qr", JUSTIFIED_ALIGN_RTF)
+                  .Replace("\\pard\\qc", JUSTIFIED_ALIGN_RTF);
             break;
         }
       }
