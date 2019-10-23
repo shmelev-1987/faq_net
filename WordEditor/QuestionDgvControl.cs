@@ -59,6 +59,9 @@ namespace FAQ_Net
       _dgvControl.BringToFront();
       _dgvControl.ContextMenuStrip = contextMenuStrip;
       _dgvControl.MouseDown += (Application.OpenForms[0] as MainForm).listView1_MouseDown;
+
+      G.SetHeaderStyle(_dgvControl);
+      _dgvControl.BackgroundColor = System.Drawing.Color.LightGray;
       //_listControl.RowFocusChanged += (Application.OpenForms[0] as MainForm).listView1_SelectedIndexChanged;
     }
 

@@ -59,57 +59,73 @@ namespace FAQ_Net
         bool lastOrderByDesc = false;
     tools.TablePropertyUserControl _tablePropertyUserControl;
 
-        public MainForm()
-        {
-            // this.ruler = new TopRuler();
-            InitializeComponent();
-            this.richText = new FAQ_Net.RichTextBoxCustom();
-            this.splitContainer1.Panel2.Controls.Add(this.richText);
-            this.richText.BringToFront();
-            // Инициализация richText
-            this.richText.AcceptsTab = true;
-            this.richText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richText.ContextMenuStrip = this.richMenu;
-            this.richText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richText.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.richText.HideSelection = false;
-            this.richText.Location = new System.Drawing.Point(0, 50);
-            this.richText.Name = "richText";
-            this.richText.RightMargin = 700;
-            this.richText.ShowSelectionMargin = true;
-            this.richText.Size = new System.Drawing.Size(890, 76);
-            this.richText.TabIndex = 12;
-            this.richText.Text = "";
-            this.richText.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.RichText_LinkClicked);
-            this.richText.SelectionChanged += new System.EventHandler(this.RichText_SelectionChanged);
-            this.richText.TextChanged += new System.EventHandler(this.RichText_TextChanged);
-            this.richText.Enter += new System.EventHandler(this.richText_Enter);
-            this.richText.KeyDown += richText_KeyDown;
-            _settingsXml = new SharedLibrary.SettingsXml(Application.ProductName);
-            _settingsXml.LoadFormPosition(this);
-            _settingsXml.SaveFormPosition(this);
+    public MainForm()
+    {
+      // this.ruler = new TopRuler();
+      InitializeComponent();
+      this.richText = new FAQ_Net.RichTextBoxCustom();
+      this.splitContainer1.Panel2.Controls.Add(this.richText);
+      this.richText.BringToFront();
+      // Инициализация richText
+      this.richText.AcceptsTab = true;
+      this.richText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.richText.ContextMenuStrip = this.richMenu;
+      this.richText.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.richText.Font = new System.Drawing.Font("Times New Roman", 12F);
+      this.richText.HideSelection = false;
+      this.richText.Location = new System.Drawing.Point(0, 50);
+      this.richText.Name = "richText";
+      this.richText.RightMargin = 700;
+      this.richText.ShowSelectionMargin = true;
+      this.richText.Size = new System.Drawing.Size(890, 76);
+      this.richText.TabIndex = 12;
+      this.richText.Text = "";
+      this.richText.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.RichText_LinkClicked);
+      this.richText.SelectionChanged += new System.EventHandler(this.RichText_SelectionChanged);
+      this.richText.TextChanged += new System.EventHandler(this.RichText_TextChanged);
+      this.richText.Enter += new System.EventHandler(this.richText_Enter);
+      this.richText.KeyDown += richText_KeyDown;
+      _settingsXml = new SharedLibrary.SettingsXml(Application.ProductName);
+      _settingsXml.LoadFormPosition(this);
+      _settingsXml.SaveFormPosition(this);
 
-            // Компонент добавления таблицы
-            var dropDown = new tools.ToolStripTableSizeSelector();
-            dropDown.Opening += DropDown_Opening;
-            dropDown.Selector.TableSizeSelected += Selector_TableSizeSelected;
-            tsddbInsertTable.DropDown = dropDown;
-            var tsmiInsertTable = new ToolStripMenuItem
-            {
-              Name = "tsmiInsertTable",
-              Size = new Size(152, 22),
-              Text = "Создать большую таблицу",
-              Tag = "InsertTable"
-            };
-            tsmiInsertTable.Click += tsmiInsertTable_Click;
-            tsddbInsertTable.DropDownItems.Add(tsmiInsertTable);
+      // Компонент добавления таблицы
+      var dropDown = new tools.ToolStripTableSizeSelector();
+      dropDown.Opening += DropDown_Opening;
+      dropDown.Selector.TableSizeSelected += Selector_TableSizeSelected;
+      tsddbInsertTable.DropDown = dropDown;
+      var tsmiInsertTable = new ToolStripMenuItem
+      {
+        Name = "tsmiInsertTable",
+        Size = new Size(152, 22),
+        Text = "Создать большую таблицу",
+        Tag = "InsertTable"
+      };
+      tsmiInsertTable.Click += tsmiInsertTable_Click;
+      tsddbInsertTable.DropDownItems.Add(tsmiInsertTable);
 
-            // Компонент для создания таблиц с расширенными настройками
-            _tablePropertyUserControl = new tools.TablePropertyUserControl();
-            _tablePropertyUserControl.OnCreateTableClickButton += Selector_TableSizeSelected;
-            // Set Rich Textbox and right margin line.
-            //ruler1.InitializeObjects(this.richText, this.rightMarginLine);
-        }
+      // Компонент для создания таблиц с расширенными настройками
+      _tablePropertyUserControl = new tools.TablePropertyUserControl();
+      _tablePropertyUserControl.OnCreateTableClickButton += Selector_TableSizeSelected;
+
+      G.SetHeaderStyle(JournalDGV);
+      JournalDGV.Columns[JournalQuestionColumn.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+      JournalDGV.Columns[JournalQuestionColumn.Name].FillWeight = 100;
+      JournalDGV.BackgroundColor = System.Drawing.Color.PaleGoldenrod;
+
+      G.SetHeaderStyle(FavoriteDGV);
+      FavoriteDGV.Columns[Favorites_question.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+      FavoriteDGV.Columns[Favorites_question.Name].FillWeight = 100;
+      FavoriteDGV.BackgroundColor = System.Drawing.Color.RosyBrown; 
+
+      G.SetHeaderStyle(DGVResultSearch);
+      DGVResultSearch.Columns[QuestionSearchColumn.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+      DGVResultSearch.Columns[QuestionSearchColumn.Name].FillWeight = 100;
+      DGVResultSearch.BackgroundColor = Color.NavajoWhite;
+
+      // Set Rich Textbox and right margin line.
+      //ruler1.InitializeObjects(this.richText, this.rightMarginLine);
+    }
 
         private void tsmiInsertTable_Click(object sender, EventArgs e)
         {
@@ -1889,18 +1905,7 @@ namespace FAQ_Net
                 AddRowInHistory(2);
             }
         }
-
-        private void MainSC_SplitterMoving(object sender, SplitterCancelEventArgs e)
-        {
-            SearchTxtBox.Width = e.SplitX;
-            //DGVQuestions.Columns["QuestionsColumn"].Width = this.Width - e.SplitX - 300;
-            //DGVQuestions.Columns["QuestionsColumn"].Width = this.Width - e.SplitX - 65;
-            DGVResultSearch.Columns["QuestionSearchColumn"].Width = e.SplitX - 20;
-            FavoriteDGV.Columns["Favorites_question"].Width = e.SplitX - 20;
-            JournalDGV.Columns["JournalQuestionColumn"].Width = e.SplitX - 20;
-            richText.RightMargin = this.Width - e.SplitX - 50;
-        }
-
+    
         private void AddInFavoritesTSB_Click(object sender, EventArgs e)
         {
             if (AddInFavoritesTSB.Checked)

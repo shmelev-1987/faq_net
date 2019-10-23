@@ -794,7 +794,6 @@ namespace FAQ_Net
       this.MainSC.Size = new System.Drawing.Size(1146, 275);
       this.MainSC.SplitterDistance = 240;
       this.MainSC.TabIndex = 0;
-      this.MainSC.SplitterMoving += new System.Windows.Forms.SplitterCancelEventHandler(this.MainSC_SplitterMoving);
       // 
       // TabControl
       // 
@@ -1195,6 +1194,8 @@ namespace FAQ_Net
       // 
       // SearchTxtBox
       // 
+      this.SearchTxtBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.SearchTxtBox.Location = new System.Drawing.Point(3, 21);
       this.SearchTxtBox.Name = "SearchTxtBox";
       this.SearchTxtBox.Size = new System.Drawing.Size(218, 20);

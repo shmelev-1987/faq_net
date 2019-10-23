@@ -466,7 +466,7 @@ namespace FAQ_Net
         public static void CancelRunSecondaryApp()
         {
             int CountProc = -1;  //Т.к. запущенный процесс, включается в поиск
-            foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcesses())
+            foreach (System.Diagnostics.Process p in System.Diagnostics.Process.GetProcessesByName(System.Windows.Forms.Application.ProductName))
             {
                 try
                 {
@@ -484,6 +484,13 @@ namespace FAQ_Net
                 return;
             }
         }
-        #endregion Запретить запуск второй копии приложения
+    #endregion Запретить запуск второй копии приложения
+
+    public static void SetHeaderStyle(DataGridView dgv)
+    {
+      dgv.EnableHeadersVisualStyles = false;
+      dgv.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 244, 249, 255);
+      dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9);
     }
+  }
 }
