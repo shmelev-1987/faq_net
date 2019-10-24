@@ -29,7 +29,7 @@ namespace FAQ_Net
       {
         if (j == 0)
         {
-          tableRowRtf.Append(@"\trowd");
+          tableRowRtf.Append(@"\trowd\trgaph108\trleft-108");
         }
         if (j == countColumns - 1)
           tableRowRtf.Append(string.Format(@"\clbrdrl\brdrw10\brdrs\clbrdrt\brdrw10\brdrs\clbrdrr\brdrw10\brdrs\clbrdrb\brdrw10\brdrs\cellx{0}\intbl \row", ((j + 1) * columnWidth).ToString()));

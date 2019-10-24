@@ -107,18 +107,15 @@ namespace FAQ_Net
       // Компонент для создания таблиц с расширенными настройками
       _tablePropertyUserControl = new tools.TablePropertyUserControl();
       _tablePropertyUserControl.OnCreateTableClickButton += Selector_TableSizeSelected;
-
-      G.SetHeaderStyle(JournalDGV);
+      
       JournalDGV.Columns[JournalQuestionColumn.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       JournalDGV.Columns[JournalQuestionColumn.Name].FillWeight = 100;
       JournalDGV.BackgroundColor = System.Drawing.Color.PaleGoldenrod;
-
-      G.SetHeaderStyle(FavoriteDGV);
+      
       FavoriteDGV.Columns[Favorites_question.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       FavoriteDGV.Columns[Favorites_question.Name].FillWeight = 100;
       FavoriteDGV.BackgroundColor = System.Drawing.Color.RosyBrown; 
-
-      G.SetHeaderStyle(DGVResultSearch);
+      
       DGVResultSearch.Columns[QuestionSearchColumn.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       DGVResultSearch.Columns[QuestionSearchColumn.Name].FillWeight = 100;
       DGVResultSearch.BackgroundColor = Color.NavajoWhite;

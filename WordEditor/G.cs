@@ -489,13 +489,6 @@ namespace FAQ_Net
         }
     #endregion Запретить запуск второй копии приложения
 
-    public static void SetHeaderStyle(DataGridView dgv)
-    {
-      dgv.EnableHeadersVisualStyles = false;
-      dgv.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(255, 244, 249, 255);
-      dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9);
-    }
-
     /// <summary>
     /// Открыть проводник с одним выделенным файлом
     /// </summary>
