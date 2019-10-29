@@ -357,7 +357,7 @@ namespace FAQ_Net
             {
               // Отобразить информацию о новой версии
               UpdateUserControl updateUserControl = new UpdateUserControl();
-              updateUserControl.UpdateInfoText = xmlDocUpdate.SelectSingleNode("//VersionConfig/LatestChanges").InnerText;
+              updateUserControl.UpdateInfoText = xmlDocUpdate.SelectSingleNode("//VersionConfig/LatestChanges").InnerText.Replace("\n", Environment.NewLine);
               updateUserControl.DownloadReleaseUrl = "https://github.com/shmelev-1987/faq_net/releases";
               updateUserControl.Width = Convert.ToInt32(xmlDocUpdate.SelectSingleNode("//VersionConfig/Width").InnerText);
               updateUserControl.Height = Convert.ToInt32(xmlDocUpdate.SelectSingleNode("//VersionConfig/Height").InnerText);

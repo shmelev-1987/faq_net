@@ -50,6 +50,7 @@
       // 
       // btnGoToUpdateUrl
       // 
+      this.btnGoToUpdateUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnGoToUpdateUrl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
       this.btnGoToUpdateUrl.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
       this.btnGoToUpdateUrl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -64,6 +65,7 @@
       // 
       // btnCancel
       // 
+      this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
       this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
       this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -78,6 +80,9 @@
       // 
       // txbUpdateInfo
       // 
+      this.txbUpdateInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.txbUpdateInfo.BackColor = System.Drawing.Color.Khaki;
       this.txbUpdateInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
       this.txbUpdateInfo.Location = new System.Drawing.Point(4, 31);
