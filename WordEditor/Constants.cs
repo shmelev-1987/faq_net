@@ -18,5 +18,6 @@ namespace FAQ_Net
     public const string id_content = "id_content";
     public const string LAST_VIEW = "last_view";
     public const string LAST_SORTING = "last_sorting";
+    public const string MAIN_SPLITTER_DISTANCE = "MainSplitterDistance";
   }
 }

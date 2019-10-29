@@ -248,6 +248,8 @@ namespace FAQ_Net
       this.printRichText = new System.Windows.Forms.ToolStripMenuItem();
       this.toolTip = new System.Windows.Forms.ToolTip(this.components);
       this.status = new System.Windows.Forms.StatusStrip();
+      this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+      this.tsmiDesignSettings = new System.Windows.Forms.ToolStripMenuItem();
       this.CountQuestTitLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountQuestLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountAnswTitLbl = new System.Windows.Forms.ToolStripStatusLabel();
@@ -1137,6 +1139,7 @@ namespace FAQ_Net
       dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.DGVResultSearch.DefaultCellStyle = dataGridViewCellStyle2;
       this.DGVResultSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.DGVResultSearch.EnableHeadersVisualStyles = false;
       this.DGVResultSearch.Location = new System.Drawing.Point(3, 125);
       this.DGVResultSearch.MultiSelect = false;
       this.DGVResultSearch.Name = "DGVResultSearch";
@@ -1324,6 +1327,7 @@ namespace FAQ_Net
       dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.FavoriteDGV.DefaultCellStyle = dataGridViewCellStyle5;
       this.FavoriteDGV.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.FavoriteDGV.EnableHeadersVisualStyles = false;
       this.FavoriteDGV.Location = new System.Drawing.Point(3, 3);
       this.FavoriteDGV.MultiSelect = false;
       this.FavoriteDGV.Name = "FavoriteDGV";
@@ -1401,6 +1405,7 @@ namespace FAQ_Net
       dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
       this.JournalDGV.DefaultCellStyle = dataGridViewCellStyle8;
       this.JournalDGV.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.JournalDGV.EnableHeadersVisualStyles = false;
       this.JournalDGV.Location = new System.Drawing.Point(3, 3);
       this.JournalDGV.MultiSelect = false;
       this.JournalDGV.Name = "JournalDGV";
@@ -2256,7 +2261,7 @@ namespace FAQ_Net
       // 
       this.cover1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.cover1.BackColor = System.Drawing.SystemColors.Control;
-      this.cover1.Location = new System.Drawing.Point(2628, 46);
+      this.cover1.Location = new System.Drawing.Point(2638, 46);
       this.cover1.Name = "cover1";
       this.cover1.Size = new System.Drawing.Size(3, 2);
       this.cover1.TabIndex = 15;
@@ -2469,8 +2474,8 @@ namespace FAQ_Net
       // status
       // 
       this.status.AutoSize = false;
-      this.status.BackColor = System.Drawing.SystemColors.Info;
       this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripDropDownButton1,
             this.CountQuestTitLbl,
             this.CountQuestLbl,
             this.CountAnswTitLbl,
@@ -2484,6 +2489,25 @@ namespace FAQ_Net
       this.status.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
       this.status.Size = new System.Drawing.Size(1146, 20);
       this.status.TabIndex = 8;
+      // 
+      // toolStripDropDownButton1
+      // 
+      this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDesignSettings});
+      this.toolStripDropDownButton1.Image = global::FAQ_Net.Properties.Resources.settings2;
+      this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+      this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 18);
+      this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
+      // 
+      // tsmiDesignSettings
+      // 
+      this.tsmiDesignSettings.Image = global::FAQ_Net.Properties.Resources.three_color_rectangle;
+      this.tsmiDesignSettings.Name = "tsmiDesignSettings";
+      this.tsmiDesignSettings.Size = new System.Drawing.Size(220, 22);
+      this.tsmiDesignSettings.Text = "Настройки внешнего вида";
+      this.tsmiDesignSettings.Click += new System.EventHandler(this.tsmiDesignSettings_Click);
       // 
       // CountQuestTitLbl
       // 
@@ -2760,7 +2784,7 @@ namespace FAQ_Net
         private Panel panel1;
         private Button SearchBtn;
         private Label label2;
-        private DataGridView DGVResultSearch;
+        public DataGridView DGVResultSearch;
         private Label label3;
         private ToolStripButton AddInFavoritesTSB;
         private DataGridView FavoriteDGV;
@@ -2828,6 +2852,8 @@ namespace FAQ_Net
     private ToolStripButton alignJustify;
     private ToolStripStatusLabel tsslStatus;
     private ToolStripStatusLabel toolStripStatusLabel3;
+    private ToolStripDropDownButton toolStripDropDownButton1;
+    private ToolStripMenuItem tsmiDesignSettings;
   }
 
 }

@@ -120,5 +120,10 @@ namespace FAQ_Net
     {
       get { return _listControl.SelectedItems[0].Index + 1; }
     }
+
+    public ListView QuestionListView
+    {
+      get { return _listControl; }
+    }
   }
 }

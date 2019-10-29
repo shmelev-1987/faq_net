@@ -413,6 +413,16 @@ namespace FAQ_Net.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap settings2 {
+            get {
+                object obj = ResourceManager.GetObject("settings2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sort_asc {
             get {
                 object obj = ResourceManager.GetObject("sort_asc", resourceCulture);
@@ -456,6 +466,16 @@ namespace FAQ_Net.Properties {
         internal static System.Drawing.Bitmap Super {
             get {
                 object obj = ResourceManager.GetObject("Super", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap three_color_rectangle {
+            get {
+                object obj = ResourceManager.GetObject("three_color_rectangle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

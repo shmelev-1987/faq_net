@@ -8,19 +8,19 @@ namespace FAQ_Net
 {
     class G
     {
-        #region Ограничение времени работы с приложением
-        public static DateTime ExecTime = DateTime.Now;
-        private static int minutes = 2;
-        public static void CheckTime()
-        {
-            if (((TimeSpan)(DateTime.Now - ExecTime)).Minutes >= minutes)
-            {
-                MessageBox.Show("Время работы в приложении привысило " + minutes.ToString() + " минуты", "Ограничение работы", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                //System.Diagnostics.Process.GetCurrentProcess().Kill();
-                Application.Exit();
-            }
-        }
-        #endregion Ограничение времени работы с приложением
+        //#region Ограничение времени работы с приложением
+        //public static DateTime ExecTime = DateTime.Now;
+        //private static int minutes = 2;
+        //public static void CheckTime()
+        //{
+        //    if (((TimeSpan)(DateTime.Now - ExecTime)).Minutes >= minutes)
+        //    {
+        //        MessageBox.Show("Время работы в приложении привысило " + minutes.ToString() + " минуты", "Ограничение работы", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        //        //System.Diagnostics.Process.GetCurrentProcess().Kill();
+        //        Application.Exit();
+        //    }
+        //}
+        //#endregion Ограничение времени работы с приложением
 
         public static string CurDir = Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf("\\") + 1);    //Текущий каталог приложения
         private static SQLiteConnection SQLiteConn = new SQLiteConnection(); //Строка соединения SQLite

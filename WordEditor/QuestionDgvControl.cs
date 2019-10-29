@@ -46,7 +46,8 @@ namespace FAQ_Net
       _dgvControl.AllowUserToOrderColumns = true;
       _dgvControl.AllowUserToAddRows = false;
       _dgvControl.AllowUserToDeleteRows = false;
-      
+      _dgvControl.EnableHeadersVisualStyles = false;
+
       _dgvControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       _dgvControl.MultiSelect = false;
       _dgvControl.Dock = DockStyle.Fill;
@@ -161,6 +162,14 @@ namespace FAQ_Net
     public int SelectedIndex
     {
       get { return _dgvControl.CurrentRow.Index + 1; }
+    }
+
+    /// <summary>
+    /// Получить номер выбранной строки
+    /// </summary>
+    public DataGridView DgvControl
+    {
+      get { return _dgvControl; }
     }
   }
 }

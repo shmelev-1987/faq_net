@@ -17,8 +17,9 @@ namespace FAQ_Net
         private IViewQuestion _questionListControl;
         QuestionDgvControl _questionDgvControl;
         QuestionListViewControl _questionListViewControl;
+        AppSettingsForm _appSettingForm;
         private RichTextBoxCustom richText;
-        private SharedLibrary.SettingsXml _settingsXml;
+        public static SharedLibrary.SettingsXml _settingsXml;
         private Format format;
         private System.Drawing.Printing.PageSettings pageSettings;
         private PrintRichText printRtf;
@@ -58,6 +59,10 @@ namespace FAQ_Net
         FindForm fnd;
         bool lastOrderByDesc = false;
     tools.TablePropertyUserControl _tablePropertyUserControl;
+    /// <summary>
+    /// Признак отмены перезапуска приложения
+    /// </summary>
+    public static bool RestartApplicationCanceled = false;
 
     public MainForm()
     {
@@ -110,15 +115,12 @@ namespace FAQ_Net
       
       JournalDGV.Columns[JournalQuestionColumn.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       JournalDGV.Columns[JournalQuestionColumn.Name].FillWeight = 100;
-      JournalDGV.BackgroundColor = System.Drawing.Color.PaleGoldenrod;
       
       FavoriteDGV.Columns[Favorites_question.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       FavoriteDGV.Columns[Favorites_question.Name].FillWeight = 100;
-      FavoriteDGV.BackgroundColor = System.Drawing.Color.RosyBrown; 
       
       DGVResultSearch.Columns[QuestionSearchColumn.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       DGVResultSearch.Columns[QuestionSearchColumn.Name].FillWeight = 100;
-      DGVResultSearch.BackgroundColor = Color.NavajoWhite;
 
       // Set Rich Textbox and right margin line.
       //ruler1.InitializeObjects(this.richText, this.rightMarginLine);
@@ -241,10 +243,8 @@ namespace FAQ_Net
             TransitionDT.Rows.Add(0, "", null);
             //DGVQuestions.Columns["QuestionsColumn"].Width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width-600;
             //DGVQuestions.Columns["QuestionsColumn"].Width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width - MainSC.SplitterDistance - 50;
-            DGVResultSearch.Columns["QuestionSearchColumn"].Width =
-                FavoriteDGV.Columns["Favorites_question"].Width = 
-                JournalDGV.Columns["JournalQuestionColumn"].Width = MainSC.SplitterDistance - 20;
 
+            SqliteDatabase.Create();
             LastQuestions();                  //Вывод последних добавленных вопросов
             string lastSortingSetting = _settingsXml.GetSetting(Constants.LAST_SORTING);
             if (lastSortingSetting == SortOrder.Descending.ToString())
@@ -310,6 +310,31 @@ namespace FAQ_Net
             t.Priority = System.Threading.ThreadPriority.Highest;
             t.Start();
             CheckUpdate();
+
+            CustomDesignControl[] controlsForSettings = new CustomDesignControl[]
+            {
+               new CustomDesignControl() { SettingId = "MainFormTabControl", Description = "Вкладки", ObjectControl = TabControl}
+              ,new CustomDesignControl() { SettingId = "CategoryToolStrip", Description = "Разделы.Кнопки", ObjectControl = toolStrip1}
+              ,new CustomDesignControl() { SettingId = "CategoryTreeView", Description = "Разделы.Список", ObjectControl = TV1}
+              ,new CustomDesignControl() { SettingId = "CategoryStatusControl", Description = "Разделы.Статусная строка", ObjectControl = statusStrip2}
+              ,new CustomDesignControl() { SettingId = "ResultSearchDataGridView", Description = "Поиск.Результат", ObjectControl = DGVResultSearch}
+              ,new CustomDesignControl() { SettingId = "FavoriteDataGridView", Description = "Избранное.Результат", ObjectControl = FavoriteDGV}
+              ,new CustomDesignControl() { SettingId = "JournalDataGridView", Description = "Журнал.Результат", ObjectControl = JournalDGV}
+
+              ,new CustomDesignControl() { SettingId = "QuestionHeader", Description = "Заголовок (справа)", ObjectControl = SelectedPathLbl}
+              ,new CustomDesignControl() { SettingId = "QuestionSplitter", Description = "Разделитель", ObjectControl = splitter1}
+              ,new CustomDesignControl() { SettingId = "QuestionDataGridView", Description = "Список вопросов (сетка)", ObjectControl = _questionDgvControl.DgvControl}
+              ,new CustomDesignControl() { SettingId = "QuestionListView", Description = "Список вопросов (лист)", ObjectControl = _questionListViewControl.QuestionListView}
+              ,new CustomDesignControl() { SettingId = "RtfDocMenu", Description = "Документ.Меню", ObjectControl = menuTop}
+              ,new CustomDesignControl() { SettingId = "RtfDocToolStrip", Description = "Документ.Пиктограммы", ObjectControl = toolsTop}
+              ,new CustomDesignControl() { SettingId = "RtfDocumentControl", Description = "RTF-документ", ObjectControl = richText}
+              ,new CustomDesignControl() { SettingId = "RightStatusControl", Description = "Правая статусная строка", ObjectControl = statusStrip3}
+
+              ,new CustomDesignControl() { SettingId = "FindControlUser", Description = "Панель поиска", ObjectControl = fnd}
+              ,new CustomDesignControl() { SettingId = "MainStatusControl", Description = "Нижняя статусная строка", ObjectControl = status}
+            };
+            _appSettingForm = new AppSettingsForm(controlsForSettings);
+            MainSC.SplitterDistance = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, MainSC.SplitterDistance);
         }
 
     /// <summary>
@@ -334,6 +359,8 @@ namespace FAQ_Net
               UpdateUserControl updateUserControl = new UpdateUserControl();
               updateUserControl.UpdateInfoText = xmlDocUpdate.SelectSingleNode("//VersionConfig/LatestChanges").InnerText;
               updateUserControl.DownloadReleaseUrl = "https://github.com/shmelev-1987/faq_net/releases";
+              updateUserControl.Width = Convert.ToInt32(xmlDocUpdate.SelectSingleNode("//VersionConfig/Width").InnerText);
+              updateUserControl.Height = Convert.ToInt32(xmlDocUpdate.SelectSingleNode("//VersionConfig/Height").InnerText);
               updateUserControl.Parent = this;
               updateUserControl.BringToFront();
             }
@@ -1244,7 +1271,9 @@ namespace FAQ_Net
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            RestartApplicationCanceled = false;
             _settingsXml.SaveFormPosition(this);
+            _settingsXml.SetSetting(Constants.MAIN_SPLITTER_DISTANCE, MainSC.SplitterDistance.ToString());
             if (splitContainer1.Panel2Collapsed==false && saveFile.Enabled)
             {
                 DialogResult res = MessageBox.Show("Сохранить изменения ответа на вопрос?", this.Text,
@@ -1255,7 +1284,10 @@ namespace FAQ_Net
                 }
                 else
                     if (res == DialogResult.Cancel)
+                    {
                         e.Cancel = true;
+                        RestartApplicationCanceled = true;
+                    }
             }
         }
 
@@ -2275,19 +2307,27 @@ namespace FAQ_Net
                 AddInFavoritesTSB.Text = "Добавить в избранное";
         }
 
+    public void SetStatusLabel(string message)
+    {
+      string currentTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+      this.Invoke((MethodInvoker)delegate
+      {
+        tsslStatus.Text = string.Format("{0} - {1}", currentTime, message);
+      });
+    }
+
         private void CreateBackupTSMI_Click(object sender, EventArgs e)
         {
-          tsslStatus.Text = "Создается резервная копия БД";
+          SetStatusLabel("Создается резервная копия БД");
           string currentTime = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
           string err;
           if (G.CreateBackup(this, out err))
           {
-            tsslStatus.Text = string.Format("{0} - Успешное создание резервной копии БД", currentTime);
+            SetStatusLabel("Успешное создание резервной копии БД");
           }
           else
           {
-            tsslStatus.Text = string.Format("{0} - {1}", currentTime, err);
-            tsslStatus.Text = err;
+            SetStatusLabel(err);
             MessageBox.Show("Ошибка создания резервной копии БД", err, MessageBoxButtons.OK, MessageBoxIcon.Error);
           }
         }
@@ -2401,7 +2441,8 @@ namespace FAQ_Net
         {
           if (e.Clicks == 2)
           {
-            ShowAnswerTSMI_Click(sender, new EventArgs());
+            if(_questionListControl.CountItemsTotal > 0)
+              ShowAnswerTSMI_Click(sender, new EventArgs());
           }
           else
           {
@@ -2733,6 +2774,11 @@ namespace FAQ_Net
         aboutProgramForm.ShowInTaskbar = false;
         aboutProgramForm.ShowDialog();
       }
+    }
+
+    private void tsmiDesignSettings_Click(object sender, EventArgs e)
+    {
+      _appSettingForm.Show();
     }
   }
 }
