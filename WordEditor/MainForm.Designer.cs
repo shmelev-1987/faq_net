@@ -410,8 +410,7 @@ namespace FAQ_Net
       this.undo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.undo.Name = "undo";
-      this.undo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-      this.undo.Size = new System.Drawing.Size(190, 22);
+      this.undo.Size = new System.Drawing.Size(158, 22);
       this.undo.Text = "&Назад";
       this.undo.Click += new System.EventHandler(this.Undo_Click);
       // 
@@ -421,15 +420,14 @@ namespace FAQ_Net
       this.redo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.redo.Name = "redo";
-      this.redo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-      this.redo.Size = new System.Drawing.Size(190, 22);
+      this.redo.Size = new System.Drawing.Size(158, 22);
       this.redo.Text = "В&перед";
       this.redo.Click += new System.EventHandler(this.Redo_Click);
       // 
       // s4
       // 
       this.s4.Name = "s4";
-      this.s4.Size = new System.Drawing.Size(187, 6);
+      this.s4.Size = new System.Drawing.Size(155, 6);
       // 
       // cut
       // 
@@ -437,8 +435,7 @@ namespace FAQ_Net
       this.cut.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.cut.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.cut.Name = "cut";
-      this.cut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-      this.cut.Size = new System.Drawing.Size(190, 22);
+      this.cut.Size = new System.Drawing.Size(158, 22);
       this.cut.Text = "Вы&резать";
       this.cut.Click += new System.EventHandler(this.Cut_Click);
       // 
@@ -448,8 +445,7 @@ namespace FAQ_Net
       this.copy.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.copy.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.copy.Name = "copy";
-      this.copy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-      this.copy.Size = new System.Drawing.Size(190, 22);
+      this.copy.Size = new System.Drawing.Size(158, 22);
       this.copy.Text = "&Копировать";
       this.copy.Click += new System.EventHandler(this.Copy_Click);
       // 
@@ -459,28 +455,26 @@ namespace FAQ_Net
       this.paste.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.paste.ImageTransparentColor = System.Drawing.Color.Fuchsia;
       this.paste.Name = "paste";
-      this.paste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-      this.paste.Size = new System.Drawing.Size(190, 22);
+      this.paste.Size = new System.Drawing.Size(158, 22);
       this.paste.Text = "&Вставить";
       this.paste.Click += new System.EventHandler(this.Paste_Click);
       // 
       // s5
       // 
       this.s5.Name = "s5";
-      this.s5.Size = new System.Drawing.Size(187, 6);
+      this.s5.Size = new System.Drawing.Size(155, 6);
       // 
       // selectAll
       // 
       this.selectAll.Name = "selectAll";
-      this.selectAll.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-      this.selectAll.Size = new System.Drawing.Size(190, 22);
+      this.selectAll.Size = new System.Drawing.Size(158, 22);
       this.selectAll.Text = "Выделить вс&ё";
       this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
       // 
       // s6
       // 
       this.s6.Name = "s6";
-      this.s6.Size = new System.Drawing.Size(187, 6);
+      this.s6.Size = new System.Drawing.Size(155, 6);
       // 
       // find
       // 
@@ -489,7 +483,7 @@ namespace FAQ_Net
       this.find.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.find.Name = "find";
       this.find.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-      this.find.Size = new System.Drawing.Size(190, 22);
+      this.find.Size = new System.Drawing.Size(158, 22);
       this.find.Text = "&Поиск";
       this.find.Click += new System.EventHandler(this.Find_Click);
       // 
@@ -497,7 +491,7 @@ namespace FAQ_Net
       // 
       this.replace.Name = "replace";
       this.replace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-      this.replace.Size = new System.Drawing.Size(190, 22);
+      this.replace.Size = new System.Drawing.Size(158, 22);
       this.replace.Text = "З&амена";
       this.replace.Click += new System.EventHandler(this.replace_Click);
       // 
@@ -1680,7 +1674,7 @@ namespace FAQ_Net
       this.cutText.Name = "cutText";
       this.cutText.Size = new System.Drawing.Size(23, 25);
       this.cutText.Text = "Вы&резать";
-      this.cutText.Click += new System.EventHandler(this.CutText_Click);
+      this.cutText.Click += new System.EventHandler(this.Cut_Click);
       // 
       // copyText
       // 
@@ -1691,7 +1685,7 @@ namespace FAQ_Net
       this.copyText.Name = "copyText";
       this.copyText.Size = new System.Drawing.Size(23, 25);
       this.copyText.Text = "&Копировать";
-      this.copyText.Click += new System.EventHandler(this.CopyText_Click);
+      this.copyText.Click += new System.EventHandler(this.Copy_Click);
       // 
       // pasteText
       // 
@@ -1702,7 +1696,7 @@ namespace FAQ_Net
       this.pasteText.Name = "pasteText";
       this.pasteText.Size = new System.Drawing.Size(23, 25);
       this.pasteText.Text = "&Вставить";
-      this.pasteText.Click += new System.EventHandler(this.PasteText_Click);
+      this.pasteText.Click += new System.EventHandler(this.Paste_Click);
       // 
       // sep3
       // 
@@ -2261,7 +2255,7 @@ namespace FAQ_Net
       // 
       this.cover1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.cover1.BackColor = System.Drawing.SystemColors.Control;
-      this.cover1.Location = new System.Drawing.Point(2638, 46);
+      this.cover1.Location = new System.Drawing.Point(2642, 46);
       this.cover1.Name = "cover1";
       this.cover1.Size = new System.Drawing.Size(3, 2);
       this.cover1.TabIndex = 15;
@@ -2375,7 +2369,7 @@ namespace FAQ_Net
             this.sep_2,
             this.printRichText});
       this.richMenu.Name = "RichMenu";
-      this.richMenu.Size = new System.Drawing.Size(219, 198);
+      this.richMenu.Size = new System.Drawing.Size(219, 220);
       this.richMenu.Opening += new System.ComponentModel.CancelEventHandler(this.richMenu_Opening);
       // 
       // cutRichText
@@ -2386,7 +2380,7 @@ namespace FAQ_Net
       this.cutRichText.Name = "cutRichText";
       this.cutRichText.Size = new System.Drawing.Size(218, 22);
       this.cutRichText.Text = "Вы&резать";
-      this.cutRichText.Click += new System.EventHandler(this.RichMenu_Click);
+      this.cutRichText.Click += new System.EventHandler(this.Cut_Click);
       // 
       // copyRichText
       // 
@@ -2396,7 +2390,7 @@ namespace FAQ_Net
       this.copyRichText.Name = "copyRichText";
       this.copyRichText.Size = new System.Drawing.Size(218, 22);
       this.copyRichText.Text = "&Копировать";
-      this.copyRichText.Click += new System.EventHandler(this.RichMenu_Click);
+      this.copyRichText.Click += new System.EventHandler(this.Copy_Click);
       // 
       // pasteRichText
       // 
@@ -2407,7 +2401,7 @@ namespace FAQ_Net
       this.pasteRichText.Name = "pasteRichText";
       this.pasteRichText.Size = new System.Drawing.Size(218, 22);
       this.pasteRichText.Text = "&Вставить";
-      this.pasteRichText.Click += new System.EventHandler(this.RichMenu_Click);
+      this.pasteRichText.Click += new System.EventHandler(this.Paste_Click);
       // 
       // sep_0
       // 

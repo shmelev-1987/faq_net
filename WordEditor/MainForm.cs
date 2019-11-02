@@ -1340,27 +1340,18 @@ namespace FAQ_Net
             fd.Dispose();
         }
 
-        private void RichMenu_Click(object sender, EventArgs e)
-        {
-            switch (((ToolStripMenuItem)(sender)).Name)
-            {
-                case "cutRichText":
-                    cut.PerformClick();
-                    break;
-                case "copyRichText":
-                    copy.PerformClick();
-                    break;
-                case "pasteRichText":
-                    paste.PerformClick();
-                    break;
-                case "fontRichText":
-                    font.PerformClick();
-                    break;
-                case "printRichText":
-                    print.PerformClick();
-                    break;
-            }
-        }
+    private void RichMenu_Click(object sender, EventArgs e)
+    {
+      switch (((ToolStripMenuItem)(sender)).Name)
+      {
+        case "fontRichText":
+          font.PerformClick();
+          break;
+        case "printRichText":
+          print.PerformClick();
+          break;
+      }
+    }
 
         private void lineSpace1_Click(object sender, EventArgs e)
         {
@@ -1393,12 +1384,7 @@ namespace FAQ_Net
         {
             Application.Exit();
         }
-
-        private void Close_Click(object sender, EventArgs e)
-        {
-            
-        }
-
+    
         private void lineSpacing_ButtonClick(object sender, EventArgs e)
         {
             byte lineSp = 0;
@@ -1415,21 +1401,6 @@ namespace FAQ_Net
                     break;
             }
             format.SetSelectionLineSpacing(lineSp);
-        }
-
-        private void CutText_Click(object sender, EventArgs e)
-        {
-            cut.PerformClick();
-        }
-
-        private void CopyText_Click(object sender, EventArgs e)
-        {
-            copy.PerformClick();
-        }
-
-        private void PasteText_Click(object sender, EventArgs e)
-        {
-            paste.PerformClick();
         }
 
         private void selectAll_Click(object sender, EventArgs e)
@@ -1634,21 +1605,6 @@ namespace FAQ_Net
         private void normalOffset_Click(object sender, EventArgs e)
         {
             richText.SelectionCharOffset = 0;
-        }
-
-        private void recentFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        /*private void CheckCountChildNodes(TreeNode TN)
-        {
-
-        }*/
-
-        private void TV1_BeforeExpand(object sender, TreeViewCancelEventArgs e)
-        {
-            
         }
 
         private void CreateCategory_Click(object sender, EventArgs e)
@@ -2046,17 +2002,17 @@ namespace FAQ_Net
             e.Effect = DragDropEffects.Move;
         }
 
-        private void ResetTNDragOver(bool SelectTNDragOver)
-        {
-            if (TNDragOver != null)
-            {
-                TNDragOver.BackColor = System.Drawing.Color.FromArgb(255,255,220);
-                if (SelectTNDragOver)
-                    TV1.SelectedNode = TNDragOver;
-                TNDragOver = null;
-                DGVQuestionsDrag = false;
-            }
-        }
+    private void ResetTNDragOver(bool SelectTNDragOver)
+    {
+      if (TNDragOver != null)
+      {
+        TNDragOver.BackColor = TV1.BackColor;
+        if (SelectTNDragOver)
+          TV1.SelectedNode = TNDragOver;
+        TNDragOver = null;
+        DGVQuestionsDrag = false;
+      }
+    }
 
         private void TV1_DragDrop(object sender, DragEventArgs e)
         {
@@ -2199,7 +2155,7 @@ namespace FAQ_Net
                 TN!=null)
             {
                 if (TNDragOver!=null)
-                    TNDragOver.BackColor = System.Drawing.Color.FromArgb(255,255,220);
+                    TNDragOver.BackColor = TV1.BackColor;
                 TNDragOver = TN;
                 TNDragOver.BackColor = System.Drawing.Color.LimeGreen;
                 TNDragOver.Expand();
@@ -2251,10 +2207,6 @@ namespace FAQ_Net
             TabControl.SelectedTab = TabControl.TabPages["SearchTP"];
         }
 
-        private void SelectedPathLbl_DragLeave(object sender, EventArgs e)
-        {
-        }
-
         private void SelectedPathLbl_MouseDown(object sender, MouseEventArgs e)
         {
             if (!splitContainer1.Panel2Collapsed && e.Button == MouseButtons.Left)
@@ -2287,7 +2239,7 @@ namespace FAQ_Net
         {
             if (TNDragOver != null)
             {
-                TNDragOver.BackColor = System.Drawing.Color.FromArgb(255, 255, 220); ;
+                TNDragOver.BackColor = TV1.BackColor;
                 TV1.SelectedNode = TNDragOver;
                 TNDragOver = null;
             }
@@ -2367,16 +2319,6 @@ namespace FAQ_Net
                     StartNode = null;
                     DoDragDrop(SelectedPathLbl.Text, DragDropEffects.Copy);
                 }
-        }
-
-        private void richText_Leave(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void DGVQuestions_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            
         }
 
         private void splitContainer1_Panel2_Leave(object sender, EventArgs e)
