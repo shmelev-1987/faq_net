@@ -29,6 +29,7 @@ namespace FAQ_Net
       if (CreateTableIfNotExists("category", Sql.CreateTable.category, ref resultMsg) == ResultOperation.Error
        || CreateTableIfNotExists("vopros", Sql.CreateTable.vopros, ref resultMsg) == ResultOperation.Error
        || CreateTableIfNotExists("otvet", Sql.CreateTable.otvet, ref resultMsg) == ResultOperation.Error
+       || CreateTableIfNotExists("word_tooltip", Sql.CreateTable.word_tooltip, ref resultMsg) == ResultOperation.Error
        //|| CreateOrAlterColumn("")
        )
       {

@@ -62,6 +62,7 @@ namespace FAQ_Net
       this.find = new System.Windows.Forms.ToolStripMenuItem();
       this.replace = new System.Windows.Forms.ToolStripMenuItem();
       this.view = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiDictionary = new System.Windows.Forms.ToolStripMenuItem();
       this.formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.font = new System.Windows.Forms.ToolStripMenuItem();
       this.superscript = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,6 +153,7 @@ namespace FAQ_Net
       this.JournalIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.JournalQuestionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.JournalFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.btnSelectQuestion = new System.Windows.Forms.Button();
       this.BackBtn = new System.Windows.Forms.Button();
       this.splitter1 = new System.Windows.Forms.Splitter();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -256,8 +258,10 @@ namespace FAQ_Net
       this.CountAnswLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountCategoriesLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountCategoriesVal = new System.Windows.Forms.ToolStripStatusLabel();
-      this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
       this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+      this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
+      this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+      this.tsmiSaveNodeSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.menuTop.SuspendLayout();
       this.MainSC.Panel1.SuspendLayout();
       this.MainSC.Panel2.SuspendLayout();
@@ -285,6 +289,8 @@ namespace FAQ_Net
       this.QuestionsCMS.SuspendLayout();
       this.richMenu.SuspendLayout();
       this.status.SuspendLayout();
+      this.splitContainer2.Panel1.SuspendLayout();
+      this.splitContainer2.SuspendLayout();
       this.SuspendLayout();
       // 
       // menuTop
@@ -301,7 +307,7 @@ namespace FAQ_Net
       this.menuTop.Location = new System.Drawing.Point(0, 0);
       this.menuTop.Name = "menuTop";
       this.menuTop.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-      this.menuTop.Size = new System.Drawing.Size(900, 22);
+      this.menuTop.Size = new System.Drawing.Size(694, 22);
       this.menuTop.TabIndex = 5;
       // 
       // file
@@ -497,10 +503,19 @@ namespace FAQ_Net
       // 
       // view
       // 
+      this.view.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDictionary});
       this.view.Name = "view";
       this.view.Size = new System.Drawing.Size(39, 18);
       this.view.Text = "В&ид";
-      this.view.Visible = false;
+      // 
+      // tsmiDictionary
+      // 
+      this.tsmiDictionary.Name = "tsmiDictionary";
+      this.tsmiDictionary.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+      this.tsmiDictionary.Size = new System.Drawing.Size(222, 22);
+      this.tsmiDictionary.Text = "Словарь подсказок";
+      this.tsmiDictionary.Click += new System.EventHandler(this.tsmiDictionary_Click);
       // 
       // formatToolStripMenuItem
       // 
@@ -780,6 +795,7 @@ namespace FAQ_Net
       // 
       // MainSC.Panel2
       // 
+      this.MainSC.Panel2.Controls.Add(this.btnSelectQuestion);
       this.MainSC.Panel2.Controls.Add(this.BackBtn);
       this.MainSC.Panel2.Controls.Add(this.splitter1);
       this.MainSC.Panel2.Controls.Add(this.splitContainer1);
@@ -789,7 +805,7 @@ namespace FAQ_Net
       this.MainSC.Panel2.Controls.Add(this.cover1);
       this.MainSC.Panel2.Controls.Add(this.cover0);
       this.MainSC.Panel2MinSize = 100;
-      this.MainSC.Size = new System.Drawing.Size(1146, 275);
+      this.MainSC.Size = new System.Drawing.Size(940, 361);
       this.MainSC.SplitterDistance = 240;
       this.MainSC.TabIndex = 0;
       // 
@@ -803,7 +819,7 @@ namespace FAQ_Net
       this.TabControl.Location = new System.Drawing.Point(0, 0);
       this.TabControl.Name = "TabControl";
       this.TabControl.SelectedIndex = 0;
-      this.TabControl.Size = new System.Drawing.Size(238, 273);
+      this.TabControl.Size = new System.Drawing.Size(238, 359);
       this.TabControl.TabIndex = 2;
       this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
       // 
@@ -816,7 +832,7 @@ namespace FAQ_Net
       this.CategoriesTP.Location = new System.Drawing.Point(4, 22);
       this.CategoriesTP.Name = "CategoriesTP";
       this.CategoriesTP.Padding = new System.Windows.Forms.Padding(3);
-      this.CategoriesTP.Size = new System.Drawing.Size(230, 247);
+      this.CategoriesTP.Size = new System.Drawing.Size(230, 333);
       this.CategoriesTP.TabIndex = 0;
       this.CategoriesTP.Text = "Разделы";
       this.CategoriesTP.UseVisualStyleBackColor = true;
@@ -831,7 +847,7 @@ namespace FAQ_Net
       this.TV1.Location = new System.Drawing.Point(3, 73);
       this.TV1.Name = "TV1";
       this.TV1.PathSeparator = " :: ";
-      this.TV1.Size = new System.Drawing.Size(224, 147);
+      this.TV1.Size = new System.Drawing.Size(224, 233);
       this.TV1.TabIndex = 4;
       this.TV1.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TV1_AfterExpand);
       this.TV1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.TV1_ItemDrag);
@@ -952,7 +968,7 @@ namespace FAQ_Net
       this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CountSubcategoryLbl,
             this.CountSubcategoryVal});
-      this.statusStrip2.Location = new System.Drawing.Point(3, 220);
+      this.statusStrip2.Location = new System.Drawing.Point(3, 306);
       this.statusStrip2.Name = "statusStrip2";
       this.statusStrip2.Size = new System.Drawing.Size(224, 24);
       this.statusStrip2.TabIndex = 3;
@@ -1102,7 +1118,7 @@ namespace FAQ_Net
       this.SearchTP.Location = new System.Drawing.Point(4, 22);
       this.SearchTP.Name = "SearchTP";
       this.SearchTP.Padding = new System.Windows.Forms.Padding(3);
-      this.SearchTP.Size = new System.Drawing.Size(230, 247);
+      this.SearchTP.Size = new System.Drawing.Size(230, 333);
       this.SearchTP.TabIndex = 1;
       this.SearchTP.Text = "Поиск";
       this.SearchTP.UseVisualStyleBackColor = true;
@@ -1147,7 +1163,7 @@ namespace FAQ_Net
       dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
       this.DGVResultSearch.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
       this.DGVResultSearch.RowHeadersVisible = false;
-      this.DGVResultSearch.Size = new System.Drawing.Size(224, 119);
+      this.DGVResultSearch.Size = new System.Drawing.Size(224, 205);
       this.DGVResultSearch.TabIndex = 5;
       this.DGVResultSearch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVResultSearch_CellClick);
       // 
@@ -1290,7 +1306,7 @@ namespace FAQ_Net
       this.FavoritesTP.Location = new System.Drawing.Point(4, 22);
       this.FavoritesTP.Name = "FavoritesTP";
       this.FavoritesTP.Padding = new System.Windows.Forms.Padding(3);
-      this.FavoritesTP.Size = new System.Drawing.Size(230, 247);
+      this.FavoritesTP.Size = new System.Drawing.Size(230, 333);
       this.FavoritesTP.TabIndex = 2;
       this.FavoritesTP.Text = "Избранное";
       this.FavoritesTP.UseVisualStyleBackColor = true;
@@ -1335,7 +1351,7 @@ namespace FAQ_Net
       dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
       this.FavoriteDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
       this.FavoriteDGV.RowHeadersVisible = false;
-      this.FavoriteDGV.Size = new System.Drawing.Size(224, 241);
+      this.FavoriteDGV.Size = new System.Drawing.Size(224, 327);
       this.FavoriteDGV.TabIndex = 6;
       this.FavoriteDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FavoriteDGV_CellClick);
       // 
@@ -1368,7 +1384,7 @@ namespace FAQ_Net
       this.JournalTP.Location = new System.Drawing.Point(4, 22);
       this.JournalTP.Name = "JournalTP";
       this.JournalTP.Padding = new System.Windows.Forms.Padding(3);
-      this.JournalTP.Size = new System.Drawing.Size(230, 247);
+      this.JournalTP.Size = new System.Drawing.Size(230, 333);
       this.JournalTP.TabIndex = 3;
       this.JournalTP.Text = "Журнал";
       this.JournalTP.UseVisualStyleBackColor = true;
@@ -1413,7 +1429,7 @@ namespace FAQ_Net
       dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
       this.JournalDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
       this.JournalDGV.RowHeadersVisible = false;
-      this.JournalDGV.Size = new System.Drawing.Size(224, 241);
+      this.JournalDGV.Size = new System.Drawing.Size(224, 327);
       this.JournalDGV.TabIndex = 7;
       this.JournalDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.JournalDGV_CellClick);
       // 
@@ -1440,6 +1456,20 @@ namespace FAQ_Net
       this.JournalFavoriteDateColumn.ReadOnly = true;
       this.JournalFavoriteDateColumn.Visible = false;
       // 
+      // btnSelectQuestion
+      // 
+      this.btnSelectQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.btnSelectQuestion.Enabled = false;
+      this.btnSelectQuestion.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.btnSelectQuestion.Location = new System.Drawing.Point(571, 10);
+      this.btnSelectQuestion.Name = "btnSelectQuestion";
+      this.btnSelectQuestion.Size = new System.Drawing.Size(118, 30);
+      this.btnSelectQuestion.TabIndex = 33;
+      this.btnSelectQuestion.Text = "Выбрать вопрос";
+      this.btnSelectQuestion.UseVisualStyleBackColor = false;
+      this.btnSelectQuestion.Visible = false;
+      this.btnSelectQuestion.Click += new System.EventHandler(this.btnSelectQuestion_Click);
+      // 
       // BackBtn
       // 
       this.BackBtn.BackColor = System.Drawing.Color.Yellow;
@@ -1459,7 +1489,7 @@ namespace FAQ_Net
       this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
       this.splitter1.Location = new System.Drawing.Point(0, 49);
       this.splitter1.Name = "splitter1";
-      this.splitter1.Size = new System.Drawing.Size(902, 3);
+      this.splitter1.Size = new System.Drawing.Size(696, 3);
       this.splitter1.TabIndex = 31;
       this.splitter1.TabStop = false;
       // 
@@ -1483,7 +1513,7 @@ namespace FAQ_Net
       this.splitContainer1.Panel2.Controls.Add(this.toolsTop);
       this.splitContainer1.Panel2.Controls.Add(this.menuTop);
       this.splitContainer1.Panel2.Leave += new System.EventHandler(this.splitContainer1_Panel2_Leave);
-      this.splitContainer1.Size = new System.Drawing.Size(902, 225);
+      this.splitContainer1.Size = new System.Drawing.Size(696, 311);
       this.splitContainer1.SplitterDistance = 93;
       this.splitContainer1.TabIndex = 29;
       // 
@@ -1494,7 +1524,7 @@ namespace FAQ_Net
             this.CountQuestionsVal});
       this.statusStrip3.Location = new System.Drawing.Point(0, 67);
       this.statusStrip3.Name = "statusStrip3";
-      this.statusStrip3.Size = new System.Drawing.Size(900, 24);
+      this.statusStrip3.Size = new System.Drawing.Size(694, 24);
       this.statusStrip3.TabIndex = 2;
       this.statusStrip3.Text = "statusStrip3";
       // 
@@ -1518,12 +1548,11 @@ namespace FAQ_Net
       this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.ID_ContentTSSL});
-      this.statusStrip1.Location = new System.Drawing.Point(0, 102);
+      this.statusStrip1.Location = new System.Drawing.Point(0, 188);
       this.statusStrip1.Name = "statusStrip1";
-      this.statusStrip1.Size = new System.Drawing.Size(578, 24);
+      this.statusStrip1.Size = new System.Drawing.Size(694, 24);
       this.statusStrip1.TabIndex = 13;
       this.statusStrip1.Text = "statusStrip1";
-      this.statusStrip1.Visible = false;
       // 
       // toolStripStatusLabel1
       // 
@@ -1539,6 +1568,7 @@ namespace FAQ_Net
       this.ID_ContentTSSL.Name = "ID_ContentTSSL";
       this.ID_ContentTSSL.Size = new System.Drawing.Size(75, 19);
       this.ID_ContentTSSL.Text = "Неизвестно";
+      this.ID_ContentTSSL.TextChanged += new System.EventHandler(this.ID_ContentTSSL_TextChanged);
       // 
       // toolsTop
       // 
@@ -1583,7 +1613,7 @@ namespace FAQ_Net
       this.toolsTop.Location = new System.Drawing.Point(0, 22);
       this.toolsTop.Name = "toolsTop";
       this.toolsTop.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-      this.toolsTop.Size = new System.Drawing.Size(900, 28);
+      this.toolsTop.Size = new System.Drawing.Size(694, 28);
       this.toolsTop.TabIndex = 6;
       // 
       // openFile
@@ -1908,7 +1938,7 @@ namespace FAQ_Net
       this.alignRight.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.alignRight.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.alignRight.Name = "alignRight";
-      this.alignRight.Size = new System.Drawing.Size(23, 24);
+      this.alignRight.Size = new System.Drawing.Size(23, 20);
       this.alignRight.ToolTipText = "Выровнять текст по правому краю";
       this.alignRight.Click += new System.EventHandler(this.Tools_Click);
       // 
@@ -1923,7 +1953,7 @@ namespace FAQ_Net
       this.alignJustify.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.alignJustify.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.alignJustify.Name = "alignJustify";
-      this.alignJustify.Size = new System.Drawing.Size(23, 24);
+      this.alignJustify.Size = new System.Drawing.Size(23, 20);
       this.alignJustify.ToolTipText = "Выровнять текст по правому краю";
       this.alignJustify.Visible = false;
       this.alignJustify.Click += new System.EventHandler(this.Tools_Click);
@@ -1984,7 +2014,7 @@ namespace FAQ_Net
       this.bullet.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.bullet.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.bullet.Name = "bullet";
-      this.bullet.Size = new System.Drawing.Size(23, 24);
+      this.bullet.Size = new System.Drawing.Size(23, 20);
       this.bullet.ToolTipText = "Маркеры";
       this.bullet.Click += new System.EventHandler(this.Tools_Click);
       // 
@@ -2179,7 +2209,7 @@ namespace FAQ_Net
       this.highLight.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.highLight.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.highLight.Name = "highLight";
-      this.highLight.Size = new System.Drawing.Size(34, 25);
+      this.highLight.Size = new System.Drawing.Size(34, 17);
       this.highLight.ToolTipText = "Цвет выделения текста (Yellow)";
       this.highLight.ButtonClick += new System.EventHandler(this.HighLight_ButtonClick);
       this.highLight.DropDownOpening += new System.EventHandler(this.HighLight_DropDownOpening);
@@ -2198,7 +2228,7 @@ namespace FAQ_Net
       this.tsddbInsertTable.Image = global::FAQ_Net.Properties.Resources.InsertTable;
       this.tsddbInsertTable.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.tsddbInsertTable.Name = "tsddbInsertTable";
-      this.tsddbInsertTable.Size = new System.Drawing.Size(29, 25);
+      this.tsddbInsertTable.Size = new System.Drawing.Size(29, 20);
       this.tsddbInsertTable.Text = "Создать таблицу";
       // 
       // AddInFavoritesTSB
@@ -2210,7 +2240,7 @@ namespace FAQ_Net
       this.AddInFavoritesTSB.Image = global::FAQ_Net.Properties.Resources.Favorite;
       this.AddInFavoritesTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.AddInFavoritesTSB.Name = "AddInFavoritesTSB";
-      this.AddInFavoritesTSB.Size = new System.Drawing.Size(23, 25);
+      this.AddInFavoritesTSB.Size = new System.Drawing.Size(23, 20);
       this.AddInFavoritesTSB.Text = "Добавить в избранное";
       this.AddInFavoritesTSB.CheckedChanged += new System.EventHandler(this.AddInFavoritesTSB_CheckedChanged);
       this.AddInFavoritesTSB.Click += new System.EventHandler(this.AddInFavoritesTSB_Click);
@@ -2224,7 +2254,7 @@ namespace FAQ_Net
       this.SelectedPathLbl.ForeColor = System.Drawing.Color.Blue;
       this.SelectedPathLbl.Location = new System.Drawing.Point(0, 0);
       this.SelectedPathLbl.Name = "SelectedPathLbl";
-      this.SelectedPathLbl.Size = new System.Drawing.Size(902, 49);
+      this.SelectedPathLbl.Size = new System.Drawing.Size(696, 49);
       this.SelectedPathLbl.TabIndex = 0;
       this.SelectedPathLbl.Text = "Последние добавленные вопросы";
       this.SelectedPathLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2246,16 +2276,16 @@ namespace FAQ_Net
       // 
       this.line0.BackColor = System.Drawing.SystemColors.Control;
       this.line0.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.line0.Location = new System.Drawing.Point(0, 274);
+      this.line0.Location = new System.Drawing.Point(0, 360);
       this.line0.Name = "line0";
-      this.line0.Size = new System.Drawing.Size(902, 1);
+      this.line0.Size = new System.Drawing.Size(696, 1);
       this.line0.TabIndex = 13;
       // 
       // cover1
       // 
       this.cover1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.cover1.BackColor = System.Drawing.SystemColors.Control;
-      this.cover1.Location = new System.Drawing.Point(2642, 46);
+      this.cover1.Location = new System.Drawing.Point(2450, 46);
       this.cover1.Name = "cover1";
       this.cover1.Size = new System.Drawing.Size(3, 2);
       this.cover1.TabIndex = 15;
@@ -2369,7 +2399,7 @@ namespace FAQ_Net
             this.sep_2,
             this.printRichText});
       this.richMenu.Name = "RichMenu";
-      this.richMenu.Size = new System.Drawing.Size(219, 220);
+      this.richMenu.Size = new System.Drawing.Size(219, 198);
       this.richMenu.Opening += new System.ComponentModel.CancelEventHandler(this.richMenu_Opening);
       // 
       // cutRichText
@@ -2478,16 +2508,17 @@ namespace FAQ_Net
             this.CountCategoriesVal,
             this.toolStripStatusLabel3,
             this.tsslStatus});
-      this.status.Location = new System.Drawing.Point(0, 275);
+      this.status.Location = new System.Drawing.Point(0, 361);
       this.status.Name = "status";
       this.status.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-      this.status.Size = new System.Drawing.Size(1146, 20);
+      this.status.Size = new System.Drawing.Size(1187, 20);
       this.status.TabIndex = 8;
       // 
       // toolStripDropDownButton1
       // 
       this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSaveNodeSelect,
             this.tsmiDesignSettings});
       this.toolStripDropDownButton1.Image = global::FAQ_Net.Properties.Resources.settings2;
       this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -2499,7 +2530,7 @@ namespace FAQ_Net
       // 
       this.tsmiDesignSettings.Image = global::FAQ_Net.Properties.Resources.three_color_rectangle;
       this.tsmiDesignSettings.Name = "tsmiDesignSettings";
-      this.tsmiDesignSettings.Size = new System.Drawing.Size(220, 22);
+      this.tsmiDesignSettings.Size = new System.Drawing.Size(269, 22);
       this.tsmiDesignSettings.Text = "Настройки внешнего вида";
       this.tsmiDesignSettings.Click += new System.EventHandler(this.tsmiDesignSettings_Click);
       // 
@@ -2554,6 +2585,12 @@ namespace FAQ_Net
       this.CountCategoriesVal.Text = "0";
       this.CountCategoriesVal.Visible = false;
       // 
+      // toolStripStatusLabel3
+      // 
+      this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+      this.toolStripStatusLabel3.Size = new System.Drawing.Size(211, 15);
+      this.toolStripStatusLabel3.Text = "Фоновый статус выполнения задачи:";
+      // 
       // tsslStatus
       // 
       this.tsslStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
@@ -2564,20 +2601,35 @@ namespace FAQ_Net
       this.tsslStatus.Size = new System.Drawing.Size(117, 15);
       this.tsslStatus.Text = "Нет фоновых задач";
       // 
-      // toolStripStatusLabel3
+      // splitContainer2
       // 
-      this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-      this.toolStripStatusLabel3.Size = new System.Drawing.Size(211, 15);
-      this.toolStripStatusLabel3.Text = "Фоновый статус выполнения задачи:";
+      this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+      this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+      this.splitContainer2.Name = "splitContainer2";
+      // 
+      // splitContainer2.Panel1
+      // 
+      this.splitContainer2.Panel1.Controls.Add(this.MainSC);
+      this.splitContainer2.Size = new System.Drawing.Size(1187, 361);
+      this.splitContainer2.SplitterDistance = 940;
+      this.splitContainer2.TabIndex = 9;
+      // 
+      // tsmiSaveNodeSelect
+      // 
+      this.tsmiSaveNodeSelect.Name = "tsmiSaveNodeSelect";
+      this.tsmiSaveNodeSelect.Size = new System.Drawing.Size(269, 22);
+      this.tsmiSaveNodeSelect.Text = "Запоминать переходы по разделам";
+      this.tsmiSaveNodeSelect.Click += new System.EventHandler(this.tsmiSaveNodeSelect_Click);
       // 
       // MainForm
       // 
       this.BackColor = System.Drawing.SystemColors.Window;
-      this.ClientSize = new System.Drawing.Size(1146, 295);
-      this.Controls.Add(this.MainSC);
+      this.ClientSize = new System.Drawing.Size(1187, 381);
+      this.Controls.Add(this.splitContainer2);
       this.Controls.Add(this.status);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(200, 200);
+      this.MinimumSize = new System.Drawing.Size(200, 400);
       this.Name = "MainForm";
       this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
       this.Text = "FAQ.Net v2.0";
@@ -2622,6 +2674,8 @@ namespace FAQ_Net
       this.richMenu.ResumeLayout(false);
       this.status.ResumeLayout(false);
       this.status.PerformLayout();
+      this.splitContainer2.Panel1.ResumeLayout(false);
+      this.splitContainer2.ResumeLayout(false);
       this.ResumeLayout(false);
 
         }
@@ -2788,7 +2842,6 @@ namespace FAQ_Net
         private ToolStripStatusLabel CountSubcategoryVal;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripStatusLabel1;
-        private ToolStripStatusLabel ID_ContentTSSL;
         private StatusStrip statusStrip3;
         private ToolStripStatusLabel toolStripStatusLabel2;
         private ToolStripStatusLabel CountQuestionsVal;
@@ -2848,6 +2901,11 @@ namespace FAQ_Net
     private ToolStripStatusLabel toolStripStatusLabel3;
     private ToolStripDropDownButton toolStripDropDownButton1;
     private ToolStripMenuItem tsmiDesignSettings;
+    private ToolStripMenuItem tsmiDictionary;
+    private SplitContainer splitContainer2;
+    private Button btnSelectQuestion;
+    private ToolStripStatusLabel ID_ContentTSSL;
+    private ToolStripMenuItem tsmiSaveNodeSelect;
   }
 
 }

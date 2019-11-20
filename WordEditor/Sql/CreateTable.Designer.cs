@@ -101,5 +101,20 @@ namespace FAQ_Net.Sql {
                 return ResourceManager.GetString("vopros", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на CREATE TABLE word_tooltip (
+        ///  id_content INTEGER NOT NULL,   /* Если id_content=0, то это общая всплывающая подсказка */
+        ///  word VARCHAR NOT NULL,         /* Слово, на которое выводится подсказка */
+        ///  tooltip_type INTEGER NOT NULL, /* Тип всплывающей подсказки: 0 - со ссылкой на внутренний документ, 1 - со ссылкой на интернет-ресурс, 2 - статическая подсказка */
+        ///  comment VARCHAR NOT NULL,      /* Текст подсказки */
+        ///  url_adr VARCHAR NULL,          /* URL-адрес */
+        ///  group_name VARCHAR NULL,       /* Им [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string word_tooltip {
+            get {
+                return ResourceManager.GetString("word_tooltip", resourceCulture);
+            }
+        }
     }
 }

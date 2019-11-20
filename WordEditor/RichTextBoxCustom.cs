@@ -48,6 +48,7 @@ namespace FAQ_Net
         public event ZoomChangedEventHandler ZoomChanged;
         private const int EM_SETZOOM = 1024 + 225;
         private const int WM_MOUSEWHEEL = 522;
+        //private const int EM_STREAMIN = 0x449; // ID события загрузки RTF-документа
         private float _ZoomFactor = 1;
        
        
@@ -72,6 +73,10 @@ namespace FAQ_Net
                 case WM_MOUSEWHEEL:
                     OnZoomChanged(new ZoomChangedEventArgs(this.ZoomFactor));
                     break;
+             //case EM_STREAMIN:
+             //  if (OnQuestionChanged != null)
+             //    OnQuestionChanged();
+             //  break;
             }
         }
     }

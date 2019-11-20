@@ -14,7 +14,7 @@ namespace FAQ_Net
     private DataGridViewTextBoxColumn _createDateColumn;
     private DataGridViewTextBoxColumn _modifDateColumn;
 
-    public QuestionDgvControl(Control owner, ContextMenuStrip contextMenuStrip)
+    public QuestionDgvControl(Control owner, ContextMenuStrip contextMenuStrip, MainForm mf)
     {
       _idColumn = new DataGridViewTextBoxColumn();
       _idColumn.ValueType = typeof(int);
@@ -59,7 +59,7 @@ namespace FAQ_Net
       owner.Controls.Add(_dgvControl);
       _dgvControl.BringToFront();
       _dgvControl.ContextMenuStrip = contextMenuStrip;
-      _dgvControl.MouseDown += (Application.OpenForms[0] as MainForm).listView1_MouseDown;
+      _dgvControl.MouseDown += mf.listView1_MouseDown;
       //_listControl.RowFocusChanged += (Application.OpenForms[0] as MainForm).listView1_SelectedIndexChanged;
     }
 

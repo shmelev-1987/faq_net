@@ -11,7 +11,7 @@ namespace FAQ_Net
   {
     private ListView _listControl;
 
-    public QuestionListViewControl(Control owner, ContextMenuStrip contextMenuStrip)
+    public QuestionListViewControl(Control owner, ContextMenuStrip contextMenuStrip, MainForm mf)
     {
       _listControl = new ListView();
       _listControl.Dock = DockStyle.Fill;
@@ -33,8 +33,8 @@ namespace FAQ_Net
       _listControl.BackColor = System.Drawing.Color.White;
       _listControl.ContextMenuStrip = contextMenuStrip;
       
-      _listControl.MouseDown += (Application.OpenForms[0] as MainForm).listView1_MouseDown;
-      _listControl.SelectedIndexChanged += (Application.OpenForms[0] as MainForm).listView1_SelectedIndexChanged;
+      _listControl.MouseDown += mf.listView1_MouseDown;
+      _listControl.SelectedIndexChanged += mf.listView1_SelectedIndexChanged;
     }
 
     //public void OnMouseDown1(object sender, MouseEventArgs e)
@@ -45,7 +45,13 @@ namespace FAQ_Net
 
     public string SelectedQuestionId
     {
-      get { return _listControl.SelectedItems[0].Tag.ToString(); }
+      get
+      {
+        string result = string.Empty;
+        if (_listControl.SelectedItems.Count != 0)
+          result = _listControl.SelectedItems[0].Tag.ToString();
+        return result;
+      }
     }
 
     public string SelectedQuestionText

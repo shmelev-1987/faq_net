@@ -51,7 +51,7 @@ namespace FAQ_Net
         private AddFonts delgAddFonts;
         private string[] ffNames;
         private SizeF fontSize;
-        private static string SelectedId_Razdel = null;
+        private string SelectedId_Razdel = null;
         private Timer Timer1 = new Timer();
         //TreeView TV1 = new TreeView();
         TreeNode StartNode = new TreeNode();    //Через эту переменную переносим ветку.
@@ -63,11 +63,34 @@ namespace FAQ_Net
     /// Признак отмены перезапуска приложения
     /// </summary>
     public static bool RestartApplicationCanceled = false;
+    TooltipUserControl _richTextBoxToolTip;
+    /// <summary>
+    /// Компонент редактирования всплывающих подсказок
+    /// </summary>
+    DictionaryEditor _dictionaryEditor;
+    public static System.Text.RegularExpressions.Regex IdContentUrlRegEx = new System.Text.RegularExpressions.Regex(@"^http://\d*$");
+    /// <summary>
+    /// Признак открытия главного окна приложения для выбора вопроса
+    /// </summary>
+    public bool ModalDialogForSelectQuestion = false;
+    private int _currentQuestionId = 0;
 
     public MainForm()
     {
+      Init();
+    }
+
+    public MainForm(bool modalDialogForSelectQuestion)
+    {
+      ModalDialogForSelectQuestion = modalDialogForSelectQuestion;
+      Init();
+    }
+
+    public void Init()
+    {
       // this.ruler = new TopRuler();
       InitializeComponent();
+      splitContainer2.Panel2Collapsed = true;
       this.richText = new FAQ_Net.RichTextBoxCustom();
       this.splitContainer1.Panel2.Controls.Add(this.richText);
       this.richText.BringToFront();
@@ -84,12 +107,22 @@ namespace FAQ_Net
       this.richText.ShowSelectionMargin = true;
       this.richText.Size = new System.Drawing.Size(890, 76);
       this.richText.TabIndex = 12;
-      this.richText.Text = "";
+      this.richText.Text = string.Empty;
       this.richText.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.RichText_LinkClicked);
       this.richText.SelectionChanged += new System.EventHandler(this.RichText_SelectionChanged);
       this.richText.TextChanged += new System.EventHandler(this.RichText_TextChanged);
       this.richText.Enter += new System.EventHandler(this.richText_Enter);
       this.richText.KeyDown += richText_KeyDown;
+      this.richText.MouseDown += richText_MouseDown;
+
+      if (ModalDialogForSelectQuestion)
+      {
+        // Изменить имя формы, чтобы положение формы на экране отличалось от основного
+        this.Name = "MainFormModal";
+        btnSelectQuestion.FlatStyle = FlatStyle.Standard;
+        btnSelectQuestion.Enabled = false;
+      }
+
       _settingsXml = new SharedLibrary.SettingsXml(Application.ProductName);
       _settingsXml.LoadFormPosition(this);
       _settingsXml.SaveFormPosition(this);
@@ -112,21 +145,23 @@ namespace FAQ_Net
       // Компонент для создания таблиц с расширенными настройками
       _tablePropertyUserControl = new tools.TablePropertyUserControl();
       _tablePropertyUserControl.OnCreateTableClickButton += Selector_TableSizeSelected;
-      
+
       JournalDGV.Columns[JournalQuestionColumn.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       JournalDGV.Columns[JournalQuestionColumn.Name].FillWeight = 100;
-      
+
       FavoriteDGV.Columns[Favorites_question.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       FavoriteDGV.Columns[Favorites_question.Name].FillWeight = 100;
-      
+
       DGVResultSearch.Columns[QuestionSearchColumn.Name].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       DGVResultSearch.Columns[QuestionSearchColumn.Name].FillWeight = 100;
 
+      //richText.DetectUrls = false;
+      //richText.MouseMove += richText_MouseMove;
       // Set Rich Textbox and right margin line.
       //ruler1.InitializeObjects(this.richText, this.rightMarginLine);
     }
 
-        private void tsmiInsertTable_Click(object sender, EventArgs e)
+    private void tsmiInsertTable_Click(object sender, EventArgs e)
         {
           _tablePropertyUserControl.Parent = splitContainer1.Panel2;
           _tablePropertyUserControl.BringToFront();
@@ -184,11 +219,10 @@ namespace FAQ_Net
 
         private void LastQuestions()
         {
-            G.ExecSQLiteQuery(
-                       "SELECT id_content,id_category,question,create_date,modif_date,favorite_date " +
-                       "FROM vopros "+
-                       "ORDER BY create_date DESC "+
-                       "LIMIT 50");
+            G.ExecSQLiteQuery(@"SELECT id_content,id_category,question,create_date,modif_date,favorite_date
+                       FROM vopros
+                       ORDER BY create_date DESC
+                       LIMIT 50");
             if (splitContainer1.Panel1Collapsed)
                 splitContainer1.Panel1Collapsed = false;
             if (!splitContainer1.Panel2Collapsed)
@@ -198,6 +232,7 @@ namespace FAQ_Net
             _questionListControl.Tag = SelectedPathLbl.Text;
             SelectedId_Razdel = null;
             CountQuestionsVal.Text = _questionListControl.CountItemsTotal.ToString();
+            SetCurrentQuestionId();
         }
 
         private void RefreshCountQuestAndAnswers()
@@ -210,109 +245,134 @@ namespace FAQ_Net
                 CountAnswLbl.Text = G.DT.Rows[0][0].ToString();
         }
 
-        public static System.Data.DataTable TransitionDT = new System.Data.DataTable();
-        private static int CurTransitionRow = 0;
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            _questionDgvControl = new QuestionDgvControl(splitContainer1.Panel1, QuestionsCMS);
-            _questionListViewControl = new QuestionListViewControl(splitContainer1.Panel1, QuestionsCMS);
-            _questionListControl = _questionDgvControl;
-            string lastViewSetting = _settingsXml.GetSetting(Constants.LAST_VIEW);
-            if (lastViewSetting == _questionListViewControl.ToString())
-              tsmiListView_Click(sender, e);
-            else
-              tsmiGridView_Click(sender, e);
+        public System.Data.DataTable TransitionDT = new System.Data.DataTable();
+        private int CurTransitionRow = 0;
+    private void MainForm_Load(object sender, EventArgs e)
+    {
+      tsmiSaveNodeSelect.Checked = _settingsXml.GetSettingAsBool(Constants.SAVE_SECTION_NODE_SELECT, true);
+      _questionDgvControl = new QuestionDgvControl(splitContainer1.Panel1, QuestionsCMS, this);
+      _questionListViewControl = new QuestionListViewControl(splitContainer1.Panel1, QuestionsCMS, this);
+      _questionListControl = _questionDgvControl;
+      string lastViewSetting = _settingsXml.GetSetting(Constants.LAST_VIEW);
+      if (lastViewSetting == _questionListViewControl.ToString())
+        tsmiListView_Click(sender, e);
+      else
+        tsmiGridView_Click(sender, e);
 
-            // В случае, если появится ошибка при выполнении следующей операции, то возможная причина - это
-            // 1) библиотека System.Data.SQLite.dll является 64-х разрядной
-            // 2) в свойствах проекта на вкладке "Сборка" указать свойство "Конечная платформа" = x86
-            G.CancelRunSecondaryApp();
+      // В случае, если появится ошибка при выполнении следующей операции, то возможная причина - это
+      // 1) библиотека System.Data.SQLite.dll является 64-х разрядной
+      // 2) в свойствах проекта на вкладке "Сборка" указать свойство "Конечная платформа" = x86
+      G.CancelRunSecondaryApp();
 
-            this.Text = "FAQ.Net v." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            string headerTitle = _settingsXml.GetSetting("HeaderTitle");
-            if (!string.IsNullOrEmpty(headerTitle))
-              this.Text = string.Format("{0} [{1}]", headerTitle, this.Text);
-            fnd = new FindForm(ref richText);
-            fnd.Dock = DockStyle.Bottom;
-            fnd.Parent = splitContainer1.Panel2;
-            fnd.BorderStyle = BorderStyle.FixedSingle;
-            fnd.Hide();
-            TransitionDT.Columns.Add("type",typeof(Int16));
-            TransitionDT.Columns.Add("id", typeof(String));
-            TransitionDT.Columns.Add("TN", typeof(TreeNode));
-            TransitionDT.Rows.Add(0, "", null);
-            //DGVQuestions.Columns["QuestionsColumn"].Width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width-600;
-            //DGVQuestions.Columns["QuestionsColumn"].Width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width - MainSC.SplitterDistance - 50;
+      this.Text = "FAQ.Net v." + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+      string headerTitle = _settingsXml.GetSetting("HeaderTitle");
+      if (!string.IsNullOrEmpty(headerTitle))
+        this.Text = string.Format("{0} [{1}]", headerTitle, this.Text);
+      fnd = new FindForm(ref richText);
+      fnd.Dock = DockStyle.Bottom;
+      fnd.Parent = splitContainer1.Panel2;
+      fnd.BorderStyle = BorderStyle.FixedSingle;
+      fnd.Hide();
+      if (TransitionDT.Columns.Count == 0)
+      {
+        TransitionDT.Columns.Add("type", typeof(Int16));
+        TransitionDT.Columns.Add("id", typeof(String));
+        TransitionDT.Columns.Add("TN", typeof(TreeNode));
+        TransitionDT.Rows.Add(0, "", null);
+      }
+      //DGVQuestions.Columns["QuestionsColumn"].Width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width-600;
+      //DGVQuestions.Columns["QuestionsColumn"].Width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width - MainSC.SplitterDistance - 50;
 
-            SqliteDatabase.Create();
-            LastQuestions();                  //Вывод последних добавленных вопросов
-            string lastSortingSetting = _settingsXml.GetSetting(Constants.LAST_SORTING);
-            if (lastSortingSetting == SortOrder.Descending.ToString())
-              SortDescTSMI_Click(sender, e);
-            else
-              SortAscTSMI_Click(sender, e);
+      SqliteDatabase.Create();
+      LastQuestions();                  //Вывод последних добавленных вопросов
+      string lastSortingSetting = _settingsXml.GetSetting(Constants.LAST_SORTING);
+      if (lastSortingSetting == SortOrder.Descending.ToString())
+        SortDescTSMI_Click(sender, e);
+      else
+        SortAscTSMI_Click(sender, e);
 
-            Timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            splitContainer1.Panel2Collapsed = true;
-            //splitContainer1.SplitterDistance = 5;
-            //Загружаем разделы нулевого уровня
-            G.GetTreeNodes(TV1, null, false);
-            RefreshCountQuestAndAnswers();    //Вывести кол-во ответов и вопросов
-            // Set/Get form's size and location values.
-            if (formWidth > 0 && formHeight > 0)
-            {
-                this.Left = posLeft;
-                this.Top = posTop;
-                this.Width = formWidth;
-                this.Height = formHeight;
-            }
-            else
-            {
-                posLeft = this.Left;
-                posTop = this.Top;
-                formWidth = this.Width;
-                formHeight = this.Height;
-            }
-            // Set tool tips for controls that don't have the ToolTipText property.
-            toolTip.SetToolTip(this.rightIndentGrip, "Right Indent");
-            InitializeUserControls();
-            highLight.DropDown = highlightColor;
-            // Initialize text color menu renderer.
-            colors.Renderer = new RenderColors();
-            // Initialize Format class.
-            format = new Format(richText.Handle);
-            // Set default page settings.
-            pageSettings = new System.Drawing.Printing.PageSettings();
-            pageSettings.Landscape = false;
-            pageSettings.Margins.Left = 50;
-            pageSettings.Margins.Right = 50;
-            pageSettings.Margins.Top = 100;
-            pageSettings.Margins.Bottom = 100;
-//            ruler.RightLimit -= pageSettings.Margins.Left + pageSettings.Margins.Right;
-            // Set the Combo Box used by the fonts ToolStripComboBox.
-            fonts = selFont.ComboBox;
-            // Set the DrawMode and add handler so that we can
-            // manually draw each font name in its own font.
-            fonts.DrawMode = DrawMode.OwnerDrawVariable;
-            fonts.MeasureItem += Fonts_MeasureItem;
-            fonts.DrawItem += Fonts_DrawItem;
-            fonts.SelectionChangeCommitted += new EventHandler(Fonts_SelectionChangeCommitted);
-            fonts.IntegralHeight = true;
-            // Add event handler for zoom changed event.
-            richText.ZoomChanged += new ZoomChangedEventHandler(richText_ZoomChanged);
-            // Adding all available font names can cause a lot
-            // of overhead, depending on how many fonts are
-            // installed, so fill them in a background thread.
-            System.Threading.Thread t = new System.Threading.Thread(GetFonts);
-            // Thread-safe delegate to add the fonts when thread work is done.
-            delgAddFonts = new AddFonts(delg_AddFonts);
-            t.IsBackground = true;
-            t.Priority = System.Threading.ThreadPriority.Highest;
-            t.Start();
-            CheckUpdate();
+      Timer1.Tick += new System.EventHandler(this.timer1_Tick);
+      splitContainer1.Panel2Collapsed = true;
+      //splitContainer1.SplitterDistance = 5;
+      //Загружаем разделы нулевого уровня
+      G.GetTreeNodes(TV1, null, false);
+      RefreshCountQuestAndAnswers();    //Вывести кол-во ответов и вопросов
+                                        // Set/Get form's size and location values.
+      if (formWidth > 0 && formHeight > 0)
+      {
+        this.Left = posLeft;
+        this.Top = posTop;
+        this.Width = formWidth;
+        this.Height = formHeight;
+      }
+      else
+      {
+        posLeft = this.Left;
+        posTop = this.Top;
+        formWidth = this.Width;
+        formHeight = this.Height;
+      }
+      // Set tool tips for controls that don't have the ToolTipText property.
+      toolTip.SetToolTip(this.rightIndentGrip, "Right Indent");
+      InitializeUserControls();
+      highLight.DropDown = highlightColor;
+      // Initialize text color menu renderer.
+      colors.Renderer = new RenderColors();
+      // Initialize Format class.
+      format = new Format(richText.Handle);
+      // Set default page settings.
+      pageSettings = new System.Drawing.Printing.PageSettings();
+      pageSettings.Landscape = false;
+      pageSettings.Margins.Left = 50;
+      pageSettings.Margins.Right = 50;
+      pageSettings.Margins.Top = 100;
+      pageSettings.Margins.Bottom = 100;
+      //            ruler.RightLimit -= pageSettings.Margins.Left + pageSettings.Margins.Right;
+      // Set the Combo Box used by the fonts ToolStripComboBox.
+      fonts = selFont.ComboBox;
+      // Set the DrawMode and add handler so that we can
+      // manually draw each font name in its own font.
+      fonts.DrawMode = DrawMode.OwnerDrawVariable;
+      fonts.MeasureItem += Fonts_MeasureItem;
+      fonts.DrawItem += Fonts_DrawItem;
+      fonts.SelectionChangeCommitted += new EventHandler(Fonts_SelectionChangeCommitted);
+      fonts.IntegralHeight = true;
+      // Add event handler for zoom changed event.
+      richText.ZoomChanged += new ZoomChangedEventHandler(richText_ZoomChanged);
+      // Adding all available font names can cause a lot
+      // of overhead, depending on how many fonts are
+      // installed, so fill them in a background thread.
+      System.Threading.Thread t = new System.Threading.Thread(GetFonts);
+      // Thread-safe delegate to add the fonts when thread work is done.
+      delgAddFonts = new AddFonts(delg_AddFonts);
+      t.IsBackground = true;
+      t.Priority = System.Threading.ThreadPriority.Highest;
+      t.Start();
+      CheckUpdate();
 
-            CustomDesignControl[] controlsForSettings = new CustomDesignControl[]
-            {
+      // Всплывающая подсказка при наведении мыши на слово
+      if (ModalDialogForSelectQuestion)
+      {
+        tsmiDictionary.Enabled = false;
+      }
+      else
+      {
+        TooltipDictionary.InitializeToolTip();
+
+        _dictionaryEditor = new DictionaryEditor();
+        _dictionaryEditor.Dock = DockStyle.Right;
+
+        _richTextBoxToolTip = new TooltipUserControl(richText);
+        //_richTextBoxToolTip.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+        //_richTextBoxToolTip.DescriptionFont = new Font("Times New Roman", 12);
+        _richTextBoxToolTip.Dictionary = TooltipDictionary.eDictionary;
+        _richTextBoxToolTip.TitleForeColor = Color.DarkBlue;
+        _richTextBoxToolTip.DescriptionForeColor = Color.Black;
+        TooltipDictionary.TV_Dictionary.MouseDoubleClick += TV_Dictionary_MouseDoubleClick;
+      }
+
+      CustomDesignControl[] controlsForSettings = new CustomDesignControl[]
+      {
                new CustomDesignControl() { SettingId = "MainFormTabControl", Description = "Вкладки", ObjectControl = TabControl}
               ,new CustomDesignControl() { SettingId = "CategoryToolStrip", Description = "Разделы.Кнопки", ObjectControl = toolStrip1}
               ,new CustomDesignControl() { SettingId = "CategoryTreeView", Description = "Разделы.Список", ObjectControl = TV1}
@@ -329,13 +389,52 @@ namespace FAQ_Net
               ,new CustomDesignControl() { SettingId = "RtfDocToolStrip", Description = "Документ.Пиктограммы", ObjectControl = toolsTop}
               ,new CustomDesignControl() { SettingId = "RtfDocumentControl", Description = "RTF-документ", ObjectControl = richText}
               ,new CustomDesignControl() { SettingId = "RightStatusControl", Description = "Правая статусная строка", ObjectControl = statusStrip3}
+              ,new CustomDesignControl() { SettingId = "DocumentStatusControl", Description = "RTF-документ.Статусная строка", ObjectControl = statusStrip1}
 
               ,new CustomDesignControl() { SettingId = "FindControlUser", Description = "Панель поиска", ObjectControl = fnd}
               ,new CustomDesignControl() { SettingId = "MainStatusControl", Description = "Нижняя статусная строка", ObjectControl = status}
-            };
-            _appSettingForm = new AppSettingsForm(controlsForSettings);
-            MainSC.SplitterDistance = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, MainSC.SplitterDistance);
-        }
+
+              ,new CustomDesignControl() { SettingId = "TooltipRtfTitle", Description = "Всплывающая подсказка.Заголовок", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.TitleLabel:null}
+              ,new CustomDesignControl() { SettingId = "TooltipRtfDescription", Description = "Всплывающая подсказка.Описание", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.DescriptionLabel:null}
+              ,new CustomDesignControl() { SettingId = "TooltipRtfFooter", Description = "Всплывающая подсказка.Подвал", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.FooterLabel:null}
+
+              ,new CustomDesignControl() { SettingId = "TooltipEditorHeaderLabel", Description = "Словарь подсказок.Заголовок", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.lblHeader:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorHeaderToolstrip", Description = "Словарь подсказок.ПанельКнопокУправления", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsHeader:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorSearchToolstrip", Description = "Словарь подсказок.ПанельПоиска", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsSearch:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorTreeView", Description = "Словарь подсказок.ДеревоПодсказок", ObjectControl = (TooltipDictionary.TV_Dictionary != null)?TooltipDictionary.TV_Dictionary:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorEditToolstrip", Description = "Словарь подсказок.ПанельКнопокРедактирования", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsEditor:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorEditPanel", Description = "Словарь подсказок.Панель редактирования", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.EditPanel:null}
+
+              //,new CustomDesignControl() { SettingId = "WordTooltip", Description = "Всплывающая подсказка", ObjectControl = _richTextBoxToolTip}
+      };
+      _appSettingForm = new AppSettingsForm(controlsForSettings);
+      MainSC.SplitterDistance = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, MainSC.SplitterDistance);
+    }
+
+    private void TV_Dictionary_MouseDoubleClick(object sender, MouseEventArgs e)
+    {
+      if (splitContainer1.Panel2Collapsed)
+        return;
+      if (TooltipDictionary.TV_Dictionary.SelectedNode == null)
+        return;
+      Color foreColor = TooltipDictionary.TV_Dictionary.SelectedNode.ForeColor;
+      string rtf = string.Format("{{\\rtf1{{\\colortbl ;\\red{0}\\green{1}\\blue{2};}}\\ul\\cf1 {3}\\ulnone  }}"
+        , foreColor.R.ToString(), foreColor.G.ToString(), foreColor.B.ToString(), TooltipDictionary.TV_Dictionary.SelectedNode.Text);
+      richText.SelectedRtf = rtf;
+    }
+
+    //public string WinToHex(string s)
+    //{
+    //  byte[] bytes = Encoding.GetEncoding(1251).GetBytes(s);
+    //  StringBuilder ByteString = new StringBuilder();
+    //  foreach (byte b in bytes)
+    //  {
+    //    ByteString.Append(String.Format("\\\'{0:x2}", b));
+    //  }
+    //  return ByteString.ToString();
+    //}
+
+
 
     /// <summary>
     /// Проверить обновление приложения
@@ -1212,17 +1311,24 @@ namespace FAQ_Net
             }
         }
 
-        private void RichText_LinkClicked(object sender, LinkClickedEventArgs e)
+    private void RichText_LinkClicked(object sender, LinkClickedEventArgs e)
+    {
+      try
+      {
+        if (IdContentUrlRegEx.IsMatch(e.LinkText))
         {
-            try
-            {
-                System.Diagnostics.Process.Start(e.LinkText);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+          CheckAndSaveDocument();
+          GetQuestionAndAnswer(e.LinkText.Substring(7));
+          AddRowInHistory(2);
         }
+        else
+          System.Diagnostics.Process.Start(e.LinkText);
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("Error: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
 
         private void SelectColor_ButtonClick(object sender, EventArgs e)
         {
@@ -1649,12 +1755,45 @@ namespace FAQ_Net
                 CountQuestionsVal.Text = _questionListControl.CountItemsTotal.ToString();
                 SelectedId_Razdel = TN.Name.Replace("'", "''");
             }
+            SetCurrentQuestionId();
         }
+
+    private void SetCurrentQuestionId(bool refreshAllData = true)
+    {
+      if (splitContainer1.Panel2Collapsed)
+        _currentQuestionId = 0;// string.IsNullOrEmpty(_questionListControl.SelectedQuestionId) ? 0 : Convert.ToInt32(_questionListControl.SelectedQuestionId);
+      else
+        int.TryParse(ID_ContentTSSL.Text, out _currentQuestionId);
+      if (_dictionaryEditor!= null && _dictionaryEditor.Parent != null && _dictionaryEditor.Visible && refreshAllData)
+        _dictionaryEditor.RefreshAllData(_currentQuestionId);
+      if (ModalDialogForSelectQuestion)
+      {
+        if (_currentQuestionId == 0)
+        {
+          //btnSelectQuestion.FlatStyle = FlatStyle.Standard;
+          btnSelectQuestion.BackColor = Color.Transparent;
+          btnSelectQuestion.Enabled = false;
+        }
+        else
+        {
+          //btnSelectQuestion.FlatStyle = FlatStyle.Flat;
+          btnSelectQuestion.BackColor = Color.Yellow;
+          btnSelectQuestion.Enabled = true;
+        }
+      }
+    }
+
+    public int GetCurrentQuestionId()
+    {
+      SetCurrentQuestionId(false);
+      return _currentQuestionId;
+    }
 
         private void TV1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             NodeSelect(TV1.SelectedNode);
-            AddRowInHistory(1);
+            if (tsmiSaveNodeSelect.Checked)
+              AddRowInHistory(1);
         }
 
         private void ExpandAllNodesTSB_Click(object sender, EventArgs e)
@@ -1757,6 +1896,8 @@ namespace FAQ_Net
         //private void GetQuestionAndAnswer(string DGVSource, string QuestionColName, string ID_ContentColName, string FavoriteDateColumn)
         private void GetQuestionAndAnswer(string id_content)
         {
+            if (_richTextBoxToolTip != null)
+              _richTextBoxToolTip.Hide();
             G.ExecSQLiteQuery(
                 "SELECT v.id_content, v.question, o.answer_rtf, v.favorite_date " +
                 "FROM vopros v LEFT JOIN otvet o ON v.id_content = o.id_content WHERE v.id_content='" + id_content.Replace("'", "''") + "'");
@@ -1792,10 +1933,12 @@ namespace FAQ_Net
                 AddInFavoritesTSB.Checked = !(G.DT.Rows[0]["favorite_date"] == DBNull.Value);
                 saveFile.Enabled =
                 save.Enabled = false;
+                SetCurrentQuestionId();
                 //BackBtn.Visible = false;
             }
-            //CurrentId_Content = G.ConvertEncoding(CurrentId_Content, 20127, 65001);
-        }
+      
+      //CurrentId_Content = G.ConvertEncoding(CurrentId_Content, 20127, 65001);
+    }
         #endregion Вывод выбранного вопроса с ответом
 
         //private void DGVQuestions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -1952,7 +2095,22 @@ namespace FAQ_Net
             {
                 GetQuestionAndAnswer(JournalDGV.CurrentRow.Cells["JournalIdColumn"].Value.ToString());
                 AddRowInHistory(2);
-            }
+        // save the right cursor for later
+        
+            // Отображение ссылки с включенным DetectUrl
+        //this.defaultRichTextBoxCursor = richText.Cursor;
+
+        //// Output some sample text, some of which contains
+        //// the trigger string (HOT_TEXT)
+        //richText.SelectionFont = new Font("Calibri", 11, FontStyle.Underline);
+        //richText.SelectionColor = Color.Blue;
+        //// output "click here" with blue underlined font
+        //richText.SelectedText = HOT_TEXT + "\n";
+
+        //richText.SelectionFont = new Font("Calibri", 11, FontStyle.Regular);
+        //richText.SelectionColor = Color.Black;
+        //richText.SelectedText = "Some regular text";
+      }
         }
 
         private void ChangeNameCategoryTSMI_Click(object sender, EventArgs e)
@@ -2321,16 +2479,21 @@ namespace FAQ_Net
                 }
         }
 
+    private void CheckAndSaveDocument()
+    {
+      if (saveFile.Enabled)
+      {
+        if (MessageBox.Show("Сохранить изменения ответа на вопрос?", "Подтверждение сохранения",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+        {
+          SaveAnswerToDB();
+        }
+      }
+    }
+
         private void splitContainer1_Panel2_Leave(object sender, EventArgs e)
         {
-            if (saveFile.Enabled)
-            {
-                if (MessageBox.Show("Сохранить изменения ответа на вопрос?", "Подтверждение сохранения",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    Save_Click(sender, new EventArgs());
-                }
-            }
+          CheckAndSaveDocument();
         }
 
         private void ASCII_TSMI_Click(object sender, EventArgs e)
@@ -2671,10 +2834,19 @@ namespace FAQ_Net
           cutRichText.Enabled = (richText.SelectedText.Length > 0);
         }
 
+    [DllImport("user32.dll")]
+    private static extern short GetAsyncKeyState(Keys vKey);
+
     private void richText_KeyDown(object sender, KeyEventArgs e)
     {
       if (e.Control)
       {
+        //if (_richTextBoxToolTip.synChecking.IsVisible
+        // && !string.IsNullOrEmpty(_richTextBoxToolTip.Url))
+        //{
+        //  //MessageBox.Show("fff");
+        //  Cursor = Cursors.Hand;
+        //}
         switch (e.KeyCode)
         {
           case Keys.B:
@@ -2705,6 +2877,35 @@ namespace FAQ_Net
                   .Replace("\\pard\\qr", JUSTIFIED_ALIGN_RTF)
                   .Replace("\\pard\\qc", JUSTIFIED_ALIGN_RTF);
             break;
+          case Keys.F8:
+            richText.ReadOnly = true;
+            richText.SelectionBackColor = Color.AliceBlue;
+            richText.ReadOnly = false;
+            if (richText.SelectedText.Length == 0)
+              MessageBox.Show("Не выделен текст");
+            else
+            if (richText.SelectedText.Length > 0)
+            {
+              using (Form f = new Form())
+              {
+                TextBox tb = new TextBox();
+                tb.Text = richText.SelectedRtf;
+                tb.Multiline = true;
+                tb.Dock = DockStyle.Fill;
+                f.Controls.Add(tb);
+                tb.MouseDoubleClick += delegate
+                {
+                  try
+                  {
+                    tb.BackColor = Color.White;
+                    richText.SelectedRtf = tb.Text;
+                  }
+                  catch (Exception) { tb.BackColor = Color.LightCoral; }
+                };
+                f.ShowDialog();
+              }
+            }
+            break;
         }
       }
     }
@@ -2721,6 +2922,77 @@ namespace FAQ_Net
     private void tsmiDesignSettings_Click(object sender, EventArgs e)
     {
       _appSettingForm.Show();
+    }
+
+    private void richText_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (e.Button == MouseButtons.Left
+       && (ModifierKeys & Keys.Control) == Keys.Control)
+      {
+        // Если отображается подсказка, на наведенное мышкой слово и есть определение на слово со ссылкой, то переходим по ссылке
+        if (_richTextBoxToolTip.Visible
+         && !string.IsNullOrEmpty(_richTextBoxToolTip.Url)
+         && !_richTextBoxToolTip.Title.StartsWith("http://"))
+        {
+          if (!_richTextBoxToolTip.Title.StartsWith("http://"))
+            this.RichText_LinkClicked(sender, new LinkClickedEventArgs(_richTextBoxToolTip.Url));
+        }
+      }
+    }
+
+    private void tsmiDictionary_Click(object sender, EventArgs e)
+    {
+      // Словарь подсказок (с указанием ссылок)
+      if (_dictionaryEditor.Parent != null)
+      {
+        _dictionaryEditor.Parent = null;
+        splitContainer2.Panel2Collapsed = true;
+      }
+      else
+      {
+        splitContainer2.Panel2Collapsed = false;
+        _dictionaryEditor.Parent = splitContainer2.Panel2;
+        _dictionaryEditor.Dock = DockStyle.Fill;
+        int idContent;
+        int.TryParse(ID_ContentTSSL.Text, out idContent);
+        _dictionaryEditor.RefreshAllData(idContent);
+      }
+      //richText.InsertLink("вопрос1");
+    }
+
+    private void btnSelectQuestion_Click(object sender, EventArgs e)
+    {
+      int idContent = GetCurrentQuestionId();
+      if (idContent == 0)
+      {
+        MessageBox.Show("Выберите вопрос из списка или откройте его", "Не выбран вопрос", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        return;
+      }
+      DialogResult = DialogResult.OK;
+    }
+
+    /// <summary>
+    /// Открыть модальное окно для выбора вопроса
+    /// </summary>
+    public void SetModalDialogForSelectQuestion()
+    {
+      btnSelectQuestion.Visible = true;
+      menuTop.Visible
+        = toolsTop.Visible
+        = toolStrip1.Visible
+        = false;
+      CategoriesContextMenu.Parent = null;
+    }
+
+    private void ID_ContentTSSL_TextChanged(object sender, EventArgs e)
+    {
+      
+    }
+
+    private void tsmiSaveNodeSelect_Click(object sender, EventArgs e)
+    {
+      tsmiSaveNodeSelect.Checked = !tsmiSaveNodeSelect.Checked;
+      _settingsXml.SetSetting(Constants.SAVE_SECTION_NODE_SELECT, tsmiSaveNodeSelect.Checked.ToString());
     }
   }
 }

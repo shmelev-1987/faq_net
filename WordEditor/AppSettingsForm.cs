@@ -17,8 +17,11 @@ namespace FAQ_Net
     private const string HEADER_STYLE_BACK_COLOR_PROP_NAME = "Цвет заголовка";
     private const string HEADER_STYLE_FONT_PROP_NAME = "Шрифт заголовка";
     private const string CELL_FONT_PROP_NAME = "Шрифт ячеек";
+    private const string CELL_FORE_COLOR = "Цвет шрифта ячеек";
+    private const string HEADER_FORE_COLOR = "Цвет шрифта заголовка";
     private const string FONT_PROP_NAME = "Шрифт";
     private const string CATEGORY_DESIGN_VIEW = "Внешний вид";
+    private const string FORE_COLOR_PROP_NAME = "Цвет шрифта";
 
     public AppSettingsForm(CustomDesignControl[] customDesignControls)
     {
@@ -38,6 +41,8 @@ namespace FAQ_Net
 
       foreach (CustomDesignControl cntrl in customDesignControls)
       {
+        if (cntrl == null)
+          continue;
         TreeNode addedTreeNode = null;
         if (cntrl.Description != null)
           addedTreeNode = tvSettings.Nodes.Add(cntrl.Description);
@@ -108,6 +113,42 @@ namespace FAQ_Net
                 if (prop.Value != null && prop.Value.ToString() != string.Empty)
                   control.Font = (Font)prop.Value;
                 break;
+              case FORE_COLOR_PROP_NAME:
+                if (control is DataGridView)
+                {
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                    (control as DataGridView).DefaultCellStyle.ForeColor = (Color)prop.Value;
+                }
+                else
+                if (control is TabControl)
+                {
+                  TabControl tc = control as TabControl;
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  {
+                    foreach (TabPage tp in tc.TabPages)
+                      tp.ForeColor = (Color)prop.Value;
+                  }
+                }
+                else
+                {
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                    control.ForeColor = (Color)prop.Value;
+                }
+                break;
+              case CELL_FORE_COLOR:
+                if (control is DataGridView)
+                {
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                    (control as DataGridView).DefaultCellStyle.ForeColor = (Color)prop.Value;
+                }
+                break;
+              case HEADER_FORE_COLOR:
+                if (control is DataGridView)
+                {
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                    (control as DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = (Color)prop.Value;
+                }
+                break;
                 //case HEADER_BACK_COLOR_PROP_NAME:
                 //  if (control is DataGridView)
                 //  {
@@ -160,6 +201,8 @@ namespace FAQ_Net
       //_propertyGridEx.SelectedObject = _controls[0]
       CustomDesignControl customDesignControl = (CustomDesignControl)_controls[tvSettings.SelectedNode.Index];
       Control cntrl = (Control)_controls[tvSettings.SelectedNode.Index].ObjectControl;
+      if (cntrl == null)
+        return;
       PropertyInfo[] properties = cntrl.GetType().GetProperties();
       if (parseType == ParseType.LoadFromControl)
         _propertyGridEx.Item.Clear();
@@ -200,7 +243,18 @@ namespace FAQ_Net
               ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.BackColor = ParseColorDesignSetting(parseType, cntrl, HEADER_STYLE_BACK_COLOR_PROP_NAME, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.BackColor, customDesignControl.SettingId);
               ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.Font = ParseFontDesignSetting(parseType, cntrl, HEADER_STYLE_FONT_PROP_NAME, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.Font, customDesignControl.SettingId);
               ((DataGridView)cntrl).DefaultCellStyle.Font = ParseFontDesignSetting(parseType, cntrl, CELL_FONT_PROP_NAME, ((DataGridView)cntrl).DefaultCellStyle.Font, customDesignControl.SettingId);
+              ((DataGridView)cntrl).DefaultCellStyle.ForeColor = ParseColorDesignSetting(parseType, cntrl, CELL_FORE_COLOR, ((DataGridView)cntrl).DefaultCellStyle.ForeColor, customDesignControl.SettingId);
+              ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.ForeColor = ParseColorDesignSetting(parseType, cntrl, HEADER_FORE_COLOR, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.ForeColor, customDesignControl.SettingId);
             }
+            break;
+          case "ForeColor":
+            if (cntrl is DataGridView)
+              continue;
+            if (cntrl is ToolStrip)
+              continue;
+            if (cntrl is RichTextBox)
+              continue;
+            cntrl.ForeColor = ParseColorDesignSetting(parseType, cntrl, FORE_COLOR_PROP_NAME, cntrl.ForeColor, customDesignControl.SettingId);
             break;
             //default:
             //  _propertyGridEx.Item.Add(pi.Name, string.Empty, false, pi.PropertyType.Name, string.Empty, true);
@@ -247,6 +301,9 @@ namespace FAQ_Net
             case CELL_FONT_PROP_NAME:
               _propertyGridEx.Item.Add(customPropertyName, ((DataGridView)cntrl).DefaultCellStyle.Font, false, CATEGORY_DESIGN_VIEW, customPropertyName, true);
               break;
+            case CELL_FORE_COLOR:
+              _propertyGridEx.Item.Add(customPropertyName, ((DataGridView)cntrl).DefaultCellStyle.ForeColor, false, CATEGORY_DESIGN_VIEW, customPropertyName, true);
+              break;
             default:
               _propertyGridEx.Item.Add(customPropertyName, null, false, CATEGORY_DESIGN_VIEW, customPropertyName, true);
               break;
@@ -276,7 +333,15 @@ namespace FAQ_Net
       {
         if (cntrl is TabControl)
         {
-          AddPropertyIfNotExists(cntrl, customPropertyName, ((TabControl)cntrl).TabPages[0].BackColor, CATEGORY_DESIGN_VIEW);
+          switch (customPropertyName)
+          {
+            case BACK_COLOR_PROP_NAME:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((TabControl)cntrl).TabPages[0].BackColor, CATEGORY_DESIGN_VIEW);
+              break;
+            case FORE_COLOR_PROP_NAME:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((TabControl)cntrl).TabPages[0].ForeColor, CATEGORY_DESIGN_VIEW);
+              break;
+          }
         }
         else
         if (cntrl is DataGridView)
@@ -289,14 +354,30 @@ namespace FAQ_Net
             case HEADER_STYLE_BACK_COLOR_PROP_NAME:
               AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.BackColor, CATEGORY_DESIGN_VIEW);
               break;
+            case CELL_FORE_COLOR:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).DefaultCellStyle.ForeColor, CATEGORY_DESIGN_VIEW);
+              break;
+            case HEADER_FORE_COLOR:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.ForeColor, CATEGORY_DESIGN_VIEW);
+              break;
             default:
               AddPropertyIfNotExists(cntrl, customPropertyName, null, CATEGORY_DESIGN_VIEW);
               break;
           }
         }
         else
-          //_propertyGridEx.Item.Add("Имя свойства", "Значение по-умолчанию", readOnly, "Категория", "Описание", visible);
-          AddPropertyIfNotExists(cntrl, customPropertyName, cntrl.BackColor, CATEGORY_DESIGN_VIEW);
+        {
+          switch (customPropertyName)
+          {
+            case BACK_COLOR_PROP_NAME:
+              //_propertyGridEx.Item.Add("Имя свойства", "Значение по-умолчанию", readOnly, "Категория", "Описание", visible);
+              AddPropertyIfNotExists(cntrl, customPropertyName, cntrl.BackColor, CATEGORY_DESIGN_VIEW);
+              break;
+            case FORE_COLOR_PROP_NAME:
+              AddPropertyIfNotExists(cntrl, customPropertyName, cntrl.ForeColor, CATEGORY_DESIGN_VIEW);
+              break;
+          }
+        }
       }
       return resultColor;
     }
