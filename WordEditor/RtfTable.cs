@@ -4,9 +4,9 @@ using System.Text;
 
 namespace FAQ_Net
 {
-  class RtfTable
+  class Rtf
   {
-    public static String InsertTableInRichTextBox(int countRows, int countColumns, int columnWidth)
+    public static string InsertTableInRichTextBox(int countRows, int countColumns, int columnWidth)
     {
       // Пример создания таблицы 2x2 с прозрачными границами ячеек
       // {\rtf1
@@ -46,6 +46,19 @@ namespace FAQ_Net
       sringTableRtf.Append(@"}");
 
       return sringTableRtf.ToString();
+    }
+
+    public static string InsertText(string text, System.Drawing.Color foreColor, bool underline)
+    {
+      string rtf = string.Format("{{\\rtf1{{\\colortbl ;\\red{0}\\green{1}\\blue{2};}}\\ul\\ulnone\\cf1 {3}}}"
+        , foreColor.R.ToString(), foreColor.G.ToString(), foreColor.B.ToString(), text);
+      if (underline)
+      {
+        // \\uld - Dotted underline (подчеркивание символом - тире)
+        rtf = string.Format("{{\\rtf1{{\\colortbl ;\\red{0}\\green{1}\\blue{2};}}\\uld\\cf1 {3}\\ulnone }}"
+          , foreColor.R.ToString(), foreColor.G.ToString(), foreColor.B.ToString(), text);
+      }
+      return rtf;
     }
   }
 }

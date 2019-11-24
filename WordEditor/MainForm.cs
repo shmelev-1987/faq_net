@@ -68,12 +68,13 @@ namespace FAQ_Net
     /// Компонент редактирования всплывающих подсказок
     /// </summary>
     DictionaryEditor _dictionaryEditor;
-    public static System.Text.RegularExpressions.Regex IdContentUrlRegEx = new System.Text.RegularExpressions.Regex(@"^http://\d*$");
+    public static System.Text.RegularExpressions.Regex IdContentUrlRegEx = new System.Text.RegularExpressions.Regex(@"^http://\d+$");
     /// <summary>
     /// Признак открытия главного окна приложения для выбора вопроса
     /// </summary>
     public bool ModalDialogForSelectQuestion = false;
     private int _currentQuestionId = 0;
+    private IntellisenseUserControl _intellisenseUserControl;
 
     public MainForm()
     {
@@ -180,7 +181,7 @@ namespace FAQ_Net
 
         private void CreateRtfTable(int countRows, int countColumns)
         {
-          richText.SelectedRtf = RtfTable.InsertTableInRichTextBox(countRows, countColumns, 16000 / countColumns);
+          richText.SelectedRtf = Rtf.InsertTableInRichTextBox(countRows, countColumns, 16000 / countColumns);
         }
 
         private void Selector_TableSizeSelected(object sender, tools.TableSizeEventArgs e)
@@ -368,7 +369,9 @@ namespace FAQ_Net
         _richTextBoxToolTip.Dictionary = TooltipDictionary.eDictionary;
         _richTextBoxToolTip.TitleForeColor = Color.DarkBlue;
         _richTextBoxToolTip.DescriptionForeColor = Color.Black;
-        TooltipDictionary.TV_Dictionary.MouseDoubleClick += TV_Dictionary_MouseDoubleClick;
+        _intellisenseUserControl = new IntellisenseUserControl(richText);
+        _intellisenseUserControl.Parent = richText;
+        _intellisenseUserControl.BringToFront();
       }
 
       CustomDesignControl[] controlsForSettings = new CustomDesignControl[]
@@ -404,23 +407,12 @@ namespace FAQ_Net
               ,new CustomDesignControl() { SettingId = "TooltipEditorTreeView", Description = "Словарь подсказок.ДеревоПодсказок", ObjectControl = (TooltipDictionary.TV_Dictionary != null)?TooltipDictionary.TV_Dictionary:null}
               ,new CustomDesignControl() { SettingId = "TooltipEditorEditToolstrip", Description = "Словарь подсказок.ПанельКнопокРедактирования", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsEditor:null}
               ,new CustomDesignControl() { SettingId = "TooltipEditorEditPanel", Description = "Словарь подсказок.Панель редактирования", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.EditPanel:null}
+              ,new CustomDesignControl() { SettingId = "IntelliSenseDataGridView", Description = "IntelliSense (Ctrl+Space)", ObjectControl = (_intellisenseUserControl != null)?_intellisenseUserControl.HelpDataGridView:null}
 
               //,new CustomDesignControl() { SettingId = "WordTooltip", Description = "Всплывающая подсказка", ObjectControl = _richTextBoxToolTip}
       };
       _appSettingForm = new AppSettingsForm(controlsForSettings);
       MainSC.SplitterDistance = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, MainSC.SplitterDistance);
-    }
-
-    private void TV_Dictionary_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-      if (splitContainer1.Panel2Collapsed)
-        return;
-      if (TooltipDictionary.TV_Dictionary.SelectedNode == null)
-        return;
-      Color foreColor = TooltipDictionary.TV_Dictionary.SelectedNode.ForeColor;
-      string rtf = string.Format("{{\\rtf1{{\\colortbl ;\\red{0}\\green{1}\\blue{2};}}\\ul\\cf1 {3}\\ulnone  }}"
-        , foreColor.R.ToString(), foreColor.G.ToString(), foreColor.B.ToString(), TooltipDictionary.TV_Dictionary.SelectedNode.Text);
-      richText.SelectedRtf = rtf;
     }
 
     //public string WinToHex(string s)
@@ -1322,7 +1314,44 @@ namespace FAQ_Net
           AddRowInHistory(2);
         }
         else
-          System.Diagnostics.Process.Start(e.LinkText);
+        {
+          if (e.LinkText.StartsWith("http:") ||
+              e.LinkText.StartsWith("https:"))
+          {
+            System.Diagnostics.Process browserProcess = new System.Diagnostics.Process();
+
+            try
+            {
+              // true is the default, but it is important not to set it to false
+              browserProcess.StartInfo.UseShellExecute = true;
+              browserProcess.StartInfo.FileName = e.LinkText;
+              browserProcess.Start();
+            }
+            catch (System.ComponentModel.Win32Exception noBrowser)
+            {
+              if (noBrowser.ErrorCode == -2147467259)
+                MessageBox.Show("Запуск браузера", "Браузер не найден: " + noBrowser.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception)
+            {
+              try
+              {
+                browserProcess.StartInfo.FileName = "iexplore.exe";
+                browserProcess.StartInfo.Arguments = e.LinkText;
+                browserProcess.Start();
+              }
+              catch (Exception ex)
+              {
+                MessageBox.Show("Запуск браузера", "Браузер не найден: " + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+              }
+            }
+            browserProcess.Dispose();
+          }
+          else
+            MessageBox.Show("URL-адрес должен начинаться с 'http:' или 'https:'", "Неверный URL", MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+
+        }
       }
       catch (Exception ex)
       {
@@ -2906,8 +2935,79 @@ namespace FAQ_Net
               }
             }
             break;
+          case Keys.Space:
+            Constants.CtrlSpaceEntered = true;
+            Point location = richText.GetPositionFromCharIndex(richText.SelectionStart > 0 ? richText.SelectionStart - 1 : 0);
+
+            Point pt = richText.GetPositionFromCharIndex(richText.SelectionStart);
+            pt.Y = (int)Math.Ceiling(richText.Font.GetHeight())+ pt.Y;
+
+            int selectionStart = 0;
+            int selectionLength = 0;
+            string partWord = GetWordFromCharIndex(location, ref selectionStart, ref selectionLength);
+            _intellisenseUserControl.ShowIntellisense(pt, partWord, selectionStart, selectionLength);
+            break;
         }
       }
+    }
+
+    private string GetWordFromCharIndex(Point location, ref int selectionStart, ref int selectionLength)
+    {
+      string word = string.Empty;
+      try
+      {
+        int mousePointerCharIndex = richText.GetCharIndexFromPosition(location);
+
+        if (mousePointerCharIndex == 0)
+          return word;
+
+        int startWord = mousePointerCharIndex;
+        bool firstStep = true;
+        while (startWord > 0)
+        {
+          if (firstStep)
+            firstStep = false;
+          else
+            startWord--;
+          //if (richText.Text.Length <= startWord+1)
+          string s = richText.Text.Substring(startWord, 1);
+          if (s.IndexOfAny(TooltipUserControl.StartOrEndWordChars) >= 0)
+          {
+            startWord += 1;
+            break;
+          }
+        }
+        int endWord = mousePointerCharIndex;
+        word = richText.Text.Substring(startWord, endWord - startWord + 1);
+        if (word.Length == 1 && word.IndexOfAny(TooltipUserControl.StartOrEndWordChars) >= 0)
+          word = string.Empty;
+        if (word.Length > 1 && word.Substring(word.Length-1).IndexOfAny(TooltipUserControl.StartOrEndWordChars) >= 0)
+          word = word.Substring(0, word.Length - 1);
+
+        // Выделить слово, чтобы оно заменялось
+        while (endWord < richText.Text.Length)
+        {
+          string s = richText.Text.Substring(endWord, 1);
+          if (s.IndexOfAny(TooltipUserControl.StartOrEndWordChars) >= 0)
+          {
+            break;
+          }
+          endWord++;
+        }
+        string checkWord = richText.Text.Substring(startWord, endWord - startWord);
+        while (checkWord.EndsWith("."))
+        {
+          checkWord = checkWord.Remove(checkWord.Length - 1);
+          endWord--;
+        }
+        if (endWord > startWord)
+        {
+          selectionStart = startWord;
+          selectionLength = endWord - startWord;
+        }
+      }
+      catch (Exception) { }
+      return word;
     }
 
     private void tsmiAboutProgram_Click(object sender, EventArgs e)

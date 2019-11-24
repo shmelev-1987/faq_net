@@ -266,9 +266,18 @@ namespace FAQ_Net
 
     private void tsbSave_Click(object sender, EventArgs e)
     {
+      txbWord.BackColor = Color.White;
       bool successExecSql = false;
       int idContent = (cmbCategoryWord.Text == Constants.PUBLIC_DICTIONARY_CATEGORY) ? 0 : _currentQuestionId;
-      string url = (cmbToolTipType.SelectedIndex == (int)TooltipDictionary.TooltipType.QuestionHref) ? "http://" + txbQuestion.Text : txbUrl.Text;
+      string url = (cmbToolTipType.SelectedIndex == (int)TooltipDictionary.TooltipType.QuestionHref)
+        ? (string.IsNullOrEmpty(txbQuestion.Text)? string.Empty: "http://" + txbQuestion.Text)
+        : txbUrl.Text;
+      if (txbWord.Text.EndsWith("."))
+      {
+        txbWord.BackColor = Color.LightCoral;
+        MessageBox.Show(string.Format("'{0}' не может заканчиваться символом '.'", lblWord.Text));
+        return;
+      }
       if (tsbSave.Text == "Создать")
       {
         successExecSql = TooltipDictionary.InsertWordToolTip(
@@ -284,7 +293,7 @@ namespace FAQ_Net
       {
         string comment = txbComment.Text;
         if (cmbToolTipType.SelectedIndex == (int)TooltipDictionary.TooltipType.QuestionHref)
-          comment = "Вопрос"+ txbQuestion.Text;
+          comment = string.IsNullOrEmpty(txbQuestion.Text)?string.Empty: "Вопрос" + txbQuestion.Text;
         successExecSql = TooltipDictionary.UpdateWordToolTip(
            idContent
           , txbWord.Text

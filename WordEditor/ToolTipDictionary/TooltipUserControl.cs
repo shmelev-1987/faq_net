@@ -10,12 +10,11 @@ namespace FAQ_Net
 {
   public partial class TooltipUserControl : UserControl
   {
-    public static char[] StartOrEndWordChars = new char[] {'.',',',';',':','!','?','%','+',
+    public static char[] StartOrEndWordChars = new char[] {',',';',':','!','?','%','+',
                                               '=','*','$','\'','\"','<','>','^','(',')',
                                               '[',']','{','}','°','&','|',' ','\n','"','\t' };
 
     private eDictionary _dict = new eDictionary();
-    private bool _isVisible;
     private RichTextBox _rtb;
     private readonly Timer timerShowToolTip = new Timer();
     private Point _lastMouseCoord;
@@ -110,6 +109,11 @@ namespace FAQ_Net
           endWord++;
         }
         word = _rtb.Text.Substring(startWord, endWord - startWord);
+        while (word.EndsWith("."))
+        {
+          word = word.Remove(word.Length - 1);
+          endWord--;
+        }
         startWordLocation = _rtb.GetPositionFromCharIndex(startWord);
         endWordLocation = _rtb.GetPositionFromCharIndex(endWord);
       }
@@ -201,13 +205,11 @@ namespace FAQ_Net
       if (string.IsNullOrEmpty(lblFooter.Text))
         tableLayoutPanel1.RowStyles[2].Height = 5;
       this.Show();
-      _isVisible = true;
     }
 
     public void HideTooltip()
     {
       this.Hide();
-      _isVisible = false;
     }
 
     private struct CompoundedPos

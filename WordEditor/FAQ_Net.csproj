@@ -126,6 +126,12 @@
     </Compile>
     <Compile Include="PrintRichText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolTipDictionary\IntellisenseUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolTipDictionary\IntellisenseUserControl.Designer.cs">
+      <DependentUpon>IntellisenseUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolTipDictionary\RichTextBoxToolTip.cs" />
     <Compile Include="SqliteDatabase.cs" />
     <Compile Include="Sql\CreateTable.Designer.cs">
@@ -190,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="tools\TablePropertyUserControl.resx">
       <DependentUpon>TablePropertyUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolTipDictionary\IntellisenseUserControl.resx">
+      <DependentUpon>IntellisenseUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolTipDictionary\TooltipUserControl.resx">
       <DependentUpon>TooltipUserControl.cs</DependentUpon>

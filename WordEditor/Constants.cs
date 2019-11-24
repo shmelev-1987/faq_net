@@ -29,5 +29,6 @@ namespace FAQ_Net
     public const string TOOLTIPTYPE_2_STATIC_TEXT = "Статический текст";
 
     public const string WithoutGroup = "Без группы";
+    public static bool CtrlSpaceEntered = false;
   }
 }

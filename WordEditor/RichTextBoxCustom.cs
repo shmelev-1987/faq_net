@@ -49,6 +49,7 @@ namespace FAQ_Net
         private const int EM_SETZOOM = 1024 + 225;
         private const int WM_MOUSEWHEEL = 522;
         //private const int EM_STREAMIN = 0x449; // ID события загрузки RTF-документа
+        private const int WM_CHAR = 0x102;
         private float _ZoomFactor = 1;
        
        
@@ -66,7 +67,19 @@ namespace FAQ_Net
 
         protected override void WndProc(ref Message m)
         {
+            // Если было нажатие сочетания клавиш Ctrl+Space, то прерываем обработку, чтобы не добавлялся пробел
+            if (Constants.CtrlSpaceEntered && m.Msg == WM_CHAR)
+            {
+              Constants.CtrlSpaceEntered = false;
+              return;
+            }
             base.WndProc(ref m);
+            // ДЛЯ ОТЛАДКИ
+            //using (System.IO.StreamWriter sw = new System.IO.StreamWriter(@"d:\MyDocuments\2019\log.log", true))
+            //{
+            //  sw.WriteLine(string.Format("{0}\t{1}", DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss"), m.ToString()));
+            //  sw.Close();
+            //}
             switch (m.Msg)
             {
                 case EM_SETZOOM:

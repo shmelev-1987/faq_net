@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Text;
+using System.Data;
 
 namespace FAQ_Net
 {
@@ -14,6 +14,7 @@ namespace FAQ_Net
 
     public static TreeView TV_Dictionary;
     public static eDictionary eDictionary;
+    public static DataTable HelpDT;
 
     #endregion Fields / Поля
 
@@ -47,6 +48,17 @@ namespace FAQ_Net
       TV_Dictionary = new TreeView();
       TV_Dictionary.Dock = DockStyle.Fill;
       TV_Dictionary.HideSelection = false;
+
+      // Создать таблицу для удобства фильтрации слов
+      HelpDT = new DataTable("HelpDT");
+      //HelpDT.Columns.Add("Img", typeof(Image));
+      DataColumn wordColumn = HelpDT.Columns.Add(WORD, typeof(String));
+      DataColumn idContentColumn = HelpDT.Columns.Add(ID_CONTENT, typeof(int));
+      HelpDT.Columns.Add(COMMENT_COLUMN_NAME, typeof(String));
+      HelpDT.Columns.Add(FORE_COLOR, typeof(String));
+      HelpDT.Columns.Add(URL_ADR_COLUMN_NAME, typeof(String));
+      HelpDT.PrimaryKey = new DataColumn[] { idContentColumn, wordColumn };
+
       // Подсказки для всех URL на вопросы БД, например: вопрос_ID, где ID - числовое значение, обозначающее номер вопроса
       G.ExecSQLiteQuery("select id_content,question from vopros");
       foreach (System.Data.DataRow row in G.DT.Rows)
@@ -61,8 +73,22 @@ namespace FAQ_Net
       {
         int idContent = Convert.ToInt32(row[ID_CONTENT]);
         int tooltipType = Convert.ToInt32(row[TOOLTIP_TYPE_COLUMN_NAME]);
-        AddItem(idContent, row[WORD].ToString(), row[COMMENT_COLUMN_NAME].ToString(), row[URL_ADR_COLUMN_NAME].ToString(), (TooltipType)tooltipType);
+        string word = row[WORD].ToString();
+        string comments = row[COMMENT_COLUMN_NAME].ToString();
+        AddItem(idContent, word, comments, row[URL_ADR_COLUMN_NAME].ToString(), (TooltipType)tooltipType);
+        AddHelpRow(idContent, word, comments, row[FORE_COLOR].ToString(), row[URL_ADR_COLUMN_NAME].ToString());
       }
+    }
+
+    public static void AddHelpRow(int idContent, string word, string comments, string foreColor, string url)
+    {
+      DataRow newHelpRow = HelpDT.NewRow();
+      newHelpRow[ID_CONTENT] = idContent;
+      newHelpRow[WORD] = word;
+      newHelpRow[COMMENT_COLUMN_NAME] = comments;
+      newHelpRow[FORE_COLOR] = foreColor;
+      newHelpRow[URL_ADR_COLUMN_NAME] = url;
+      HelpDT.Rows.Add(newHelpRow);
     }
 
     /// <summary>
@@ -72,7 +98,6 @@ namespace FAQ_Net
     {
       if (!eDictionary.Contains(idContent, title))
       {
-        
         eDictionary.Add(idContent, title, description, url, tooltipType);
       }
     }
@@ -86,6 +111,7 @@ namespace FAQ_Net
         {
           DictionaryInfo deletedWord = eDictionary.GetByTitle(idContent, word);
           eDictionary.Remove(deletedWord);
+          HelpDT.Rows.Remove(GetHelpDtRow(idContent, word));
           result = true;
         }
       }
@@ -129,6 +155,7 @@ namespace FAQ_Net
       {
         AddItem(idContent, word, comment, url, (TooltipType)tooltipType);
         DictionaryEditor.AddNode(idContent, groupName, word, foreColor, true);
+        AddHelpRow(idContent, word, comment, foreColor, url);
         return true;
       }
       return false;
@@ -163,12 +190,6 @@ namespace FAQ_Net
           if (G.ExecSQLiteQuery("select question from vopros where id_content="+ url.Substring(7))
             && G.DT.Rows.Count == 1)
           {
-            //oldDicInfo.Title = word;
-            //oldDicInfo.Description = G.DT.Rows[0][0].ToString();
-            //oldDicInfo.TooltipType = (TooltipDictionary.TooltipType)tooltipType;
-            //oldDicInfo.IdContent = idContent;
-            //oldDicInfo.Url = url;
-
             eDictionary.Edit(oldDicInfo, word, G.DT.Rows[0][0].ToString(), idContent, tooltipType, url);
           }
         }
@@ -196,9 +217,20 @@ namespace FAQ_Net
           DictionaryEditor.AddNode(idContent, groupName, word, foreColor, true);
         }
 
+        // Пересоздать запись в HelpDGV
+        HelpDT.Rows.Remove(GetHelpDtRow(oldIdContent, oldWord));
+        AddHelpRow(idContent, word, comment, foreColor, url);
         return true;
       }
       return false;
+    }
+
+    private static DataRow GetHelpDtRow(int idContent, string word)
+    {
+      DataRow[] rows = HelpDT.Select(string.Format("{0}={1} and {2}='{3}'", ID_CONTENT, idContent, WORD, word));
+      if (rows.Length == 1)
+        return rows[0];
+      return null;
     }
 
     /// <summary>
