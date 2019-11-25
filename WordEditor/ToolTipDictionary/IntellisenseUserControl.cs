@@ -19,7 +19,7 @@ namespace FAQ_Net
     /// <summary>
     /// Фиксированная строка поиска в текущей вкладке
     /// </summary>
-    private string FixedFilterSearchInHelpDGV = "";
+    //private string FixedFilterSearchInHelpDGV = "";
     RichTextBoxCustom _richTextBoxCustom;
 
     public IntellisenseUserControl(RichTextBoxCustom rtb)

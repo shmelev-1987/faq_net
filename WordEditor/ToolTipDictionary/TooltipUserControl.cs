@@ -131,6 +131,8 @@ namespace FAQ_Net
     {
       //Проверка, что курсор находится не за пределами слова и не ниже последней строки
       bool cursorInWordContains = (_lastMouseCoord.X >= _startWordLocation.X && _lastMouseCoord.X <= _endWordLocation.X);
+      //(Application.OpenForms[0] as MainForm).Text = string.Format("_lastMouseCoord.X >= _startWordLocation.X && _lastMouseCoord.X <= _endWordLocation.X: {0}>={1} && {2}<={3}"
+      //  , _lastMouseCoord.X, _startWordLocation.X, _lastMouseCoord.X, _endWordLocation.X);
       if (!cursorInWordContains || IsMousePosOutOfLastLine())
       {
         this.HideTooltip();
