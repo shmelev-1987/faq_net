@@ -68,7 +68,8 @@ namespace FAQ_Net
     ///  омпонент редактировани€ всплывающих подсказок
     /// </summary>
     DictionaryEditor _dictionaryEditor;
-    public static System.Text.RegularExpressions.Regex IdContentUrlRegEx = new System.Text.RegularExpressions.Regex(@"^http://\d+$");
+    public static System.Text.RegularExpressions.Regex IdContentUrlRegEx_v1 = new System.Text.RegularExpressions.Regex(@"^http://\d+$");
+    public static System.Text.RegularExpressions.Regex IdContentUrlRegEx_v2 = new System.Text.RegularExpressions.Regex(@"^\\\\\d+$");
     /// <summary>
     /// ѕризнак открыти€ главного окна приложени€ дл€ выбора вопроса
     /// </summary>
@@ -273,6 +274,7 @@ namespace FAQ_Net
       fnd.Dock = DockStyle.Bottom;
       fnd.Parent = splitContainer1.Panel2;
       fnd.BorderStyle = BorderStyle.FixedSingle;
+      fnd.BringToFront();
       fnd.Hide();
       if (TransitionDT.Columns.Count == 0)
       {
@@ -1307,10 +1309,10 @@ namespace FAQ_Net
     {
       try
       {
-        if (IdContentUrlRegEx.IsMatch(e.LinkText))
+        if (IdContentUrlRegEx_v2.IsMatch(e.LinkText))
         {
           CheckAndSaveDocument();
-          GetQuestionAndAnswer(e.LinkText.Substring(7));
+          GetQuestionAndAnswer(e.LinkText.Substring(2));
           AddRowInHistory(2);
         }
         else

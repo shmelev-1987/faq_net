@@ -76,9 +76,16 @@ namespace FAQ_Net
         , TooltipType = tooltipType
         , Index = dicList.Count + 1
       };
-      if (MainForm.IdContentUrlRegEx.IsMatch(url))
+      if (MainForm.IdContentUrlRegEx_v2.IsMatch(url))
       {
-        var questionInfo = GetByTitle(0, "вопрос" + url.Substring(7));
+        var questionInfo = GetByTitle(0, "\\\\" + url.Substring(2));
+        if (questionInfo != null)
+          inf.Description = questionInfo.Description;
+      }
+      else
+      if (MainForm.IdContentUrlRegEx_v1.IsMatch(url))
+      {
+        var questionInfo = GetByTitle(0, "\\\\" + url.Substring(7));
         if (questionInfo != null)
           inf.Description = questionInfo.Description;
       }

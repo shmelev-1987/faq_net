@@ -64,17 +64,17 @@ namespace FAQ_Net
       txbComment.Text = comment;
       txbQuestion.Text = string.Empty;
       txbUrl.Text = url;
-      if (tooltipType == (int)TooltipDictionary.TooltipType.QuestionHref
-        && MainForm.IdContentUrlRegEx.IsMatch(url))
+      if (tooltipType == (int)TooltipDictionary.TooltipType.QuestionHref)
       {
-        txbQuestion.Text = url.Substring(7);
+        if (MainForm.IdContentUrlRegEx_v2.IsMatch(url))
+          txbQuestion.Text = url.Substring(2);
+        else
+        if (MainForm.IdContentUrlRegEx_v1.IsMatch(url))
+          txbQuestion.Text = url.Substring(7);
       }
       cmbForeColor.SelectedIndex = -1;
       cmbForeColor.Text = foreColor;
       cmbGroup.Text = groupName;
-      //int categoryPropertyIndex = propertyGridEx1.Item.FindItem(CATEGORY_PROP_NAME);
-      //propertyGridEx1.Item[categoryPropertyIndex].Value = (idContent == 0) ? Constants.PUBLIC_DICTIONARY_CATEGORY: Constants.PRIVATE_DICTIONARY_CATEGORY;
-
     }
 
     private void SetDefaultProperty()
@@ -270,7 +270,7 @@ namespace FAQ_Net
       bool successExecSql = false;
       int idContent = (cmbCategoryWord.Text == Constants.PUBLIC_DICTIONARY_CATEGORY) ? 0 : _currentQuestionId;
       string url = (cmbToolTipType.SelectedIndex == (int)TooltipDictionary.TooltipType.QuestionHref)
-        ? (string.IsNullOrEmpty(txbQuestion.Text)? string.Empty: "http://" + txbQuestion.Text)
+        ? (string.IsNullOrEmpty(txbQuestion.Text)? string.Empty: "\\\\" + txbQuestion.Text)
         : txbUrl.Text;
       if (txbWord.Text.EndsWith("."))
       {
@@ -293,7 +293,7 @@ namespace FAQ_Net
       {
         string comment = txbComment.Text;
         if (cmbToolTipType.SelectedIndex == (int)TooltipDictionary.TooltipType.QuestionHref)
-          comment = string.IsNullOrEmpty(txbQuestion.Text)?string.Empty: "Вопрос" + txbQuestion.Text;
+          comment = string.Empty;
         successExecSql = TooltipDictionary.UpdateWordToolTip(
            idContent
           , txbWord.Text

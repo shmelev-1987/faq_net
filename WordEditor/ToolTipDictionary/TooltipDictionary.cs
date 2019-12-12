@@ -63,9 +63,9 @@ namespace FAQ_Net
       G.ExecSQLiteQuery("select id_content,question from vopros");
       foreach (System.Data.DataRow row in G.DT.Rows)
       {
-        string urlQuestion = "http://" + row["id_content"].ToString();
+        string urlQuestion = "\\\\" + row["id_content"].ToString();
         string idContent = row["id_content"].ToString();
-        AddItem(Convert.ToInt32(idContent), string.Format("вопрос{0}", idContent), row["question"].ToString(), urlQuestion, TooltipType.QuestionHref);
+        AddItem(0, string.Format("\\\\{0}", idContent), row["question"].ToString(), urlQuestion, TooltipType.QuestionHref);
       }
       // Подсказки, определенные пользователем
       G.ExecSQLiteQuery("select * from word_tooltip");
@@ -185,13 +185,19 @@ namespace FAQ_Net
           , idContent, word, tooltipType, comment, url, groupName, foreColor, oldIdContent, oldWord)))
       {
         DictionaryInfo oldDicInfo = eDictionary.GetByTitle(oldIdContent, oldWord);
-        if (MainForm.IdContentUrlRegEx.IsMatch(url))
+        string selectQuestionSql = "select question from vopros where id_content={0}";
+        if (MainForm.IdContentUrlRegEx_v1.IsMatch(url)
+         && G.ExecSQLiteQuery(string.Format(selectQuestionSql, url.Substring(7)))
+         && G.DT.Rows.Count == 1)
         {
-          if (G.ExecSQLiteQuery("select question from vopros where id_content="+ url.Substring(7))
-            && G.DT.Rows.Count == 1)
-          {
-            eDictionary.Edit(oldDicInfo, word, G.DT.Rows[0][0].ToString(), idContent, tooltipType, url);
-          }
+          eDictionary.Edit(oldDicInfo, word, G.DT.Rows[0][0].ToString(), idContent, tooltipType, url);
+        }
+        else
+        if (MainForm.IdContentUrlRegEx_v2.IsMatch(url)
+          && G.ExecSQLiteQuery(string.Format(selectQuestionSql, url.Substring(2)))
+          && G.DT.Rows.Count == 1)
+        {
+          eDictionary.Edit(oldDicInfo, word, G.DT.Rows[0][0].ToString(), idContent, tooltipType, url);
         }
         else
           eDictionary.Edit(oldDicInfo, word, comment, idContent, tooltipType, url);

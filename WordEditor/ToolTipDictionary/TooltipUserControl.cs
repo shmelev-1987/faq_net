@@ -15,7 +15,7 @@ namespace FAQ_Net
                                               '[',']','{','}','°','&','|',' ','\n','"','\t' };
 
     private eDictionary _dict = new eDictionary();
-    private RichTextBox _rtb;
+    private RichTextBoxCustom _rtb;
     private readonly Timer timerShowToolTip = new Timer();
     private Point _lastMouseCoord;
     private Point _startWordLocation;
@@ -29,7 +29,7 @@ namespace FAQ_Net
 
     #region Всплывающая подсказка внутри RichTextBox
 
-    public TooltipUserControl(RichTextBox rtb)
+    public TooltipUserControl(RichTextBoxCustom rtb)
     {
       InitializeComponent();
       _rtb = rtb;
@@ -151,10 +151,15 @@ namespace FAQ_Net
         if (!string.IsNullOrEmpty(wordDefinition.Url))
         {
           MainForm mf = Application.OpenForms[0] as MainForm;
-          ;
-          if (MainForm.IdContentUrlRegEx.IsMatch(wordDefinition.Url))
+          if (MainForm.IdContentUrlRegEx_v1.IsMatch(wordDefinition.Url))
           {
             if (mf.GetCurrentQuestionId().ToString() != wordDefinition.Url.Substring(7))
+              this.Footer = "Нажмите Ctrl+LeftMouse для быстрого перехода на вопрос";
+          }
+          else
+          if (MainForm.IdContentUrlRegEx_v2.IsMatch(wordDefinition.Url))
+          {
+            if (mf.GetCurrentQuestionId().ToString() != wordDefinition.Url.Substring(2))
               this.Footer = "Нажмите Ctrl+LeftMouse для быстрого перехода на вопрос";
           }
           else
