@@ -71,9 +71,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PropertyGridEx">
-      <HintPath>..\_dll\PropertyGridEx.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
@@ -359,6 +356,10 @@
     <ProjectReference Include="..\IndentLine\IndentLine.csproj">
       <Project>{10145BEA-0BBD-48D7-850D-8E9C09A2A85E}</Project>
       <Name>IndentLine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PropertyGridEx\PropertyGridEx.csproj">
+      <Project>{d2df0485-3377-4d32-b3b4-d182c9ff94f7}</Project>
+      <Name>PropertyGridEx</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ruler\Ruler.csproj">
       <Project>{F9935C11-1BB0-4174-B9B2-EFD6580390D8}</Project>

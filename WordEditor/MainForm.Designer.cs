@@ -251,6 +251,7 @@ namespace FAQ_Net
       this.toolTip = new System.Windows.Forms.ToolTip(this.components);
       this.status = new System.Windows.Forms.StatusStrip();
       this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+      this.tsmiSaveNodeSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiDesignSettings = new System.Windows.Forms.ToolStripMenuItem();
       this.CountQuestTitLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountQuestLbl = new System.Windows.Forms.ToolStripStatusLabel();
@@ -261,7 +262,7 @@ namespace FAQ_Net
       this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
       this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-      this.tsmiSaveNodeSelect = new System.Windows.Forms.ToolStripMenuItem();
+      this.btnNextQuestion = new System.Windows.Forms.Button();
       this.menuTop.SuspendLayout();
       this.MainSC.Panel1.SuspendLayout();
       this.MainSC.Panel2.SuspendLayout();
@@ -795,6 +796,7 @@ namespace FAQ_Net
       // 
       // MainSC.Panel2
       // 
+      this.MainSC.Panel2.Controls.Add(this.btnNextQuestion);
       this.MainSC.Panel2.Controls.Add(this.btnSelectQuestion);
       this.MainSC.Panel2.Controls.Add(this.BackBtn);
       this.MainSC.Panel2.Controls.Add(this.splitter1);
@@ -1461,7 +1463,7 @@ namespace FAQ_Net
       this.btnSelectQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.btnSelectQuestion.Enabled = false;
       this.btnSelectQuestion.FlatStyle = System.Windows.Forms.FlatStyle.System;
-      this.btnSelectQuestion.Location = new System.Drawing.Point(571, 10);
+      this.btnSelectQuestion.Location = new System.Drawing.Point(573, 10);
       this.btnSelectQuestion.Name = "btnSelectQuestion";
       this.btnSelectQuestion.Size = new System.Drawing.Size(118, 30);
       this.btnSelectQuestion.TabIndex = 33;
@@ -1476,7 +1478,7 @@ namespace FAQ_Net
       this.BackBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.BackBtn.Location = new System.Drawing.Point(3, 3);
       this.BackBtn.Name = "BackBtn";
-      this.BackBtn.Size = new System.Drawing.Size(72, 24);
+      this.BackBtn.Size = new System.Drawing.Size(54, 24);
       this.BackBtn.TabIndex = 32;
       this.BackBtn.Text = "Назад";
       this.BackBtn.UseVisualStyleBackColor = false;
@@ -2285,7 +2287,7 @@ namespace FAQ_Net
       // 
       this.cover1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.cover1.BackColor = System.Drawing.SystemColors.Control;
-      this.cover1.Location = new System.Drawing.Point(2450, 46);
+      this.cover1.Location = new System.Drawing.Point(2452, 46);
       this.cover1.Name = "cover1";
       this.cover1.Size = new System.Drawing.Size(3, 2);
       this.cover1.TabIndex = 15;
@@ -2526,6 +2528,13 @@ namespace FAQ_Net
       this.toolStripDropDownButton1.Size = new System.Drawing.Size(29, 18);
       this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
       // 
+      // tsmiSaveNodeSelect
+      // 
+      this.tsmiSaveNodeSelect.Name = "tsmiSaveNodeSelect";
+      this.tsmiSaveNodeSelect.Size = new System.Drawing.Size(269, 22);
+      this.tsmiSaveNodeSelect.Text = "Запоминать переходы по разделам";
+      this.tsmiSaveNodeSelect.Click += new System.EventHandler(this.tsmiSaveNodeSelect_Click);
+      // 
       // tsmiDesignSettings
       // 
       this.tsmiDesignSettings.Image = global::FAQ_Net.Properties.Resources.three_color_rectangle;
@@ -2615,12 +2624,18 @@ namespace FAQ_Net
       this.splitContainer2.SplitterDistance = 940;
       this.splitContainer2.TabIndex = 9;
       // 
-      // tsmiSaveNodeSelect
+      // btnNextQuestion
       // 
-      this.tsmiSaveNodeSelect.Name = "tsmiSaveNodeSelect";
-      this.tsmiSaveNodeSelect.Size = new System.Drawing.Size(269, 22);
-      this.tsmiSaveNodeSelect.Text = "Запоминать переходы по разделам";
-      this.tsmiSaveNodeSelect.Click += new System.EventHandler(this.tsmiSaveNodeSelect_Click);
+      this.btnNextQuestion.BackColor = System.Drawing.Color.Yellow;
+      this.btnNextQuestion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnNextQuestion.Location = new System.Drawing.Point(63, 3);
+      this.btnNextQuestion.Name = "btnNextQuestion";
+      this.btnNextQuestion.Size = new System.Drawing.Size(54, 24);
+      this.btnNextQuestion.TabIndex = 34;
+      this.btnNextQuestion.Text = "Вперед";
+      this.btnNextQuestion.UseVisualStyleBackColor = false;
+      this.btnNextQuestion.Visible = false;
+      this.btnNextQuestion.Click += new System.EventHandler(this.btnNextQuestion_Click);
       // 
       // MainForm
       // 
@@ -2906,6 +2921,7 @@ namespace FAQ_Net
     private Button btnSelectQuestion;
     private ToolStripStatusLabel ID_ContentTSSL;
     private ToolStripMenuItem tsmiSaveNodeSelect;
+    private Button btnNextQuestion;
   }
 
 }

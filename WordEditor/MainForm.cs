@@ -2595,6 +2595,7 @@ namespace FAQ_Net
 
         private void BackBtn_Click(object sender, EventArgs e)
         {
+            btnNextQuestion.Visible = true;
             CurTransitionRow -= 1;
             if (CurTransitionRow == 0)
                 BackBtn.Visible = false;
@@ -2658,6 +2659,7 @@ namespace FAQ_Net
             //for (int i = CurTransitionRow + 1; i < TransitionDT.Rows.Count; i++)
             {
                 TransitionDT.Rows.RemoveAt(TransitionDT.Rows.Count-1);
+                btnNextQuestion.Visible = false;
             }
             switch (type)
             {
@@ -3095,6 +3097,32 @@ namespace FAQ_Net
     {
       tsmiSaveNodeSelect.Checked = !tsmiSaveNodeSelect.Checked;
       _settingsXml.SetSetting(Constants.SAVE_SECTION_NODE_SELECT, tsmiSaveNodeSelect.Checked.ToString());
+    }
+
+    private void btnNextQuestion_Click(object sender, EventArgs e)
+    {
+      CurTransitionRow += 1;
+      if (TransitionDT.Rows.Count == CurTransitionRow+1)
+      {
+        btnNextQuestion.Visible = false;
+        BackBtn.Visible = true;
+      }
+
+      switch (TransitionDT.Rows[CurTransitionRow]["type"].ToString())
+      {
+        case "0":
+          TV1.SelectedNode = null;
+          LastQuestions();    //Последние добавленные вопросы
+          break;
+        case "1":
+          //TV1.SelectedNode = (TreeNode)TransitionDT.Rows[CurTransitionRow]["TN"];
+          NodeSelect((TreeNode)TransitionDT.Rows[CurTransitionRow]["TN"]);
+          break;
+        case "2":
+          TV1.SelectedNode = null;
+          GetQuestionAndAnswer(TransitionDT.Rows[CurTransitionRow]["id"].ToString());
+          break;
+      }
     }
   }
 }
