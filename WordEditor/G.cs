@@ -350,18 +350,30 @@ namespace FAQ_Net
             Form form = new Form();
             Label label = new Label();
             TextBox textBox = new TextBox();
-            Button buttonOk = new Button();
-            Button buttonCancel = new Button();
+      PulseButton.PulseButton buttonOk = new PulseButton.PulseButton();
+      PulseButton.PulseButton buttonCancel = new PulseButton.PulseButton();
+      buttonOk.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
+      buttonOk.BackColor = System.Drawing.SystemColors.Control;
+      buttonOk.ButtonColorTop = System.Drawing.Color.GreenYellow;
+      buttonOk.ButtonColorBottom = System.Drawing.Color.YellowGreen;
+      buttonCancel.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
+      buttonOk.PulseWidth = 1;
+      buttonOk.CornerRadius = 5;
+      buttonCancel.PulseWidth = 1;
+      buttonCancel.ButtonColorTop = System.Drawing.Color.MistyRose;
+      buttonCancel.ButtonColorBottom = System.Drawing.Color.LightCoral;
+      buttonCancel.BackColor = System.Drawing.SystemColors.Control;
+      buttonCancel.CornerRadius = 5;
 
-            form.Text = title;
+      form.Text = title;
             label.Text = promptText;
             textBox.Text = value;
 
             buttonOk.Text = "OK";
-            buttonOk.Image = FAQ_Net.Properties.Resources.OK;
+            //buttonOk.Image = FAQ_Net.Properties.Resources.OK;
             buttonOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             buttonCancel.Text = "Cancel";
-            buttonCancel.Image = FAQ_Net.Properties.Resources.No;
+            //buttonCancel.Image = FAQ_Net.Properties.Resources.No;
             buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             buttonOk.DialogResult = DialogResult.OK;
             buttonCancel.DialogResult = DialogResult.Cancel;

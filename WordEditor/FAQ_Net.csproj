@@ -102,6 +102,7 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="CustomDesignControl.cs" />
+    <Compile Include="EnumString.cs" />
     <Compile Include="ToolTipDictionary\DictionaryEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -360,6 +361,10 @@
     <ProjectReference Include="..\PropertyGridEx\PropertyGridEx.csproj">
       <Project>{d2df0485-3377-4d32-b3b4-d182c9ff94f7}</Project>
       <Name>PropertyGridEx</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GradientControl\GradientControl.csproj">
+      <Project>{9ff66cde-3584-40fc-9622-bf09afb4b915}</Project>
+      <Name>GradientControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ruler\Ruler.csproj">
       <Project>{F9935C11-1BB0-4174-B9B2-EFD6580390D8}</Project>

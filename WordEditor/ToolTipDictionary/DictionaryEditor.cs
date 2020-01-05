@@ -29,9 +29,10 @@ namespace FAQ_Net
     {
       InitializeComponent();
 
-      splitContainer1.Panel1.Controls.Add(TooltipDictionary.TV_Dictionary);
+      panel1.Controls.Add(TooltipDictionary.TV_Dictionary);
       TooltipDictionary.TV_Dictionary.BringToFront();
       TooltipDictionary.TV_Dictionary.AfterSelect += tvDictionary_AfterSelect;
+      TooltipDictionary.TV_Dictionary.NodeMouseDoubleClick += tvDictionary_NodeMouseDoubleClick;
       // Категории
       cmbCategoryWord.Items.Add(Constants.PUBLIC_DICTIONARY_CATEGORY);
       cmbCategoryWord.Items.Add(Constants.PRIVATE_DICTIONARY_CATEGORY);
@@ -41,7 +42,8 @@ namespace FAQ_Net
       cmbToolTipType.Items.Add(Constants.TOOLTIPTYPE_1_INTERNET_QUESTION);
       cmbToolTipType.Items.Add(Constants.TOOLTIPTYPE_2_STATIC_TEXT);
 
-      splitContainer1.Panel2Collapsed = true;
+      panel2.Visible = false;
+      panel1.Dock = DockStyle.Fill;
 
       cmbForeColor.DrawMode = DrawMode.OwnerDrawFixed;
       cmbForeColor.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -54,6 +56,11 @@ namespace FAQ_Net
         cmbForeColor.Items.Add(known.Name);
       }
       cmbForeColor.EndUpdate();
+    }
+
+    private void tvDictionary_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+    {
+      EditOrCopyWordToolTip(false);
     }
 
     private void SetPropertyValues(int idContent, string word, int tooltipType, string comment, string url, string groupName, string foreColor)
@@ -257,8 +264,9 @@ namespace FAQ_Net
 
     private void tsbAdd_Click(object sender, EventArgs e)
     {
-      splitContainer1.Panel2Collapsed = false;
-      splitContainer1.Panel1Collapsed = true;
+      panel2.Visible = true;
+      panel2.Dock = DockStyle.Fill;
+      panel1.Visible = false;
       tsbSave.Text = "Создать";
       SetDefaultProperty();
       SetIdContentForSave(0);
@@ -309,8 +317,9 @@ namespace FAQ_Net
       if (successExecSql)
       {
         AddGroupName(cmbGroup.Text);
-        splitContainer1.Panel2Collapsed = true;
-        splitContainer1.Panel1Collapsed = false;
+        panel2.Visible = false;
+        panel1.Visible = true;
+        panel1.Dock = DockStyle.Fill;
         //if (tsbSave.Text == "Создать")
         //  TooltipDictionary.TV_Dictionary.Nodes[cmbCategoryWord.Text].Nodes.Add(idContent.ToString(), txbWord.Text);
         //RefreshAllData(new string[] { S_TypeCmbBox.Text });
@@ -319,8 +328,9 @@ namespace FAQ_Net
 
     private void tsbCancel_Click(object sender, EventArgs e)
     {
-      splitContainer1.Panel2Collapsed = true;
-      splitContainer1.Panel1Collapsed = false;
+      panel2.Visible = false;
+      panel1.Visible = true;
+      panel1.Dock = DockStyle.Fill;
     }
 
     private void cmbToolTipType_SelectedIndexChanged(object sender, EventArgs e)
@@ -465,8 +475,9 @@ namespace FAQ_Net
           tsbSave.Text = "Создать";
         else
           tsbSave.Text = "Сохранить";
-        splitContainer1.Panel2Collapsed = false;
-        splitContainer1.Panel1Collapsed = true;
+        panel2.Visible = true;
+        panel2.Dock = DockStyle.Fill;
+        panel1.Visible = false;
         //int _oldIdContent = (TooltipDictionary.TV_Dictionary.SelectedNode.Parent.Parent.Text == Constants.PUBLIC_DICTIONARY_CATEGORY) ? 0 : currentQuestionId;
         SetIdContentForSave(Convert.ToInt32(TooltipDictionary.TV_Dictionary.SelectedNode.Name));
         int currentQuestionId = (TooltipDictionary.TV_Dictionary.SelectedNode.Parent.Parent.Text == Constants.PUBLIC_DICTIONARY_CATEGORY) ? 0 : _oldIdContent;
@@ -620,9 +631,9 @@ namespace FAQ_Net
       tstbSearch_KeyDown(sender, new KeyEventArgs(Keys.Enter));
     }
 
-    public SplitterPanel EditPanel
+    public Panel EditPanel
     {
-      get { return splitContainer1.Panel2; }
+      get { return panel2; }
     }
   }
 }

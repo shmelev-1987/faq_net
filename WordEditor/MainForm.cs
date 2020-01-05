@@ -28,18 +28,18 @@ namespace FAQ_Net
         private const byte NUMBER_POS = 8;
         private const byte HALF_POINT = 4;
         private const int PORTRAIT_RIGHT_LIMIT = 823;
-        private int riValue;
-        private int rightIndentVal;
+        //private int riValue;
+        //private int rightIndentVal;
         private int oldRightMarginX;
-        private int rightIndentOffset = 124;
+        //private int rightIndentOffset = 124;
         private int rightMarginMouseX;
         private Font selFnt;
         private ColorTable highlightColor;
         private HorizontalAlignment selAlign;
-        private bool saved = true;
+        //private bool saved = true;
         private string appFolder = @"\Word_Editor\";
         private string currentFile = "";
-        private string[] recentFiles;
+        //private string[] recentFiles;
         private bool zoomChanging;
         private int posLeft;
         private int posTop;
@@ -167,7 +167,7 @@ namespace FAQ_Net
         {
           _tablePropertyUserControl.Parent = splitContainer1.Panel2;
           _tablePropertyUserControl.BringToFront();
-          _tablePropertyUserControl.Location = new Point(MainSC.Panel1.ClientSize.Width + 100, 100);
+          _tablePropertyUserControl.Location = new Point(TabControl.Width + 100, 100);
         }
 
         private void DropDown_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -316,7 +316,7 @@ namespace FAQ_Net
         formHeight = this.Height;
       }
       // Set tool tips for controls that don't have the ToolTipText property.
-      toolTip.SetToolTip(this.rightIndentGrip, "Right Indent");
+      //toolTip.SetToolTip(this.rightIndentGrip, "Right Indent");
       InitializeUserControls();
       highLight.DropDown = highlightColor;
       // Initialize text color menu renderer.
@@ -376,6 +376,7 @@ namespace FAQ_Net
         _intellisenseUserControl.BringToFront();
       }
 
+      Font headerBtnFont = BackBtn.Font;
       CustomDesignControl[] controlsForSettings = new CustomDesignControl[]
       {
                new CustomDesignControl() { SettingId = "MainFormTabControl", Description = "Вкладки", ObjectControl = TabControl}
@@ -386,8 +387,8 @@ namespace FAQ_Net
               ,new CustomDesignControl() { SettingId = "FavoriteDataGridView", Description = "Избранное.Результат", ObjectControl = FavoriteDGV}
               ,new CustomDesignControl() { SettingId = "JournalDataGridView", Description = "Журнал.Результат", ObjectControl = JournalDGV}
 
-              ,new CustomDesignControl() { SettingId = "QuestionHeader", Description = "Заголовок (справа)", ObjectControl = SelectedPathLbl}
-              ,new CustomDesignControl() { SettingId = "QuestionSplitter", Description = "Разделитель", ObjectControl = splitter1}
+              ,new CustomDesignControl() { SettingId = "QuestionHeader", Description = "Заголовок (справа)", ObjectControl = panel3}
+              //,new CustomDesignControl() { SettingId = "QuestionSplitter", Description = "Разделитель", ObjectControl = splitter1}
               ,new CustomDesignControl() { SettingId = "QuestionDataGridView", Description = "Список вопросов (сетка)", ObjectControl = _questionDgvControl.DgvControl}
               ,new CustomDesignControl() { SettingId = "QuestionListView", Description = "Список вопросов (лист)", ObjectControl = _questionListViewControl.QuestionListView}
               ,new CustomDesignControl() { SettingId = "RtfDocMenu", Description = "Документ.Меню", ObjectControl = menuTop}
@@ -396,7 +397,7 @@ namespace FAQ_Net
               ,new CustomDesignControl() { SettingId = "RightStatusControl", Description = "Правая статусная строка", ObjectControl = statusStrip3}
               ,new CustomDesignControl() { SettingId = "DocumentStatusControl", Description = "RTF-документ.Статусная строка", ObjectControl = statusStrip1}
 
-              ,new CustomDesignControl() { SettingId = "FindControlUser", Description = "Панель поиска", ObjectControl = fnd}
+              ,new CustomDesignControl() { SettingId = "FindControlUser", Description = "Панель поиска", ObjectControl = fnd.panelGradient}
               ,new CustomDesignControl() { SettingId = "MainStatusControl", Description = "Нижняя статусная строка", ObjectControl = status}
 
               ,new CustomDesignControl() { SettingId = "TooltipRtfTitle", Description = "Всплывающая подсказка.Заголовок", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.TitleLabel:null}
@@ -414,7 +415,12 @@ namespace FAQ_Net
               //,new CustomDesignControl() { SettingId = "WordTooltip", Description = "Всплывающая подсказка", ObjectControl = _richTextBoxToolTip}
       };
       _appSettingForm = new AppSettingsForm(controlsForSettings);
-      MainSC.SplitterDistance = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, MainSC.SplitterDistance);
+      TabControl.Width = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, TabControl.Width);
+      BackBtn.Font = headerBtnFont;
+      btnNextQuestion.Font = headerBtnFont;
+      btnSelectQuestion.Font = headerBtnFont;
+      //SetRoundedShape(TV1, 30);
+      //SetRoundedShape(DGVResultSearch, 30);
     }
 
     //public string WinToHex(string s)
@@ -640,9 +646,6 @@ namespace FAQ_Net
             //// Store recent files in the Windows recent folder, so that
             //// theby Windows disk cleanup, and many freeware utility apps.
             //string recentDocs = Environment.GetFolderPath(Environment.SpecialFolder.Recent) + appFolder;
-
-
-
         }
 
         private void Fonts_MeasureItem(object sender, MeasureItemEventArgs e)
@@ -742,17 +745,17 @@ namespace FAQ_Net
 
         void rightIndentGrip_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-//                rightIndentLine.Visible = true;
-                rightMarginMouseX = Control.MousePosition.X - rightIndentGrip.Left;
-                oldRightMarginX = rightIndentGrip.Left;
-            }
-            else
-            {
-                //MessageBox.Show("this.rightMarginLine.Left: " + this.rightMarginLine.Left.ToString() + Environment.NewLine +
-                //    "rightIndentGrip.Left: " + rightIndentGrip.Left.ToString() + "Beta Message");
-            }
+//            if (e.Button == MouseButtons.Left)
+//            {
+////                rightIndentLine.Visible = true;
+//                rightMarginMouseX = Control.MousePosition.X - rightIndentGrip.Left;
+//                oldRightMarginX = rightIndentGrip.Left;
+//            }
+//            else
+//            {
+//                //MessageBox.Show("this.rightMarginLine.Left: " + this.rightMarginLine.Left.ToString() + Environment.NewLine +
+//                //    "rightIndentGrip.Left: " + rightIndentGrip.Left.ToString() + "Beta Message");
+//            }
         }
 
         private void rightIdentGrip_MouseMove(object sender, MouseEventArgs e)
@@ -1104,7 +1107,7 @@ namespace FAQ_Net
         private void RichText_TextChanged(object sender, EventArgs e)
         {
             SetUndoRedo();
-            saved = false;
+            //saved = false;
             saveFile.Enabled = true;
             save.Enabled = true;
         }
@@ -1189,7 +1192,7 @@ namespace FAQ_Net
                 saveAs.PerformClick();
                 return false;
             }
-            saved = true;
+            //saved = true;
             return true;
         }
 
@@ -1218,7 +1221,7 @@ namespace FAQ_Net
             }
             currentFile = fullpath;
             CountSubcategoryLbl.Text = "Current File:  " + currentFile;
-            saved = true;
+            //saved = true;
             return true;
         }
 
@@ -1410,7 +1413,7 @@ namespace FAQ_Net
         {
             RestartApplicationCanceled = false;
             _settingsXml.SaveFormPosition(this);
-            _settingsXml.SetSetting(Constants.MAIN_SPLITTER_DISTANCE, MainSC.SplitterDistance.ToString());
+            _settingsXml.SetSetting(Constants.MAIN_SPLITTER_DISTANCE, TabControl.Width.ToString());
             if (splitContainer1.Panel2Collapsed==false && saveFile.Enabled)
             {
                 DialogResult res = MessageBox.Show("Сохранить изменения ответа на вопрос?", this.Text,
@@ -1799,16 +1802,13 @@ namespace FAQ_Net
         _dictionaryEditor.RefreshAllData(_currentQuestionId);
       if (ModalDialogForSelectQuestion)
       {
+        btnSelectQuestion.BackColor = SelectedPathLbl.BackColor;
         if (_currentQuestionId == 0)
         {
-          //btnSelectQuestion.FlatStyle = FlatStyle.Standard;
-          btnSelectQuestion.BackColor = Color.Transparent;
           btnSelectQuestion.Enabled = false;
         }
         else
         {
-          //btnSelectQuestion.FlatStyle = FlatStyle.Flat;
-          btnSelectQuestion.BackColor = Color.Yellow;
           btnSelectQuestion.Enabled = true;
         }
       }
@@ -2512,6 +2512,8 @@ namespace FAQ_Net
 
     private void CheckAndSaveDocument()
     {
+      if (ModalDialogForSelectQuestion)
+        return;
       if (saveFile.Enabled)
       {
         if (MessageBox.Show("Сохранить изменения ответа на вопрос?", "Подтверждение сохранения",
@@ -2567,8 +2569,10 @@ namespace FAQ_Net
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            if (this.Width - MainSC.SplitterDistance - 50>50)
-                richText.RightMargin = this.Width - MainSC.SplitterDistance - 50;
+            if (richText == null)
+              return;
+            if (this.Width - TabControl.Width - 50>50)
+                richText.RightMargin = this.Width - TabControl.Width - 50;
             else
                 richText.RightMargin =20;
         }
@@ -2596,6 +2600,7 @@ namespace FAQ_Net
         private void BackBtn_Click(object sender, EventArgs e)
         {
             btnNextQuestion.Visible = true;
+            btnNextQuestion.BackColor = SelectedPathLbl.BackColor;
             CurTransitionRow -= 1;
             if (CurTransitionRow == 0)
                 BackBtn.Visible = false;
@@ -2676,6 +2681,7 @@ namespace FAQ_Net
             
             CurTransitionRow += 1;
             BackBtn.Visible = true;
+            BackBtn.BackColor = SelectedPathLbl.BackColor;
         }
 
         #region Рекурсивный метод удаления разделов (DelRazdelyRecursive)
@@ -2711,7 +2717,7 @@ namespace FAQ_Net
                 if (TV1.Nodes.Count > 0)
                 {
                     TV1.SelectedNode = null;
-                    SelectedPathLbl.Text = "";
+                    SelectedPathLbl.Text = string.Empty;
                     CountSubcategoryVal.Text = "0";
                     CountQuestionsVal.Text = "0";
                     //NodeSelect(TV1.Nodes[0]);
@@ -3086,6 +3092,7 @@ namespace FAQ_Net
         = toolStrip1.Visible
         = false;
       CategoriesContextMenu.Parent = null;
+      richText.ReadOnly = true;
     }
 
     private void ID_ContentTSSL_TextChanged(object sender, EventArgs e)
@@ -3106,6 +3113,7 @@ namespace FAQ_Net
       {
         btnNextQuestion.Visible = false;
         BackBtn.Visible = true;
+        BackBtn.BackColor = SelectedPathLbl.BackColor;
       }
 
       switch (TransitionDT.Rows[CurTransitionRow]["type"].ToString())
@@ -3123,6 +3131,25 @@ namespace FAQ_Net
           GetQuestionAndAnswer(TransitionDT.Rows[CurTransitionRow]["id"].ToString());
           break;
       }
+    }
+
+    static void SetRoundedShape(Control control, int radius)
+    {
+      System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+      path.AddLine(radius, 0, control.Width - radius, 0);
+      path.AddArc(control.Width - radius, 0, radius, radius, 270, 90);
+      path.AddLine(control.Width, radius, control.Width, control.Height - radius);
+      path.AddArc(control.Width - radius, control.Height - radius, radius, radius, 0, 90);
+      path.AddLine(control.Width - radius, control.Height, radius, control.Height);
+      path.AddArc(0, control.Height - radius, radius, radius, 90, 90);
+      path.AddLine(0, control.Height - radius, 0, radius);
+      path.AddArc(0, 0, radius, radius, 180, 90);
+      control.Region = new Region(path);
+    }
+
+    private void MainForm_ClientSizeChanged(object sender, EventArgs e)
+    {
+      SelectedPathLbl.MaximumSize = new Size((sender as Control).ClientSize.Width - SelectedPathLbl.Left, 20000);
     }
   }
 }

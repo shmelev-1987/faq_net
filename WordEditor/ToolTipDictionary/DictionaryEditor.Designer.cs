@@ -28,16 +28,9 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.tsSearch = new System.Windows.Forms.ToolStrip();
-      this.tstbSearch = new System.Windows.Forms.ToolStripTextBox();
-      this.tsbSearch = new System.Windows.Forms.ToolStripButton();
-      this.tsHeader = new System.Windows.Forms.ToolStrip();
-      this.tsbAdd = new System.Windows.Forms.ToolStripButton();
-      this.tsbEdit = new System.Windows.Forms.ToolStripButton();
-      this.tsbCopy = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-      this.tsbDelete = new System.Windows.Forms.ToolStripButton();
+      this.panel1 = new GradientControls.PanelGradient();
+      this.panel2 = new GradientControls.PanelGradient();
+      this.lblHeader = new GradientControls.LabelGradient();
       this.cmbGroup = new System.Windows.Forms.ComboBox();
       this.lblGroup = new System.Windows.Forms.Label();
       this.cmbForeColor = new System.Windows.Forms.ComboBox();
@@ -55,63 +48,75 @@
       this.lblWord = new System.Windows.Forms.Label();
       this.cmbCategoryWord = new System.Windows.Forms.ComboBox();
       this.label2 = new System.Windows.Forms.Label();
-      this.tsEditor = new System.Windows.Forms.ToolStrip();
+      this.tsSearch = new GradientControls.ToolStripGradient();
+      this.tstbSearch = new System.Windows.Forms.ToolStripTextBox();
+      this.tsbSearch = new System.Windows.Forms.ToolStripButton();
+      this.tsHeader = new GradientControls.ToolStripGradient();
+      this.tsbAdd = new System.Windows.Forms.ToolStripButton();
+      this.tsbEdit = new System.Windows.Forms.ToolStripButton();
+      this.tsbCopy = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.tsbDelete = new System.Windows.Forms.ToolStripButton();
+      this.tsEditor = new GradientControls.ToolStripGradient();
       this.tsbSave = new System.Windows.Forms.ToolStripButton();
       this.tsbCancel = new System.Windows.Forms.ToolStripButton();
-      this.lblHeader = new System.Windows.Forms.Label();
-      this.splitContainer1.Panel1.SuspendLayout();
-      this.splitContainer1.Panel2.SuspendLayout();
-      this.splitContainer1.SuspendLayout();
+      this.panel1.SuspendLayout();
       this.tsSearch.SuspendLayout();
       this.tsHeader.SuspendLayout();
+      this.panel2.SuspendLayout();
       this.tsEditor.SuspendLayout();
       this.SuspendLayout();
       // 
-      // splitContainer1
+      // panel1
       // 
-      this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.splitContainer1.Location = new System.Drawing.Point(0, 21);
-      this.splitContainer1.Name = "splitContainer1";
-      this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      this.panel1.BackColorBottom = System.Drawing.Color.Empty;
+      this.panel1.Controls.Add(this.tsSearch);
+      this.panel1.Controls.Add(this.tsHeader);
+      this.panel1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.panel1.Location = new System.Drawing.Point(3, 24);
+      this.panel1.Name = "panel1";
+      this.panel1.Size = new System.Drawing.Size(264, 79);
+      this.panel1.TabIndex = 3;
       // 
-      // splitContainer1.Panel1
+      // panel2
       // 
-      this.splitContainer1.Panel1.Controls.Add(this.tsSearch);
-      this.splitContainer1.Panel1.Controls.Add(this.tsHeader);
-      // 
-      // splitContainer1.Panel2
-      // 
-      this.splitContainer1.Panel2.Controls.Add(this.cmbGroup);
-      this.splitContainer1.Panel2.Controls.Add(this.lblGroup);
-      this.splitContainer1.Panel2.Controls.Add(this.cmbForeColor);
-      this.splitContainer1.Panel2.Controls.Add(this.lblForeColor);
-      this.splitContainer1.Panel2.Controls.Add(this.txbUrl);
-      this.splitContainer1.Panel2.Controls.Add(this.lblUrl);
-      this.splitContainer1.Panel2.Controls.Add(this.btnSelectQuestion);
-      this.splitContainer1.Panel2.Controls.Add(this.txbQuestion);
-      this.splitContainer1.Panel2.Controls.Add(this.lblQuestion);
-      this.splitContainer1.Panel2.Controls.Add(this.txbComment);
-      this.splitContainer1.Panel2.Controls.Add(this.lblComment);
-      this.splitContainer1.Panel2.Controls.Add(this.cmbToolTipType);
-      this.splitContainer1.Panel2.Controls.Add(this.label3);
-      this.splitContainer1.Panel2.Controls.Add(this.txbWord);
-      this.splitContainer1.Panel2.Controls.Add(this.lblWord);
-      this.splitContainer1.Panel2.Controls.Add(this.cmbCategoryWord);
-      this.splitContainer1.Panel2.Controls.Add(this.label2);
-      this.splitContainer1.Panel2.Controls.Add(this.tsEditor);
-      this.splitContainer1.Size = new System.Drawing.Size(270, 545);
-      this.splitContainer1.SplitterDistance = 159;
-      this.splitContainer1.TabIndex = 0;
+      this.panel2.BackColorBottom = System.Drawing.Color.Empty;
+      this.panel2.Controls.Add(this.cmbGroup);
+      this.panel2.Controls.Add(this.lblGroup);
+      this.panel2.Controls.Add(this.cmbForeColor);
+      this.panel2.Controls.Add(this.lblForeColor);
+      this.panel2.Controls.Add(this.txbUrl);
+      this.panel2.Controls.Add(this.lblUrl);
+      this.panel2.Controls.Add(this.btnSelectQuestion);
+      this.panel2.Controls.Add(this.txbQuestion);
+      this.panel2.Controls.Add(this.lblQuestion);
+      this.panel2.Controls.Add(this.txbComment);
+      this.panel2.Controls.Add(this.lblComment);
+      this.panel2.Controls.Add(this.cmbToolTipType);
+      this.panel2.Controls.Add(this.label3);
+      this.panel2.Controls.Add(this.txbWord);
+      this.panel2.Controls.Add(this.lblWord);
+      this.panel2.Controls.Add(this.cmbCategoryWord);
+      this.panel2.Controls.Add(this.label2);
+      this.panel2.Controls.Add(this.tsEditor);
+      this.panel2.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.panel2.Location = new System.Drawing.Point(3, 109);
+      this.panel2.Name = "panel2";
+      this.panel2.Size = new System.Drawing.Size(264, 367);
+      this.panel2.TabIndex = 4;
       // 
       // tsSearch
       // 
+      this.tsSearch.BackColor = System.Drawing.SystemColors.Control;
+      this.tsSearch.BackColorBottom = System.Drawing.Color.Empty;
+      this.tsSearch.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
       this.tsSearch.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.tsSearch.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tstbSearch,
             this.tsbSearch});
       this.tsSearch.Location = new System.Drawing.Point(0, 25);
       this.tsSearch.Name = "tsSearch";
-      this.tsSearch.Size = new System.Drawing.Size(270, 25);
+      this.tsSearch.Size = new System.Drawing.Size(264, 25);
       this.tsSearch.TabIndex = 1;
       this.tsSearch.Text = "toolStrip3";
       // 
@@ -140,6 +145,9 @@
       // 
       // tsHeader
       // 
+      this.tsHeader.BackColor = System.Drawing.SystemColors.Control;
+      this.tsHeader.BackColorBottom = System.Drawing.Color.Empty;
+      this.tsHeader.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
       this.tsHeader.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.tsHeader.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAdd,
@@ -149,7 +157,7 @@
             this.tsbDelete});
       this.tsHeader.Location = new System.Drawing.Point(0, 0);
       this.tsHeader.Name = "tsHeader";
-      this.tsHeader.Size = new System.Drawing.Size(270, 25);
+      this.tsHeader.Size = new System.Drawing.Size(264, 25);
       this.tsHeader.TabIndex = 0;
       this.tsHeader.Text = "toolStrip1";
       // 
@@ -206,16 +214,16 @@
       this.cmbGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.cmbGroup.FormattingEnabled = true;
-      this.cmbGroup.Location = new System.Drawing.Point(11, 349);
+      this.cmbGroup.Location = new System.Drawing.Point(9, 340);
       this.cmbGroup.Name = "cmbGroup";
-      this.cmbGroup.Size = new System.Drawing.Size(249, 21);
+      this.cmbGroup.Size = new System.Drawing.Size(252, 21);
       this.cmbGroup.TabIndex = 36;
       // 
       // lblGroup
       // 
       this.lblGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.lblGroup.AutoSize = true;
-      this.lblGroup.Location = new System.Drawing.Point(10, 333);
+      this.lblGroup.Location = new System.Drawing.Point(8, 324);
       this.lblGroup.Name = "lblGroup";
       this.lblGroup.Size = new System.Drawing.Size(42, 13);
       this.lblGroup.TabIndex = 35;
@@ -226,9 +234,9 @@
       this.cmbForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.cmbForeColor.FormattingEnabled = true;
-      this.cmbForeColor.Location = new System.Drawing.Point(11, 309);
+      this.cmbForeColor.Location = new System.Drawing.Point(9, 300);
       this.cmbForeColor.Name = "cmbForeColor";
-      this.cmbForeColor.Size = new System.Drawing.Size(249, 21);
+      this.cmbForeColor.Size = new System.Drawing.Size(252, 21);
       this.cmbForeColor.TabIndex = 34;
       this.cmbForeColor.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbForeColor_DrawItem);
       // 
@@ -236,7 +244,7 @@
       // 
       this.lblForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.lblForeColor.AutoSize = true;
-      this.lblForeColor.Location = new System.Drawing.Point(8, 293);
+      this.lblForeColor.Location = new System.Drawing.Point(6, 284);
       this.lblForeColor.Name = "lblForeColor";
       this.lblForeColor.Size = new System.Drawing.Size(74, 13);
       this.lblForeColor.TabIndex = 33;
@@ -246,16 +254,16 @@
       // 
       this.txbUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.txbUrl.Location = new System.Drawing.Point(11, 270);
+      this.txbUrl.Location = new System.Drawing.Point(9, 261);
       this.txbUrl.Name = "txbUrl";
-      this.txbUrl.Size = new System.Drawing.Size(249, 20);
+      this.txbUrl.Size = new System.Drawing.Size(252, 20);
       this.txbUrl.TabIndex = 32;
       // 
       // lblUrl
       // 
       this.lblUrl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.lblUrl.AutoSize = true;
-      this.lblUrl.Location = new System.Drawing.Point(8, 254);
+      this.lblUrl.Location = new System.Drawing.Point(6, 245);
       this.lblUrl.Name = "lblUrl";
       this.lblUrl.Size = new System.Drawing.Size(62, 13);
       this.lblUrl.TabIndex = 31;
@@ -264,7 +272,7 @@
       // btnSelectQuestion
       // 
       this.btnSelectQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnSelectQuestion.Location = new System.Drawing.Point(235, 229);
+      this.btnSelectQuestion.Location = new System.Drawing.Point(236, 220);
       this.btnSelectQuestion.Name = "btnSelectQuestion";
       this.btnSelectQuestion.Size = new System.Drawing.Size(25, 24);
       this.btnSelectQuestion.TabIndex = 30;
@@ -276,16 +284,16 @@
       // 
       this.txbQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.txbQuestion.Location = new System.Drawing.Point(11, 231);
+      this.txbQuestion.Location = new System.Drawing.Point(9, 222);
       this.txbQuestion.Name = "txbQuestion";
-      this.txbQuestion.Size = new System.Drawing.Size(218, 20);
+      this.txbQuestion.Size = new System.Drawing.Size(221, 20);
       this.txbQuestion.TabIndex = 29;
       // 
       // lblQuestion
       // 
       this.lblQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.lblQuestion.AutoSize = true;
-      this.lblQuestion.Location = new System.Drawing.Point(8, 215);
+      this.lblQuestion.Location = new System.Drawing.Point(6, 206);
       this.lblQuestion.Name = "lblQuestion";
       this.lblQuestion.Size = new System.Drawing.Size(63, 13);
       this.lblQuestion.TabIndex = 28;
@@ -296,16 +304,16 @@
       this.txbComment.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.txbComment.Location = new System.Drawing.Point(11, 165);
+      this.txbComment.Location = new System.Drawing.Point(9, 165);
       this.txbComment.Multiline = true;
       this.txbComment.Name = "txbComment";
-      this.txbComment.Size = new System.Drawing.Size(249, 47);
+      this.txbComment.Size = new System.Drawing.Size(252, 38);
       this.txbComment.TabIndex = 27;
       // 
       // lblComment
       // 
       this.lblComment.AutoSize = true;
-      this.lblComment.Location = new System.Drawing.Point(8, 149);
+      this.lblComment.Location = new System.Drawing.Point(6, 149);
       this.lblComment.Name = "lblComment";
       this.lblComment.Size = new System.Drawing.Size(77, 13);
       this.lblComment.TabIndex = 26;
@@ -317,16 +325,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.cmbToolTipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cmbToolTipType.FormattingEnabled = true;
-      this.cmbToolTipType.Location = new System.Drawing.Point(11, 125);
+      this.cmbToolTipType.Location = new System.Drawing.Point(9, 125);
       this.cmbToolTipType.Name = "cmbToolTipType";
-      this.cmbToolTipType.Size = new System.Drawing.Size(249, 21);
+      this.cmbToolTipType.Size = new System.Drawing.Size(252, 21);
       this.cmbToolTipType.TabIndex = 25;
       this.cmbToolTipType.SelectedIndexChanged += new System.EventHandler(this.cmbToolTipType_SelectedIndexChanged);
       // 
       // label3
       // 
       this.label3.AutoSize = true;
-      this.label3.Location = new System.Drawing.Point(8, 109);
+      this.label3.Location = new System.Drawing.Point(6, 109);
       this.label3.Name = "label3";
       this.label3.Size = new System.Drawing.Size(83, 13);
       this.label3.TabIndex = 24;
@@ -336,9 +344,9 @@
       // 
       this.txbWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.txbWord.Location = new System.Drawing.Point(11, 86);
+      this.txbWord.Location = new System.Drawing.Point(9, 86);
       this.txbWord.Name = "txbWord";
-      this.txbWord.Size = new System.Drawing.Size(249, 20);
+      this.txbWord.Size = new System.Drawing.Size(252, 20);
       this.txbWord.TabIndex = 23;
       this.txbWord.TextChanged += new System.EventHandler(this.txbWord_TextChanged);
       this.txbWord.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbWord_KeyPress);
@@ -346,7 +354,7 @@
       // lblWord
       // 
       this.lblWord.AutoSize = true;
-      this.lblWord.Location = new System.Drawing.Point(8, 70);
+      this.lblWord.Location = new System.Drawing.Point(6, 70);
       this.lblWord.Name = "lblWord";
       this.lblWord.Size = new System.Drawing.Size(38, 13);
       this.lblWord.TabIndex = 22;
@@ -358,15 +366,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.cmbCategoryWord.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.cmbCategoryWord.FormattingEnabled = true;
-      this.cmbCategoryWord.Location = new System.Drawing.Point(11, 46);
+      this.cmbCategoryWord.Location = new System.Drawing.Point(9, 46);
       this.cmbCategoryWord.Name = "cmbCategoryWord";
-      this.cmbCategoryWord.Size = new System.Drawing.Size(249, 21);
+      this.cmbCategoryWord.Size = new System.Drawing.Size(252, 21);
       this.cmbCategoryWord.TabIndex = 21;
       // 
       // label2
       // 
       this.label2.AutoSize = true;
-      this.label2.Location = new System.Drawing.Point(8, 30);
+      this.label2.Location = new System.Drawing.Point(6, 30);
       this.label2.Name = "label2";
       this.label2.Size = new System.Drawing.Size(60, 13);
       this.label2.TabIndex = 20;
@@ -374,12 +382,16 @@
       // 
       // tsEditor
       // 
+      this.tsEditor.BackColor = System.Drawing.SystemColors.Control;
+      this.tsEditor.BackColorBottom = System.Drawing.Color.Empty;
+      this.tsEditor.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.tsEditor.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.tsEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbSave,
             this.tsbCancel});
       this.tsEditor.Location = new System.Drawing.Point(0, 0);
       this.tsEditor.Name = "tsEditor";
-      this.tsEditor.Size = new System.Drawing.Size(270, 25);
+      this.tsEditor.Size = new System.Drawing.Size(264, 25);
       this.tsEditor.TabIndex = 18;
       this.tsEditor.Text = "toolStrip2";
       // 
@@ -417,19 +429,19 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.Controls.Add(this.splitContainer1);
+      this.Controls.Add(this.panel2);
+      this.Controls.Add(this.panel1);
       this.Controls.Add(this.lblHeader);
       this.Name = "DictionaryEditor";
-      this.Size = new System.Drawing.Size(270, 566);
-      this.splitContainer1.Panel1.ResumeLayout(false);
-      this.splitContainer1.Panel1.PerformLayout();
-      this.splitContainer1.Panel2.ResumeLayout(false);
-      this.splitContainer1.Panel2.PerformLayout();
-      this.splitContainer1.ResumeLayout(false);
+      this.Size = new System.Drawing.Size(270, 483);
+      this.panel1.ResumeLayout(false);
+      this.panel1.PerformLayout();
       this.tsSearch.ResumeLayout(false);
       this.tsSearch.PerformLayout();
       this.tsHeader.ResumeLayout(false);
       this.tsHeader.PerformLayout();
+      this.panel2.ResumeLayout(false);
+      this.panel2.PerformLayout();
       this.tsEditor.ResumeLayout(false);
       this.tsEditor.PerformLayout();
       this.ResumeLayout(false);
@@ -437,8 +449,6 @@
     }
 
     #endregion
-
-    private System.Windows.Forms.SplitContainer splitContainer1;
     private System.Windows.Forms.ToolStripButton tsbAdd;
     private System.Windows.Forms.ToolStripButton tsbEdit;
     private System.Windows.Forms.ToolStripButton tsbDelete;
@@ -464,10 +474,12 @@
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     private System.Windows.Forms.Button btnSelectQuestion;
     private System.Windows.Forms.ToolStripButton tsbSearch;
-    public System.Windows.Forms.ToolStrip tsHeader;
-    public System.Windows.Forms.ToolStrip tsEditor;
-    public System.Windows.Forms.Label lblHeader;
-    public System.Windows.Forms.ToolStrip tsSearch;
+    public GradientControls.ToolStripGradient tsHeader;
+    public GradientControls.ToolStripGradient tsEditor;
+    public GradientControls.LabelGradient lblHeader;
+    public GradientControls.ToolStripGradient tsSearch;
     private System.Windows.Forms.ToolStripTextBox tstbSearch;
+    private GradientControls.PanelGradient panel1;
+    private GradientControls.PanelGradient panel2;
   }
 }

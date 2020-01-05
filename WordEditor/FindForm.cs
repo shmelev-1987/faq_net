@@ -6,7 +6,7 @@ namespace FAQ_Net
     class FindForm : UserControl
     {
         // Components:
-        private Button btnSearchDown;
+        private PulseButton.PulseButton btnSearchDown;
         private CheckBox wholeWord;
         private CheckBox matchCase;
         private int curPos = -1;
@@ -17,17 +17,18 @@ namespace FAQ_Net
         private const byte REPLACE_NONE = 0;
         private const byte REPLACE_EACH = 1;
         private const byte REPLACE_ALL = 2;
-        private Button cancel;
-        private Button btnSearchUp;
+        private PulseButton.PulseButton cancel;
+        private PulseButton.PulseButton btnSearchUp;
     private TextBox txbReplace;
     private Label lblReplace;
-    private Button btnReplaceAll;
-    private Button btnReplace;
+    private PulseButton.PulseButton btnReplaceAll;
+    private PulseButton.PulseButton btnReplace;
     public TextBox findText;
     private Label FindLabel;
     public RadioButton rbSearch;
     public RadioButton rbReplace;
     private CheckBox chkHighlightAll;
+    public GradientControls.PanelGradient panelGradient;
     public RichTextBox rtb;
 
         /// <summary>
@@ -44,27 +45,36 @@ namespace FAQ_Net
 
         private void InitializeComponent()
         {
-      this.btnSearchDown = new System.Windows.Forms.Button();
+      this.btnSearchDown = new PulseButton.PulseButton();
       this.wholeWord = new System.Windows.Forms.CheckBox();
       this.matchCase = new System.Windows.Forms.CheckBox();
-      this.btnReplace = new System.Windows.Forms.Button();
-      this.btnReplaceAll = new System.Windows.Forms.Button();
+      this.btnReplace = new PulseButton.PulseButton();
+      this.btnReplaceAll = new PulseButton.PulseButton();
       this.txbReplace = new System.Windows.Forms.TextBox();
       this.lblReplace = new System.Windows.Forms.Label();
-      this.btnSearchUp = new System.Windows.Forms.Button();
-      this.cancel = new System.Windows.Forms.Button();
+      this.btnSearchUp = new PulseButton.PulseButton();
+      this.cancel = new PulseButton.PulseButton();
       this.findText = new System.Windows.Forms.TextBox();
       this.FindLabel = new System.Windows.Forms.Label();
       this.rbSearch = new System.Windows.Forms.RadioButton();
       this.rbReplace = new System.Windows.Forms.RadioButton();
       this.chkHighlightAll = new System.Windows.Forms.CheckBox();
+      this.panelGradient = new GradientControls.PanelGradient();
+      this.panelGradient.SuspendLayout();
       this.SuspendLayout();
       // 
       // btnSearchDown
       // 
+      this.btnSearchDown.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.btnSearchDown.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.btnSearchDown.CornerRadius = 5;
+      this.btnSearchDown.ForeColor = System.Drawing.SystemColors.ControlText;
       this.btnSearchDown.Image = global::FAQ_Net.Properties.Resources.down;
-      this.btnSearchDown.Location = new System.Drawing.Point(330, 23);
+      this.btnSearchDown.Location = new System.Drawing.Point(331, 23);
       this.btnSearchDown.Name = "btnSearchDown";
+      this.btnSearchDown.PulseSpeed = 0.3F;
+      this.btnSearchDown.PulseWidth = 1;
+      this.btnSearchDown.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
       this.btnSearchDown.Size = new System.Drawing.Size(25, 25);
       this.btnSearchDown.TabIndex = 2;
       this.btnSearchDown.TabStop = false;
@@ -75,7 +85,7 @@ namespace FAQ_Net
       // wholeWord
       // 
       this.wholeWord.AutoSize = true;
-      this.wholeWord.Location = new System.Drawing.Point(600, 28);
+      this.wholeWord.Location = new System.Drawing.Point(601, 28);
       this.wholeWord.Name = "wholeWord";
       this.wholeWord.Size = new System.Drawing.Size(143, 17);
       this.wholeWord.TabIndex = 345;
@@ -86,7 +96,7 @@ namespace FAQ_Net
       // matchCase
       // 
       this.matchCase.AutoSize = true;
-      this.matchCase.Location = new System.Drawing.Point(474, 28);
+      this.matchCase.Location = new System.Drawing.Point(475, 28);
       this.matchCase.Name = "matchCase";
       this.matchCase.Size = new System.Drawing.Size(120, 17);
       this.matchCase.TabIndex = 444;
@@ -96,8 +106,15 @@ namespace FAQ_Net
       // 
       // btnReplace
       // 
-      this.btnReplace.Location = new System.Drawing.Point(361, 50);
+      this.btnReplace.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.btnReplace.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.btnReplace.CornerRadius = 5;
+      this.btnReplace.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.btnReplace.Location = new System.Drawing.Point(362, 50);
       this.btnReplace.Name = "btnReplace";
+      this.btnReplace.PulseSpeed = 0.3F;
+      this.btnReplace.PulseWidth = 1;
+      this.btnReplace.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
       this.btnReplace.Size = new System.Drawing.Size(75, 23);
       this.btnReplace.TabIndex = 683;
       this.btnReplace.Text = "Заменить";
@@ -106,8 +123,15 @@ namespace FAQ_Net
       // 
       // btnReplaceAll
       // 
-      this.btnReplaceAll.Location = new System.Drawing.Point(442, 50);
+      this.btnReplaceAll.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.btnReplaceAll.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.btnReplaceAll.CornerRadius = 5;
+      this.btnReplaceAll.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.btnReplaceAll.Location = new System.Drawing.Point(443, 50);
       this.btnReplaceAll.Name = "btnReplaceAll";
+      this.btnReplaceAll.PulseSpeed = 0.3F;
+      this.btnReplaceAll.PulseWidth = 1;
+      this.btnReplaceAll.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
       this.btnReplaceAll.Size = new System.Drawing.Size(89, 23);
       this.btnReplaceAll.TabIndex = 682;
       this.btnReplaceAll.TabStop = false;
@@ -117,7 +141,7 @@ namespace FAQ_Net
       // 
       // txbReplace
       // 
-      this.txbReplace.Location = new System.Drawing.Point(85, 52);
+      this.txbReplace.Location = new System.Drawing.Point(86, 52);
       this.txbReplace.Name = "txbReplace";
       this.txbReplace.Size = new System.Drawing.Size(215, 20);
       this.txbReplace.TabIndex = 680;
@@ -125,7 +149,7 @@ namespace FAQ_Net
       // lblReplace
       // 
       this.lblReplace.AutoSize = true;
-      this.lblReplace.Location = new System.Drawing.Point(7, 55);
+      this.lblReplace.Location = new System.Drawing.Point(8, 55);
       this.lblReplace.Name = "lblReplace";
       this.lblReplace.Size = new System.Drawing.Size(75, 13);
       this.lblReplace.TabIndex = 681;
@@ -133,9 +157,16 @@ namespace FAQ_Net
       // 
       // btnSearchUp
       // 
+      this.btnSearchUp.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.btnSearchUp.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.btnSearchUp.CornerRadius = 5;
+      this.btnSearchUp.ForeColor = System.Drawing.SystemColors.ControlText;
       this.btnSearchUp.Image = global::FAQ_Net.Properties.Resources.up;
-      this.btnSearchUp.Location = new System.Drawing.Point(306, 23);
+      this.btnSearchUp.Location = new System.Drawing.Point(307, 23);
       this.btnSearchUp.Name = "btnSearchUp";
+      this.btnSearchUp.PulseSpeed = 0.3F;
+      this.btnSearchUp.PulseWidth = 1;
+      this.btnSearchUp.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
       this.btnSearchUp.Size = new System.Drawing.Size(25, 25);
       this.btnSearchUp.TabIndex = 679;
       this.btnSearchUp.UseVisualStyleBackColor = true;
@@ -144,9 +175,16 @@ namespace FAQ_Net
       // cancel
       // 
       this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.cancel.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.cancel.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.cancel.CornerRadius = 5;
       this.cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-      this.cancel.Location = new System.Drawing.Point(759, 0);
+      this.cancel.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.cancel.Location = new System.Drawing.Point(759, 3);
       this.cancel.Name = "cancel";
+      this.cancel.PulseSpeed = 0.3F;
+      this.cancel.PulseWidth = 1;
+      this.cancel.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
       this.cancel.Size = new System.Drawing.Size(21, 20);
       this.cancel.TabIndex = 3;
       this.cancel.TabStop = false;
@@ -156,7 +194,7 @@ namespace FAQ_Net
       // 
       // findText
       // 
-      this.findText.Location = new System.Drawing.Point(85, 26);
+      this.findText.Location = new System.Drawing.Point(86, 26);
       this.findText.Name = "findText";
       this.findText.Size = new System.Drawing.Size(215, 20);
       this.findText.TabIndex = 1;
@@ -164,7 +202,7 @@ namespace FAQ_Net
       // FindLabel
       // 
       this.FindLabel.AutoSize = true;
-      this.FindLabel.Location = new System.Drawing.Point(8, 29);
+      this.FindLabel.Location = new System.Drawing.Point(9, 29);
       this.FindLabel.Name = "FindLabel";
       this.FindLabel.Size = new System.Drawing.Size(41, 13);
       this.FindLabel.TabIndex = 7;
@@ -173,7 +211,7 @@ namespace FAQ_Net
       // rbSearch
       // 
       this.rbSearch.AutoSize = true;
-      this.rbSearch.Location = new System.Drawing.Point(12, 3);
+      this.rbSearch.Location = new System.Drawing.Point(13, 3);
       this.rbSearch.Name = "rbSearch";
       this.rbSearch.Size = new System.Drawing.Size(56, 17);
       this.rbSearch.TabIndex = 685;
@@ -184,7 +222,7 @@ namespace FAQ_Net
       // 
       this.rbReplace.AutoSize = true;
       this.rbReplace.Checked = true;
-      this.rbReplace.Location = new System.Drawing.Point(74, 3);
+      this.rbReplace.Location = new System.Drawing.Point(75, 3);
       this.rbReplace.Name = "rbReplace";
       this.rbReplace.Size = new System.Drawing.Size(75, 17);
       this.rbReplace.TabIndex = 686;
@@ -196,7 +234,7 @@ namespace FAQ_Net
       // chkHighlightAll
       // 
       this.chkHighlightAll.AutoSize = true;
-      this.chkHighlightAll.Location = new System.Drawing.Point(361, 28);
+      this.chkHighlightAll.Location = new System.Drawing.Point(362, 28);
       this.chkHighlightAll.Name = "chkHighlightAll";
       this.chkHighlightAll.Size = new System.Drawing.Size(107, 17);
       this.chkHighlightAll.TabIndex = 687;
@@ -205,27 +243,39 @@ namespace FAQ_Net
       this.chkHighlightAll.UseVisualStyleBackColor = true;
       this.chkHighlightAll.CheckedChanged += new System.EventHandler(this.chkHighlightAll_CheckedChanged);
       // 
+      // panelGradient
+      // 
+      this.panelGradient.BackColorBottom = System.Drawing.Color.Empty;
+      this.panelGradient.Controls.Add(this.chkHighlightAll);
+      this.panelGradient.Controls.Add(this.rbSearch);
+      this.panelGradient.Controls.Add(this.rbReplace);
+      this.panelGradient.Controls.Add(this.matchCase);
+      this.panelGradient.Controls.Add(this.btnSearchDown);
+      this.panelGradient.Controls.Add(this.btnReplace);
+      this.panelGradient.Controls.Add(this.wholeWord);
+      this.panelGradient.Controls.Add(this.btnReplaceAll);
+      this.panelGradient.Controls.Add(this.btnSearchUp);
+      this.panelGradient.Controls.Add(this.cancel);
+      this.panelGradient.Controls.Add(this.lblReplace);
+      this.panelGradient.Controls.Add(this.FindLabel);
+      this.panelGradient.Controls.Add(this.findText);
+      this.panelGradient.Controls.Add(this.txbReplace);
+      this.panelGradient.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.panelGradient.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.panelGradient.Location = new System.Drawing.Point(0, 0);
+      this.panelGradient.Name = "panelGradient";
+      this.panelGradient.Size = new System.Drawing.Size(783, 78);
+      this.panelGradient.TabIndex = 688;
+      // 
       // FindForm
       // 
       this.BackColor = System.Drawing.SystemColors.Window;
-      this.Controls.Add(this.chkHighlightAll);
-      this.Controls.Add(this.rbReplace);
-      this.Controls.Add(this.rbSearch);
-      this.Controls.Add(this.btnReplace);
-      this.Controls.Add(this.btnReplaceAll);
-      this.Controls.Add(this.cancel);
-      this.Controls.Add(this.FindLabel);
-      this.Controls.Add(this.txbReplace);
-      this.Controls.Add(this.findText);
-      this.Controls.Add(this.lblReplace);
-      this.Controls.Add(this.btnSearchUp);
-      this.Controls.Add(this.wholeWord);
-      this.Controls.Add(this.btnSearchDown);
-      this.Controls.Add(this.matchCase);
+      this.Controls.Add(this.panelGradient);
       this.Name = "FindForm";
       this.Size = new System.Drawing.Size(783, 78);
+      this.panelGradient.ResumeLayout(false);
+      this.panelGradient.PerformLayout();
       this.ResumeLayout(false);
-      this.PerformLayout();
 
     }
 

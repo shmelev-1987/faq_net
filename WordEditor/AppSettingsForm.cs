@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using GradientControls;
 
 namespace FAQ_Net
 {
@@ -22,6 +23,16 @@ namespace FAQ_Net
     private const string FONT_PROP_NAME = "Шрифт";
     private const string CATEGORY_DESIGN_VIEW = "Внешний вид";
     private const string FORE_COLOR_PROP_NAME = "Цвет шрифта";
+    private const string BACK_COLOR_MODE = "Тип заливки";
+    private const string BACK_COLOR2_PROP_NAME = "Цвет фона (градиент)";
+    private const string GRADIENT_MODE_PROP_NAME = "Тип градиента";
+    private const string MENU_COLOR1 = "Цвет1. Фон при наведении корневого пункта";
+    private const string MENU_COLOR2 = "Цвет2. Фон выбранного пункта";
+    private const string MENU_COLOR3 = "Цвет3. Разделитель пунктов";
+    private const string MENU_COLOR4 = "Цвет4. Чекбокс при наведении";
+    private const string MENU_COLOR5 = "Цвет5. Оконтовка выбранного пункта";
+    private const string MENU_COLOR6 = "Цвет6. Цвет шрифта";
+    private const string MENU_COLOR7 = "Цвет7. Чекбокс";
 
     public AppSettingsForm(CustomDesignControl[] customDesignControls)
     {
@@ -62,31 +73,33 @@ namespace FAQ_Net
         try
         {
           Control control = (Control)_controls[tvSettings.SelectedNode.Index].ObjectControl;
+          PropertyGridEx.CustomProperty backColorProperty = null;
           foreach (PropertyGridEx.CustomProperty prop in _propertyGridEx.Item)
           {
             switch (prop.Name)
             {
               case BACK_COLOR_PROP_NAME:
-                if (control is DataGridView)
-                {
-                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
-                    (control as DataGridView).BackgroundColor = (Color)prop.Value;
-                }
-                else
-                if (control is TabControl)
-                {
-                  TabControl tc = control as TabControl;
-                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
-                  {
-                    foreach(TabPage tp in tc.TabPages)
-                      tp.BackColor = (Color)prop.Value;
-                  }
-                }
-                else
-                {
-                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
-                    control.BackColor = (Color)prop.Value;
-                }
+                backColorProperty = prop;
+                //if (control is DataGridView)
+                //{
+                //  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                //    (control as DataGridView).BackgroundColor = (Color)prop.Value;
+                //}
+                //else
+                //if (control is TabControl)
+                //{
+                //  TabControl tc = control as TabControl;
+                //  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                //  {
+                //    foreach(TabPage tp in tc.TabPages)
+                //      tp.BackColor = (Color)prop.Value;
+                //  }
+                //}
+                //else
+                //{
+                //  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                //    control.BackColor = (Color)prop.Value;
+                //}
                 break;
               case HEADER_STYLE_BACK_COLOR_PROP_NAME:
                 if (control is DataGridView)
@@ -149,6 +162,138 @@ namespace FAQ_Net
                     (control as DataGridView).ColumnHeadersDefaultCellStyle.ForeColor = (Color)prop.Value;
                 }
                 break;
+              case BACK_COLOR_MODE:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                {
+                  (control as IGradientControl).FillColorType = (GradientControls.GradientEnums.FillColorMode)prop.Value;
+                  //(control as IGradientControl).GradientFillControl_Paint(null, null);
+                }
+                if (control is GradientControls.TabControlGradient)
+                {
+                  GradientControls.TabControlGradient tc = control as GradientControls.TabControlGradient;
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  {
+                    foreach (TabPage tp in tc.TabPages)
+                    {
+                      (tp as GradientControls.TabPageGradient).FillColorType = tc.FillColorType;
+                    }
+                  }
+                }
+                if (control is GradientControls.StatusStripGradient)
+                {
+                  (control as GradientControls.StatusStripGradient).BackColor = Color.Transparent;
+                  foreach (ToolStripItem statusItem in (control as GradientControls.StatusStripGradient).Items)
+                    statusItem.BackColor = Color.Transparent;
+                }
+                if (control is GradientControls.PanelGradient)
+                {
+                  GradientControls.PanelGradient panel = control as GradientControls.PanelGradient;
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  {
+                    foreach (Control cntrl in panel.Controls)
+                    {
+                      if (cntrl is Label || cntrl is CheckBox || cntrl is RadioButton)
+                        cntrl.BackColor = Color.Transparent;
+                    }
+                  }
+                }
+                break;
+              case BACK_COLOR2_PROP_NAME:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  (control as IGradientControl).BackColorBottom = (Color)prop.Value;
+                if (control is GradientControls.TabControlGradient)
+                {
+                  GradientControls.TabControlGradient tc = control as GradientControls.TabControlGradient;
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  {
+                    foreach (TabPage tp in tc.TabPages)
+                    {
+                      GradientControls.TabPageGradient tpg = tp as GradientControls.TabPageGradient;
+                      tpg.BackColorBottom = (Color)prop.Value;
+                    }
+                  }
+                }
+                if (control is GradientControls.StatusStripGradient)
+                {
+                  (control as GradientControls.StatusStripGradient).BackColor = Color.Transparent;
+                  foreach (ToolStripItem statusItem in (control as GradientControls.StatusStripGradient).Items)
+                    statusItem.BackColor = Color.Transparent;
+                }
+                if (control is GradientControls.PanelGradient)
+                {
+                  GradientControls.PanelGradient panel = control as GradientControls.PanelGradient;
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  {
+                    foreach (Control cntrl in panel.Controls)
+                    {
+                      if (cntrl is Label || cntrl is CheckBox || cntrl is RadioButton)
+                        cntrl.BackColor = Color.Transparent;
+                    }
+                  }
+                }
+                break;
+              case GRADIENT_MODE_PROP_NAME:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  (control as IGradientControl).GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)prop.Value;
+                if (control is GradientControls.TabControlGradient)
+                {
+                  GradientControls.TabControlGradient tc = control as GradientControls.TabControlGradient;
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  {
+                    foreach (TabPage tp in tc.TabPages)
+                    {
+                      GradientControls.TabPageGradient tpg = tp as GradientControls.TabPageGradient;
+                      tpg.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)prop.Value;
+                    }
+                  }
+                }
+                if (control is GradientControls.StatusStripGradient)
+                {
+                  (control as GradientControls.StatusStripGradient).BackColor = Color.Transparent;
+                  foreach (ToolStripItem statusItem in (control as GradientControls.StatusStripGradient).Items)
+                    statusItem.BackColor = Color.Transparent;
+                }
+                if (control is GradientControls.PanelGradient)
+                {
+                  GradientControls.PanelGradient panel = control as GradientControls.PanelGradient;
+                  if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  {
+                    foreach (Control cntrl in panel.Controls)
+                    {
+                      if (cntrl is Label || cntrl is CheckBox || cntrl is RadioButton)
+                        cntrl.BackColor = Color.Transparent;
+                    }
+                  }
+                }
+                break;
+              case MENU_COLOR1:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  (control as GradientControls.MenuStripZ).MenuColor1 = (Color)prop.Value;
+                break;
+              case MENU_COLOR2:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  (control as GradientControls.MenuStripZ).MenuColor2 = (Color)prop.Value;
+                break;
+              case MENU_COLOR3:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  (control as GradientControls.MenuStripZ).MenuColor3 = (Color)prop.Value;
+                break;
+              case MENU_COLOR4:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  (control as GradientControls.MenuStripZ).MenuColor4 = (Color)prop.Value;
+                break;
+              case MENU_COLOR5:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  (control as GradientControls.MenuStripZ).MenuColor5 = (Color)prop.Value;
+                break;
+              case MENU_COLOR6:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  (control as GradientControls.MenuStripZ).MenuColor6 = (Color)prop.Value;
+                break;
+              case MENU_COLOR7:
+                if (prop.Value != null && prop.Value.ToString() != string.Empty)
+                  (control as GradientControls.MenuStripZ).MenuColor7 = (Color)prop.Value;
+                break;
                 //case HEADER_BACK_COLOR_PROP_NAME:
                 //  if (control is DataGridView)
                 //  {
@@ -156,6 +301,43 @@ namespace FAQ_Net
                 //      (control as DataGridView).ColumnHeadersDefaultCellStyle.BackColor = (Color)prop.Value;
                 //  }
                 //  break;
+            }
+          }
+          if (backColorProperty != null)
+          {
+            if (control is DataGridView)
+            {
+              if (backColorProperty.Value != null && backColorProperty.Value.ToString() != string.Empty)
+                (control as DataGridView).BackgroundColor = (Color)backColorProperty.Value;
+            }
+            else
+            if (control is TabControl)
+            {
+              TabControl tc = control as TabControl;
+              if (backColorProperty.Value != null && backColorProperty.Value.ToString() != string.Empty)
+              {
+                foreach (TabPage tp in tc.TabPages)
+                  tp.BackColor = (Color)backColorProperty.Value;
+              }
+            }
+            else
+            if (control is GradientControls.PanelGradient)
+            {
+              GradientControls.PanelGradient panel = control as GradientControls.PanelGradient;
+              if (backColorProperty.Value != null && backColorProperty.Value.ToString() != string.Empty)
+              {
+                control.BackColor = (Color)backColorProperty.Value;
+                foreach (Control cntrl in panel.Controls)
+                {
+                  if (cntrl is Label || cntrl is CheckBox || cntrl is RadioButton)
+                    cntrl.BackColor = Color.Transparent;
+                }
+              }
+            }
+            else
+            {
+              if (backColorProperty.Value != null && backColorProperty.Value.ToString() != string.Empty)
+                control.BackColor = (Color)backColorProperty.Value;
             }
           }
           tsbSave.Enabled = true;
@@ -222,12 +404,72 @@ namespace FAQ_Net
           case "BackColor":
             if (cntrl is DataGridView)
               continue;
-            if (cntrl is TabControl)
+            if (cntrl is GradientControls.TabControlGradient)
             {
-              foreach(TabPage tp in (((TabControl)cntrl).TabPages))
+              GradientControls.TabControlGradient tcg = cntrl as GradientControls.TabControlGradient;
+              foreach (GradientControls.TabPageGradient tp in (((GradientControls.TabControlGradient)cntrl).TabPages))
+              {
                 //tp.BackColor = ParseColorDesignSetting(parseType, (TabControl)cntrl, BACK_COLOR_PROP_NAME, cntrl.BackColor);
-                tp.BackColor = ParseColorDesignSetting(parseType, (TabControl)cntrl, BACK_COLOR_PROP_NAME, tp.BackColor, customDesignControl.SettingId);
+                string fillColorType = ParseEnumDesignSetting(parseType, (GradientControls.TabControlGradient)cntrl, BACK_COLOR_MODE, tp.FillColorType.ToString(), customDesignControl.SettingId, typeof(GradientEnums.FillColorMode));
+                tp.FillColorType = (GradientEnums.FillColorMode)EnumString.GetValue(fillColorType, typeof(GradientEnums.FillColorMode));
+                tp.BackColor = ParseColorDesignSetting(parseType, (GradientControls.TabControlGradient)cntrl, BACK_COLOR_PROP_NAME, tp.BackColor, customDesignControl.SettingId);
+                //tp.BackColorTop = ParseColorDesignSetting(parseType, (GradientControls.TabControlGradient)cntrl, BACK_COLOR_MODE, tp.BackColorTop, customDesignControl.SettingId);
+                tp.BackColorBottom = ParseColorDesignSetting(parseType, (GradientControls.TabControlGradient)cntrl, BACK_COLOR2_PROP_NAME, tp.BackColorBottom, customDesignControl.SettingId);
+                string gradientMode = ParseEnumDesignSetting(parseType, (GradientControls.TabControlGradient)cntrl, GRADIENT_MODE_PROP_NAME, tp.GradientMode.ToString(), customDesignControl.SettingId, typeof(System.Drawing.Drawing2D.LinearGradientMode));
+                tp.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)EnumString.GetValue(gradientMode, typeof(System.Drawing.Drawing2D.LinearGradientMode));
+                foreach (Control ctrl in tp.Controls)
+                {
+                  try
+                  {
+                    if (ctrl is Label || ctrl is Panel)
+                      ctrl.BackColor = Color.Transparent;
+                  }
+                  catch (Exception) { }
+                }
+              }
               continue;
+            }
+            else
+            if (cntrl is IGradientControl)
+            {
+              IGradientControl gradientControl = cntrl as IGradientControl;
+              string fillColorType = ParseEnumDesignSetting(parseType, gradientControl, BACK_COLOR_MODE, gradientControl.FillColorType.ToString(), customDesignControl.SettingId, typeof(GradientEnums.FillColorMode));
+              (cntrl as IGradientControl).FillColorType = (GradientEnums.FillColorMode)EnumString.GetValue(fillColorType, typeof(GradientEnums.FillColorMode));
+              //tp.BackColorTop = ParseColorDesignSetting(parseType, (GradientControls.TabControlGradient)cntrl, BACK_COLOR_MODE, tp.BackColorTop, customDesignControl.SettingId);
+              (cntrl as IGradientControl).BackColorBottom = ParseColorDesignSetting(parseType, cntrl, BACK_COLOR2_PROP_NAME, gradientControl.BackColorBottom, customDesignControl.SettingId);
+              string gradientMode = ParseEnumDesignSetting(parseType, gradientControl, GRADIENT_MODE_PROP_NAME, gradientControl.GradientMode.ToString(), customDesignControl.SettingId, typeof(System.Drawing.Drawing2D.LinearGradientMode));
+              (cntrl as IGradientControl).GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)EnumString.GetValue(gradientMode, typeof(System.Drawing.Drawing2D.LinearGradientMode));
+              if (cntrl is GradientControls.PanelGradient)
+              {
+                foreach (Control ctrl in (cntrl as PanelGradient).Controls)
+                {
+                  try
+                  {
+                    if (ctrl is Label)
+                      ctrl.BackColor = Color.Transparent;
+                  }
+                  catch (Exception) { }
+                }
+              }
+              if (cntrl is StatusStripGradient)
+              {
+                foreach (ToolStripItem statusItem in (cntrl as GradientControls.StatusStripGradient).Items)
+                {
+                  statusItem.BackColor = Color.Transparent;
+                  statusItem.ForeColor = cntrl.ForeColor;
+                }
+              }
+            }
+            if (cntrl is GradientControls.MenuStripZ)
+            {
+              GradientControls.MenuStripZ msz = cntrl as GradientControls.MenuStripZ;
+              msz.MenuColor1 = ParseColorDesignSetting(parseType, cntrl, MENU_COLOR1, msz.MenuColor1, customDesignControl.SettingId);
+              msz.MenuColor2 = ParseColorDesignSetting(parseType, cntrl, MENU_COLOR2, msz.MenuColor2, customDesignControl.SettingId);
+              msz.MenuColor3 = ParseColorDesignSetting(parseType, cntrl, MENU_COLOR3, msz.MenuColor3, customDesignControl.SettingId);
+              msz.MenuColor4 = ParseColorDesignSetting(parseType, cntrl, MENU_COLOR4, msz.MenuColor4, customDesignControl.SettingId);
+              msz.MenuColor5 = ParseColorDesignSetting(parseType, cntrl, MENU_COLOR5, msz.MenuColor5, customDesignControl.SettingId);
+              msz.MenuColor6 = ParseColorDesignSetting(parseType, cntrl, MENU_COLOR6, msz.MenuColor6, customDesignControl.SettingId);
+              msz.MenuColor7 = ParseColorDesignSetting(parseType, cntrl, MENU_COLOR7, msz.MenuColor7, customDesignControl.SettingId);
             }
             cntrl.BackColor = ParseColorDesignSetting(parseType, cntrl, BACK_COLOR_PROP_NAME, cntrl.BackColor, customDesignControl.SettingId);
             break;
@@ -265,6 +507,118 @@ namespace FAQ_Net
         _propertyGridEx.Refresh();
     }
 
+    private string ParseEnumDesignSetting(ParseType parseType, IGradientControl cntrl, string customPropertyName, string valueStr, string settingId, Type tyEnum)
+    {
+      string result = string.Empty;
+      if (tyEnum.Equals(typeof(GradientEnums.FillColorMode)))
+        result = Enum.Parse(typeof(GradientEnums.FillColorMode), valueStr).ToString();
+      if (tyEnum.Equals(typeof(System.Drawing.Drawing2D.LinearGradientMode)))
+        result = Enum.Parse(typeof(System.Drawing.Drawing2D.LinearGradientMode), valueStr).ToString();
+      if (parseType == ParseType.SaveToFile)
+        MainForm._settingsXml.SetSetting(string.Format("{0}_{1}", settingId, customPropertyName), valueStr);
+      else
+      if (parseType == ParseType.LoadFromFile)
+      {
+        string str = MainForm._settingsXml.GetSetting(string.Format("{0}_{1}", settingId, customPropertyName));
+        if (!string.IsNullOrEmpty(str))
+        {
+          result = str;
+        }
+      }
+      else
+      if (parseType == ParseType.LoadFromControl)
+      {
+        if (cntrl is GradientControls.TabControlGradient)
+        {
+          GradientControls.TabControlGradient tabControlGradient = cntrl as GradientControls.TabControlGradient;
+          switch (customPropertyName)
+          {
+            case BACK_COLOR_MODE:
+              AddPropertyIfNotExists(tabControlGradient, customPropertyName, (tabControlGradient.TabPages[0] as GradientControls.TabPageGradient).FillColorType, CATEGORY_DESIGN_VIEW);
+              break;
+            case GRADIENT_MODE_PROP_NAME:
+              AddPropertyIfNotExists(tabControlGradient, customPropertyName, (tabControlGradient.TabPages[0] as GradientControls.TabPageGradient).GradientMode, CATEGORY_DESIGN_VIEW);
+              break;
+            case BACK_COLOR2_PROP_NAME:
+              AddPropertyIfNotExists(tabControlGradient, customPropertyName, (tabControlGradient.TabPages[0] as GradientControls.TabPageGradient).BackColorBottom, CATEGORY_DESIGN_VIEW);
+              break;
+            case BACK_COLOR_PROP_NAME:
+              AddPropertyIfNotExists(tabControlGradient, customPropertyName, tabControlGradient.TabPages[0].BackColor, CATEGORY_DESIGN_VIEW);
+              break;
+            case FORE_COLOR_PROP_NAME:
+              AddPropertyIfNotExists(tabControlGradient, customPropertyName, tabControlGradient.TabPages[0].ForeColor, CATEGORY_DESIGN_VIEW);
+              break;
+          }
+        }
+        else
+        //  if (cntrl is DataGridView)
+        //  {
+        //    switch (customPropertyName)
+        //    {
+        //      case BACK_COLOR_PROP_NAME:
+        //        AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).BackgroundColor, CATEGORY_DESIGN_VIEW);
+        //        break;
+        //      case HEADER_STYLE_BACK_COLOR_PROP_NAME:
+        //        AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.BackColor, CATEGORY_DESIGN_VIEW);
+        //        break;
+        //      case CELL_FORE_COLOR:
+        //        AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).DefaultCellStyle.ForeColor, CATEGORY_DESIGN_VIEW);
+        //        break;
+        //      case HEADER_FORE_COLOR:
+        //        AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.ForeColor, CATEGORY_DESIGN_VIEW);
+        //        break;
+        //      default:
+        //        AddPropertyIfNotExists(cntrl, customPropertyName, null, CATEGORY_DESIGN_VIEW);
+        //        break;
+        //    }
+        //  }
+        //  else
+        {
+          switch (customPropertyName)
+          {
+            case BACK_COLOR_PROP_NAME:
+              //_propertyGridEx.Item.Add("Имя свойства", "Значение по-умолчанию", readOnly, "Категория", "Описание", visible);
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, cntrl.BackColor, CATEGORY_DESIGN_VIEW);
+              break;
+            case FORE_COLOR_PROP_NAME:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, cntrl.ForeColor, CATEGORY_DESIGN_VIEW);
+              break;
+            case BACK_COLOR_MODE:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.IGradientControl)cntrl).FillColorType, CATEGORY_DESIGN_VIEW);
+              break;
+            case GRADIENT_MODE_PROP_NAME:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.IGradientControl)cntrl).GradientMode, CATEGORY_DESIGN_VIEW);
+              break;
+            case BACK_COLOR2_PROP_NAME:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.IGradientControl)cntrl).BackColorBottom, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR1:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor1, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR2:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor2, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR3:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor3, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR4:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor4, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR5:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor5, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR6:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor6, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR7:
+              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor7, CATEGORY_DESIGN_VIEW);
+              break;
+          }
+        }
+      }
+      return result;
+    }
+    
     private void SaveDesignSetting(Control cntrl, string value)
     {
       MainForm._settingsXml.SetSetting(string.Format("{0}_{1}", cntrl.Tag.ToString(), BACK_COLOR_PROP_NAME), value);
@@ -338,6 +692,15 @@ namespace FAQ_Net
             case BACK_COLOR_PROP_NAME:
               AddPropertyIfNotExists(cntrl, customPropertyName, ((TabControl)cntrl).TabPages[0].BackColor, CATEGORY_DESIGN_VIEW);
               break;
+            case BACK_COLOR2_PROP_NAME:
+              AddPropertyIfNotExists(cntrl, customPropertyName, (((TabControlGradient)cntrl).TabPages[0] as GradientControls.TabPageGradient).BackColorBottom, CATEGORY_DESIGN_VIEW);
+              break;
+            case GRADIENT_MODE_PROP_NAME:
+              AddPropertyIfNotExists(cntrl, customPropertyName, (((TabControlGradient)cntrl).TabPages[0] as GradientControls.TabPageGradient).GradientMode, CATEGORY_DESIGN_VIEW);
+              break;
+            case BACK_COLOR_MODE:
+              AddPropertyIfNotExists(cntrl, customPropertyName, (((TabControlGradient)cntrl).TabPages[0] as GradientControls.TabPageGradient).FillColorType, CATEGORY_DESIGN_VIEW);
+              break;
             case FORE_COLOR_PROP_NAME:
               AddPropertyIfNotExists(cntrl, customPropertyName, ((TabControl)cntrl).TabPages[0].ForeColor, CATEGORY_DESIGN_VIEW);
               break;
@@ -375,6 +738,36 @@ namespace FAQ_Net
               break;
             case FORE_COLOR_PROP_NAME:
               AddPropertyIfNotExists(cntrl, customPropertyName, cntrl.ForeColor, CATEGORY_DESIGN_VIEW);
+              break;
+            case BACK_COLOR_MODE:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.IGradientControl)cntrl).FillColorType, CATEGORY_DESIGN_VIEW);
+              break;
+            case GRADIENT_MODE_PROP_NAME:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.IGradientControl)cntrl).GradientMode, CATEGORY_DESIGN_VIEW);
+              break;
+            case BACK_COLOR2_PROP_NAME:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.IGradientControl)cntrl).BackColorBottom, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR1:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor1, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR2:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor2, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR3:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor3, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR4:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor4, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR5:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor5, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR6:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor6, CATEGORY_DESIGN_VIEW);
+              break;
+            case MENU_COLOR7:
+              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor7, CATEGORY_DESIGN_VIEW);
               break;
           }
         }
