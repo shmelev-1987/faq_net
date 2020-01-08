@@ -308,6 +308,8 @@ namespace FAQ_Net
         private int CurTransitionRow = 0;
     private void MainForm_Load(object sender, EventArgs e)
     {
+      SqliteDatabase.Create();
+
       tsmiSaveNodeSelect.Checked = _settingsXml.GetSettingAsBool(Constants.SAVE_SECTION_NODE_SELECT, true);
       _questionDgvControl = new QuestionDgvControl(splitContainer1.Panel1, QuestionsCMS, this);
       _questionListViewControl = new QuestionListViewControl(splitContainer1.Panel1, QuestionsCMS, this);
@@ -374,7 +376,6 @@ namespace FAQ_Net
       //DGVQuestions.Columns["QuestionsColumn"].Width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width-600;
       //DGVQuestions.Columns["QuestionsColumn"].Width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width - MainSC.SplitterDistance - 50;
 
-      SqliteDatabase.Create();
       LastQuestions();                  //¬ывод последних добавленных вопросов
       string lastSortingSetting = _settingsXml.GetSetting(Constants.LAST_SORTING);
       if (lastSortingSetting == SortOrder.Descending.ToString())
