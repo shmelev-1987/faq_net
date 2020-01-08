@@ -168,7 +168,7 @@ namespace FAQ_Net
         try
         {
           //dv.RowFilter = string.Format("{0} AND {1} LIKE '%{2}%'", FixedFilterSearchInHelpDGV, TooltipDictionary.WORD, KeywordsTT.Tag);
-          dv.RowFilter = string.Format("{0} LIKE '%{1}%'", TooltipDictionary.WORD, KeywordsTT.Tag);
+          dv.RowFilter = string.Format("{0} LIKE '%{1}%' and ({2}=0 or {2}={3})", TooltipDictionary.WORD, KeywordsTT.Tag, TooltipDictionary.ID_CONTENT, (Application.OpenForms[0] as MainForm).GetCurrentQuestionId());
         }
         catch (Exception ex)
         {

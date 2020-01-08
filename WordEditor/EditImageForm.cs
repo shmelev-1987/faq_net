@@ -194,14 +194,12 @@ namespace FAQ_Net
         int maxWidth = 714; // 714 - это MAX ширина изображения, которое умещается в ширине листа A4
         if (scaleWidth + 19 > maxWidth)
           scaleWidth = maxWidth;
+        this.MaximumSize = new Size(maxWidth + 19, _sourceImage.Height + toolStrip1.Height + 45);
       }
-
-      pictureBoxImage.Image = ScaleImage(_sourceImage, scaleWidth, scaleHeight);
-
-      if (tsbMaxWidthFormatA4.Checked)
-        this.MaximumSize = new Size(scaleWidth + 19, scaleHeight + toolStrip1.Height + 45);
       else
         this.MaximumSize = new Size(0, 0);
+
+      pictureBoxImage.Image = ScaleImage(_sourceImage, scaleWidth, scaleHeight);
     }
   }
 }

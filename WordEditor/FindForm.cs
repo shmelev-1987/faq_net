@@ -162,7 +162,7 @@ namespace FAQ_Net
       this.btnSearchUp.CornerRadius = 5;
       this.btnSearchUp.ForeColor = System.Drawing.SystemColors.ControlText;
       this.btnSearchUp.Image = global::FAQ_Net.Properties.Resources.up;
-      this.btnSearchUp.Location = new System.Drawing.Point(307, 23);
+      this.btnSearchUp.Location = new System.Drawing.Point(305, 23);
       this.btnSearchUp.Name = "btnSearchUp";
       this.btnSearchUp.PulseSpeed = 0.3F;
       this.btnSearchUp.PulseWidth = 1;
@@ -188,7 +188,7 @@ namespace FAQ_Net
       this.cancel.Size = new System.Drawing.Size(21, 20);
       this.cancel.TabIndex = 3;
       this.cancel.TabStop = false;
-      this.cancel.Text = "&X";
+      this.cancel.Text = "X";
       this.cancel.UseVisualStyleBackColor = true;
       this.cancel.Click += new System.EventHandler(this.cancel_Click);
       // 

@@ -1090,10 +1090,9 @@ namespace FAQ_Net
             fnd.rbSearch.Checked = true;
             if (richText.SelectedText.Length > 0)
                 fnd.findText.Text = richText.SelectedText;
+            richText.BringToFront();
             fnd.Show();
             fnd.findText.Focus();
-            //fnd.Visible = true;
-            //fnd.Dispose();
         }
 
         private void PageSet_Click(object sender, EventArgs e)
@@ -2976,8 +2975,12 @@ namespace FAQ_Net
             pt.Y = (int)Math.Ceiling(richText.Font.GetHeight())+ pt.Y;
             if (pt.Y + _intellisenseUserControl.Height > richText.Height)
               pt.Y = pt.Y - _intellisenseUserControl.Height;
+            if (pt.Y < 0)
+              pt.Y = 0;
             if (pt.X + _intellisenseUserControl.Width > richText.Width)
               pt.X = pt.X - _intellisenseUserControl.Width;
+            if (pt.X < 0)
+              pt.X = 0;
 
             int selectionStart = 0;
             int selectionLength = 0;

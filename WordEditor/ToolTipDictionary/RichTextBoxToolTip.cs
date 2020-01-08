@@ -160,7 +160,7 @@ namespace FAQ_Net
       DictionaryInfo result = dicList.Find(x => x.IdContent == idContent && (string.Compare(x.Title, infTitle, true) == 0));
       if (result == null)
       {
-        result = dicList.Find(x => string.Compare(x.Title, infTitle, true) == 0);
+        result = dicList.Find(x => x.IdContent == 0 && (string.Compare(x.Title, infTitle, true) == 0));
         //if (result != null)
         //  result.Description = dicList[result.Index].Description;
       }

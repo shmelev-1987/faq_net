@@ -133,7 +133,7 @@ namespace FAQ_Net
       bool cursorInWordContains = (_lastMouseCoord.X >= _startWordLocation.X && _lastMouseCoord.X <= _endWordLocation.X);
       //(Application.OpenForms[0] as MainForm).Text = string.Format("_lastMouseCoord.X >= _startWordLocation.X && _lastMouseCoord.X <= _endWordLocation.X: {0}>={1} && {2}<={3}"
       //  , _lastMouseCoord.X, _startWordLocation.X, _lastMouseCoord.X, _endWordLocation.X);
-      if (!cursorInWordContains || IsMousePosOutOfLastLine())
+      if (!cursorInWordContains/* || IsMousePosOutOfLastLine()*/)
       {
         this.HideTooltip();
         return;
@@ -166,12 +166,16 @@ namespace FAQ_Net
         int xPosition = _lastMouseCoord.X + 5;
         if (xPosition + lblDescription.MaximumSize.Width > _rtb.Width)
           xPosition = xPosition - lblDescription.MaximumSize.Width;
+        if (xPosition < 0)
+          xPosition = 0;
 
         int yPosition = _lastMouseCoord.Y + 5;
         if (yPosition + this.Height > _rtb.Height)
           yPosition = yPosition - this.Height;
+        if (yPosition < 0)
+          yPosition = 0;
 
-        this.Location = new Point(xPosition, yPosition);
+          this.Location = new Point(xPosition, yPosition);
         this.ShowTooltip();
       }
     }
