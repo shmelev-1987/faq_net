@@ -14,13 +14,10 @@ namespace SharedLibrary
     /// <summary>
     /// Конструктор класса SettingsXml
     /// </summary>
-    public SettingsXml(string applicationProductName)
+    public SettingsXml(string fileName)
     {
       SettingsXmlDoc = new System.Xml.XmlDocument();
-
-      // Файл настроек создается в каталоге, откуда запускается приложение
-      _settingsXML = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\" +
-                           applicationProductName + ".xml";
+      _settingsXML = fileName;
       LoadXml();
     }
 

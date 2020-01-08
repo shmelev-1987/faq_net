@@ -16,7 +16,7 @@ namespace FAQ_Net
       _listControl = new ListView();
       _listControl.Dock = DockStyle.Fill;
 
-      _listControl.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      _listControl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
       _listControl.HideSelection = false;
       _listControl.MultiSelect = false;
       _listControl.Size = new System.Drawing.Size(890, 67);
@@ -30,7 +30,8 @@ namespace FAQ_Net
       owner.Controls.Add(_listControl);
       _listControl.BringToFront();
       _listControl.Activation = ItemActivation.OneClick;
-      _listControl.BackColor = System.Drawing.Color.White;
+      _listControl.BackColor = System.Drawing.Color.FromArgb(28,28,28);
+      _listControl.ForeColor = System.Drawing.Color.White;
       _listControl.ContextMenuStrip = contextMenuStrip;
       
       _listControl.MouseDown += mf.listView1_MouseDown;

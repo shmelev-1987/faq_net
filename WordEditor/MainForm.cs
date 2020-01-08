@@ -97,6 +97,7 @@ namespace FAQ_Net
       this.splitContainer1.Panel2.Controls.Add(this.richText);
       this.richText.BringToFront();
       // Инициализация richText
+      this.richText.BackColor = Color.DarkGray;
       this.richText.AcceptsTab = true;
       this.richText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.richText.ContextMenuStrip = this.richMenu;
@@ -125,7 +126,10 @@ namespace FAQ_Net
         btnSelectQuestion.Enabled = false;
       }
 
-      _settingsXml = new SharedLibrary.SettingsXml(Application.ProductName);
+      // Файл настроек создается в каталоге, откуда запускается приложение
+      string xmlFileNameSettings = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\" +
+                           Application.ProductName + ".xml";
+      _settingsXml = new SharedLibrary.SettingsXml(xmlFileNameSettings);
       _settingsXml.LoadFormPosition(this);
       _settingsXml.SaveFormPosition(this);
 
@@ -247,23 +251,12 @@ namespace FAQ_Net
                 CountAnswLbl.Text = G.DT.Rows[0][0].ToString();
         }
 
-        public System.Data.DataTable TransitionDT = new System.Data.DataTable();
-        private int CurTransitionRow = 0;
-    private void MainForm_Load(object sender, EventArgs e)
+    /// <summary>
+    /// Загрузить настройки внешнего вида из файла
+    /// </summary>
+    public void ReloadStyleSettings(SharedLibrary.SettingsXml settingsXml)
     {
-      tsmiSaveNodeSelect.Checked = _settingsXml.GetSettingAsBool(Constants.SAVE_SECTION_NODE_SELECT, true);
-      _questionDgvControl = new QuestionDgvControl(splitContainer1.Panel1, QuestionsCMS, this);
-      _questionListViewControl = new QuestionListViewControl(splitContainer1.Panel1, QuestionsCMS, this);
-      _questionListControl = _questionDgvControl;
-
-      // Панель поиска
-      fnd = new FindForm(ref richText);
-      fnd.Dock = DockStyle.Bottom;
-      fnd.Parent = splitContainer1.Panel2;
-      fnd.BorderStyle = BorderStyle.FixedSingle;
-      fnd.BringToFront();
-      fnd.Hide();
-
+      //SharedLibrary.SettingsXml settingsXml = new SharedLibrary.SettingsXml(xmlFileName);
       Font headerBtnFont = BackBtn.Font;
       CustomDesignControl[] controlsForSettings = new CustomDesignControl[]
       {
@@ -302,11 +295,58 @@ namespace FAQ_Net
 
               //,new CustomDesignControl() { SettingId = "WordTooltip", Description = "Всплывающая подсказка", ObjectControl = _richTextBoxToolTip}
       };
-      _appSettingForm = new AppSettingsForm(controlsForSettings);
-      TabControl.Width = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, TabControl.Width);
+      if (_appSettingForm == null)
+        _appSettingForm = new AppSettingsForm(controlsForSettings, settingsXml);
+      else
+        _appSettingForm.ReloadStyleSettings(controlsForSettings, settingsXml, true);
       BackBtn.Font = headerBtnFont;
       btnNextQuestion.Font = headerBtnFont;
       btnSelectQuestion.Font = headerBtnFont;
+    }
+
+        public System.Data.DataTable TransitionDT = new System.Data.DataTable();
+        private int CurTransitionRow = 0;
+    private void MainForm_Load(object sender, EventArgs e)
+    {
+      tsmiSaveNodeSelect.Checked = _settingsXml.GetSettingAsBool(Constants.SAVE_SECTION_NODE_SELECT, true);
+      _questionDgvControl = new QuestionDgvControl(splitContainer1.Panel1, QuestionsCMS, this);
+      _questionListViewControl = new QuestionListViewControl(splitContainer1.Panel1, QuestionsCMS, this);
+      _questionListControl = _questionDgvControl;
+
+      // Панель поиска
+      fnd = new FindForm(ref richText);
+      fnd.Dock = DockStyle.Bottom;
+      fnd.Parent = splitContainer1.Panel2;
+      fnd.BorderStyle = BorderStyle.FixedSingle;
+      fnd.BringToFront();
+      fnd.Hide();
+
+      // Всплывающая подсказка при наведении мыши на слово
+      if (ModalDialogForSelectQuestion)
+      {
+        tsmiDictionary.Enabled = false;
+      }
+      else
+      {
+        TooltipDictionary.InitializeToolTip();
+
+        _dictionaryEditor = new DictionaryEditor();
+        _dictionaryEditor.Dock = DockStyle.Right;
+
+        _richTextBoxToolTip = new TooltipUserControl(richText);
+        //_richTextBoxToolTip.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
+        //_richTextBoxToolTip.DescriptionFont = new Font("Times New Roman", 12);
+        _richTextBoxToolTip.Dictionary = TooltipDictionary.eDictionary;
+        _richTextBoxToolTip.TitleForeColor = Color.DarkBlue;
+        _richTextBoxToolTip.DescriptionForeColor = Color.Black;
+        _intellisenseUserControl = new IntellisenseUserControl(richText);
+        _intellisenseUserControl.Parent = richText;
+        _intellisenseUserControl.BringToFront();
+      }
+
+      ReloadStyleSettings(_settingsXml);
+
+      TabControl.Width = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, TabControl.Width);
 
       string lastViewSetting = _settingsXml.GetSetting(Constants.LAST_VIEW);
       if (lastViewSetting == _questionListViewControl.ToString())
@@ -400,29 +440,6 @@ namespace FAQ_Net
       t.Priority = System.Threading.ThreadPriority.Highest;
       t.Start();
       CheckUpdate();
-
-      // Всплывающая подсказка при наведении мыши на слово
-      if (ModalDialogForSelectQuestion)
-      {
-        tsmiDictionary.Enabled = false;
-      }
-      else
-      {
-        TooltipDictionary.InitializeToolTip();
-
-        _dictionaryEditor = new DictionaryEditor();
-        _dictionaryEditor.Dock = DockStyle.Right;
-
-        _richTextBoxToolTip = new TooltipUserControl(richText);
-        //_richTextBoxToolTip.TitleFont = new Font("Times New Roman", 12, FontStyle.Bold);
-        //_richTextBoxToolTip.DescriptionFont = new Font("Times New Roman", 12);
-        _richTextBoxToolTip.Dictionary = TooltipDictionary.eDictionary;
-        _richTextBoxToolTip.TitleForeColor = Color.DarkBlue;
-        _richTextBoxToolTip.DescriptionForeColor = Color.Black;
-        _intellisenseUserControl = new IntellisenseUserControl(richText);
-        _intellisenseUserControl.Parent = richText;
-        _intellisenseUserControl.BringToFront();
-      }
 
       //SetRoundedShape(TV1, 30);
       //SetRoundedShape(DGVResultSearch, 30);
@@ -2957,6 +2974,10 @@ namespace FAQ_Net
 
             Point pt = richText.GetPositionFromCharIndex(richText.SelectionStart);
             pt.Y = (int)Math.Ceiling(richText.Font.GetHeight())+ pt.Y;
+            if (pt.Y + _intellisenseUserControl.Height > richText.Height)
+              pt.Y = pt.Y - _intellisenseUserControl.Height;
+            if (pt.X + _intellisenseUserControl.Width > richText.Width)
+              pt.X = pt.X - _intellisenseUserControl.Width;
 
             int selectionStart = 0;
             int selectionLength = 0;
@@ -3101,11 +3122,6 @@ namespace FAQ_Net
       richText.ReadOnly = true;
     }
 
-    private void ID_ContentTSSL_TextChanged(object sender, EventArgs e)
-    {
-      
-    }
-
     private void tsmiSaveNodeSelect_Click(object sender, EventArgs e)
     {
       tsmiSaveNodeSelect.Checked = !tsmiSaveNodeSelect.Checked;
@@ -3160,6 +3176,7 @@ namespace FAQ_Net
     {
       using (OpenFileDialog ofd = new OpenFileDialog())
       {
+        ofd.Title = "Выберите файлы с изображениями (несколько выбранных файлов будут объединены в памяти приложения)";
         ofd.Multiselect = true;
         if (ofd.ShowDialog() == DialogResult.OK)
         {

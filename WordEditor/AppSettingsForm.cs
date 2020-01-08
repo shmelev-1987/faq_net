@@ -33,12 +33,21 @@ namespace FAQ_Net
     private const string MENU_COLOR5 = "Цвет5. Оконтовка выбранного пункта";
     private const string MENU_COLOR6 = "Цвет6. Цвет шрифта";
     private const string MENU_COLOR7 = "Цвет7. Чекбокс";
+    private SharedLibrary.SettingsXml _xmlSettings;
+    private string _themesDir = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\Styles";
 
-    public AppSettingsForm(CustomDesignControl[] customDesignControls)
+    public AppSettingsForm(CustomDesignControl[] customDesignControls, SharedLibrary.SettingsXml settingsXml)
     {
       InitializeComponent();
+      ReloadStyleSettings(customDesignControls, settingsXml, false);
+    }
 
-      MainForm._settingsXml.LoadFormPosition(this);
+    public void ReloadStyleSettings(CustomDesignControl[] customDesignControls, SharedLibrary.SettingsXml settingsXml, bool saveButtonEnableAfterReload)
+    {
+      _xmlSettings = settingsXml;
+      _xmlSettings.LoadFormPosition(this);
+
+      _controls = customDesignControls;
 
       // Создать компонент с расширенными свойствами
       _propertyGridEx = new PropertyGridEx.PropertyGridEx();
@@ -48,9 +57,8 @@ namespace FAQ_Net
       _propertyGridEx.BringToFront();
       _propertyGridEx.PropertyValueChanged += _propertyGridEx_PropertyValueChanged;
 
-      _controls = customDesignControls;
-
-      foreach (CustomDesignControl cntrl in customDesignControls)
+      tvSettings.Nodes.Clear();
+      foreach (CustomDesignControl cntrl in _controls)
       {
         if (cntrl == null)
           continue;
@@ -64,6 +72,7 @@ namespace FAQ_Net
         tvSettings.SelectedNode = addedTreeNode;
         ParseProperty(ParseType.LoadFromFile);
       }
+      tsbSave.Enabled = tsbCancel.Enabled = saveButtonEnableAfterReload;
     }
 
     private void _propertyGridEx_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
@@ -380,14 +389,14 @@ namespace FAQ_Net
 
     private void ParseProperty(ParseType parseType)
     {
+      if (parseType == ParseType.LoadFromControl)
+        _propertyGridEx.Item.Clear();
       //_propertyGridEx.SelectedObject = _controls[0]
       CustomDesignControl customDesignControl = (CustomDesignControl)_controls[tvSettings.SelectedNode.Index];
       Control cntrl = (Control)_controls[tvSettings.SelectedNode.Index].ObjectControl;
       if (cntrl == null)
         return;
       PropertyInfo[] properties = cntrl.GetType().GetProperties();
-      if (parseType == ParseType.LoadFromControl)
-        _propertyGridEx.Item.Clear();
       foreach (PropertyInfo pi in properties)
       {
         switch (pi.Name)
@@ -515,11 +524,11 @@ namespace FAQ_Net
       if (tyEnum.Equals(typeof(System.Drawing.Drawing2D.LinearGradientMode)))
         result = Enum.Parse(typeof(System.Drawing.Drawing2D.LinearGradientMode), valueStr).ToString();
       if (parseType == ParseType.SaveToFile)
-        MainForm._settingsXml.SetSetting(string.Format("{0}_{1}", settingId, customPropertyName), valueStr);
+        _xmlSettings.SetSetting(string.Format("{0}_{1}", settingId, customPropertyName), valueStr);
       else
       if (parseType == ParseType.LoadFromFile)
       {
-        string str = MainForm._settingsXml.GetSetting(string.Format("{0}_{1}", settingId, customPropertyName));
+        string str = _xmlSettings.GetSetting(string.Format("{0}_{1}", settingId, customPropertyName));
         if (!string.IsNullOrEmpty(str))
         {
           result = str;
@@ -621,7 +630,7 @@ namespace FAQ_Net
     
     private void SaveDesignSetting(Control cntrl, string value)
     {
-      MainForm._settingsXml.SetSetting(string.Format("{0}_{1}", cntrl.Tag.ToString(), BACK_COLOR_PROP_NAME), value);
+      _xmlSettings.SetSetting(string.Format("{0}_{1}", cntrl.Tag.ToString(), BACK_COLOR_PROP_NAME), value);
     }
 
     private Font ParseFontDesignSetting(ParseType parseType, Control cntrl, string customPropertyName, Font fontValue, string settingId)
@@ -631,13 +640,13 @@ namespace FAQ_Net
       if (parseType == ParseType.SaveToFile)
       {
         string fontString = cvt.ConvertToString(fontValue);
-        MainForm._settingsXml.SetSetting(string.Format("{0}_{1}", settingId, customPropertyName), fontString);
+        _xmlSettings.SetSetting(string.Format("{0}_{1}", settingId, customPropertyName), fontString);
       }
       else
       if (parseType == ParseType.LoadFromFile)
       {
         //string s = cvt.ConvertToString(this.Font);
-        string str = MainForm._settingsXml.GetSetting(string.Format("{0}_{1}", settingId, customPropertyName));
+        string str = _xmlSettings.GetSetting(string.Format("{0}_{1}", settingId, customPropertyName));
         if (!string.IsNullOrEmpty(str))
           resultFont = cvt.ConvertFromString(str) as Font;
       }
@@ -674,11 +683,11 @@ namespace FAQ_Net
     {
       Color resultColor = colorValue;
       if (parseType == ParseType.SaveToFile)
-        MainForm._settingsXml.SetSetting(string.Format("{0}_{1}", settingId, customPropertyName), colorValue.ToArgb().ToString());
+        _xmlSettings.SetSetting(string.Format("{0}_{1}", settingId, customPropertyName), colorValue.ToArgb().ToString());
       else
       if (parseType == ParseType.LoadFromFile)
       {
-        string str = MainForm._settingsXml.GetSetting(string.Format("{0}_{1}", settingId, customPropertyName));
+        string str = _xmlSettings.GetSetting(string.Format("{0}_{1}", settingId, customPropertyName));
         if (!string.IsNullOrEmpty(str))
           resultColor = (Color.FromArgb(Convert.ToInt32(str)));
       }
@@ -847,7 +856,7 @@ namespace FAQ_Net
 
     private void AppSettingsForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-      MainForm._settingsXml.SaveFormPosition(this);
+      _xmlSettings.SaveFormPosition(this);
       e.Cancel = true;
       this.Hide();
     }
@@ -855,6 +864,32 @@ namespace FAQ_Net
     private void AppSettingsForm_Shown(object sender, EventArgs e)
     {
       RefreshPropertiesForControlsBeforeChange(false);
+      RefreshStyleThemeList();
+    }
+
+    /// <summary>
+    /// Обновить список тем
+    /// </summary>
+    private void RefreshStyleThemeList()
+    {
+      tssbStyleThemes.DropDownItems.Clear();
+      string themesDir = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\Styles";
+      if (System.IO.Directory.Exists(themesDir))
+      {
+        try
+        {
+          foreach (string file in System.IO.Directory.GetFiles(themesDir, "*.xml"))
+          {
+            tssbStyleThemes.DropDownItems.Add(System.IO.Path.GetFileNameWithoutExtension(file));
+          }
+        }
+        catch (Exception ex)
+        {
+          G.AddRowToLog("Загрузка списка стилей из каталога " + themesDir, ex.Message);
+        }
+      }
+      if (tssbStyleThemes.DropDownItems.Count == 0)
+        tssbStyleThemes.DropDownItems.Add("Не найдено XML файлов со стилями");
     }
 
     private void RefreshPropertiesForControlsBeforeChange(bool saveChangesToFile)
@@ -877,11 +912,78 @@ namespace FAQ_Net
         {
           this.Invoke((MethodInvoker)delegate
           {
+            _xmlSettings = MainForm._settingsXml;
             tvSettings.SelectedNode = tvSettings.Nodes[i];
             ParseProperty(ParseType.SaveToFile);
           });
         }
       }
+    }
+
+    private void tssbStyleThemes_Click(object sender, EventArgs e)
+    {
+      tssbStyleThemes.DropDownItems.Clear();
+      if (System.IO.Directory.Exists(_themesDir))
+      {
+        try
+        {
+          foreach (string file in System.IO.Directory.GetFiles(_themesDir, "*.xml"))
+          {
+            tssbStyleThemes.DropDownItems.Add(System.IO.Path.GetFileNameWithoutExtension(file));
+          }
+        }
+        catch (Exception ex)
+        {
+          G.AddRowToLog("Загрузка списка стилей из каталога " + _themesDir, ex.Message);
+        }
+      }
+      if (tssbStyleThemes.DropDownItems.Count == 0)
+        tssbStyleThemes.DropDownItems.Add("Не найдено XML файлов со стилями");
+    }
+
+    private void tssbStyleThemes_ButtonClick(object sender, EventArgs e)
+    {
+      tssbStyleThemes.ShowDropDown();
+    }
+
+    /// <summary>
+    /// Загрузить настройки оформления из XML-файла
+    /// </summary>
+    /// <param name="fileName">Полное имя XML файла</param>
+    private void LoadStyleFromFile(string fileName)
+    {
+      MainApp.WaitForm.Show(this);
+      try
+      {
+        SharedLibrary.SettingsXml settingsXml = new SharedLibrary.SettingsXml(fileName);
+        (Application.OpenForms[0] as MainForm).ReloadStyleSettings(settingsXml);
+      }
+      catch (Exception ex)
+      {
+        G.AddRowToLog("Ошибка при загрузке стиля оформления из файла" + fileName, ex.Message);
+        MessageBox.Show("Ошибка при загрузке стиля оформления из файла", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      MainApp.WaitForm.Close();
+    }
+
+    private void tsbLoadSettingsFromFile_Click(object sender, EventArgs e)
+    {
+      using (OpenFileDialog ofd = new OpenFileDialog())
+      {
+        ofd.Multiselect = false;
+        ofd.Title = "Выберите XML-файл с настройками";
+        ofd.Filter = "XML файлы с настройками (*.xml)|*.xml|Все файлы (*.*)|*.*";
+        if (ofd.ShowDialog() == DialogResult.OK)
+        {
+          LoadStyleFromFile(ofd.FileName);
+        }
+      }
+    }
+
+    private void tssbStyleThemes_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+    {
+      string xmlFileName = System.IO.Path.Combine(_themesDir, e.ClickedItem.Text + ".xml");
+      LoadStyleFromFile(xmlFileName);
     }
   }
 }

@@ -28,10 +28,13 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppSettingsForm));
       this.tvSettings = new System.Windows.Forms.TreeView();
       this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.tsbSave = new System.Windows.Forms.ToolStripButton();
       this.tsbCancel = new System.Windows.Forms.ToolStripButton();
+      this.tssbStyleThemes = new System.Windows.Forms.ToolStripSplitButton();
+      this.tsbLoadSettingsFromFile = new System.Windows.Forms.ToolStripButton();
       this.toolStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -52,7 +55,9 @@
       // 
       this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbSave,
-            this.tsbCancel});
+            this.tsbCancel,
+            this.tssbStyleThemes,
+            this.tsbLoadSettingsFromFile});
       this.toolStrip1.Location = new System.Drawing.Point(0, 0);
       this.toolStrip1.Name = "toolStrip1";
       this.toolStrip1.Size = new System.Drawing.Size(530, 25);
@@ -78,6 +83,28 @@
       this.tsbCancel.Size = new System.Drawing.Size(69, 22);
       this.tsbCancel.Text = "Отмена";
       this.tsbCancel.Click += new System.EventHandler(this.tsbCancel_Click);
+      // 
+      // tssbStyleThemes
+      // 
+      this.tssbStyleThemes.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+      this.tssbStyleThemes.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+      this.tssbStyleThemes.Image = ((System.Drawing.Image)(resources.GetObject("tssbStyleThemes.Image")));
+      this.tssbStyleThemes.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.tssbStyleThemes.Name = "tssbStyleThemes";
+      this.tssbStyleThemes.Size = new System.Drawing.Size(54, 22);
+      this.tssbStyleThemes.Text = "Темы";
+      this.tssbStyleThemes.ButtonClick += new System.EventHandler(this.tssbStyleThemes_ButtonClick);
+      this.tssbStyleThemes.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tssbStyleThemes_DropDownItemClicked);
+      // 
+      // tsbLoadSettingsFromFile
+      // 
+      this.tsbLoadSettingsFromFile.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+      this.tsbLoadSettingsFromFile.Image = global::FAQ_Net.Properties.Resources.OpenSml;
+      this.tsbLoadSettingsFromFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.tsbLoadSettingsFromFile.Name = "tsbLoadSettingsFromFile";
+      this.tsbLoadSettingsFromFile.Size = new System.Drawing.Size(195, 22);
+      this.tsbLoadSettingsFromFile.Text = "Загрузить настройки из файла";
+      this.tsbLoadSettingsFromFile.Click += new System.EventHandler(this.tsbLoadSettingsFromFile_Click);
       // 
       // AppSettingsForm
       // 
@@ -106,5 +133,7 @@
     private System.Windows.Forms.ToolStrip toolStrip1;
     private System.Windows.Forms.ToolStripButton tsbSave;
     private System.Windows.Forms.ToolStripButton tsbCancel;
+    private System.Windows.Forms.ToolStripSplitButton tssbStyleThemes;
+    private System.Windows.Forms.ToolStripButton tsbLoadSettingsFromFile;
   }
 }

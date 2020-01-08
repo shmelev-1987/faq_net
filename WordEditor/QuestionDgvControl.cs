@@ -51,6 +51,7 @@ namespace FAQ_Net
       _dgvControl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       _dgvControl.MultiSelect = false;
       _dgvControl.Dock = DockStyle.Fill;
+      _dgvControl.RowHeadersVisible = false;
       //_listControl.ShowCustomizeSection = false;
       _dgvControl.Columns.Add(_idColumn);
       _dgvControl.Columns.Add(_questionColumn);

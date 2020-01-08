@@ -62,6 +62,7 @@
       this.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill;
       this.lblHeader.ForeColor = System.Drawing.Color.Blue;
       this.lblHeader.Location = new System.Drawing.Point(3, 0);
+      this.lblHeader.MaximumSize = new System.Drawing.Size(300, 0);
       this.lblHeader.Name = "lblHeader";
       this.lblHeader.Size = new System.Drawing.Size(58, 25);
       this.lblHeader.TabIndex = 0;
@@ -73,6 +74,7 @@
       this.lblDescription.AutoSize = true;
       this.lblDescription.BackColor = System.Drawing.Color.Transparent;
       this.lblDescription.Location = new System.Drawing.Point(3, 25);
+      this.lblDescription.MaximumSize = new System.Drawing.Size(300, 0);
       this.lblDescription.Name = "lblDescription";
       this.lblDescription.Size = new System.Drawing.Size(58, 13);
       this.lblDescription.TabIndex = 1;

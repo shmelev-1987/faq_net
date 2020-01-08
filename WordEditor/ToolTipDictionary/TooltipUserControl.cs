@@ -142,8 +142,6 @@ namespace FAQ_Net
       DictionaryInfo wordDefinition = Dictionary.GetByTitle(Convert.ToInt32((Application.OpenForms[0] as MainForm).GetCurrentQuestionId().ToString()), _toolTipWord);
       if (wordDefinition != null)
       {
-        var mp = Control.MousePosition;
-        this.Location = new Point(_lastMouseCoord.X + 5, _lastMouseCoord.Y + 5);
         this.Title = _toolTipWord;
         this.Description = wordDefinition.Description;
         this.Url = wordDefinition.Url;
@@ -165,6 +163,15 @@ namespace FAQ_Net
           else
             this.Footer = "Нажмите Ctrl+LeftMouse для открытия страницы в браузере";
         }
+        int xPosition = _lastMouseCoord.X + 5;
+        if (xPosition + lblDescription.MaximumSize.Width > _rtb.Width)
+          xPosition = xPosition - lblDescription.MaximumSize.Width;
+
+        int yPosition = _lastMouseCoord.Y + 5;
+        if (yPosition + this.Height > _rtb.Height)
+          yPosition = yPosition - this.Height;
+
+        this.Location = new Point(xPosition, yPosition);
         this.ShowTooltip();
       }
     }
