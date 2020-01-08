@@ -70,6 +70,8 @@ namespace GradientControls
         base.OnPaintBackground(e);
         return;
       }
+      if (this.Width == 0 || this.Height == 0)
+        return;
       //if (this.BackColor == Color.Transparent)
       //  backColor = this.Parent.BackColor;
       Graphics gfx = e.Graphics;

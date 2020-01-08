@@ -255,6 +255,59 @@ namespace FAQ_Net
       _questionDgvControl = new QuestionDgvControl(splitContainer1.Panel1, QuestionsCMS, this);
       _questionListViewControl = new QuestionListViewControl(splitContainer1.Panel1, QuestionsCMS, this);
       _questionListControl = _questionDgvControl;
+
+      // Панель поиска
+      fnd = new FindForm(ref richText);
+      fnd.Dock = DockStyle.Bottom;
+      fnd.Parent = splitContainer1.Panel2;
+      fnd.BorderStyle = BorderStyle.FixedSingle;
+      fnd.BringToFront();
+      fnd.Hide();
+
+      Font headerBtnFont = BackBtn.Font;
+      CustomDesignControl[] controlsForSettings = new CustomDesignControl[]
+      {
+               new CustomDesignControl() { SettingId = "MainFormTabControl", Description = "Вкладки", ObjectControl = TabControl}
+              ,new CustomDesignControl() { SettingId = "CategoryToolStrip", Description = "Разделы.Кнопки", ObjectControl = toolStrip1}
+              ,new CustomDesignControl() { SettingId = "CategoryTreeView", Description = "Разделы.Список", ObjectControl = TV1}
+              ,new CustomDesignControl() { SettingId = "CategoryStatusControl", Description = "Разделы.Статусная строка", ObjectControl = statusStrip2}
+              ,new CustomDesignControl() { SettingId = "ResultSearchDataGridView", Description = "Поиск.Результат", ObjectControl = DGVResultSearch}
+              ,new CustomDesignControl() { SettingId = "FavoriteDataGridView", Description = "Избранное.Результат", ObjectControl = FavoriteDGV}
+              ,new CustomDesignControl() { SettingId = "JournalDataGridView", Description = "Журнал.Результат", ObjectControl = JournalDGV}
+
+              ,new CustomDesignControl() { SettingId = "QuestionHeader", Description = "Заголовок (справа)", ObjectControl = panel3}
+              ,new CustomDesignControl() { SettingId = "QuestionSplitter", Description = "Разделитель", ObjectControl = splitter1}
+              ,new CustomDesignControl() { SettingId = "QuestionDataGridView", Description = "Список вопросов (сетка)", ObjectControl = _questionDgvControl.DgvControl}
+              ,new CustomDesignControl() { SettingId = "QuestionListView", Description = "Список вопросов (лист)", ObjectControl = _questionListViewControl.QuestionListView}
+              ,new CustomDesignControl() { SettingId = "RtfDocMenu", Description = "Документ.Меню", ObjectControl = menuTop}
+              ,new CustomDesignControl() { SettingId = "RtfDocToolStrip", Description = "Документ.Пиктограммы", ObjectControl = toolsTop}
+              ,new CustomDesignControl() { SettingId = "RtfDocumentControl", Description = "RTF-документ", ObjectControl = richText}
+              ,new CustomDesignControl() { SettingId = "RightStatusControl", Description = "Правая статусная строка", ObjectControl = statusStrip3}
+              ,new CustomDesignControl() { SettingId = "DocumentStatusControl", Description = "RTF-документ.Статусная строка", ObjectControl = statusStrip1}
+
+              ,new CustomDesignControl() { SettingId = "FindControlUser", Description = "Панель поиска", ObjectControl = fnd.panelGradient}
+              ,new CustomDesignControl() { SettingId = "MainStatusControl", Description = "Нижняя статусная строка", ObjectControl = status}
+
+              ,new CustomDesignControl() { SettingId = "TooltipRtfTitle", Description = "Всплывающая подсказка.Заголовок", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.TitleLabel:null}
+              ,new CustomDesignControl() { SettingId = "TooltipRtfDescription", Description = "Всплывающая подсказка.Описание", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.DescriptionLabel:null}
+              ,new CustomDesignControl() { SettingId = "TooltipRtfFooter", Description = "Всплывающая подсказка.Подвал", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.FooterLabel:null}
+
+              ,new CustomDesignControl() { SettingId = "TooltipEditorHeaderLabel", Description = "Словарь подсказок.Заголовок", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.lblHeader:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorHeaderToolstrip", Description = "Словарь подсказок.ПанельКнопокУправления", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsHeader:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorSearchToolstrip", Description = "Словарь подсказок.ПанельПоиска", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsSearch:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorTreeView", Description = "Словарь подсказок.ДеревоПодсказок", ObjectControl = (TooltipDictionary.TV_Dictionary != null)?TooltipDictionary.TV_Dictionary:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorEditToolstrip", Description = "Словарь подсказок.ПанельКнопокРедактирования", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsEditor:null}
+              ,new CustomDesignControl() { SettingId = "TooltipEditorEditPanel", Description = "Словарь подсказок.Панель редактирования", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.EditPanel:null}
+              ,new CustomDesignControl() { SettingId = "IntelliSenseDataGridView", Description = "IntelliSense (Ctrl+Space)", ObjectControl = (_intellisenseUserControl != null)?_intellisenseUserControl.HelpDataGridView:null}
+
+              //,new CustomDesignControl() { SettingId = "WordTooltip", Description = "Всплывающая подсказка", ObjectControl = _richTextBoxToolTip}
+      };
+      _appSettingForm = new AppSettingsForm(controlsForSettings);
+      TabControl.Width = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, TabControl.Width);
+      BackBtn.Font = headerBtnFont;
+      btnNextQuestion.Font = headerBtnFont;
+      btnSelectQuestion.Font = headerBtnFont;
+
       string lastViewSetting = _settingsXml.GetSetting(Constants.LAST_VIEW);
       if (lastViewSetting == _questionListViewControl.ToString())
         tsmiListView_Click(sender, e);
@@ -270,12 +323,7 @@ namespace FAQ_Net
       string headerTitle = _settingsXml.GetSetting("HeaderTitle");
       if (!string.IsNullOrEmpty(headerTitle))
         this.Text = string.Format("{0} [{1}]", headerTitle, this.Text);
-      fnd = new FindForm(ref richText);
-      fnd.Dock = DockStyle.Bottom;
-      fnd.Parent = splitContainer1.Panel2;
-      fnd.BorderStyle = BorderStyle.FixedSingle;
-      fnd.BringToFront();
-      fnd.Hide();
+
       if (TransitionDT.Columns.Count == 0)
       {
         TransitionDT.Columns.Add("type", typeof(Int16));
@@ -376,49 +424,6 @@ namespace FAQ_Net
         _intellisenseUserControl.BringToFront();
       }
 
-      Font headerBtnFont = BackBtn.Font;
-      CustomDesignControl[] controlsForSettings = new CustomDesignControl[]
-      {
-               new CustomDesignControl() { SettingId = "MainFormTabControl", Description = "Вкладки", ObjectControl = TabControl}
-              ,new CustomDesignControl() { SettingId = "CategoryToolStrip", Description = "Разделы.Кнопки", ObjectControl = toolStrip1}
-              ,new CustomDesignControl() { SettingId = "CategoryTreeView", Description = "Разделы.Список", ObjectControl = TV1}
-              ,new CustomDesignControl() { SettingId = "CategoryStatusControl", Description = "Разделы.Статусная строка", ObjectControl = statusStrip2}
-              ,new CustomDesignControl() { SettingId = "ResultSearchDataGridView", Description = "Поиск.Результат", ObjectControl = DGVResultSearch}
-              ,new CustomDesignControl() { SettingId = "FavoriteDataGridView", Description = "Избранное.Результат", ObjectControl = FavoriteDGV}
-              ,new CustomDesignControl() { SettingId = "JournalDataGridView", Description = "Журнал.Результат", ObjectControl = JournalDGV}
-
-              ,new CustomDesignControl() { SettingId = "QuestionHeader", Description = "Заголовок (справа)", ObjectControl = panel3}
-              //,new CustomDesignControl() { SettingId = "QuestionSplitter", Description = "Разделитель", ObjectControl = splitter1}
-              ,new CustomDesignControl() { SettingId = "QuestionDataGridView", Description = "Список вопросов (сетка)", ObjectControl = _questionDgvControl.DgvControl}
-              ,new CustomDesignControl() { SettingId = "QuestionListView", Description = "Список вопросов (лист)", ObjectControl = _questionListViewControl.QuestionListView}
-              ,new CustomDesignControl() { SettingId = "RtfDocMenu", Description = "Документ.Меню", ObjectControl = menuTop}
-              ,new CustomDesignControl() { SettingId = "RtfDocToolStrip", Description = "Документ.Пиктограммы", ObjectControl = toolsTop}
-              ,new CustomDesignControl() { SettingId = "RtfDocumentControl", Description = "RTF-документ", ObjectControl = richText}
-              ,new CustomDesignControl() { SettingId = "RightStatusControl", Description = "Правая статусная строка", ObjectControl = statusStrip3}
-              ,new CustomDesignControl() { SettingId = "DocumentStatusControl", Description = "RTF-документ.Статусная строка", ObjectControl = statusStrip1}
-
-              ,new CustomDesignControl() { SettingId = "FindControlUser", Description = "Панель поиска", ObjectControl = fnd.panelGradient}
-              ,new CustomDesignControl() { SettingId = "MainStatusControl", Description = "Нижняя статусная строка", ObjectControl = status}
-
-              ,new CustomDesignControl() { SettingId = "TooltipRtfTitle", Description = "Всплывающая подсказка.Заголовок", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.TitleLabel:null}
-              ,new CustomDesignControl() { SettingId = "TooltipRtfDescription", Description = "Всплывающая подсказка.Описание", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.DescriptionLabel:null}
-              ,new CustomDesignControl() { SettingId = "TooltipRtfFooter", Description = "Всплывающая подсказка.Подвал", ObjectControl = (_richTextBoxToolTip != null)?_richTextBoxToolTip.FooterLabel:null}
-
-              ,new CustomDesignControl() { SettingId = "TooltipEditorHeaderLabel", Description = "Словарь подсказок.Заголовок", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.lblHeader:null}
-              ,new CustomDesignControl() { SettingId = "TooltipEditorHeaderToolstrip", Description = "Словарь подсказок.ПанельКнопокУправления", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsHeader:null}
-              ,new CustomDesignControl() { SettingId = "TooltipEditorSearchToolstrip", Description = "Словарь подсказок.ПанельПоиска", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsSearch:null}
-              ,new CustomDesignControl() { SettingId = "TooltipEditorTreeView", Description = "Словарь подсказок.ДеревоПодсказок", ObjectControl = (TooltipDictionary.TV_Dictionary != null)?TooltipDictionary.TV_Dictionary:null}
-              ,new CustomDesignControl() { SettingId = "TooltipEditorEditToolstrip", Description = "Словарь подсказок.ПанельКнопокРедактирования", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.tsEditor:null}
-              ,new CustomDesignControl() { SettingId = "TooltipEditorEditPanel", Description = "Словарь подсказок.Панель редактирования", ObjectControl = (_dictionaryEditor != null)?_dictionaryEditor.EditPanel:null}
-              ,new CustomDesignControl() { SettingId = "IntelliSenseDataGridView", Description = "IntelliSense (Ctrl+Space)", ObjectControl = (_intellisenseUserControl != null)?_intellisenseUserControl.HelpDataGridView:null}
-
-              //,new CustomDesignControl() { SettingId = "WordTooltip", Description = "Всплывающая подсказка", ObjectControl = _richTextBoxToolTip}
-      };
-      _appSettingForm = new AppSettingsForm(controlsForSettings);
-      TabControl.Width = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, TabControl.Width);
-      BackBtn.Font = headerBtnFont;
-      btnNextQuestion.Font = headerBtnFont;
-      btnSelectQuestion.Font = headerBtnFont;
       //SetRoundedShape(TV1, 30);
       //SetRoundedShape(DGVResultSearch, 30);
     }
@@ -1110,6 +1115,7 @@ namespace FAQ_Net
             //saved = false;
             saveFile.Enabled = true;
             save.Enabled = true;
+            tsslCountCharsValue.Text = richText.Text.Length.ToString();
         }
 
         private void Undo_Click(object sender, EventArgs e)
@@ -3147,9 +3153,32 @@ namespace FAQ_Net
       control.Region = new Region(path);
     }
 
-    private void MainForm_ClientSizeChanged(object sender, EventArgs e)
+    /// <summary>
+    /// Добавление картинок из файлов
+    /// </summary>
+    private void tsbAddImage_Click(object sender, EventArgs e)
     {
-      SelectedPathLbl.MaximumSize = new Size((sender as Control).ClientSize.Width - SelectedPathLbl.Left, 20000);
+      using (OpenFileDialog ofd = new OpenFileDialog())
+      {
+        ofd.Multiselect = true;
+        if (ofd.ShowDialog() == DialogResult.OK)
+        {
+          Bitmap combineBitmap = EditImageForm.CombineBitmap(ofd.FileNames);
+          byte[] bytes = EditImageForm.ImageToByte(combineBitmap);
+
+          if (ofd.FileNames.Length > 0)
+          {
+            using (EditImageForm editImageForm = new EditImageForm())
+            {
+              editImageForm.Picture = combineBitmap;
+              if (editImageForm.ShowDialog() == DialogResult.OK)
+              {
+                richText.InsertImage(editImageForm.Picture);
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

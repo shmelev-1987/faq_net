@@ -88,6 +88,8 @@ namespace GradientControls
     protected override void OnPaintBackground(System.Windows.Forms.PaintEventArgs pevent)
     {
       Graphics gfx = pevent.Graphics;
+      if (this.Width == 0 || this.Height == 0)
+        return;
       Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
 
       // Dispose of brush resources after use

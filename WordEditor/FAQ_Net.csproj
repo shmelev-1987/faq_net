@@ -102,6 +102,12 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="CustomDesignControl.cs" />
+    <Compile Include="EditImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditImageForm.Designer.cs">
+      <DependentUpon>EditImageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EnumString.cs" />
     <Compile Include="ToolTipDictionary\DictionaryEditor.cs">
       <SubType>UserControl</SubType>
@@ -162,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AppSettingsForm.resx">
       <DependentUpon>AppSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditImageForm.resx">
+      <DependentUpon>EditImageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolTipDictionary\DictionaryEditor.resx">
       <DependentUpon>DictionaryEditor.cs</DependentUpon>

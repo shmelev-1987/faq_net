@@ -61,6 +61,8 @@ namespace GradientControls
     protected override void OnPaintBackground(System.Windows.Forms.PaintEventArgs e)
     {
       base.OnPaintBackground(e);
+      if (this.Width == 0 || this.Height == 0)
+        return;
       Graphics gfx = e.Graphics;
       Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
 
