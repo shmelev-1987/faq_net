@@ -33,6 +33,7 @@
       this.toolStrip1 = new System.Windows.Forms.ToolStrip();
       this.tsbSave = new System.Windows.Forms.ToolStripButton();
       this.tsbCancel = new System.Windows.Forms.ToolStripButton();
+      this.tssbStyleIcons = new System.Windows.Forms.ToolStripSplitButton();
       this.tssbStyleThemes = new System.Windows.Forms.ToolStripSplitButton();
       this.tsbLoadSettingsFromFile = new System.Windows.Forms.ToolStripButton();
       this.toolStrip1.SuspendLayout();
@@ -56,6 +57,7 @@
       this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbSave,
             this.tsbCancel,
+            this.tssbStyleIcons,
             this.tssbStyleThemes,
             this.tsbLoadSettingsFromFile});
       this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -83,6 +85,18 @@
       this.tsbCancel.Size = new System.Drawing.Size(69, 22);
       this.tsbCancel.Text = "Отмена";
       this.tsbCancel.Click += new System.EventHandler(this.tsbCancel_Click);
+      // 
+      // tssbStyleIcons
+      // 
+      this.tssbStyleIcons.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+      this.tssbStyleIcons.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+      this.tssbStyleIcons.Image = ((System.Drawing.Image)(resources.GetObject("tssbStyleIcons.Image")));
+      this.tssbStyleIcons.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.tssbStyleIcons.Name = "tssbStyleIcons";
+      this.tssbStyleIcons.Size = new System.Drawing.Size(65, 22);
+      this.tssbStyleIcons.Text = "Иконки";
+      this.tssbStyleIcons.ButtonClick += new System.EventHandler(this.tssbStyleIcons_ButtonClick);
+      this.tssbStyleIcons.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tssbStyleIcons_DropDownItemClicked);
       // 
       // tssbStyleThemes
       // 
@@ -135,5 +149,6 @@
     private System.Windows.Forms.ToolStripButton tsbCancel;
     private System.Windows.Forms.ToolStripSplitButton tssbStyleThemes;
     private System.Windows.Forms.ToolStripButton tsbLoadSettingsFromFile;
+    private System.Windows.Forms.ToolStripSplitButton tssbStyleIcons;
   }
 }

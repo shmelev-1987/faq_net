@@ -33,13 +33,28 @@ namespace FAQ_Net
     private const string MENU_COLOR5 = "Цвет5. Оконтовка выбранного пункта";
     private const string MENU_COLOR6 = "Цвет6. Цвет шрифта";
     private const string MENU_COLOR7 = "Цвет7. Чекбокс";
+    private const string VISIBLE_BUTTON = "ОтображатьКнопку";
     private SharedLibrary.SettingsXml _xmlSettings;
     private string _themesDir = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\Styles";
+    private string _iconsDir = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\icons";
+    private const string DEFAULT_ICONS_MENU_NAME = "DefaultIcons";
 
     public AppSettingsForm(CustomDesignControl[] customDesignControls, SharedLibrary.SettingsXml settingsXml)
     {
       InitializeComponent();
       ReloadStyleSettings(customDesignControls, settingsXml, false);
+      RefreshStyleThemeList();
+
+      // Загрузить настройки иконок
+      string iconDirName = _xmlSettings.GetSetting(Constants.ICONS_DIR_NAME, DEFAULT_ICONS_MENU_NAME);
+      foreach (ToolStripMenuItem item in tssbStyleIcons.DropDownItems)
+      {
+        if (item.Name == iconDirName || item.Text == iconDirName)
+        {
+          item.PerformClick();
+          break;
+        }
+      }
     }
 
     public void ReloadStyleSettings(CustomDesignControl[] customDesignControls, SharedLibrary.SettingsXml settingsXml, bool saveButtonEnableAfterReload)
@@ -303,6 +318,21 @@ namespace FAQ_Net
                 if (prop.Value != null && prop.Value.ToString() != string.Empty)
                   (control as GradientControls.MenuStripZ).MenuColor7 = (Color)prop.Value;
                 break;
+              default:
+                if (prop.Name.StartsWith(VISIBLE_BUTTON))
+                {
+                  ToolStripGradient tsg = (control as GradientControls.ToolStripGradient);
+                  foreach (ToolStripItem tsi in tsg.Items)
+                  {
+                    string name = string.Format("{0}.{1}", VISIBLE_BUTTON, tsi.Name);
+                    if (prop.Name == name)
+                    {
+                      tsi.Visible = (bool)prop.Value;
+                      break;
+                    }
+                  }
+                }
+                break;
                 //case HEADER_BACK_COLOR_PROP_NAME:
                 //  if (control is DataGridView)
                 //  {
@@ -468,6 +498,32 @@ namespace FAQ_Net
                   statusItem.ForeColor = cntrl.ForeColor;
                 }
               }
+              if (cntrl is ToolStripGradient)
+              {
+                ToolStripGradient tsg = (cntrl as GradientControls.ToolStripGradient);
+                foreach (ToolStripItem toolStripItem in tsg.Items)
+                {
+                  if (tsg.Name != Constants.RtfToolStripName)
+                    break;
+                  if (toolStripItem is ToolStripComboBox)
+                    continue;
+                  if (toolStripItem is ToolStripTextBox)
+                    continue;
+                  toolStripItem.ImageScaling = ToolStripItemImageScaling.None;
+                  if (parseType == ParseType.SaveToFile)
+                    _xmlSettings.SetSetting(string.Format("{0}_{1}_{2}", tsg.Name, toolStripItem.Name, VISIBLE_BUTTON), toolStripItem.Visible.ToString());
+                  else
+                  if (parseType == ParseType.LoadFromFile)
+                  {
+                    string str = _xmlSettings.GetSetting(string.Format("{0}_{1}_{2}", tsg.Name, toolStripItem.Name, VISIBLE_BUTTON));
+                    if (!string.IsNullOrEmpty(str))
+                      toolStripItem.Visible = Convert.ToBoolean(str);
+                  }
+                  else
+                  if (parseType == ParseType.LoadFromControl)
+                    AddPropertyIfNotExists(VISIBLE_BUTTON+"."+ toolStripItem.Name, toolStripItem.Visible, VISIBLE_BUTTON);
+                }
+              }
             }
             if (cntrl is GradientControls.MenuStripZ)
             {
@@ -543,19 +599,19 @@ namespace FAQ_Net
           switch (customPropertyName)
           {
             case BACK_COLOR_MODE:
-              AddPropertyIfNotExists(tabControlGradient, customPropertyName, (tabControlGradient.TabPages[0] as GradientControls.TabPageGradient).FillColorType, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, (tabControlGradient.TabPages[0] as GradientControls.TabPageGradient).FillColorType, CATEGORY_DESIGN_VIEW);
               break;
             case GRADIENT_MODE_PROP_NAME:
-              AddPropertyIfNotExists(tabControlGradient, customPropertyName, (tabControlGradient.TabPages[0] as GradientControls.TabPageGradient).GradientMode, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, (tabControlGradient.TabPages[0] as GradientControls.TabPageGradient).GradientMode, CATEGORY_DESIGN_VIEW);
               break;
             case BACK_COLOR2_PROP_NAME:
-              AddPropertyIfNotExists(tabControlGradient, customPropertyName, (tabControlGradient.TabPages[0] as GradientControls.TabPageGradient).BackColorBottom, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, (tabControlGradient.TabPages[0] as GradientControls.TabPageGradient).BackColorBottom, CATEGORY_DESIGN_VIEW);
               break;
             case BACK_COLOR_PROP_NAME:
-              AddPropertyIfNotExists(tabControlGradient, customPropertyName, tabControlGradient.TabPages[0].BackColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, tabControlGradient.TabPages[0].BackColor, CATEGORY_DESIGN_VIEW);
               break;
             case FORE_COLOR_PROP_NAME:
-              AddPropertyIfNotExists(tabControlGradient, customPropertyName, tabControlGradient.TabPages[0].ForeColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, tabControlGradient.TabPages[0].ForeColor, CATEGORY_DESIGN_VIEW);
               break;
           }
         }
@@ -587,40 +643,40 @@ namespace FAQ_Net
           {
             case BACK_COLOR_PROP_NAME:
               //_propertyGridEx.Item.Add("Имя свойства", "Значение по-умолчанию", readOnly, "Категория", "Описание", visible);
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, cntrl.BackColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, cntrl.BackColor, CATEGORY_DESIGN_VIEW);
               break;
             case FORE_COLOR_PROP_NAME:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, cntrl.ForeColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, cntrl.ForeColor, CATEGORY_DESIGN_VIEW);
               break;
             case BACK_COLOR_MODE:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.IGradientControl)cntrl).FillColorType, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.IGradientControl)cntrl).FillColorType, CATEGORY_DESIGN_VIEW);
               break;
             case GRADIENT_MODE_PROP_NAME:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.IGradientControl)cntrl).GradientMode, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.IGradientControl)cntrl).GradientMode, CATEGORY_DESIGN_VIEW);
               break;
             case BACK_COLOR2_PROP_NAME:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.IGradientControl)cntrl).BackColorBottom, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.IGradientControl)cntrl).BackColorBottom, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR1:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor1, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor1, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR2:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor2, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor2, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR3:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor3, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor3, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR4:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor4, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor4, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR5:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor5, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor5, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR6:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor6, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor6, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR7:
-              AddPropertyIfNotExists(cntrl as Control, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor7, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor7, CATEGORY_DESIGN_VIEW);
               break;
           }
         }
@@ -699,19 +755,19 @@ namespace FAQ_Net
           switch (customPropertyName)
           {
             case BACK_COLOR_PROP_NAME:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((TabControl)cntrl).TabPages[0].BackColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((TabControl)cntrl).TabPages[0].BackColor, CATEGORY_DESIGN_VIEW);
               break;
             case BACK_COLOR2_PROP_NAME:
-              AddPropertyIfNotExists(cntrl, customPropertyName, (((TabControlGradient)cntrl).TabPages[0] as GradientControls.TabPageGradient).BackColorBottom, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, (((TabControlGradient)cntrl).TabPages[0] as GradientControls.TabPageGradient).BackColorBottom, CATEGORY_DESIGN_VIEW);
               break;
             case GRADIENT_MODE_PROP_NAME:
-              AddPropertyIfNotExists(cntrl, customPropertyName, (((TabControlGradient)cntrl).TabPages[0] as GradientControls.TabPageGradient).GradientMode, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, (((TabControlGradient)cntrl).TabPages[0] as GradientControls.TabPageGradient).GradientMode, CATEGORY_DESIGN_VIEW);
               break;
             case BACK_COLOR_MODE:
-              AddPropertyIfNotExists(cntrl, customPropertyName, (((TabControlGradient)cntrl).TabPages[0] as GradientControls.TabPageGradient).FillColorType, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, (((TabControlGradient)cntrl).TabPages[0] as GradientControls.TabPageGradient).FillColorType, CATEGORY_DESIGN_VIEW);
               break;
             case FORE_COLOR_PROP_NAME:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((TabControl)cntrl).TabPages[0].ForeColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((TabControl)cntrl).TabPages[0].ForeColor, CATEGORY_DESIGN_VIEW);
               break;
           }
         }
@@ -721,19 +777,19 @@ namespace FAQ_Net
           switch (customPropertyName)
           {
             case BACK_COLOR_PROP_NAME:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).BackgroundColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((DataGridView)cntrl).BackgroundColor, CATEGORY_DESIGN_VIEW);
               break;
             case HEADER_STYLE_BACK_COLOR_PROP_NAME:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.BackColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.BackColor, CATEGORY_DESIGN_VIEW);
               break;
             case CELL_FORE_COLOR:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).DefaultCellStyle.ForeColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((DataGridView)cntrl).DefaultCellStyle.ForeColor, CATEGORY_DESIGN_VIEW);
               break;
             case HEADER_FORE_COLOR:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.ForeColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((DataGridView)cntrl).ColumnHeadersDefaultCellStyle.ForeColor, CATEGORY_DESIGN_VIEW);
               break;
             default:
-              AddPropertyIfNotExists(cntrl, customPropertyName, null, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, null, CATEGORY_DESIGN_VIEW);
               break;
           }
         }
@@ -743,40 +799,40 @@ namespace FAQ_Net
           {
             case BACK_COLOR_PROP_NAME:
               //_propertyGridEx.Item.Add("Имя свойства", "Значение по-умолчанию", readOnly, "Категория", "Описание", visible);
-              AddPropertyIfNotExists(cntrl, customPropertyName, cntrl.BackColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, cntrl.BackColor, CATEGORY_DESIGN_VIEW);
               break;
             case FORE_COLOR_PROP_NAME:
-              AddPropertyIfNotExists(cntrl, customPropertyName, cntrl.ForeColor, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, cntrl.ForeColor, CATEGORY_DESIGN_VIEW);
               break;
             case BACK_COLOR_MODE:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.IGradientControl)cntrl).FillColorType, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.IGradientControl)cntrl).FillColorType, CATEGORY_DESIGN_VIEW);
               break;
             case GRADIENT_MODE_PROP_NAME:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.IGradientControl)cntrl).GradientMode, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.IGradientControl)cntrl).GradientMode, CATEGORY_DESIGN_VIEW);
               break;
             case BACK_COLOR2_PROP_NAME:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.IGradientControl)cntrl).BackColorBottom, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.IGradientControl)cntrl).BackColorBottom, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR1:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor1, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor1, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR2:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor2, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor2, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR3:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor3, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor3, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR4:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor4, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor4, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR5:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor5, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor5, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR6:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor6, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor6, CATEGORY_DESIGN_VIEW);
               break;
             case MENU_COLOR7:
-              AddPropertyIfNotExists(cntrl, customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor7, CATEGORY_DESIGN_VIEW);
+              AddPropertyIfNotExists(customPropertyName, ((GradientControls.MenuStripZ)cntrl).MenuColor7, CATEGORY_DESIGN_VIEW);
               break;
           }
         }
@@ -784,7 +840,7 @@ namespace FAQ_Net
       return resultColor;
     }
 
-    private void AddPropertyIfNotExists(Control cntrl, string customPropertyName, object value, string categoryName)
+    private void AddPropertyIfNotExists(string customPropertyName, object value, string categoryName)
     {
       bool find = false;
       foreach (PropertyGridEx.CustomProperty prop in _propertyGridEx.Item)
@@ -864,7 +920,6 @@ namespace FAQ_Net
     private void AppSettingsForm_Shown(object sender, EventArgs e)
     {
       RefreshPropertiesForControlsBeforeChange(false);
-      RefreshStyleThemeList();
     }
 
     /// <summary>
@@ -873,7 +928,7 @@ namespace FAQ_Net
     private void RefreshStyleThemeList()
     {
       tssbStyleThemes.DropDownItems.Clear();
-      string themesDir = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\Styles";
+      string themesDir = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "\\styles";
       if (System.IO.Directory.Exists(themesDir))
       {
         try
@@ -890,6 +945,52 @@ namespace FAQ_Net
       }
       if (tssbStyleThemes.DropDownItems.Count == 0)
         tssbStyleThemes.DropDownItems.Add("Не найдено XML файлов со стилями");
+
+      // Иконки
+      tssbStyleIcons.DropDownItems.Clear();
+      if (System.IO.Directory.Exists(_iconsDir))
+      {
+        try
+        {
+          MainForm mf = (Application.OpenForms[0] as MainForm);
+          tssbStyleIcons.DropDownItems.Add("По-умолчанию").Name = DEFAULT_ICONS_MENU_NAME;
+          foreach (string dir in System.IO.Directory.GetDirectories(_iconsDir))
+          {
+            tssbStyleIcons.DropDownItems.Add(dir.Substring(dir.LastIndexOf(System.IO.Path.DirectorySeparatorChar)+1));
+            //foreach (string file in System.IO.Directory.GetFiles(dir, "*.png"))
+            //{
+            //  switch (System.IO.Path.GetFileNameWithoutExtension(file))
+            //  {
+            //    case "CreateQuestion":
+            //      mf.CreateQuestionImage = Image.FromFile(file);
+            //      break;
+            //    case "CreateCategory":
+            //      mf.CreateCaregoryImage = Image.FromFile(file);
+            //      break;
+            //    case "CreateSubcategory":
+            //      mf.CreateSubcategoryImage = Image.FromFile(file);
+            //      break;
+            //    case "Refresh":
+            //      mf.RefreshCategoryImage = Image.FromFile(file);
+            //      break;
+            //    case "CollapseAll":
+            //      mf.CollapseAllImage = Image.FromFile(file);
+            //      break;
+            //    case "ExpandAll":
+            //      mf.ExpandAllImage = Image.FromFile(file);
+            //      break;
+            //  }
+            //  //tssbStyleIcons.DropDownItems.Add(System.IO.Path.GetFileNameWithoutExtension(file));
+            //}
+          }
+        }
+        catch (Exception ex)
+        {
+          G.AddRowToLog("Загрузка списка икон из каталога " + _iconsDir, ex.Message);
+        }
+      }
+      //if (tssbStyleThemes.DropDownItems.Count == 0)
+      //  tssbStyleThemes.DropDownItems.Add("Не найдено XML файлов со стилями");
     }
 
     private void RefreshPropertiesForControlsBeforeChange(bool saveChangesToFile)
@@ -915,30 +1016,19 @@ namespace FAQ_Net
             _xmlSettings = MainForm._settingsXml;
             tvSettings.SelectedNode = tvSettings.Nodes[i];
             ParseProperty(ParseType.SaveToFile);
+
+            // Сохранить настройки иконок
+            foreach (ToolStripMenuItem item in tssbStyleIcons.DropDownItems)
+            {
+              if (item.Enabled == false)
+              {
+                _xmlSettings.SetSetting(Constants.ICONS_DIR_NAME, item.Text);
+                break;
+              }
+            }
           });
         }
       }
-    }
-
-    private void tssbStyleThemes_Click(object sender, EventArgs e)
-    {
-      tssbStyleThemes.DropDownItems.Clear();
-      if (System.IO.Directory.Exists(_themesDir))
-      {
-        try
-        {
-          foreach (string file in System.IO.Directory.GetFiles(_themesDir, "*.xml"))
-          {
-            tssbStyleThemes.DropDownItems.Add(System.IO.Path.GetFileNameWithoutExtension(file));
-          }
-        }
-        catch (Exception ex)
-        {
-          G.AddRowToLog("Загрузка списка стилей из каталога " + _themesDir, ex.Message);
-        }
-      }
-      if (tssbStyleThemes.DropDownItems.Count == 0)
-        tssbStyleThemes.DropDownItems.Add("Не найдено XML файлов со стилями");
     }
 
     private void tssbStyleThemes_ButtonClick(object sender, EventArgs e)
@@ -984,6 +1074,189 @@ namespace FAQ_Net
     {
       string xmlFileName = System.IO.Path.Combine(_themesDir, e.ClickedItem.Text + ".xml");
       LoadStyleFromFile(xmlFileName);
+    }
+
+    private void tssbStyleIcons_ButtonClick(object sender, EventArgs e)
+    {
+      tssbStyleIcons.ShowDropDown();
+    }
+
+    /// <summary>
+    /// Загрузить настройки оформления из XML-файла
+    /// </summary>
+    /// <param name="iconDirPath">Полное имя каталога с иконками</param>
+    private bool LoadIconsFromDir(string iconDirPath)
+    {
+      bool result = false;
+      try
+      {
+        MainForm mf = (Application.OpenForms[0] as MainForm);
+        if (iconDirPath == "По-умолчанию")
+        {
+
+        }
+        foreach (string file in System.IO.Directory.GetFiles(iconDirPath, "*.png"))
+        {
+          switch (System.IO.Path.GetFileNameWithoutExtension(file).ToLower())
+          {
+            case "create_question":
+              mf.CreateQuestionImage = Image.FromFile(file);
+              break;
+            case "create_category":
+              mf.CreateCaregoryImage = Image.FromFile(file);
+              break;
+            case "create_subcategory":
+              mf.CreateSubcategoryImage = Image.FromFile(file);
+              break;
+            case "refresh":
+              mf.RefreshCategoryImage = Image.FromFile(file);
+              break;
+            case "collapse_all":
+              mf.CollapseAllImage = Image.FromFile(file);
+              break;
+            case "expand_all":
+              mf.ExpandAllImage = Image.FromFile(file);
+              break;
+            case "open":
+              mf.ImageOpenFile = Image.FromFile(file);
+              break;
+            case "save":
+              mf.ImageSaveFile = Image.FromFile(file);
+              break;
+            case "print":
+              mf.ImagePrint = Image.FromFile(file);
+              break;
+            case "print_prev":
+              mf.ImagePrintPrev = Image.FromFile(file);
+              break;
+            case "find":
+              mf.ImageFind = Image.FromFile(file);
+              break;
+            case "cut":
+              mf.ImageCut = Image.FromFile(file);
+              break;
+            case "copy":
+              mf.ImageCopy = Image.FromFile(file);
+              break;
+            case "paste":
+              mf.ImagePaste = Image.FromFile(file);
+              break;
+            case "undo":
+              mf.ImageUndo = Image.FromFile(file);
+              break;
+            case "redo":
+              mf.ImageRedo = Image.FromFile(file);
+              break;
+            case "bold":
+              mf.ImageBold = Image.FromFile(file);
+              break;
+            case "italic":
+              mf.ImageItalic = Image.FromFile(file);
+              break;
+            case "under":
+              mf.ImageUnder = Image.FromFile(file);
+              break;
+            case "strikeout":
+              mf.ImageStrikeout = Image.FromFile(file);
+              break;
+            case "align_left":
+              mf.ImageAlignLeft = Image.FromFile(file);
+              break;
+            case "align_center":
+              mf.ImageAlignCenter = Image.FromFile(file);
+              break;
+            case "align_right":
+              mf.ImageAlignRight = Image.FromFile(file);
+              break;
+            //case "align_justify":
+            //  mf.ImageAlignJustify = Image.FromFile(file);
+            //  break;
+            case "line_spacing":
+              mf.ImageLineSpacing = Image.FromFile(file);
+              break;
+            case "bullet":
+              mf.ImageBullet = Image.FromFile(file);
+              break;
+            case "select_color":
+              mf.ImageSelectColor = Image.FromFile(file);
+              break;
+            case "high_light":
+              mf.ImageHighLight = Image.FromFile(file);
+              break;
+            case "insert_table":
+              mf.ImageInsertTable = Image.FromFile(file);
+              break;
+            case "add_image":
+              mf.ImageAddImage = Image.FromFile(file);
+              break;
+            case "favorite":
+              mf.ImageAddInFavorites = Image.FromFile(file);
+              break;
+          }
+        }
+        result = true;
+      }
+      catch (Exception ex)
+      {
+        G.AddRowToLog("Ошибка при загрузке иконок оформления из каталога" + iconDirPath, ex.Message);
+        MessageBox.Show("Ошибка при загрузке иконок оформления из каталога", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      return result;
+    }
+
+    private void tssbStyleIcons_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+    {
+      bool successApply = false;
+      if (e.ClickedItem.Name == DEFAULT_ICONS_MENU_NAME)
+      {
+        MainForm mf = (Application.OpenForms[0] as MainForm);
+        mf.CreateQuestionImage = null;
+        mf.CreateCaregoryImage = null;
+        mf.CreateSubcategoryImage = null;
+        mf.RefreshCategoryImage = null;
+        mf.CollapseAllImage = null;
+        mf.ExpandAllImage = null;
+        mf.ImageOpenFile = null;
+        mf.ImageSaveFile = null;
+        mf.ImagePrint = null;
+        mf.ImagePrintPrev = null;
+        mf.ImageFind = null;
+        mf.ImageCut = null;
+        mf.ImageCopy = null;
+        mf.ImagePaste = null;
+        mf.ImageUndo = null;
+        mf.ImageRedo = null;
+        mf.ImageBold = null;
+        mf.ImageItalic = null;
+        mf.ImageUnder = null;
+        mf.ImageStrikeout = null;
+        mf.ImageAlignLeft = null;
+        mf.ImageAlignCenter = null;
+        mf.ImageAlignRight = null;
+        //mf.ImageAlignJustify = null;
+        mf.ImageLineSpacing = null;
+        mf.ImageBullet = null;
+        mf.ImageSelectColor = null;
+        mf.ImageHighLight = null;
+        mf.ImageInsertTable = null;
+        mf.ImageAddImage = null;
+        mf.ImageAddInFavorites = null;
+        successApply = true;
+      }
+      else
+      {
+        string iconDirPath = System.IO.Path.Combine(_iconsDir, e.ClickedItem.Text);
+        successApply = LoadIconsFromDir(iconDirPath);
+      }
+      if (successApply)
+      {
+        foreach(ToolStripMenuItem item in tssbStyleIcons.DropDownItems)
+        {
+          item.Enabled = true;
+        }
+        e.ClickedItem.Enabled = false;
+        tsbSave.Enabled = tsbCancel.Enabled = true;
+      }
     }
   }
 }

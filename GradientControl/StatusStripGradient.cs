@@ -64,12 +64,9 @@ namespace GradientControls
 
     protected override void OnPaintBackground(System.Windows.Forms.PaintEventArgs e)
     {
-      if (System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime
-        || this.BackColor.ToArgb() == Color.Transparent.ToArgb())
-      {
-        base.OnPaintBackground(e);
+      base.OnPaintBackground(e);
+      if (_fillColorType == GradientEnums.FillColorMode.Full)
         return;
-      }
       if (this.Width == 0 || this.Height == 0)
         return;
       Graphics gfx = e.Graphics;

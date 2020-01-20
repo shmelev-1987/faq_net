@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace WaitWnd
@@ -15,8 +16,15 @@ namespace WaitWnd
     /// </summary>
     public void Show()
     {
-      loadthread = new Thread(new ThreadStart(LoadingProcessEx));
-      loadthread.Start();
+      try
+      {
+        loadthread = new Thread(new ThreadStart(LoadingProcessEx));
+        loadthread.Start();
+      }
+      catch (Exception ex)
+      {
+        FAQ_Net.G.AddRowToLog("Не запускается фоновая форма ожидания Show()", ex.Message);
+      }
     }
     /// <summary>
     /// 显示等待框
@@ -24,28 +32,56 @@ namespace WaitWnd
     /// <param name="parent">父窗体</param>
     public void Show(Form parent)
     {
-      loadthread = new Thread(new ParameterizedThreadStart(LoadingProcessEx));
-      loadthread.Start(parent);
+      try
+      {
+        loadthread = new Thread(new ParameterizedThreadStart(LoadingProcessEx));
+        loadthread.Start(parent);
+      }
+      catch(Exception ex)
+      {
+        FAQ_Net.G.AddRowToLog("Не запускается фоновая форма ожидания Show(parent)", ex.Message);
+      }
     }
     public void Close()
     {
-      if (loadingForm != null)
+      try
       {
-        loadingForm.BeginInvoke(new System.Threading.ThreadStart(loadingForm.CloseLoadingForm));
-        loadingForm = null;
-        loadthread = null;
+        if (loadingForm != null)
+        {
+          loadingForm.BeginInvoke(new System.Threading.ThreadStart(loadingForm.CloseLoadingForm));
+          loadingForm = null;
+          loadthread = null;
+        }
+      }
+      catch(Exception ex)
+      {
+        FAQ_Net.G.AddRowToLog("Не закрывается фоновая форма ожидания", ex.Message);
       }
     }
     private void LoadingProcessEx()
     {
-      loadingForm = new WaitForm();
-      loadingForm.ShowDialog();
+      try
+      {
+        loadingForm = new WaitForm();
+        loadingForm.ShowDialog();
+      }
+      catch (Exception ex)
+      {
+        FAQ_Net.G.AddRowToLog("Не отображается фоновая форма ожидания LoadingProcessEx()", ex.Message);
+      }
     }
     private void LoadingProcessEx(object parent)
     {
-      Form Cparent = parent as Form;
-      loadingForm = new WaitForm(Cparent);
-      loadingForm.ShowDialog();
+      try
+      {
+        Form Cparent = parent as Form;
+        loadingForm = new WaitForm(Cparent);
+        loadingForm.ShowDialog();
+      }
+      catch (Exception ex)
+      {
+        FAQ_Net.G.AddRowToLog("Не отображается фоновая форма ожидания LoadingProcessEx(parent)", ex.Message);
+      }
     }
   }
 }

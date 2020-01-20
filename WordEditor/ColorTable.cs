@@ -12,7 +12,58 @@ namespace FAQ_Net
         private Color selectedColor;
         private string toolTipText;
         private int itemIndex;
-       
+
+    // ------------------ First Row -----------------------------
+    internal static Color Black = Color.Black;
+    internal static Color Brown = Color.FromArgb(153, 51, 0);
+    internal static Color OliveGreen = Color.FromArgb(51, 51, 0);
+    internal static Color DarkGreen = Color.FromArgb(0, 51, 0);
+
+    internal static Color DarkTeal = Color.FromArgb(0, 51, 102);
+    internal static Color DarkBlue = Color.FromArgb(0, 0, 128);
+    internal static Color Indigo = Color.FromArgb(51, 51, 153);
+    internal static Color Gray80 = Color.FromArgb(51, 51, 51);
+    // ------------------ Second Row ----------------------------
+    internal static Color DarkRed = Color.FromArgb(128, 0, 0);
+    internal static Color Orange = Color.FromArgb(255, 102, 0);
+    internal static Color DarkYellow = Color.FromArgb(128, 128, 0);
+    internal static Color Green = Color.Green;
+
+    internal static Color Teal = Color.Teal;
+    internal static Color Blue = Color.Blue;
+    internal static Color BlueGray = Color.FromArgb(102, 102, 153);
+    internal static Color Gray50 = Color.FromArgb(128, 128, 128);
+    // ------------------ Third Row -----------------------------       
+    internal static Color Red = Color.Red;
+    internal static Color LightOrange = Color.FromArgb(255, 153, 0);
+    internal static Color Lime = Color.FromArgb(153, 204, 0);
+    internal static Color SeaGreen = Color.FromArgb(51, 153, 102);
+
+    internal static Color Aqua = Color.FromArgb(51, 204, 204);
+    internal static Color LightBlue = Color.FromArgb(51, 102, 255);
+    internal static Color Violet = Color.FromArgb(128, 0, 128);
+    internal static Color Gray40 = Color.FromArgb(153, 153, 153);
+    // ----------------- Forth Row ------------------------------
+    internal static Color Pink = Color.FromArgb(255, 0, 255);
+    internal static Color Gold = Color.FromArgb(255, 204, 0);
+    internal static Color Yellow = Color.FromArgb(255, 255, 0);
+    internal static Color BrightGreen = Color.FromArgb(0, 255, 0);
+
+    internal static Color Turquoise = Color.FromArgb(0, 255, 255);
+    internal static Color SkyBlue = Color.FromArgb(0, 204, 255);
+    internal static Color Plum = Color.FromArgb(153, 51, 102);
+    internal static Color Gray25 = Color.FromArgb(192, 192, 192);
+    // ----------------- Fifth Row ------------------------------
+    internal static Color Rose = Color.FromArgb(255, 153, 204);
+    internal static Color Tan = Color.FromArgb(255, 204, 153);
+    internal static Color LightYellow = Color.FromArgb(255, 255, 153);
+    internal static Color LightGreen = Color.FromArgb(204, 255, 204);
+
+    internal static Color LightTurquoise = Color.FromArgb(204, 255, 255);
+    internal static Color PaleBlue = Color.FromArgb(153, 204, 255);
+    internal static Color Lavender = Color.FromArgb(204, 153, 255);
+    internal static Color White = Color.White;
+
         /// <summary>
         /// Returns the color from the image in the selected dropdown item.
         /// </summary>
@@ -36,18 +87,28 @@ namespace FAQ_Net
             selectedColor = Color.Yellow;
             this.LayoutStyle = ToolStripLayoutStyle.Table;
             TableLayoutSettings layout = (TableLayoutSettings)this.LayoutSettings;
-            layout.ColumnCount = 5;
-            layout.RowCount = 3;
+            layout.ColumnCount = 8;
+            layout.RowCount = 5;
+      
+            // 
+
+
             // Highlight color values used here have been shamelessly
             // copied from microsoft word's Highlight color values.
-            Color[] colors = new Color[] { Color.FromArgb(255, 255, 0), Color.FromArgb(0, 255, 0),
-            Color.FromArgb(0, 255, 255), Color.FromArgb(255, 0, 255), Color.FromArgb(0, 0, 255), Color.FromArgb(255, 0, 0),
-            Color.FromArgb(0, 0, 128), Color.FromArgb(0, 128, 128), Color.FromArgb(0, 128, 0), Color.FromArgb(128, 0, 128),
-            Color.FromArgb(128, 0, 0), Color.FromArgb(128, 128, 0), Color.FromArgb(128, 128, 128), Color.FromArgb(192, 192, 192),
-            Color.FromArgb(0, 0, 0) };
+            Color[] colors = new Color[] { Black, Brown, OliveGreen, DarkGreen, DarkTeal, DarkBlue, Indigo, Gray80,
+            DarkRed, Orange, DarkYellow, Green, Teal, Blue, BlueGray, Gray50,
+            Red, LightOrange, Lime, SeaGreen, Aqua, LightBlue, Violet, Gray40,
+            Pink, Gold, Yellow, BrightGreen, Turquoise, SkyBlue, Plum, Gray25,
+            Rose, Tan, LightYellow, LightGreen, LightTurquoise, PaleBlue, Lavender, White
+            };
             // ToolTipText used. Same text as MS Word, what a coincidence!
-            string[] colorNames = new string[] { "Yellow", "Bright Green", "Turquoise", "Pink", "Blue", "Red", "Dark Blue",
-                "Teal", "Green", "Violet", "Dark Red", "Dark Yellow", "Gray-50%", "Gray-25%", "Black" };
+            string[] colorNames = new string[] {
+            "Black", "Brown", "OliveGreen", "DarkGreen", "DarkTeal", "DarkBlue", "Indigo", "Gray80",
+            "DarkRed", "Orange", "DarkYellow", "Green", "Teal", "Blue", "BlueGray", "Gray50",
+            "Red", "LightOrange", "Lime", "SeaGreen", "Aqua", "LightBlue", "Violet", "Gray40",
+            "Pink", "Gold", "Yellow", "BrightGreen", "Turquoise", "SkyBlue", "Plum", "Gray25",
+            "Rose", "Tan", "LightYellow", "LightGreen", "LightTurquoise", "PaleBlue", "Lavender", "White"
+            };
             // Set rectangle and padding values so that
             // when an item is selected the selection
             // frame highlights the color "square" with
@@ -60,7 +121,7 @@ namespace FAQ_Net
              int bmWidth = 13;
             int bmHeight = 12;
             // Add the Fourteen colors to the dropdown.
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < colors.Length; i++)
             {
                 Bitmap bm = new Bitmap(bmWidth, bmHeight);
                 using (Graphics g = Graphics.FromImage(bm))
@@ -87,7 +148,7 @@ namespace FAQ_Net
             ToolStripMenuItem noColor = new ToolStripMenuItem("None");
             this.Items.Add(noColor);
             layout.SetCellPosition(noColor, new TableLayoutPanelCellPosition(0, 0));
-            layout.SetColumnSpan(noColor, 5);
+            layout.SetColumnSpan(noColor, layout.ColumnCount);
             // The color white is used to indicate "No Highlight".
             Bitmap bmp = new Bitmap(1, 1);
             using (Graphics g = Graphics.FromImage(bmp))

@@ -65,6 +65,8 @@ namespace GradientControls
 
     protected override void OnPaintBackground(System.Windows.Forms.PaintEventArgs pevent)
     {
+      if (_fillColorType == GradientEnums.FillColorMode.Full)
+        return;
       if (this.Width == 0 || this.Height == 0)
         return;
       Graphics gfx = pevent.Graphics;

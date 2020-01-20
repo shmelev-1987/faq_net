@@ -30,5 +30,8 @@ namespace FAQ_Net
 
     public const string WithoutGroup = "Без группы";
     public static bool CtrlSpaceEntered = false;
+    public const string ICONS_DIR_NAME = "IconsDirName";
+    public static string RtfToolStripName;
+    public const string RTF_COMBOBOX_CONTROLS_REPLACE_TO_MENU = "ReplaceComboboxRtfControlsToMenu";
   }
 }

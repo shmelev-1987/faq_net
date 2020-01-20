@@ -77,6 +77,7 @@ namespace FAQ_Net
     private int _currentQuestionId = 0;
     private IntellisenseUserControl _intellisenseUserControl;
 
+    #region Конструкторы / Constructors
     public MainForm()
     {
       Init();
@@ -117,6 +118,7 @@ namespace FAQ_Net
       this.richText.Enter += new System.EventHandler(this.richText_Enter);
       this.richText.KeyDown += richText_KeyDown;
       this.richText.MouseDown += richText_MouseDown;
+      Constants.RtfToolStripName = this.toolsTop.Name;
 
       if (ModalDialogForSelectQuestion)
       {
@@ -166,6 +168,492 @@ namespace FAQ_Net
       // Set Rich Textbox and right margin line.
       //ruler1.InitializeObjects(this.richText, this.rightMarginLine);
     }
+
+    #endregion Конструкторы / Constructors
+
+    #region Свойства / Properties
+
+    #region Свойства изменения иконок
+
+    public Image CreateQuestionImage
+    {
+      set
+      {
+        if (value == null)
+          CreateQuestionTSB.Image = global::FAQ_Net.Properties.Resources.NewSml;
+        else
+          CreateQuestionTSB.Image = value;
+        CreateQuestionTSB.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    public Image CreateCaregoryImage
+    {
+      set
+      {
+        if (value == null)
+          CreateCategoryTSB.Image = global::FAQ_Net.Properties.Resources.Folder;
+        else
+          CreateCategoryTSB.Image = value;
+        CreateCategoryTSB.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    public Image CreateSubcategoryImage
+    {
+      set
+      {
+        if (value == null)
+          CreateSubcategoryTSB.Image = global::FAQ_Net.Properties.Resources.NewFolder2;
+        else
+          CreateSubcategoryTSB.Image = value;
+        CreateSubcategoryTSB.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    public Image RefreshCategoryImage
+    {
+      set
+      {
+        if (value == null)
+          RefreshTSB.Image = global::FAQ_Net.Properties.Resources.Refresh;
+        else
+          RefreshTSB.Image = value;
+        RefreshTSB.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    public Image CollapseAllImage
+    {
+      set
+      {
+        if (value == null)
+          CollapseAllTSB.Image = global::FAQ_Net.Properties.Resources.collapse;
+        else
+          CollapseAllTSB.Image = value;
+        CollapseAllTSB.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    public Image ExpandAllImage
+    {
+      set
+      {
+        if (value == null)
+          ExpandAllNodesTSB.Image = global::FAQ_Net.Properties.Resources.expand;
+        else
+          ExpandAllNodesTSB.Image = value;
+        ExpandAllNodesTSB.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Открыть"
+    /// </summary>
+    public Image ImageOpenFile
+    {
+      set
+      {
+        if (value == null)
+          openFile.Image = global::FAQ_Net.Properties.Resources.OpenSml;
+        else
+          openFile.Image = value;
+        openFile.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Сохранить"
+    /// </summary>
+    public Image ImageSaveFile
+    {
+      set
+      {
+        if (value == null)
+          saveFile.Image = global::FAQ_Net.Properties.Resources.SaveSml;
+        else
+          saveFile.Image = value;
+        saveFile.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Печать"
+    /// </summary>
+    public Image ImagePrint
+    {
+      set
+      {
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.PrintSml;
+        print.Image = result;
+        printText.Image = result;
+        print.ImageScaling = ToolStripItemImageScaling.None;
+        printText.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Предварительный просмотр"
+    /// </summary>
+    public Image ImagePrintPrev
+    {
+      set
+      {
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.PrevSml;
+        printPrev.Image = result;
+        printPrevText.Image = result;
+        printPrev.ImageScaling = ToolStripItemImageScaling.None;
+        printPrevText.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Найти"
+    /// </summary>
+    public Image ImageFind
+    {
+      set
+      {
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.binoculars;
+        find.Image = result;
+        findText.Image = result;
+        find.ImageScaling = ToolStripItemImageScaling.None;
+        findText.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Вырезать"
+    /// </summary>
+    public Image ImageCut
+    {
+      set
+      {
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.Cut;
+        cut.Image = result;
+        cutText.Image = result;
+        cut.ImageScaling = ToolStripItemImageScaling.None;
+        cutText.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Копировать"
+    /// </summary>
+    public Image ImageCopy
+    {
+      set
+      {
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.copy_16x16;
+        copy.Image = result;
+        copyText.Image = result;
+        copy.ImageScaling = ToolStripItemImageScaling.None;
+        copyText.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Вставить"
+    /// </summary>
+    public Image ImagePaste
+    {
+      set
+      {
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.Paste;
+        paste.Image = result;
+        pasteText.Image = result;
+        paste.ImageScaling = ToolStripItemImageScaling.None;
+        pasteText.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Назад"
+    /// </summary>
+    public Image ImageUndo
+    {
+      set
+      {
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.UndoSml;
+        undo.Image = result;
+        undoText.Image = result;
+        undo.ImageScaling = ToolStripItemImageScaling.None;
+        undoText.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Вперед"
+    /// </summary>
+    public Image ImageRedo
+    {
+      set
+      {
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.RedoSml;
+        redo.Image = result;
+        redoText.Image = result;
+        redo.ImageScaling = ToolStripItemImageScaling.None;
+        redoText.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Жирный"
+    /// </summary>
+    public Image ImageBold
+    {
+      set
+      {
+        if (value == null)
+          bold.Image = global::FAQ_Net.Properties.Resources.BoldSml;
+        else
+          bold.Image = value;
+        bold.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Курсив"
+    /// </summary>
+    public Image ImageItalic
+    {
+      set
+      {
+        if (value == null)
+          italic.Image = global::FAQ_Net.Properties.Resources.ItalSml;
+        else
+          italic.Image = value;
+        italic.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Подчеркнутый"
+    /// </summary>
+    public Image ImageUnder
+    {
+      set
+      {
+        if (value == null)
+          under.Image = global::FAQ_Net.Properties.Resources.UnderSml;
+        else
+          under.Image = value;
+        under.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Зачеркнутый"
+    /// </summary>
+    public Image ImageStrikeout
+    {
+      set
+      {
+        if (value == null)
+          strikeout.Image = global::FAQ_Net.Properties.Resources.strikeout;
+        else
+          strikeout.Image = value;
+        strikeout.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Выровнять текст по левому краю"
+    /// </summary>
+    public Image ImageAlignLeft
+    {
+      set
+      {
+        if (value == null)
+          alignLeft.Image = global::FAQ_Net.Properties.Resources.LeftSml;
+        else
+          alignLeft.Image = value;
+        alignLeft.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Выровнять текст по центру"
+    /// </summary>
+    public Image ImageAlignCenter
+    {
+      set
+      {
+        if (value == null)
+          alignCenter.Image = global::FAQ_Net.Properties.Resources.CtrSml;
+        else
+          alignCenter.Image = value;
+        alignCenter.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Выровнять текст по правому краю"
+    /// </summary>
+    public Image ImageAlignRight
+    {
+      set
+      {
+        if (value == null)
+          alignRight.Image = global::FAQ_Net.Properties.Resources.RightSml;
+        else
+          alignRight.Image = value;
+        alignRight.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    ///// <summary>
+    ///// Задать иконку "Выровнять текст по ширине"
+    ///// </summary>
+    //public Image ImageAlignJustify
+    //{
+    //  set
+    //  {
+    //    if (value == null)
+    //      alignJustify.Image = global::FAQ_Net.Properties.Resources.JustifySml;
+    //    else
+    //      alignJustify.Image = value;
+    //    alignJustify.ImageScaling = ToolStripItemImageScaling.None;
+    //  }
+    //}
+
+    /// <summary>
+    /// Задать иконку "Межстрочный интервал"
+    /// </summary>
+    public Image ImageLineSpacing
+    {
+      set
+      {
+        if (value == null)
+          lineSpacing.Image = global::FAQ_Net.Properties.Resources.LineSpSml;
+        else
+          lineSpacing.Image = value;
+        lineSpacing.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Маркеры"
+    /// </summary>
+    public Image ImageBullet
+    {
+      set
+      {
+        if (value == null)
+          bullet.Image = global::FAQ_Net.Properties.Resources.Bullets;
+        else
+          bullet.Image = value;
+        bullet.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Цвет текста"
+    /// </summary>
+    public Image ImageSelectColor
+    {
+      set
+      {
+        //if (value == null)
+        //  selectColor.Image = global::FAQ_Net.Properties.Resources.HLiteSml;
+        //else
+        //  selectColor.Image = value;
+
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.ColorSml;
+        selectColor.Image = result;
+        selectColor.ImageScaling = ToolStripItemImageScaling.None;
+        //selectColor.Width = 32;
+        //selectColor.Height = 32;
+        //selectColor.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Цвет выделения текста"
+    /// </summary>
+    public Image ImageHighLight
+    {
+      set
+      {
+        if (value == null)
+          highLight.Image = global::FAQ_Net.Properties.Resources.HLiteSml;
+        else
+          highLight.Image = value;
+        highLight.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Создать таблицу"
+    /// </summary>
+    public Image ImageInsertTable
+    {
+      set
+      {
+        if (value == null)
+          tsddbInsertTable.Image = global::FAQ_Net.Properties.Resources.InsertTable;
+        else
+          tsddbInsertTable.Image = value;
+        tsddbInsertTable.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Добавить изображение"
+    /// </summary>
+    public Image ImageAddImage
+    {
+      set
+      {
+        if (value == null)
+        {
+          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+          tsbAddImage.Image = ((System.Drawing.Image)(resources.GetObject("tsbAddImage.Image")));
+        }
+        else
+          tsbAddImage.Image = value;
+        tsbAddImage.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    /// <summary>
+    /// Задать иконку "Добавить в избранное"
+    /// </summary>
+    public Image ImageAddInFavorites
+    {
+      set
+      {
+        if (value == null)
+          AddInFavoritesTSB.Image = global::FAQ_Net.Properties.Resources.Favorite;
+        else
+          AddInFavoritesTSB.Image = value;
+        AddInFavoritesTSB.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
+
+    #endregion Свойства изменения иконок
+
+    #endregion Свойства / Properties
+
+    #region Методы / Methods
 
     private void tsmiInsertTable_Click(object sender, EventArgs e)
         {
@@ -302,6 +790,7 @@ namespace FAQ_Net
       BackBtn.Font = headerBtnFont;
       btnNextQuestion.Font = headerBtnFont;
       btnSelectQuestion.Font = headerBtnFont;
+      lblSearchDescription_FontChanged(null, null);
     }
 
         public System.Data.DataTable TransitionDT = new System.Data.DataTable();
@@ -311,6 +800,8 @@ namespace FAQ_Net
       SqliteDatabase.Create();
 
       tsmiSaveNodeSelect.Checked = _settingsXml.GetSettingAsBool(Constants.SAVE_SECTION_NODE_SELECT, true);
+      tsmiReplaceFontControlToMenu.Checked = _settingsXml.GetSettingAsBool(Constants.RTF_COMBOBOX_CONTROLS_REPLACE_TO_MENU, false);
+      ReplaceFontControlToMenuOrBack();
       _questionDgvControl = new QuestionDgvControl(splitContainer1.Panel1, QuestionsCMS, this);
       _questionListViewControl = new QuestionListViewControl(splitContainer1.Panel1, QuestionsCMS, this);
       _questionListControl = _questionDgvControl;
@@ -1286,7 +1777,7 @@ namespace FAQ_Net
         {
             using (Brush b = new SolidBrush(selectedColor))
             {
-                e.Graphics.FillRectangle(b, new Rectangle(3, 16, 16, 4));
+                e.Graphics.FillRectangle(b, new Rectangle(3, selectColor.Height - 8, selectColor.Width - 6 - 12, 6));
             }
         }
 
@@ -1295,7 +1786,7 @@ namespace FAQ_Net
             InitializeUserControls();
             using (Brush b = new SolidBrush(highlightColor.SelectedColor))
             {
-                e.Graphics.FillRectangle(b, new Rectangle(3, 18, 16, 4));
+                e.Graphics.FillRectangle(b, new Rectangle(3, highLight.Height - 8, highLight.Width - 6 - 12, 6));
             }
         }
 
@@ -2074,9 +2565,7 @@ namespace FAQ_Net
             Sql = AddSelect(Sql, SearchText);
             G.ExecSQLiteQuery(Sql);
             DGVResultSearch.DataSource = G.DT;
-            label3.Text = G.DT.Rows.Count.ToString() + " записей";
-            label2.Visible = 
-                label3.Visible = true;
+            DGVResultSearch.Columns[QuestionSearchColumn.Name].HeaderText = string.Format("Найдено записей: {0}", G.DT.Rows.Count);
         }
 
         private void DGVResultSearch_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -3201,5 +3690,88 @@ namespace FAQ_Net
         }
       }
     }
+
+    private void ReplaceFontControlToMenuOrBack()
+    {
+      if (tsmiReplaceFontControlToMenu.Checked)
+      {
+        selFont.Alignment
+          = size.Alignment
+          = zoom.Alignment
+          = ToolStripItemAlignment.Right;
+        menuTop.Items.Add(zoom);
+        menuTop.Items.Add(size);
+        menuTop.Items.Add(selFont);
+      }
+      else
+      {
+        selFont.Alignment
+          = size.Alignment
+          = zoom.Alignment
+          = ToolStripItemAlignment.Left;
+        this.toolsTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openFile,
+            this.saveFile,
+            this.sep0,
+            this.printText,
+            this.printPrevText,
+            this.sep1,
+            this.findText,
+            this.sep2,
+            this.cutText,
+            this.copyText,
+            this.pasteText,
+            this.sep3,
+            this.undoText,
+            this.redoText,
+            this.sep4,
+            this.selFont,
+            this.size,
+            this.sep5,
+            this.bold,
+            this.italic,
+            this.under,
+            this.strikeout,
+            this.sep6,
+            this.zoom,
+            this.alignLeft,
+            this.alignCenter,
+            this.alignRight,
+            //this.alignJustify,
+            this.lineSpacing,
+            this.sep7,
+            this.bullet,
+            this.selectColor,
+            this.highLight,
+            this.sep8,
+            this.tsddbInsertTable,
+            this.tsbAddImage,
+            this.AddInFavoritesTSB});
+      }
+    }
+
+    private void tsmiReplaceFontControlToMenu_Click(object sender, EventArgs e)
+    {
+      tsmiReplaceFontControlToMenu.Checked = !tsmiReplaceFontControlToMenu.Checked;
+      _settingsXml.SetSetting(Constants.RTF_COMBOBOX_CONTROLS_REPLACE_TO_MENU, tsmiReplaceFontControlToMenu.Checked.ToString());
+      ReplaceFontControlToMenuOrBack();
+    }
+
+    private void lblSearchDescription_FontChanged(object sender, EventArgs e)
+    {
+      SearchTxtBox.Top = label1.Top + label1.Height;
+      lblSearchDescription.Top = SearchTxtBox.Top + SearchTxtBox.Height;
+      SearchAllRB.Top
+        = SearchQuestRB.Top
+        = SearchAnswRB.Top
+        = lblSearchDescription.Top+ lblSearchDescription.Height;
+      
+      SearchQuestRB.Left = SearchAllRB.Left + SearchAllRB.Width+3;
+      SearchAnswRB.Left = SearchQuestRB.Left + SearchQuestRB.Width+3;
+      SearchBtn.Top = SearchAnswRB.Top+ SearchAnswRB.Height+5;
+      panel1.Height = SearchBtn.Top + SearchBtn.Height+5;
+    }
+
+    #endregion Методы / Methods
   }
 }

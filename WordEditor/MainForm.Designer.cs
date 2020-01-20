@@ -29,15 +29,15 @@ namespace FAQ_Net
         private void InitializeComponent()
         {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
       this.TabControl = new GradientControls.TabControlGradient();
       this.CategoriesTP = new GradientControls.TabPageGradient();
@@ -77,12 +77,10 @@ namespace FAQ_Net
       this.SearchFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.panel1 = new System.Windows.Forms.Panel();
       this.SearchTxtBox = new System.Windows.Forms.TextBox();
-      this.label4 = new System.Windows.Forms.Label();
+      this.lblSearchDescription = new System.Windows.Forms.Label();
       this.SearchAnswRB = new System.Windows.Forms.RadioButton();
       this.SearchQuestRB = new System.Windows.Forms.RadioButton();
       this.SearchAllRB = new System.Windows.Forms.RadioButton();
-      this.label3 = new System.Windows.Forms.Label();
-      this.label2 = new System.Windows.Forms.Label();
       this.SearchBtn = new PulseButton.PulseButton();
       this.label1 = new System.Windows.Forms.Label();
       this.FavoritesTP = new GradientControls.TabPageGradient();
@@ -132,7 +130,6 @@ namespace FAQ_Net
       this.alignLeft = new System.Windows.Forms.ToolStripButton();
       this.alignCenter = new System.Windows.Forms.ToolStripButton();
       this.alignRight = new System.Windows.Forms.ToolStripButton();
-      this.alignJustify = new System.Windows.Forms.ToolStripButton();
       this.lineSpacing = new System.Windows.Forms.ToolStripSplitButton();
       this.lineSpace1 = new System.Windows.Forms.ToolStripMenuItem();
       this.lineSpace1pt5 = new System.Windows.Forms.ToolStripMenuItem();
@@ -256,6 +253,7 @@ namespace FAQ_Net
       this.status = new GradientControls.StatusStripGradient();
       this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
       this.tsmiSaveNodeSelect = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiReplaceFontControlToMenu = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiDesignSettings = new System.Windows.Forms.ToolStripMenuItem();
       this.CountQuestTitLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountQuestLbl = new System.Windows.Forms.ToolStripStatusLabel();
@@ -548,6 +546,7 @@ namespace FAQ_Net
       this.CreateQuestionTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.CreateQuestionTSB.Enabled = false;
       this.CreateQuestionTSB.Image = global::FAQ_Net.Properties.Resources.NewSml;
+      this.CreateQuestionTSB.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.CreateQuestionTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.CreateQuestionTSB.Name = "CreateQuestionTSB";
       this.CreateQuestionTSB.Size = new System.Drawing.Size(23, 22);
@@ -558,6 +557,7 @@ namespace FAQ_Net
       // 
       this.CreateCategoryTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.CreateCategoryTSB.Image = global::FAQ_Net.Properties.Resources.Folder;
+      this.CreateCategoryTSB.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.CreateCategoryTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.CreateCategoryTSB.Name = "CreateCategoryTSB";
       this.CreateCategoryTSB.Size = new System.Drawing.Size(23, 22);
@@ -633,43 +633,43 @@ namespace FAQ_Net
       // 
       this.DGVResultSearch.AllowUserToAddRows = false;
       this.DGVResultSearch.AllowUserToResizeRows = false;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.DGVResultSearch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.DGVResultSearch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
       this.DGVResultSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.DGVResultSearch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id_content_search,
             this.QuestionSearchColumn,
             this.SearchFavoriteDateColumn});
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.DGVResultSearch.DefaultCellStyle = dataGridViewCellStyle2;
+      dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.DGVResultSearch.DefaultCellStyle = dataGridViewCellStyle11;
       this.DGVResultSearch.Dock = System.Windows.Forms.DockStyle.Fill;
       this.DGVResultSearch.EnableHeadersVisualStyles = false;
-      this.DGVResultSearch.Location = new System.Drawing.Point(3, 125);
+      this.DGVResultSearch.Location = new System.Drawing.Point(3, 128);
       this.DGVResultSearch.MultiSelect = false;
       this.DGVResultSearch.Name = "DGVResultSearch";
       this.DGVResultSearch.ReadOnly = true;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.DGVResultSearch.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.DGVResultSearch.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
       this.DGVResultSearch.RowHeadersVisible = false;
-      this.DGVResultSearch.Size = new System.Drawing.Size(224, 248);
+      this.DGVResultSearch.Size = new System.Drawing.Size(224, 245);
       this.DGVResultSearch.TabIndex = 5;
       this.DGVResultSearch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVResultSearch_CellClick);
       // 
@@ -699,18 +699,16 @@ namespace FAQ_Net
       // panel1
       // 
       this.panel1.Controls.Add(this.SearchTxtBox);
-      this.panel1.Controls.Add(this.label4);
+      this.panel1.Controls.Add(this.lblSearchDescription);
       this.panel1.Controls.Add(this.SearchAnswRB);
       this.panel1.Controls.Add(this.SearchQuestRB);
       this.panel1.Controls.Add(this.SearchAllRB);
-      this.panel1.Controls.Add(this.label3);
-      this.panel1.Controls.Add(this.label2);
       this.panel1.Controls.Add(this.SearchBtn);
       this.panel1.Controls.Add(this.label1);
       this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
       this.panel1.Location = new System.Drawing.Point(3, 3);
       this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(224, 122);
+      this.panel1.Size = new System.Drawing.Size(224, 125);
       this.panel1.TabIndex = 4;
       // 
       // SearchTxtBox
@@ -723,20 +721,21 @@ namespace FAQ_Net
       this.SearchTxtBox.TabIndex = 1;
       this.SearchTxtBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchTxtBox_KeyPress);
       // 
-      // label4
+      // lblSearchDescription
       // 
-      this.label4.AutoSize = true;
-      this.label4.ForeColor = System.Drawing.Color.Red;
-      this.label4.Location = new System.Drawing.Point(13, 42);
-      this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(198, 26);
-      this.label4.TabIndex = 10;
-      this.label4.Text = "|| - ИЛИ, &&&& - И, пробел - разделитель,\r\n% - любые символы";
+      this.lblSearchDescription.AutoSize = true;
+      this.lblSearchDescription.ForeColor = System.Drawing.Color.Red;
+      this.lblSearchDescription.Location = new System.Drawing.Point(13, 42);
+      this.lblSearchDescription.Name = "lblSearchDescription";
+      this.lblSearchDescription.Size = new System.Drawing.Size(198, 26);
+      this.lblSearchDescription.TabIndex = 10;
+      this.lblSearchDescription.Text = "|| - ИЛИ, &&&& - И, пробел - разделитель,\r\n% - любые символы";
+      this.lblSearchDescription.FontChanged += new System.EventHandler(this.lblSearchDescription_FontChanged);
       // 
       // SearchAnswRB
       // 
       this.SearchAnswRB.AutoSize = true;
-      this.SearchAnswRB.Location = new System.Drawing.Point(148, 68);
+      this.SearchAnswRB.Location = new System.Drawing.Point(148, 70);
       this.SearchAnswRB.Name = "SearchAnswRB";
       this.SearchAnswRB.Size = new System.Drawing.Size(73, 17);
       this.SearchAnswRB.TabIndex = 9;
@@ -746,7 +745,7 @@ namespace FAQ_Net
       // SearchQuestRB
       // 
       this.SearchQuestRB.AutoSize = true;
-      this.SearchQuestRB.Location = new System.Drawing.Point(58, 68);
+      this.SearchQuestRB.Location = new System.Drawing.Point(59, 70);
       this.SearchQuestRB.Name = "SearchQuestRB";
       this.SearchQuestRB.Size = new System.Drawing.Size(92, 17);
       this.SearchQuestRB.TabIndex = 8;
@@ -757,7 +756,7 @@ namespace FAQ_Net
       // 
       this.SearchAllRB.AutoSize = true;
       this.SearchAllRB.Checked = true;
-      this.SearchAllRB.Location = new System.Drawing.Point(4, 68);
+      this.SearchAllRB.Location = new System.Drawing.Point(4, 70);
       this.SearchAllRB.Name = "SearchAllRB";
       this.SearchAllRB.Size = new System.Drawing.Size(56, 17);
       this.SearchAllRB.TabIndex = 7;
@@ -765,42 +764,20 @@ namespace FAQ_Net
       this.SearchAllRB.Text = "Везде";
       this.SearchAllRB.UseVisualStyleBackColor = true;
       // 
-      // label3
-      // 
-      this.label3.AutoSize = true;
-      this.label3.ForeColor = System.Drawing.Color.Blue;
-      this.label3.Location = new System.Drawing.Point(11, 101);
-      this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(106, 13);
-      this.label3.TabIndex = 6;
-      this.label3.Text = "Результаты поиска";
-      this.label3.Visible = false;
-      // 
-      // label2
-      // 
-      this.label2.AutoSize = true;
-      this.label2.ForeColor = System.Drawing.Color.Blue;
-      this.label2.Location = new System.Drawing.Point(11, 88);
-      this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(106, 13);
-      this.label2.TabIndex = 5;
-      this.label2.Text = "Результаты поиска";
-      this.label2.Visible = false;
-      // 
       // SearchBtn
       // 
       this.SearchBtn.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
       this.SearchBtn.ButtonColorTop = System.Drawing.Color.LightCyan;
       this.SearchBtn.CornerRadius = 5;
       this.SearchBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.SearchBtn.Location = new System.Drawing.Point(133, 91);
+      this.SearchBtn.Location = new System.Drawing.Point(74, 93);
       this.SearchBtn.Name = "SearchBtn";
       this.SearchBtn.PulseSpeed = 0.3F;
       this.SearchBtn.PulseWidth = 1;
       this.SearchBtn.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
-      this.SearchBtn.Size = new System.Drawing.Size(75, 23);
+      this.SearchBtn.Size = new System.Drawing.Size(77, 25);
       this.SearchBtn.TabIndex = 4;
-      this.SearchBtn.Text = "Искать";
+      this.SearchBtn.Text = "Поиск";
       this.SearchBtn.UseVisualStyleBackColor = true;
       this.SearchBtn.Click += new System.EventHandler(this.SearchBtn_Click);
       // 
@@ -830,41 +807,41 @@ namespace FAQ_Net
       // 
       this.FavoriteDGV.AllowUserToAddRows = false;
       this.FavoriteDGV.AllowUserToResizeRows = false;
-      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.FavoriteDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.FavoriteDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
       this.FavoriteDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.FavoriteDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Favorites_id_content,
             this.Favorites_question,
             this.FavoritesFavoriteDateColumn});
-      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.FavoriteDGV.DefaultCellStyle = dataGridViewCellStyle5;
+      dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.FavoriteDGV.DefaultCellStyle = dataGridViewCellStyle14;
       this.FavoriteDGV.Dock = System.Windows.Forms.DockStyle.Fill;
       this.FavoriteDGV.EnableHeadersVisualStyles = false;
       this.FavoriteDGV.Location = new System.Drawing.Point(3, 3);
       this.FavoriteDGV.MultiSelect = false;
       this.FavoriteDGV.Name = "FavoriteDGV";
       this.FavoriteDGV.ReadOnly = true;
-      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.FavoriteDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+      dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.FavoriteDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
       this.FavoriteDGV.RowHeadersVisible = false;
       this.FavoriteDGV.Size = new System.Drawing.Size(224, 370);
       this.FavoriteDGV.TabIndex = 6;
@@ -910,41 +887,41 @@ namespace FAQ_Net
       // 
       this.JournalDGV.AllowUserToAddRows = false;
       this.JournalDGV.AllowUserToResizeRows = false;
-      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.JournalDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+      dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.JournalDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
       this.JournalDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.JournalDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.JournalIdColumn,
             this.JournalQuestionColumn,
             this.JournalFavoriteDateColumn});
-      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.JournalDGV.DefaultCellStyle = dataGridViewCellStyle8;
+      dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.JournalDGV.DefaultCellStyle = dataGridViewCellStyle17;
       this.JournalDGV.Dock = System.Windows.Forms.DockStyle.Fill;
       this.JournalDGV.EnableHeadersVisualStyles = false;
       this.JournalDGV.Location = new System.Drawing.Point(3, 3);
       this.JournalDGV.MultiSelect = false;
       this.JournalDGV.Name = "JournalDGV";
       this.JournalDGV.ReadOnly = true;
-      dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.JournalDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+      dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.JournalDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
       this.JournalDGV.RowHeadersVisible = false;
       this.JournalDGV.Size = new System.Drawing.Size(224, 370);
       this.JournalDGV.TabIndex = 7;
@@ -1098,7 +1075,6 @@ namespace FAQ_Net
             this.alignLeft,
             this.alignCenter,
             this.alignRight,
-            this.alignJustify,
             this.lineSpacing,
             this.sep7,
             this.bullet,
@@ -1110,6 +1086,7 @@ namespace FAQ_Net
             this.AddInFavoritesTSB});
       this.toolsTop.Location = new System.Drawing.Point(0, 24);
       this.toolsTop.Name = "toolsTop";
+      this.toolsTop.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
       this.toolsTop.Size = new System.Drawing.Size(696, 28);
       this.toolsTop.TabIndex = 6;
       // 
@@ -1440,25 +1417,8 @@ namespace FAQ_Net
       this.alignRight.ToolTipText = "Выровнять текст по правому краю";
       this.alignRight.Click += new System.EventHandler(this.Tools_Click);
       // 
-      // alignJustify
-      // 
-      this.alignJustify.Checked = true;
-      this.alignJustify.CheckOnClick = true;
-      this.alignJustify.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.alignJustify.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.alignJustify.Image = global::FAQ_Net.Properties.Resources.JustifySml;
-      this.alignJustify.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.alignJustify.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.alignJustify.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
-      this.alignJustify.Name = "alignJustify";
-      this.alignJustify.Size = new System.Drawing.Size(23, 20);
-      this.alignJustify.ToolTipText = "Выровнять текст по правому краю";
-      this.alignJustify.Visible = false;
-      this.alignJustify.Click += new System.EventHandler(this.Tools_Click);
-      // 
       // lineSpacing
       // 
-      this.lineSpacing.AutoSize = false;
       this.lineSpacing.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.lineSpacing.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lineSpace1,
@@ -1468,7 +1428,7 @@ namespace FAQ_Net
       this.lineSpacing.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.lineSpacing.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.lineSpacing.Name = "lineSpacing";
-      this.lineSpacing.Size = new System.Drawing.Size(33, 23);
+      this.lineSpacing.Size = new System.Drawing.Size(33, 22);
       this.lineSpacing.ToolTipText = "Межстрочный интервал (1)";
       this.lineSpacing.ButtonClick += new System.EventHandler(this.lineSpacing_ButtonClick);
       // 
@@ -1518,15 +1478,13 @@ namespace FAQ_Net
       // 
       // selectColor
       // 
-      this.selectColor.AutoSize = false;
       this.selectColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.selectColor.DropDown = this.colors;
       this.selectColor.Image = global::FAQ_Net.Properties.Resources.ColorSml;
       this.selectColor.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.selectColor.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.selectColor.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.selectColor.Name = "selectColor";
-      this.selectColor.Size = new System.Drawing.Size(34, 22);
+      this.selectColor.Size = new System.Drawing.Size(32, 20);
       this.selectColor.ToolTipText = "Цвет текста (Black)";
       this.selectColor.ButtonClick += new System.EventHandler(this.SelectColor_ButtonClick);
       this.selectColor.Paint += new System.Windows.Forms.PaintEventHandler(this.SelectColor_Paint);
@@ -2278,8 +2236,8 @@ namespace FAQ_Net
       this.tableLayoutPanel1.AutoSize = true;
       this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
       this.tableLayoutPanel1.ColumnCount = 4;
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 52F));
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
       this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
       this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
       this.tableLayoutPanel1.Controls.Add(this.btnSelectQuestion, 3, 0);
@@ -2325,14 +2283,14 @@ namespace FAQ_Net
       this.BackBtn.CornerRadius = 5;
       this.BackBtn.Font = new System.Drawing.Font("Segoe UI", 8.25F);
       this.BackBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.BackBtn.Image = global::FAQ_Net.Properties.Resources.arrow_left;
       this.BackBtn.Location = new System.Drawing.Point(3, 3);
       this.BackBtn.Name = "BackBtn";
       this.BackBtn.PulseSpeed = 0.3F;
       this.BackBtn.PulseWidth = 1;
-      this.BackBtn.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
-      this.BackBtn.Size = new System.Drawing.Size(44, 24);
+      this.BackBtn.Size = new System.Drawing.Size(26, 25);
       this.BackBtn.TabIndex = 32;
-      this.BackBtn.Text = "Назад";
+      this.toolTip.SetToolTip(this.BackBtn, "Назад");
       this.BackBtn.UseVisualStyleBackColor = false;
       this.BackBtn.Visible = false;
       this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
@@ -2346,14 +2304,14 @@ namespace FAQ_Net
       this.btnNextQuestion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.btnNextQuestion.Font = new System.Drawing.Font("Segoe UI", 8.25F);
       this.btnNextQuestion.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.btnNextQuestion.Location = new System.Drawing.Point(55, 3);
+      this.btnNextQuestion.Image = global::FAQ_Net.Properties.Resources.arrow_right;
+      this.btnNextQuestion.Location = new System.Drawing.Point(35, 3);
       this.btnNextQuestion.Name = "btnNextQuestion";
       this.btnNextQuestion.PulseSpeed = 0.3F;
       this.btnNextQuestion.PulseWidth = 1;
-      this.btnNextQuestion.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
-      this.btnNextQuestion.Size = new System.Drawing.Size(54, 24);
+      this.btnNextQuestion.Size = new System.Drawing.Size(26, 25);
       this.btnNextQuestion.TabIndex = 34;
-      this.btnNextQuestion.Text = "Вперед";
+      this.toolTip.SetToolTip(this.btnNextQuestion, "Вперед");
       this.btnNextQuestion.UseVisualStyleBackColor = false;
       this.btnNextQuestion.Visible = false;
       this.btnNextQuestion.Click += new System.EventHandler(this.btnNextQuestion_Click);
@@ -2362,9 +2320,9 @@ namespace FAQ_Net
       // 
       this.SelectedPathLbl.Dock = System.Windows.Forms.DockStyle.Fill;
       this.SelectedPathLbl.Font = new System.Drawing.Font("Bookman Old Style", 16F, System.Drawing.FontStyle.Italic);
-      this.SelectedPathLbl.Location = new System.Drawing.Point(115, 0);
+      this.SelectedPathLbl.Location = new System.Drawing.Point(67, 0);
       this.SelectedPathLbl.Name = "SelectedPathLbl";
-      this.SelectedPathLbl.Size = new System.Drawing.Size(480, 30);
+      this.SelectedPathLbl.Size = new System.Drawing.Size(528, 31);
       this.SelectedPathLbl.TabIndex = 35;
       this.SelectedPathLbl.Text = "Последние добавленные вопросы";
       this.SelectedPathLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2657,6 +2615,7 @@ namespace FAQ_Net
       this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
       this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiSaveNodeSelect,
+            this.tsmiReplaceFontControlToMenu,
             this.tsmiDesignSettings});
       this.toolStripDropDownButton1.Image = global::FAQ_Net.Properties.Resources.settings2;
       this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -2667,15 +2626,22 @@ namespace FAQ_Net
       // tsmiSaveNodeSelect
       // 
       this.tsmiSaveNodeSelect.Name = "tsmiSaveNodeSelect";
-      this.tsmiSaveNodeSelect.Size = new System.Drawing.Size(269, 22);
+      this.tsmiSaveNodeSelect.Size = new System.Drawing.Size(425, 22);
       this.tsmiSaveNodeSelect.Text = "Запоминать переходы по разделам";
       this.tsmiSaveNodeSelect.Click += new System.EventHandler(this.tsmiSaveNodeSelect_Click);
+      // 
+      // tsmiReplaceFontControlToMenu
+      // 
+      this.tsmiReplaceFontControlToMenu.Name = "tsmiReplaceFontControlToMenu";
+      this.tsmiReplaceFontControlToMenu.Size = new System.Drawing.Size(425, 22);
+      this.tsmiReplaceFontControlToMenu.Text = "Переместить компоненты выбора шрифта и масштаба в меню";
+      this.tsmiReplaceFontControlToMenu.Click += new System.EventHandler(this.tsmiReplaceFontControlToMenu_Click);
       // 
       // tsmiDesignSettings
       // 
       this.tsmiDesignSettings.Image = global::FAQ_Net.Properties.Resources.three_color_rectangle;
       this.tsmiDesignSettings.Name = "tsmiDesignSettings";
-      this.tsmiDesignSettings.Size = new System.Drawing.Size(269, 22);
+      this.tsmiDesignSettings.Size = new System.Drawing.Size(425, 22);
       this.tsmiDesignSettings.Text = "Настройки внешнего вида";
       this.tsmiDesignSettings.Click += new System.EventHandler(this.tsmiDesignSettings_Click);
       // 
@@ -2799,9 +2765,6 @@ namespace FAQ_Net
         private ToolStripMenuItem edit;
         private GradientControls.ToolStripGradient toolsTop;
         private ToolStripButton saveFile;
-        private ToolStripSeparator sep0;
-        private ToolStripButton printText;
-        private ToolStripButton printPrevText;
         private ToolStripSeparator s0;
         private ToolStripMenuItem save;
         private ToolStripSeparator sep1;
@@ -2931,9 +2894,7 @@ namespace FAQ_Net
         private Label label1;
         private Panel panel1;
         private PulseButton.PulseButton SearchBtn;
-        private Label label2;
         public DataGridView DGVResultSearch;
-        private Label label3;
         private ToolStripButton AddInFavoritesTSB;
         private DataGridView FavoriteDGV;
         private DataGridView JournalDGV;
@@ -2968,7 +2929,7 @@ namespace FAQ_Net
         private DataGridViewTextBoxColumn JournalFavoriteDateColumn;
         private ToolStripMenuItem кодировкаToolStripMenuItem;
         private ToolStripMenuItem ASCII_TSMI;
-        private Label label4;
+        private Label lblSearchDescription;
         private ToolStripMenuItem orange;
         private ToolStripMenuItem тестToolStripMenuItem;
         private PulseButton.PulseButton BackBtn;
@@ -2988,7 +2949,6 @@ namespace FAQ_Net
     private ToolStripMenuItem tsmiAddTable;
     private ToolStripMenuItem справкаToolStripMenuItem;
     private ToolStripMenuItem tsmiAboutProgram;
-    private ToolStripButton alignJustify;
     private ToolStripMenuItem tsmiDictionary;
     private SplitContainer splitContainer2;
     private PulseButton.PulseButton btnSelectQuestion;
@@ -3021,6 +2981,10 @@ namespace FAQ_Net
     private Splitter splitter1;
     private ToolStripStatusLabel tsslCountCharsHeader;
     private ToolStripStatusLabel tsslCountCharsValue;
+    private ToolStripSeparator sep0;
+    private ToolStripButton printText;
+    private ToolStripButton printPrevText;
+    private ToolStripMenuItem tsmiReplaceFontControlToMenu;
   }
 
 }

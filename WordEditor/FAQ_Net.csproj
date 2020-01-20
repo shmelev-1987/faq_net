@@ -328,6 +328,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="help.ico" />
+    <None Include="Resources\arrow-right.png" />
+    <None Include="Resources\arrow-left.png" />
     <None Include="Resources\search.png" />
     <None Include="Resources\Edit.png" />
     <None Include="Resources\DelOrClose.png" />
