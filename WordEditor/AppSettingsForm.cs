@@ -461,7 +461,10 @@ namespace FAQ_Net
                   try
                   {
                     if (ctrl is Label || ctrl is Panel)
-                      ctrl.BackColor = Color.Transparent;
+                    {
+                      GradientControls.TabPageGradient firstPage = (tcg.TabPages[0] as GradientControls.TabPageGradient);
+                      ctrl.BackColor = firstPage.FillColorType == GradientEnums.FillColorMode.Full ? firstPage.BackColor : Color.Transparent;
+                    }
                   }
                   catch (Exception) { }
                 }
