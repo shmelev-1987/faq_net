@@ -802,6 +802,9 @@ namespace FAQ_Net
       tsmiSaveNodeSelect.Checked = _settingsXml.GetSettingAsBool(Constants.SAVE_SECTION_NODE_SELECT, true);
       tsmiReplaceFontControlToMenu.Checked = _settingsXml.GetSettingAsBool(Constants.RTF_COMBOBOX_CONTROLS_REPLACE_TO_MENU, false);
       ReplaceFontControlToMenuOrBack();
+      Constants.RtfSmoothScrolling
+        = tsmiSmoothScrollingDocument.Checked = _settingsXml.GetSettingAsBool(Constants.RTF_SMOOTH_SCROLLING, true);
+      
       _questionDgvControl = new QuestionDgvControl(splitContainer1.Panel1, QuestionsCMS, this);
       _questionListViewControl = new QuestionListViewControl(splitContainer1.Panel1, QuestionsCMS, this);
       _questionListControl = _questionDgvControl;

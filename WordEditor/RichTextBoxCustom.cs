@@ -113,12 +113,12 @@ namespace FAQ_Net
                       OnZoomChanged(new ZoomChangedEventArgs(this.ZoomFactor));
                     }
                     break;
-                case WM_VSCROLL:
-                    if (!Constants.RtfSmoothScrolling && ((uint)m.WParam & 0xFF) == SB_THUMBTRACK)
-                      ScrollWithoutSmooth(ref m);
-                    else
-                      base.WndProc(ref m);
-                    break;
+                //case WM_VSCROLL:
+                //    if (!Constants.RtfSmoothScrolling && ((uint)m.WParam & 0xFF) == SB_THUMBTRACK)
+                //      ScrollWithoutSmooth(ref m);
+                //    else
+                //      base.WndProc(ref m);
+                //    break;
                 default:
                     base.WndProc(ref m);
                     break;
