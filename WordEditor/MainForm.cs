@@ -2566,6 +2566,7 @@ namespace FAQ_Net
             G.ExecSQLiteQuery(Sql);
             DGVResultSearch.DataSource = G.DT;
             DGVResultSearch.Columns[QuestionSearchColumn.Name].HeaderText = string.Format("Найдено записей: {0}", G.DT.Rows.Count);
+            searchDown.Enabled = searchUp.Enabled = (G.DT.Rows.Count > 0 && SearchTxtBox.Text.Length > 0);
         }
 
         private void DGVResultSearch_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -3768,10 +3769,63 @@ namespace FAQ_Net
       
       SearchQuestRB.Left = SearchAllRB.Left + SearchAllRB.Width+3;
       SearchAnswRB.Left = SearchQuestRB.Left + SearchQuestRB.Width+3;
-      SearchBtn.Top = SearchAnswRB.Top+ SearchAnswRB.Height+5;
+      SearchBtn.Top
+        = searchDown.Top
+        = searchUp.Top = SearchAnswRB.Top + SearchAnswRB.Height + 5;
       panel1.Height = SearchBtn.Top + SearchBtn.Height+5;
     }
 
     #endregion Методы / Methods
+
+    private void GlobalSearch(bool down)
+    {
+      if (DGVResultSearch.Rows.Count == 0)
+        return;
+      if (splitContainer1.Panel2Collapsed)
+        DGVResultSearch_CellClick(null, null);
+      bool endSearch = false;
+      bool successSearch = false;
+      while (!endSearch && !successSearch)
+      {
+        successSearch = fnd.FindNext(SearchTxtBox, false, down);
+        if (successSearch)
+          break;
+        int nextIndex = down ? 1 : -1;
+        if ((down && DGVResultSearch.Rows.Count > DGVResultSearch.CurrentRow.Index + nextIndex)
+          || (!down && DGVResultSearch.CurrentRow.Index != 0))
+        {
+          DGVResultSearch.CurrentCell = DGVResultSearch.Rows[DGVResultSearch.CurrentRow.Index + nextIndex].Cells[DGVResultSearch.CurrentCell.OwningColumn.Name];
+          DGVResultSearch_CellClick(null, null);
+          if (!down)
+            richText.SelectionStart = richText.Text.Length;
+          endSearch = fnd.FindNext(SearchTxtBox, false, down);
+        }
+        else
+          endSearch = true;
+      }
+    }
+
+    private void searchDown_Click(object sender, EventArgs e)
+    {
+      GlobalSearch(true);
+    }
+
+    private void searchUp_Click(object sender, EventArgs e)
+    {
+      GlobalSearch(false);
+    }
+
+    private void SearchTxtBox_TextChanged(object sender, EventArgs e)
+    {
+      SearchTxtBox.BackColor = Color.White;
+      searchDown.Enabled = searchUp.Enabled = false;
+    }
+
+    private void tsmiSmoothScrollingDocument_Click(object sender, EventArgs e)
+    {
+      tsmiSmoothScrollingDocument.Checked = !tsmiSmoothScrollingDocument.Checked;
+      _settingsXml.SetSetting(Constants.RTF_SMOOTH_SCROLLING, tsmiSmoothScrollingDocument.Checked.ToString());
+      Constants.RtfSmoothScrolling = tsmiSmoothScrollingDocument.Checked;
+    }
   }
 }

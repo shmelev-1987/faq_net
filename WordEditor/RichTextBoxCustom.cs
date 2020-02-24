@@ -43,6 +43,21 @@ namespace FAQ_Net
 
     #endregion Код необходим для того, чтобы корректно обрабатывались RFT-таблицы
 
+    [DllImport("User32.dll", CharSet = CharSet.Auto, EntryPoint = "SendMessage")]
+    static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+    private void ScrollWithoutSmooth(ref Message m)
+    {
+      int scrollLines = SystemInformation.MouseWheelScrollLines;
+      for (int i = 0; i < scrollLines; i++)
+      {
+        if (m.WParam == (IntPtr)4287102976)
+          SendMessage(m.HWnd, WM_VSCROLL, (IntPtr)SB_LINEDOWN, (IntPtr)0);
+        else
+          SendMessage(m.HWnd, WM_VSCROLL, (IntPtr)SB_LINEUP, (IntPtr)0);
+      }
+    }
+
         /// <summary>
         /// Occurs when the zoom factor changes.
         /// </summary>
@@ -52,6 +67,11 @@ namespace FAQ_Net
         //private const int EM_STREAMIN = 0x449; // ID события загрузки RTF-документа
         private const int WM_CHAR = 0x102;
         private float _ZoomFactor = 1;
+        private const int WM_HSCROLL = 0x114;
+        private const int WM_VSCROLL = 0x115;
+        private const int SB_LINEDOWN = 1;
+        private const int SB_LINEUP = 0;
+        private const int SB_THUMBTRACK = 5;
        
        
         protected virtual void OnZoomChanged(ZoomChangedEventArgs e)
@@ -74,7 +94,6 @@ namespace FAQ_Net
               Constants.CtrlSpaceEntered = false;
               return;
             }
-            base.WndProc(ref m);
             // ДЛЯ ОТЛАДКИ
             //using (System.IO.StreamWriter sw = new System.IO.StreamWriter(@"d:\MyDocuments\2019\log.log", true))
             //{
@@ -85,7 +104,23 @@ namespace FAQ_Net
             {
                 case EM_SETZOOM:
                 case WM_MOUSEWHEEL:
-                    OnZoomChanged(new ZoomChangedEventArgs(this.ZoomFactor));
+                    if (!Constants.RtfSmoothScrolling
+                    && (m.WParam == (IntPtr)4287102976 /* Scroll down */ || m.WParam == (IntPtr)7864320 /* Scroll up */))
+                     ScrollWithoutSmooth(ref m);
+                    else
+                    {
+                      base.WndProc(ref m);
+                      OnZoomChanged(new ZoomChangedEventArgs(this.ZoomFactor));
+                    }
+                    break;
+                case WM_VSCROLL:
+                    if (!Constants.RtfSmoothScrolling && ((uint)m.WParam & 0xFF) == SB_THUMBTRACK)
+                      ScrollWithoutSmooth(ref m);
+                    else
+                      base.WndProc(ref m);
+                    break;
+                default:
+                    base.WndProc(ref m);
                     break;
              //case EM_STREAMIN:
              //  if (OnQuestionChanged != null)

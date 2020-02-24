@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Windows.Forms;
 
 namespace FAQ_Net
@@ -49,7 +49,7 @@ namespace FAQ_Net
       this.DelRazdelMainTSMI = new System.Windows.Forms.ToolStripMenuItem();
       this.DelRazdelTSMI = new System.Windows.Forms.ToolStripMenuItem();
       this.DelRazdelWithReplaceTSMI = new System.Windows.Forms.ToolStripMenuItem();
-      this.фToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+      this.С„ToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
       this.LastQuestionsTSMI = new System.Windows.Forms.ToolStripMenuItem();
       this.RefreshTSMI = new System.Windows.Forms.ToolStripMenuItem();
       this.SearchTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,6 +76,8 @@ namespace FAQ_Net
       this.QuestionSearchColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.SearchFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.panel1 = new System.Windows.Forms.Panel();
+      this.searchUp = new PulseButton.PulseButton();
+      this.searchDown = new PulseButton.PulseButton();
       this.SearchTxtBox = new System.Windows.Forms.TextBox();
       this.lblSearchDescription = new System.Windows.Forms.Label();
       this.SearchAnswRB = new System.Windows.Forms.RadioButton();
@@ -209,12 +211,12 @@ namespace FAQ_Net
       this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripMenuItem18 = new System.Windows.Forms.ToolStripMenuItem();
-      this.кодировкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.ASCII_TSMI = new System.Windows.Forms.ToolStripMenuItem();
-      this.тестToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.С‚РµСЃС‚ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiTable = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiAddTable = new System.Windows.Forms.ToolStripMenuItem();
-      this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.СЃРїСЂР°РІРєР°ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiAboutProgram = new System.Windows.Forms.ToolStripMenuItem();
       this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
       this.btnSelectQuestion = new PulseButton.PulseButton();
@@ -263,6 +265,7 @@ namespace FAQ_Net
       this.CountCategoriesVal = new System.Windows.Forms.ToolStripStatusLabel();
       this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
       this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
+      this.tsmiSmoothScrollingDocument = new System.Windows.Forms.ToolStripMenuItem();
       this.TabControl.SuspendLayout();
       this.CategoriesTP.SuspendLayout();
       this.CategoriesContextMenu.SuspendLayout();
@@ -324,7 +327,7 @@ namespace FAQ_Net
       this.CategoriesTP.Padding = new System.Windows.Forms.Padding(3);
       this.CategoriesTP.Size = new System.Drawing.Size(230, 376);
       this.CategoriesTP.TabIndex = 0;
-      this.CategoriesTP.Text = "Разделы";
+      this.CategoriesTP.Text = "Р Р°Р·РґРµР»С‹";
       // 
       // TV1
       // 
@@ -356,7 +359,7 @@ namespace FAQ_Net
             this.CreateCategoryTSMI,
             this.CreateSubcategoryTSMI,
             this.DelRazdelMainTSMI,
-            this.фToolStripMenuItem,
+            this.С„ToolStripMenuItem,
             this.LastQuestionsTSMI,
             this.RefreshTSMI,
             this.SearchTSMI,
@@ -371,21 +374,21 @@ namespace FAQ_Net
       this.CreateQuestionTSMI.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
       this.CreateQuestionTSMI.Name = "CreateQuestionTSMI";
       this.CreateQuestionTSMI.Size = new System.Drawing.Size(258, 22);
-      this.CreateQuestionTSMI.Text = "Добавить вопрос";
+      this.CreateQuestionTSMI.Text = "Р”РѕР±Р°РІРёС‚СЊ РІРѕРїСЂРѕСЃ";
       this.CreateQuestionTSMI.Click += new System.EventHandler(this.CreateQuestionTSB_Click);
       // 
       // CreateCategoryTSMI
       // 
       this.CreateCategoryTSMI.Name = "CreateCategoryTSMI";
       this.CreateCategoryTSMI.Size = new System.Drawing.Size(258, 22);
-      this.CreateCategoryTSMI.Text = "Добавить раздел";
+      this.CreateCategoryTSMI.Text = "Р”РѕР±Р°РІРёС‚СЊ СЂР°Р·РґРµР»";
       this.CreateCategoryTSMI.Click += new System.EventHandler(this.CreateCategory_Click);
       // 
       // CreateSubcategoryTSMI
       // 
       this.CreateSubcategoryTSMI.Name = "CreateSubcategoryTSMI";
       this.CreateSubcategoryTSMI.Size = new System.Drawing.Size(258, 22);
-      this.CreateSubcategoryTSMI.Text = "Добавить подраздел";
+      this.CreateSubcategoryTSMI.Text = "Р”РѕР±Р°РІРёС‚СЊ РїРѕРґСЂР°Р·РґРµР»";
       this.CreateSubcategoryTSMI.Click += new System.EventHandler(this.CreateSubcategoryTSB_Click);
       // 
       // DelRazdelMainTSMI
@@ -395,32 +398,32 @@ namespace FAQ_Net
             this.DelRazdelWithReplaceTSMI});
       this.DelRazdelMainTSMI.Name = "DelRazdelMainTSMI";
       this.DelRazdelMainTSMI.Size = new System.Drawing.Size(258, 22);
-      this.DelRazdelMainTSMI.Text = "Удалить раздел";
+      this.DelRazdelMainTSMI.Text = "РЈРґР°Р»РёС‚СЊ СЂР°Р·РґРµР»";
       // 
       // DelRazdelTSMI
       // 
       this.DelRazdelTSMI.Name = "DelRazdelTSMI";
       this.DelRazdelTSMI.Size = new System.Drawing.Size(314, 22);
-      this.DelRazdelTSMI.Text = "вместе с содержимым";
+      this.DelRazdelTSMI.Text = "РІРјРµСЃС‚Рµ СЃ СЃРѕРґРµСЂР¶РёРјС‹Рј";
       this.DelRazdelTSMI.Click += new System.EventHandler(this.DelRazdelTSMI_Click);
       // 
       // DelRazdelWithReplaceTSMI
       // 
       this.DelRazdelWithReplaceTSMI.Name = "DelRazdelWithReplaceTSMI";
       this.DelRazdelWithReplaceTSMI.Size = new System.Drawing.Size(314, 22);
-      this.DelRazdelWithReplaceTSMI.Text = "с переносом содержимого в другой раздел";
+      this.DelRazdelWithReplaceTSMI.Text = "СЃ РїРµСЂРµРЅРѕСЃРѕРј СЃРѕРґРµСЂР¶РёРјРѕРіРѕ РІ РґСЂСѓРіРѕР№ СЂР°Р·РґРµР»";
       this.DelRazdelWithReplaceTSMI.Click += new System.EventHandler(this.DelRazdelWithReplaceTSMI_Click);
       // 
-      // фToolStripMenuItem
+      // С„ToolStripMenuItem
       // 
-      this.фToolStripMenuItem.Name = "фToolStripMenuItem";
-      this.фToolStripMenuItem.Size = new System.Drawing.Size(255, 6);
+      this.С„ToolStripMenuItem.Name = "С„ToolStripMenuItem";
+      this.С„ToolStripMenuItem.Size = new System.Drawing.Size(255, 6);
       // 
       // LastQuestionsTSMI
       // 
       this.LastQuestionsTSMI.Name = "LastQuestionsTSMI";
       this.LastQuestionsTSMI.Size = new System.Drawing.Size(258, 22);
-      this.LastQuestionsTSMI.Text = "Последние добавления";
+      this.LastQuestionsTSMI.Text = "РџРѕСЃР»РµРґРЅРёРµ РґРѕР±Р°РІР»РµРЅРёСЏ";
       this.LastQuestionsTSMI.Click += new System.EventHandler(this.LastQuestionsTSMI_Click);
       // 
       // RefreshTSMI
@@ -428,21 +431,21 @@ namespace FAQ_Net
       this.RefreshTSMI.Image = global::FAQ_Net.Properties.Resources.Refresh;
       this.RefreshTSMI.Name = "RefreshTSMI";
       this.RefreshTSMI.Size = new System.Drawing.Size(258, 22);
-      this.RefreshTSMI.Text = "Обновить список";
+      this.RefreshTSMI.Text = "РћР±РЅРѕРІРёС‚СЊ СЃРїРёСЃРѕРє";
       this.RefreshTSMI.Click += new System.EventHandler(this.RefreshTSB_Click);
       // 
       // SearchTSMI
       // 
       this.SearchTSMI.Name = "SearchTSMI";
       this.SearchTSMI.Size = new System.Drawing.Size(258, 22);
-      this.SearchTSMI.Text = "Поиск";
+      this.SearchTSMI.Text = "РџРѕРёСЃРє";
       this.SearchTSMI.Click += new System.EventHandler(this.SearchTSMI_Click);
       // 
       // ChangeNameCategoryTSMI
       // 
       this.ChangeNameCategoryTSMI.Name = "ChangeNameCategoryTSMI";
       this.ChangeNameCategoryTSMI.Size = new System.Drawing.Size(258, 22);
-      this.ChangeNameCategoryTSMI.Text = "Изменить наименование раздела";
+      this.ChangeNameCategoryTSMI.Text = "РР·РјРµРЅРёС‚СЊ РЅР°РёРјРµРЅРѕРІР°РЅРёРµ СЂР°Р·РґРµР»Р°";
       this.ChangeNameCategoryTSMI.Click += new System.EventHandler(this.ChangeNameCategoryTSMI_Click);
       // 
       // CreateBackupTSMI
@@ -450,7 +453,7 @@ namespace FAQ_Net
       this.CreateBackupTSMI.Image = global::FAQ_Net.Properties.Resources.SaveSml;
       this.CreateBackupTSMI.Name = "CreateBackupTSMI";
       this.CreateBackupTSMI.Size = new System.Drawing.Size(258, 22);
-      this.CreateBackupTSMI.Text = "Создать резервную копию БД";
+      this.CreateBackupTSMI.Text = "РЎРѕР·РґР°С‚СЊ СЂРµР·РµСЂРІРЅСѓСЋ РєРѕРїРёСЋ Р‘Р”";
       this.CreateBackupTSMI.Click += new System.EventHandler(this.CreateBackupTSMI_Click);
       // 
       // statusStrip2
@@ -473,7 +476,7 @@ namespace FAQ_Net
       this.CountSubcategoryLbl.Margin = new System.Windows.Forms.Padding(3, 3, 0, 2);
       this.CountSubcategoryLbl.Name = "CountSubcategoryLbl";
       this.CountSubcategoryLbl.Size = new System.Drawing.Size(148, 17);
-      this.CountSubcategoryLbl.Text = "Количество подразделов:";
+      this.CountSubcategoryLbl.Text = "РљРѕР»РёС‡РµСЃС‚РІРѕ РїРѕРґСЂР°Р·РґРµР»РѕРІ:";
       // 
       // CountSubcategoryVal
       // 
@@ -506,7 +509,7 @@ namespace FAQ_Net
       this.SearchCategoryBtn.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
       this.SearchCategoryBtn.Size = new System.Drawing.Size(224, 23);
       this.SearchCategoryBtn.TabIndex = 1;
-      this.SearchCategoryBtn.Text = "Найти";
+      this.SearchCategoryBtn.Text = "РќР°Р№С‚Рё";
       this.SearchCategoryBtn.UseVisualStyleBackColor = true;
       this.SearchCategoryBtn.Click += new System.EventHandler(this.SearchCategoryBtn_Click);
       // 
@@ -518,7 +521,7 @@ namespace FAQ_Net
       this.SearchCategoryCmbBox.Name = "SearchCategoryCmbBox";
       this.SearchCategoryCmbBox.Size = new System.Drawing.Size(224, 21);
       this.SearchCategoryCmbBox.TabIndex = 0;
-      this.SearchCategoryCmbBox.Text = "---Поиск по разделам---";
+      this.SearchCategoryCmbBox.Text = "---РџРѕРёСЃРє РїРѕ СЂР°Р·РґРµР»Р°Рј---";
       // 
       // toolStrip1
       // 
@@ -550,7 +553,7 @@ namespace FAQ_Net
       this.CreateQuestionTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.CreateQuestionTSB.Name = "CreateQuestionTSB";
       this.CreateQuestionTSB.Size = new System.Drawing.Size(23, 22);
-      this.CreateQuestionTSB.Text = "Создание вопроса";
+      this.CreateQuestionTSB.Text = "РЎРѕР·РґР°РЅРёРµ РІРѕРїСЂРѕСЃР°";
       this.CreateQuestionTSB.Click += new System.EventHandler(this.CreateQuestionTSB_Click);
       // 
       // CreateCategoryTSB
@@ -561,7 +564,7 @@ namespace FAQ_Net
       this.CreateCategoryTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.CreateCategoryTSB.Name = "CreateCategoryTSB";
       this.CreateCategoryTSB.Size = new System.Drawing.Size(23, 22);
-      this.CreateCategoryTSB.Text = "Добавить раздел";
+      this.CreateCategoryTSB.Text = "Р”РѕР±Р°РІРёС‚СЊ СЂР°Р·РґРµР»";
       this.CreateCategoryTSB.Click += new System.EventHandler(this.CreateCategory_Click);
       // 
       // CreateSubcategoryTSB
@@ -572,7 +575,7 @@ namespace FAQ_Net
       this.CreateSubcategoryTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.CreateSubcategoryTSB.Name = "CreateSubcategoryTSB";
       this.CreateSubcategoryTSB.Size = new System.Drawing.Size(23, 22);
-      this.CreateSubcategoryTSB.Text = "Добавить подраздел";
+      this.CreateSubcategoryTSB.Text = "Р”РѕР±Р°РІРёС‚СЊ РїРѕРґСЂР°Р·РґРµР»";
       this.CreateSubcategoryTSB.Click += new System.EventHandler(this.CreateSubcategoryTSB_Click);
       // 
       // toolStripSeparator3
@@ -587,7 +590,7 @@ namespace FAQ_Net
       this.RefreshTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.RefreshTSB.Name = "RefreshTSB";
       this.RefreshTSB.Size = new System.Drawing.Size(23, 22);
-      this.RefreshTSB.Text = "Обновить";
+      this.RefreshTSB.Text = "РћР±РЅРѕРІРёС‚СЊ";
       this.RefreshTSB.Click += new System.EventHandler(this.RefreshTSB_Click);
       // 
       // toolStripSeparator4
@@ -602,7 +605,7 @@ namespace FAQ_Net
       this.CollapseAllTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.CollapseAllTSB.Name = "CollapseAllTSB";
       this.CollapseAllTSB.Size = new System.Drawing.Size(23, 22);
-      this.CollapseAllTSB.Text = "Свернуть все узлы";
+      this.CollapseAllTSB.Text = "РЎРІРµСЂРЅСѓС‚СЊ РІСЃРµ СѓР·Р»С‹";
       this.CollapseAllTSB.Click += new System.EventHandler(this.CollapseAllTSB_Click);
       // 
       // ExpandAllNodesTSB
@@ -612,7 +615,7 @@ namespace FAQ_Net
       this.ExpandAllNodesTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.ExpandAllNodesTSB.Name = "ExpandAllNodesTSB";
       this.ExpandAllNodesTSB.Size = new System.Drawing.Size(23, 22);
-      this.ExpandAllNodesTSB.Text = "Развернуть все узлы";
+      this.ExpandAllNodesTSB.Text = "Р Р°Р·РІРµСЂРЅСѓС‚СЊ РІСЃРµ СѓР·Р»С‹";
       this.ExpandAllNodesTSB.Click += new System.EventHandler(this.ExpandAllNodesTSB_Click);
       // 
       // SearchTP
@@ -627,7 +630,7 @@ namespace FAQ_Net
       this.SearchTP.Padding = new System.Windows.Forms.Padding(3);
       this.SearchTP.Size = new System.Drawing.Size(230, 376);
       this.SearchTP.TabIndex = 1;
-      this.SearchTP.Text = "Поиск";
+      this.SearchTP.Text = "РџРѕРёСЃРє";
       // 
       // DGVResultSearch
       // 
@@ -684,7 +687,7 @@ namespace FAQ_Net
       // QuestionSearchColumn
       // 
       this.QuestionSearchColumn.DataPropertyName = "question";
-      this.QuestionSearchColumn.HeaderText = "Результаты";
+      this.QuestionSearchColumn.HeaderText = "Р РµР·СѓР»СЊС‚Р°С‚С‹";
       this.QuestionSearchColumn.Name = "QuestionSearchColumn";
       this.QuestionSearchColumn.ReadOnly = true;
       // 
@@ -698,6 +701,8 @@ namespace FAQ_Net
       // 
       // panel1
       // 
+      this.panel1.Controls.Add(this.searchUp);
+      this.panel1.Controls.Add(this.searchDown);
       this.panel1.Controls.Add(this.SearchTxtBox);
       this.panel1.Controls.Add(this.lblSearchDescription);
       this.panel1.Controls.Add(this.SearchAnswRB);
@@ -711,6 +716,42 @@ namespace FAQ_Net
       this.panel1.Size = new System.Drawing.Size(224, 125);
       this.panel1.TabIndex = 4;
       // 
+      // searchUp
+      // 
+      this.searchUp.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.searchUp.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.searchUp.CornerRadius = 5;
+      this.searchUp.Enabled = false;
+      this.searchUp.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.searchUp.Location = new System.Drawing.Point(181, 93);
+      this.searchUp.Name = "searchUp";
+      this.searchUp.PulseSpeed = 0.3F;
+      this.searchUp.PulseWidth = 1;
+      this.searchUp.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
+      this.searchUp.Size = new System.Drawing.Size(15, 25);
+      this.searchUp.TabIndex = 12;
+      this.searchUp.Text = "в†‘";
+      this.searchUp.UseVisualStyleBackColor = true;
+      this.searchUp.Click += new System.EventHandler(this.searchUp_Click);
+      // 
+      // searchDown
+      // 
+      this.searchDown.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.searchDown.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.searchDown.CornerRadius = 5;
+      this.searchDown.Enabled = false;
+      this.searchDown.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.searchDown.Location = new System.Drawing.Point(160, 93);
+      this.searchDown.Name = "searchDown";
+      this.searchDown.PulseSpeed = 0.3F;
+      this.searchDown.PulseWidth = 1;
+      this.searchDown.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
+      this.searchDown.Size = new System.Drawing.Size(15, 25);
+      this.searchDown.TabIndex = 11;
+      this.searchDown.Text = "в†“";
+      this.searchDown.UseVisualStyleBackColor = true;
+      this.searchDown.Click += new System.EventHandler(this.searchDown_Click);
+      // 
       // SearchTxtBox
       // 
       this.SearchTxtBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -719,6 +760,7 @@ namespace FAQ_Net
       this.SearchTxtBox.Name = "SearchTxtBox";
       this.SearchTxtBox.Size = new System.Drawing.Size(218, 20);
       this.SearchTxtBox.TabIndex = 1;
+      this.SearchTxtBox.TextChanged += new System.EventHandler(this.SearchTxtBox_TextChanged);
       this.SearchTxtBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchTxtBox_KeyPress);
       // 
       // lblSearchDescription
@@ -729,7 +771,7 @@ namespace FAQ_Net
       this.lblSearchDescription.Name = "lblSearchDescription";
       this.lblSearchDescription.Size = new System.Drawing.Size(198, 26);
       this.lblSearchDescription.TabIndex = 10;
-      this.lblSearchDescription.Text = "|| - ИЛИ, &&&& - И, пробел - разделитель,\r\n% - любые символы";
+      this.lblSearchDescription.Text = "|| - РР›Р, &&&& - Р, РїСЂРѕР±РµР» - СЂР°Р·РґРµР»РёС‚РµР»СЊ,\r\n% - Р»СЋР±С‹Рµ СЃРёРјРІРѕР»С‹";
       this.lblSearchDescription.FontChanged += new System.EventHandler(this.lblSearchDescription_FontChanged);
       // 
       // SearchAnswRB
@@ -739,7 +781,7 @@ namespace FAQ_Net
       this.SearchAnswRB.Name = "SearchAnswRB";
       this.SearchAnswRB.Size = new System.Drawing.Size(73, 17);
       this.SearchAnswRB.TabIndex = 9;
-      this.SearchAnswRB.Text = "в ответах";
+      this.SearchAnswRB.Text = "РІ РѕС‚РІРµС‚Р°С…";
       this.SearchAnswRB.UseVisualStyleBackColor = true;
       // 
       // SearchQuestRB
@@ -749,7 +791,7 @@ namespace FAQ_Net
       this.SearchQuestRB.Name = "SearchQuestRB";
       this.SearchQuestRB.Size = new System.Drawing.Size(92, 17);
       this.SearchQuestRB.TabIndex = 8;
-      this.SearchQuestRB.Text = "в заголовках";
+      this.SearchQuestRB.Text = "РІ Р·Р°РіРѕР»РѕРІРєР°С…";
       this.SearchQuestRB.UseVisualStyleBackColor = true;
       // 
       // SearchAllRB
@@ -761,7 +803,7 @@ namespace FAQ_Net
       this.SearchAllRB.Size = new System.Drawing.Size(56, 17);
       this.SearchAllRB.TabIndex = 7;
       this.SearchAllRB.TabStop = true;
-      this.SearchAllRB.Text = "Везде";
+      this.SearchAllRB.Text = "Р’РµР·РґРµ";
       this.SearchAllRB.UseVisualStyleBackColor = true;
       // 
       // SearchBtn
@@ -777,7 +819,7 @@ namespace FAQ_Net
       this.SearchBtn.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
       this.SearchBtn.Size = new System.Drawing.Size(77, 25);
       this.SearchBtn.TabIndex = 4;
-      this.SearchBtn.Text = "Поиск";
+      this.SearchBtn.Text = "РџРѕРёСЃРє";
       this.SearchBtn.UseVisualStyleBackColor = true;
       this.SearchBtn.Click += new System.EventHandler(this.SearchBtn_Click);
       // 
@@ -788,7 +830,7 @@ namespace FAQ_Net
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(61, 13);
       this.label1.TabIndex = 0;
-      this.label1.Text = "Что ищем:";
+      this.label1.Text = "Р§С‚Рѕ РёС‰РµРј:";
       // 
       // FavoritesTP
       // 
@@ -801,7 +843,7 @@ namespace FAQ_Net
       this.FavoritesTP.Padding = new System.Windows.Forms.Padding(3);
       this.FavoritesTP.Size = new System.Drawing.Size(230, 376);
       this.FavoritesTP.TabIndex = 2;
-      this.FavoritesTP.Text = "Избранное";
+      this.FavoritesTP.Text = "РР·Р±СЂР°РЅРЅРѕРµ";
       // 
       // FavoriteDGV
       // 
@@ -858,7 +900,7 @@ namespace FAQ_Net
       // Favorites_question
       // 
       this.Favorites_question.DataPropertyName = "question";
-      this.Favorites_question.HeaderText = "Результаты";
+      this.Favorites_question.HeaderText = "Р РµР·СѓР»СЊС‚Р°С‚С‹";
       this.Favorites_question.Name = "Favorites_question";
       this.Favorites_question.ReadOnly = true;
       // 
@@ -881,7 +923,7 @@ namespace FAQ_Net
       this.JournalTP.Padding = new System.Windows.Forms.Padding(3);
       this.JournalTP.Size = new System.Drawing.Size(230, 376);
       this.JournalTP.TabIndex = 3;
-      this.JournalTP.Text = "Журнал";
+      this.JournalTP.Text = "Р–СѓСЂРЅР°Р»";
       // 
       // JournalDGV
       // 
@@ -938,7 +980,7 @@ namespace FAQ_Net
       // JournalQuestionColumn
       // 
       this.JournalQuestionColumn.DataPropertyName = "question";
-      this.JournalQuestionColumn.HeaderText = "Результаты";
+      this.JournalQuestionColumn.HeaderText = "Р РµР·СѓР»СЊС‚Р°С‚С‹";
       this.JournalQuestionColumn.Name = "JournalQuestionColumn";
       this.JournalQuestionColumn.ReadOnly = true;
       // 
@@ -992,13 +1034,13 @@ namespace FAQ_Net
       // 
       this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
       this.toolStripStatusLabel2.Size = new System.Drawing.Size(105, 17);
-      this.toolStripStatusLabel2.Text = "Кол-во вопросов:";
+      this.toolStripStatusLabel2.Text = "РљРѕР»-РІРѕ РІРѕРїСЂРѕСЃРѕРІ:";
       // 
       // CountQuestionsVal
       // 
       this.CountQuestionsVal.Name = "CountQuestionsVal";
       this.CountQuestionsVal.Size = new System.Drawing.Size(37, 17);
-      this.CountQuestionsVal.Text = "0 из 0";
+      this.CountQuestionsVal.Text = "0 РёР· 0";
       // 
       // statusStrip1
       // 
@@ -1020,19 +1062,19 @@ namespace FAQ_Net
       // 
       this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
       this.toolStripStatusLabel1.Size = new System.Drawing.Size(70, 17);
-      this.toolStripStatusLabel1.Text = "ID вопроса:";
+      this.toolStripStatusLabel1.Text = "ID РІРѕРїСЂРѕСЃР°:";
       // 
       // ID_ContentTSSL
       // 
       this.ID_ContentTSSL.Name = "ID_ContentTSSL";
       this.ID_ContentTSSL.Size = new System.Drawing.Size(71, 17);
-      this.ID_ContentTSSL.Text = "Неизвестно";
+      this.ID_ContentTSSL.Text = "РќРµРёР·РІРµСЃС‚РЅРѕ";
       // 
       // tsslCountCharsHeader
       // 
       this.tsslCountCharsHeader.Name = "tsslCountCharsHeader";
       this.tsslCountCharsHeader.Size = new System.Drawing.Size(139, 17);
-      this.tsslCountCharsHeader.Text = "  Количество символов:";
+      this.tsslCountCharsHeader.Text = "  РљРѕР»РёС‡РµСЃС‚РІРѕ СЃРёРјРІРѕР»РѕРІ:";
       // 
       // tsslCountCharsValue
       // 
@@ -1099,7 +1141,7 @@ namespace FAQ_Net
       this.openFile.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.openFile.Name = "openFile";
       this.openFile.Size = new System.Drawing.Size(23, 24);
-      this.openFile.ToolTipText = "Открыть";
+      this.openFile.ToolTipText = "РћС‚РєСЂС‹С‚СЊ";
       this.openFile.Click += new System.EventHandler(this.Tools_Click);
       // 
       // saveFile
@@ -1112,7 +1154,7 @@ namespace FAQ_Net
       this.saveFile.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.saveFile.Name = "saveFile";
       this.saveFile.Size = new System.Drawing.Size(23, 24);
-      this.saveFile.ToolTipText = "Сохранить";
+      this.saveFile.ToolTipText = "РЎРѕС…СЂР°РЅРёС‚СЊ";
       this.saveFile.Click += new System.EventHandler(this.Tools_Click);
       // 
       // sep0
@@ -1130,7 +1172,7 @@ namespace FAQ_Net
       this.printText.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.printText.Name = "printText";
       this.printText.Size = new System.Drawing.Size(23, 24);
-      this.printText.ToolTipText = "Печать...";
+      this.printText.ToolTipText = "РџРµС‡Р°С‚СЊ...";
       this.printText.Click += new System.EventHandler(this.Tools_Click);
       // 
       // printPrevText
@@ -1142,7 +1184,7 @@ namespace FAQ_Net
       this.printPrevText.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.printPrevText.Name = "printPrevText";
       this.printPrevText.Size = new System.Drawing.Size(23, 24);
-      this.printPrevText.ToolTipText = "Предварительный просмотр";
+      this.printPrevText.ToolTipText = "РџСЂРµРґРІР°СЂРёС‚РµР»СЊРЅС‹Р№ РїСЂРѕСЃРјРѕС‚СЂ";
       this.printPrevText.Click += new System.EventHandler(this.Tools_Click);
       // 
       // sep1
@@ -1160,7 +1202,7 @@ namespace FAQ_Net
       this.findText.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.findText.Name = "findText";
       this.findText.Size = new System.Drawing.Size(23, 24);
-      this.findText.ToolTipText = "Найти";
+      this.findText.ToolTipText = "РќР°Р№С‚Рё";
       this.findText.Click += new System.EventHandler(this.Tools_Click);
       // 
       // sep2
@@ -1177,7 +1219,7 @@ namespace FAQ_Net
       this.cutText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.cutText.Name = "cutText";
       this.cutText.Size = new System.Drawing.Size(23, 25);
-      this.cutText.Text = "Вы&резать";
+      this.cutText.Text = "Р’С‹&СЂРµР·Р°С‚СЊ";
       this.cutText.Click += new System.EventHandler(this.Cut_Click);
       // 
       // copyText
@@ -1188,7 +1230,7 @@ namespace FAQ_Net
       this.copyText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.copyText.Name = "copyText";
       this.copyText.Size = new System.Drawing.Size(23, 25);
-      this.copyText.Text = "&Копировать";
+      this.copyText.Text = "&РљРѕРїРёСЂРѕРІР°С‚СЊ";
       this.copyText.Click += new System.EventHandler(this.Copy_Click);
       // 
       // pasteText
@@ -1199,7 +1241,7 @@ namespace FAQ_Net
       this.pasteText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.pasteText.Name = "pasteText";
       this.pasteText.Size = new System.Drawing.Size(23, 25);
-      this.pasteText.Text = "&Вставить";
+      this.pasteText.Text = "&Р’СЃС‚Р°РІРёС‚СЊ";
       this.pasteText.Click += new System.EventHandler(this.Paste_Click);
       // 
       // sep3
@@ -1218,7 +1260,7 @@ namespace FAQ_Net
       this.undoText.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.undoText.Name = "undoText";
       this.undoText.Size = new System.Drawing.Size(23, 24);
-      this.undoText.ToolTipText = "Назад";
+      this.undoText.ToolTipText = "РќР°Р·Р°Рґ";
       this.undoText.Click += new System.EventHandler(this.Tools_Click);
       // 
       // redoText
@@ -1231,7 +1273,7 @@ namespace FAQ_Net
       this.redoText.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.redoText.Name = "redoText";
       this.redoText.Size = new System.Drawing.Size(23, 24);
-      this.redoText.ToolTipText = "Вперед";
+      this.redoText.ToolTipText = "Р’РїРµСЂРµРґ";
       this.redoText.Click += new System.EventHandler(this.Tools_Click);
       // 
       // sep4
@@ -1252,7 +1294,7 @@ namespace FAQ_Net
       this.selFont.Name = "selFont";
       this.selFont.Size = new System.Drawing.Size(120, 25);
       this.selFont.Text = "Times New Roman";
-      this.selFont.ToolTipText = "Шрифт";
+      this.selFont.ToolTipText = "РЁСЂРёС„С‚";
       this.selFont.DropDownClosed += new System.EventHandler(this.SelFont_DropDownClosed);
       this.selFont.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SelFont_KeyDown);
       // 
@@ -1281,7 +1323,7 @@ namespace FAQ_Net
       this.size.Name = "size";
       this.size.Size = new System.Drawing.Size(52, 23);
       this.size.Text = "12";
-      this.size.ToolTipText = "Размер шрифта";
+      this.size.ToolTipText = "Р Р°Р·РјРµСЂ С€СЂРёС„С‚Р°";
       this.size.DropDownClosed += new System.EventHandler(this.Size_DropDownClosed);
       this.size.SelectedIndexChanged += new System.EventHandler(this.Size_SelectedIndexChanged);
       this.size.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Size_KeyDown);
@@ -1302,7 +1344,7 @@ namespace FAQ_Net
       this.bold.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.bold.Name = "bold";
       this.bold.Size = new System.Drawing.Size(23, 24);
-      this.bold.ToolTipText = "Жирный";
+      this.bold.ToolTipText = "Р–РёСЂРЅС‹Р№";
       this.bold.Click += new System.EventHandler(this.Tools_Click);
       // 
       // italic
@@ -1315,7 +1357,7 @@ namespace FAQ_Net
       this.italic.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.italic.Name = "italic";
       this.italic.Size = new System.Drawing.Size(23, 24);
-      this.italic.ToolTipText = "Курсив";
+      this.italic.ToolTipText = "РљСѓСЂСЃРёРІ";
       this.italic.Click += new System.EventHandler(this.Tools_Click);
       // 
       // under
@@ -1328,7 +1370,7 @@ namespace FAQ_Net
       this.under.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.under.Name = "under";
       this.under.Size = new System.Drawing.Size(23, 24);
-      this.under.ToolTipText = "Подчеркнутый";
+      this.under.ToolTipText = "РџРѕРґС‡РµСЂРєРЅСѓС‚С‹Р№";
       this.under.Click += new System.EventHandler(this.Tools_Click);
       // 
       // strikeout
@@ -1339,7 +1381,7 @@ namespace FAQ_Net
       this.strikeout.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.strikeout.Name = "strikeout";
       this.strikeout.Size = new System.Drawing.Size(23, 25);
-      this.strikeout.Text = "Зачеркнутый";
+      this.strikeout.Text = "Р—Р°С‡РµСЂРєРЅСѓС‚С‹Р№";
       this.strikeout.Click += new System.EventHandler(this.Tools_Click);
       // 
       // sep6
@@ -1368,7 +1410,7 @@ namespace FAQ_Net
       this.zoom.Name = "zoom";
       this.zoom.Size = new System.Drawing.Size(65, 23);
       this.zoom.Text = "100%";
-      this.zoom.ToolTipText = "Масштаб";
+      this.zoom.ToolTipText = "РњР°СЃС€С‚Р°Р±";
       this.zoom.SelectedIndexChanged += new System.EventHandler(this.zoom_SelectedIndexChanged);
       this.zoom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.zoom_KeyDown);
       // 
@@ -1384,7 +1426,7 @@ namespace FAQ_Net
       this.alignLeft.Margin = new System.Windows.Forms.Padding(2, 2, 0, 2);
       this.alignLeft.Name = "alignLeft";
       this.alignLeft.Size = new System.Drawing.Size(23, 24);
-      this.alignLeft.ToolTipText = "Выровнять текст по левому краю";
+      this.alignLeft.ToolTipText = "Р’С‹СЂРѕРІРЅСЏС‚СЊ С‚РµРєСЃС‚ РїРѕ Р»РµРІРѕРјСѓ РєСЂР°СЋ";
       this.alignLeft.Click += new System.EventHandler(this.Tools_Click);
       // 
       // alignCenter
@@ -1399,7 +1441,7 @@ namespace FAQ_Net
       this.alignCenter.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.alignCenter.Name = "alignCenter";
       this.alignCenter.Size = new System.Drawing.Size(23, 24);
-      this.alignCenter.ToolTipText = "Выровнять текст по центру";
+      this.alignCenter.ToolTipText = "Р’С‹СЂРѕРІРЅСЏС‚СЊ С‚РµРєСЃС‚ РїРѕ С†РµРЅС‚СЂСѓ";
       this.alignCenter.Click += new System.EventHandler(this.Tools_Click);
       // 
       // alignRight
@@ -1414,7 +1456,7 @@ namespace FAQ_Net
       this.alignRight.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.alignRight.Name = "alignRight";
       this.alignRight.Size = new System.Drawing.Size(23, 20);
-      this.alignRight.ToolTipText = "Выровнять текст по правому краю";
+      this.alignRight.ToolTipText = "Р’С‹СЂРѕРІРЅСЏС‚СЊ С‚РµРєСЃС‚ РїРѕ РїСЂР°РІРѕРјСѓ РєСЂР°СЋ";
       this.alignRight.Click += new System.EventHandler(this.Tools_Click);
       // 
       // lineSpacing
@@ -1429,7 +1471,7 @@ namespace FAQ_Net
       this.lineSpacing.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.lineSpacing.Name = "lineSpacing";
       this.lineSpacing.Size = new System.Drawing.Size(33, 22);
-      this.lineSpacing.ToolTipText = "Межстрочный интервал (1)";
+      this.lineSpacing.ToolTipText = "РњРµР¶СЃС‚СЂРѕС‡РЅС‹Р№ РёРЅС‚РµСЂРІР°Р» (1)";
       this.lineSpacing.ButtonClick += new System.EventHandler(this.lineSpacing_ButtonClick);
       // 
       // lineSpace1
@@ -1473,7 +1515,7 @@ namespace FAQ_Net
       this.bullet.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.bullet.Name = "bullet";
       this.bullet.Size = new System.Drawing.Size(23, 20);
-      this.bullet.ToolTipText = "Маркеры";
+      this.bullet.ToolTipText = "РњР°СЂРєРµСЂС‹";
       this.bullet.Click += new System.EventHandler(this.Tools_Click);
       // 
       // selectColor
@@ -1485,7 +1527,7 @@ namespace FAQ_Net
       this.selectColor.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.selectColor.Name = "selectColor";
       this.selectColor.Size = new System.Drawing.Size(32, 20);
-      this.selectColor.ToolTipText = "Цвет текста (Black)";
+      this.selectColor.ToolTipText = "Р¦РІРµС‚ С‚РµРєСЃС‚Р° (Black)";
       this.selectColor.ButtonClick += new System.EventHandler(this.SelectColor_ButtonClick);
       this.selectColor.Paint += new System.Windows.Forms.PaintEventHandler(this.SelectColor_Paint);
       // 
@@ -1666,7 +1708,7 @@ namespace FAQ_Net
       this.highLight.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.highLight.Name = "highLight";
       this.highLight.Size = new System.Drawing.Size(34, 17);
-      this.highLight.ToolTipText = "Цвет выделения текста (Yellow)";
+      this.highLight.ToolTipText = "Р¦РІРµС‚ РІС‹РґРµР»РµРЅРёСЏ С‚РµРєСЃС‚Р° (Yellow)";
       this.highLight.ButtonClick += new System.EventHandler(this.HighLight_ButtonClick);
       this.highLight.DropDownOpening += new System.EventHandler(this.HighLight_DropDownOpening);
       this.highLight.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.HighLight_DropDownItemClicked);
@@ -1685,7 +1727,7 @@ namespace FAQ_Net
       this.tsddbInsertTable.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.tsddbInsertTable.Name = "tsddbInsertTable";
       this.tsddbInsertTable.Size = new System.Drawing.Size(29, 20);
-      this.tsddbInsertTable.Text = "Создать таблицу";
+      this.tsddbInsertTable.Text = "РЎРѕР·РґР°С‚СЊ С‚Р°Р±Р»РёС†Сѓ";
       // 
       // tsbAddImage
       // 
@@ -1694,7 +1736,7 @@ namespace FAQ_Net
       this.tsbAddImage.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.tsbAddImage.Name = "tsbAddImage";
       this.tsbAddImage.Size = new System.Drawing.Size(23, 20);
-      this.tsbAddImage.Text = "Добавить изображение";
+      this.tsbAddImage.Text = "Р”РѕР±Р°РІРёС‚СЊ РёР·РѕР±СЂР°Р¶РµРЅРёРµ";
       this.tsbAddImage.Click += new System.EventHandler(this.tsbAddImage_Click);
       // 
       // AddInFavoritesTSB
@@ -1707,7 +1749,7 @@ namespace FAQ_Net
       this.AddInFavoritesTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.AddInFavoritesTSB.Name = "AddInFavoritesTSB";
       this.AddInFavoritesTSB.Size = new System.Drawing.Size(23, 20);
-      this.AddInFavoritesTSB.Text = "Добавить в избранное";
+      this.AddInFavoritesTSB.Text = "Р”РѕР±Р°РІРёС‚СЊ РІ РёР·Р±СЂР°РЅРЅРѕРµ";
       this.AddInFavoritesTSB.CheckedChanged += new System.EventHandler(this.AddInFavoritesTSB_CheckedChanged);
       this.AddInFavoritesTSB.Click += new System.EventHandler(this.AddInFavoritesTSB_Click);
       // 
@@ -1722,9 +1764,9 @@ namespace FAQ_Net
             this.edit,
             this.view,
             this.formatToolStripMenuItem,
-            this.кодировкаToolStripMenuItem,
+            this.РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem,
             this.tsmiTable,
-            this.справкаToolStripMenuItem});
+            this.СЃРїСЂР°РІРєР°ToolStripMenuItem});
       this.menuTop.Location = new System.Drawing.Point(0, 0);
       this.menuTop.MenuColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
       this.menuTop.MenuColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
@@ -1749,7 +1791,7 @@ namespace FAQ_Net
       this.file.ForeColor = System.Drawing.Color.White;
       this.file.Name = "file";
       this.file.Size = new System.Drawing.Size(48, 20);
-      this.file.Text = "&Файл";
+      this.file.Text = "&Р¤Р°Р№Р»";
       // 
       // open
       // 
@@ -1759,7 +1801,7 @@ namespace FAQ_Net
       this.open.Name = "open";
       this.open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
       this.open.Size = new System.Drawing.Size(233, 22);
-      this.open.Text = "&Открыть";
+      this.open.Text = "&РћС‚РєСЂС‹С‚СЊ";
       this.open.Click += new System.EventHandler(this.Open_Click);
       // 
       // s0
@@ -1776,7 +1818,7 @@ namespace FAQ_Net
       this.save.Name = "save";
       this.save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
       this.save.Size = new System.Drawing.Size(233, 22);
-      this.save.Text = "&Сохранить";
+      this.save.Text = "&РЎРѕС…СЂР°РЅРёС‚СЊ";
       this.save.Click += new System.EventHandler(this.Save_Click);
       // 
       // saveAs
@@ -1784,7 +1826,7 @@ namespace FAQ_Net
       this.saveAs.ForeColor = System.Drawing.Color.White;
       this.saveAs.Name = "saveAs";
       this.saveAs.Size = new System.Drawing.Size(233, 22);
-      this.saveAs.Text = "Сохранить &как...";
+      this.saveAs.Text = "РЎРѕС…СЂР°РЅРёС‚СЊ &РєР°Рє...";
       this.saveAs.Click += new System.EventHandler(this.saveAs_Click);
       // 
       // s1
@@ -1797,7 +1839,7 @@ namespace FAQ_Net
       this.pageSet.ForeColor = System.Drawing.Color.White;
       this.pageSet.Name = "pageSet";
       this.pageSet.Size = new System.Drawing.Size(233, 22);
-      this.pageSet.Text = "Настройка с&траницы...";
+      this.pageSet.Text = "РќР°СЃС‚СЂРѕР№РєР° СЃ&С‚СЂР°РЅРёС†С‹...";
       this.pageSet.Click += new System.EventHandler(this.PageSet_Click);
       // 
       // printPrev
@@ -1808,7 +1850,7 @@ namespace FAQ_Net
       this.printPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.printPrev.Name = "printPrev";
       this.printPrev.Size = new System.Drawing.Size(233, 22);
-      this.printPrev.Text = "Предварительный прос&мотр";
+      this.printPrev.Text = "РџСЂРµРґРІР°СЂРёС‚РµР»СЊРЅС‹Р№ РїСЂРѕСЃ&РјРѕС‚СЂ";
       this.printPrev.Click += new System.EventHandler(this.PrintPrev_Click);
       // 
       // print
@@ -1820,7 +1862,7 @@ namespace FAQ_Net
       this.print.Name = "print";
       this.print.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
       this.print.Size = new System.Drawing.Size(233, 22);
-      this.print.Text = "&Печать...";
+      this.print.Text = "&РџРµС‡Р°С‚СЊ...";
       this.print.Click += new System.EventHandler(this.Print_Click);
       // 
       // edit
@@ -1840,7 +1882,7 @@ namespace FAQ_Net
       this.edit.ForeColor = System.Drawing.Color.White;
       this.edit.Name = "edit";
       this.edit.Size = new System.Drawing.Size(59, 20);
-      this.edit.Text = "&Правка";
+      this.edit.Text = "&РџСЂР°РІРєР°";
       // 
       // undo
       // 
@@ -1849,7 +1891,7 @@ namespace FAQ_Net
       this.undo.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.undo.Name = "undo";
       this.undo.Size = new System.Drawing.Size(158, 22);
-      this.undo.Text = "&Назад";
+      this.undo.Text = "&РќР°Р·Р°Рґ";
       this.undo.Click += new System.EventHandler(this.Undo_Click);
       // 
       // redo
@@ -1859,7 +1901,7 @@ namespace FAQ_Net
       this.redo.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.redo.Name = "redo";
       this.redo.Size = new System.Drawing.Size(158, 22);
-      this.redo.Text = "В&перед";
+      this.redo.Text = "Р’&РїРµСЂРµРґ";
       this.redo.Click += new System.EventHandler(this.Redo_Click);
       // 
       // s4
@@ -1875,7 +1917,7 @@ namespace FAQ_Net
       this.cut.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.cut.Name = "cut";
       this.cut.Size = new System.Drawing.Size(158, 22);
-      this.cut.Text = "Вы&резать";
+      this.cut.Text = "Р’С‹&СЂРµР·Р°С‚СЊ";
       this.cut.Click += new System.EventHandler(this.Cut_Click);
       // 
       // copy
@@ -1886,7 +1928,7 @@ namespace FAQ_Net
       this.copy.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.copy.Name = "copy";
       this.copy.Size = new System.Drawing.Size(158, 22);
-      this.copy.Text = "&Копировать";
+      this.copy.Text = "&РљРѕРїРёСЂРѕРІР°С‚СЊ";
       this.copy.Click += new System.EventHandler(this.Copy_Click);
       // 
       // paste
@@ -1897,7 +1939,7 @@ namespace FAQ_Net
       this.paste.ImageTransparentColor = System.Drawing.Color.Fuchsia;
       this.paste.Name = "paste";
       this.paste.Size = new System.Drawing.Size(158, 22);
-      this.paste.Text = "&Вставить";
+      this.paste.Text = "&Р’СЃС‚Р°РІРёС‚СЊ";
       this.paste.Click += new System.EventHandler(this.Paste_Click);
       // 
       // s5
@@ -1910,7 +1952,7 @@ namespace FAQ_Net
       this.selectAll.ForeColor = System.Drawing.Color.White;
       this.selectAll.Name = "selectAll";
       this.selectAll.Size = new System.Drawing.Size(158, 22);
-      this.selectAll.Text = "Выделить вс&ё";
+      this.selectAll.Text = "Р’С‹РґРµР»РёС‚СЊ РІСЃ&С‘";
       this.selectAll.Click += new System.EventHandler(this.selectAll_Click);
       // 
       // s6
@@ -1927,7 +1969,7 @@ namespace FAQ_Net
       this.find.Name = "find";
       this.find.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
       this.find.Size = new System.Drawing.Size(158, 22);
-      this.find.Text = "&Поиск";
+      this.find.Text = "&РџРѕРёСЃРє";
       this.find.Click += new System.EventHandler(this.Find_Click);
       // 
       // replace
@@ -1936,7 +1978,7 @@ namespace FAQ_Net
       this.replace.Name = "replace";
       this.replace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
       this.replace.Size = new System.Drawing.Size(158, 22);
-      this.replace.Text = "З&амена";
+      this.replace.Text = "Р—&Р°РјРµРЅР°";
       this.replace.Click += new System.EventHandler(this.replace_Click);
       // 
       // view
@@ -1946,7 +1988,7 @@ namespace FAQ_Net
       this.view.ForeColor = System.Drawing.Color.White;
       this.view.Name = "view";
       this.view.Size = new System.Drawing.Size(39, 20);
-      this.view.Text = "В&ид";
+      this.view.Text = "Р’&РёРґ";
       // 
       // tsmiDictionary
       // 
@@ -1954,7 +1996,7 @@ namespace FAQ_Net
       this.tsmiDictionary.Name = "tsmiDictionary";
       this.tsmiDictionary.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
       this.tsmiDictionary.Size = new System.Drawing.Size(222, 22);
-      this.tsmiDictionary.Text = "Словарь подсказок";
+      this.tsmiDictionary.Text = "РЎР»РѕРІР°СЂСЊ РїРѕРґСЃРєР°Р·РѕРє";
       this.tsmiDictionary.Click += new System.EventHandler(this.tsmiDictionary_Click);
       // 
       // formatToolStripMenuItem
@@ -1966,7 +2008,7 @@ namespace FAQ_Net
       this.formatToolStripMenuItem.ForeColor = System.Drawing.Color.White;
       this.formatToolStripMenuItem.Name = "formatToolStripMenuItem";
       this.formatToolStripMenuItem.Size = new System.Drawing.Size(62, 20);
-      this.formatToolStripMenuItem.Text = "&Формат";
+      this.formatToolStripMenuItem.Text = "&Р¤РѕСЂРјР°С‚";
       // 
       // font
       // 
@@ -1976,7 +2018,7 @@ namespace FAQ_Net
       this.font.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.font.Name = "font";
       this.font.Size = new System.Drawing.Size(196, 22);
-      this.font.Text = "&Шрифт...";
+      this.font.Text = "&РЁСЂРёС„С‚...";
       this.font.Click += new System.EventHandler(this.font_Click);
       // 
       // superscript
@@ -1996,7 +2038,7 @@ namespace FAQ_Net
       this.superscript.ForeColor = System.Drawing.Color.White;
       this.superscript.Name = "superscript";
       this.superscript.Size = new System.Drawing.Size(196, 22);
-      this.superscript.Text = "На&дстрочный символ";
+      this.superscript.Text = "РќР°&РґСЃС‚СЂРѕС‡РЅС‹Р№ СЃРёРјРІРѕР»";
       // 
       // noSuperscript
       // 
@@ -2092,7 +2134,7 @@ namespace FAQ_Net
       this.subscript.ForeColor = System.Drawing.Color.White;
       this.subscript.Name = "subscript";
       this.subscript.Size = new System.Drawing.Size(196, 22);
-      this.subscript.Text = "П&одстрочный символ";
+      this.subscript.Text = "Рџ&РѕРґСЃС‚СЂРѕС‡РЅС‹Р№ СЃРёРјРІРѕР»";
       // 
       // noSubscript
       // 
@@ -2171,32 +2213,32 @@ namespace FAQ_Net
       this.toolStripMenuItem18.Text = "-9";
       this.toolStripMenuItem18.Click += new System.EventHandler(this.superSubScript_Click);
       // 
-      // кодировкаToolStripMenuItem
+      // РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem
       // 
-      this.кодировкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ASCII_TSMI,
-            this.тестToolStripMenuItem});
-      this.кодировкаToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-      this.кодировкаToolStripMenuItem.Name = "кодировкаToolStripMenuItem";
-      this.кодировкаToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-      this.кодировкаToolStripMenuItem.Text = "Кодировка";
+            this.С‚РµСЃС‚ToolStripMenuItem});
+      this.РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+      this.РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem.Name = "РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem";
+      this.РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+      this.РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem.Text = "РљРѕРґРёСЂРѕРІРєР°";
       // 
       // ASCII_TSMI
       // 
       this.ASCII_TSMI.ForeColor = System.Drawing.Color.White;
       this.ASCII_TSMI.Name = "ASCII_TSMI";
       this.ASCII_TSMI.Size = new System.Drawing.Size(197, 22);
-      this.ASCII_TSMI.Text = "Из WIN1252 в WIN1251";
+      this.ASCII_TSMI.Text = "РР· WIN1252 РІ WIN1251";
       this.ASCII_TSMI.Click += new System.EventHandler(this.ASCII_TSMI_Click);
       // 
-      // тестToolStripMenuItem
+      // С‚РµСЃС‚ToolStripMenuItem
       // 
-      this.тестToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-      this.тестToolStripMenuItem.Name = "тестToolStripMenuItem";
-      this.тестToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-      this.тестToolStripMenuItem.Text = "По запросу";
-      this.тестToolStripMenuItem.Visible = false;
-      this.тестToolStripMenuItem.Click += new System.EventHandler(this.тестToolStripMenuItem_Click);
+      this.С‚РµСЃС‚ToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+      this.С‚РµСЃС‚ToolStripMenuItem.Name = "С‚РµСЃС‚ToolStripMenuItem";
+      this.С‚РµСЃС‚ToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+      this.С‚РµСЃС‚ToolStripMenuItem.Text = "РџРѕ Р·Р°РїСЂРѕСЃСѓ";
+      this.С‚РµСЃС‚ToolStripMenuItem.Visible = false;
+      this.С‚РµСЃС‚ToolStripMenuItem.Click += new System.EventHandler(this.С‚РµСЃС‚ToolStripMenuItem_Click);
       // 
       // tsmiTable
       // 
@@ -2205,7 +2247,7 @@ namespace FAQ_Net
       this.tsmiTable.ForeColor = System.Drawing.Color.White;
       this.tsmiTable.Name = "tsmiTable";
       this.tsmiTable.Size = new System.Drawing.Size(66, 20);
-      this.tsmiTable.Text = "Таблица";
+      this.tsmiTable.Text = "РўР°Р±Р»РёС†Р°";
       this.tsmiTable.Visible = false;
       // 
       // tsmiAddTable
@@ -2213,22 +2255,22 @@ namespace FAQ_Net
       this.tsmiAddTable.ForeColor = System.Drawing.Color.White;
       this.tsmiAddTable.Name = "tsmiAddTable";
       this.tsmiAddTable.Size = new System.Drawing.Size(126, 22);
-      this.tsmiAddTable.Text = "Добавить";
+      this.tsmiAddTable.Text = "Р”РѕР±Р°РІРёС‚СЊ";
       // 
-      // справкаToolStripMenuItem
+      // СЃРїСЂР°РІРєР°ToolStripMenuItem
       // 
-      this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.СЃРїСЂР°РІРєР°ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiAboutProgram});
-      this.справкаToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-      this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-      this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-      this.справкаToolStripMenuItem.Text = "Справка";
+      this.СЃРїСЂР°РІРєР°ToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+      this.СЃРїСЂР°РІРєР°ToolStripMenuItem.Name = "СЃРїСЂР°РІРєР°ToolStripMenuItem";
+      this.СЃРїСЂР°РІРєР°ToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+      this.СЃРїСЂР°РІРєР°ToolStripMenuItem.Text = "РЎРїСЂР°РІРєР°";
       // 
       // tsmiAboutProgram
       // 
       this.tsmiAboutProgram.Name = "tsmiAboutProgram";
       this.tsmiAboutProgram.Size = new System.Drawing.Size(149, 22);
-      this.tsmiAboutProgram.Text = "О программе";
+      this.tsmiAboutProgram.Text = "Рћ РїСЂРѕРіСЂР°РјРјРµ";
       this.tsmiAboutProgram.Click += new System.EventHandler(this.tsmiAboutProgram_Click);
       // 
       // tableLayoutPanel1
@@ -2270,7 +2312,7 @@ namespace FAQ_Net
       this.btnSelectQuestion.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
       this.btnSelectQuestion.Size = new System.Drawing.Size(94, 24);
       this.btnSelectQuestion.TabIndex = 33;
-      this.btnSelectQuestion.Text = "Выбрать вопрос";
+      this.btnSelectQuestion.Text = "Р’С‹Р±СЂР°С‚СЊ РІРѕРїСЂРѕСЃ";
       this.btnSelectQuestion.UseVisualStyleBackColor = false;
       this.btnSelectQuestion.Visible = false;
       this.btnSelectQuestion.Click += new System.EventHandler(this.btnSelectQuestion_Click);
@@ -2290,7 +2332,7 @@ namespace FAQ_Net
       this.BackBtn.PulseWidth = 1;
       this.BackBtn.Size = new System.Drawing.Size(26, 25);
       this.BackBtn.TabIndex = 32;
-      this.toolTip.SetToolTip(this.BackBtn, "Назад");
+      this.toolTip.SetToolTip(this.BackBtn, "РќР°Р·Р°Рґ");
       this.BackBtn.UseVisualStyleBackColor = false;
       this.BackBtn.Visible = false;
       this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
@@ -2311,7 +2353,7 @@ namespace FAQ_Net
       this.btnNextQuestion.PulseWidth = 1;
       this.btnNextQuestion.Size = new System.Drawing.Size(26, 25);
       this.btnNextQuestion.TabIndex = 34;
-      this.toolTip.SetToolTip(this.btnNextQuestion, "Вперед");
+      this.toolTip.SetToolTip(this.btnNextQuestion, "Р’РїРµСЂРµРґ");
       this.btnNextQuestion.UseVisualStyleBackColor = false;
       this.btnNextQuestion.Visible = false;
       this.btnNextQuestion.Click += new System.EventHandler(this.btnNextQuestion_Click);
@@ -2319,12 +2361,11 @@ namespace FAQ_Net
       // SelectedPathLbl
       // 
       this.SelectedPathLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.SelectedPathLbl.Font = new System.Drawing.Font("Bookman Old Style", 16F, System.Drawing.FontStyle.Italic);
       this.SelectedPathLbl.Location = new System.Drawing.Point(67, 0);
       this.SelectedPathLbl.Name = "SelectedPathLbl";
       this.SelectedPathLbl.Size = new System.Drawing.Size(528, 31);
       this.SelectedPathLbl.TabIndex = 35;
-      this.SelectedPathLbl.Text = "Последние добавленные вопросы";
+      this.SelectedPathLbl.Text = "РџРѕСЃР»РµРґРЅРёРµ РґРѕР±Р°РІР»РµРЅРЅС‹Рµ РІРѕРїСЂРѕСЃС‹";
       this.SelectedPathLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       this.SelectedPathLbl.DragEnter += new System.Windows.Forms.DragEventHandler(this.SelectedPathLbl_DragEnter);
       this.SelectedPathLbl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SelectedPathLbl_MouseDown);
@@ -2365,7 +2406,7 @@ namespace FAQ_Net
       // 
       this.AddQuestionTSMI.Name = "AddQuestionTSMI";
       this.AddQuestionTSMI.Size = new System.Drawing.Size(192, 22);
-      this.AddQuestionTSMI.Text = "Добавить";
+      this.AddQuestionTSMI.Text = "Р”РѕР±Р°РІРёС‚СЊ";
       this.AddQuestionTSMI.Click += new System.EventHandler(this.CreateQuestionTSB_Click);
       // 
       // ShowAnswerTSMI
@@ -2373,21 +2414,21 @@ namespace FAQ_Net
       this.ShowAnswerTSMI.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
       this.ShowAnswerTSMI.Name = "ShowAnswerTSMI";
       this.ShowAnswerTSMI.Size = new System.Drawing.Size(192, 22);
-      this.ShowAnswerTSMI.Text = "Посмотреть";
+      this.ShowAnswerTSMI.Text = "РџРѕСЃРјРѕС‚СЂРµС‚СЊ";
       this.ShowAnswerTSMI.Click += new System.EventHandler(this.ShowAnswerTSMI_Click);
       // 
       // EditQuestionTSMI
       // 
       this.EditQuestionTSMI.Name = "EditQuestionTSMI";
       this.EditQuestionTSMI.Size = new System.Drawing.Size(192, 22);
-      this.EditQuestionTSMI.Text = "Изменить";
+      this.EditQuestionTSMI.Text = "РР·РјРµРЅРёС‚СЊ";
       this.EditQuestionTSMI.Click += new System.EventHandler(this.EditQuestionTSMI_Click);
       // 
       // DeleteQuestionTSMI
       // 
       this.DeleteQuestionTSMI.Name = "DeleteQuestionTSMI";
       this.DeleteQuestionTSMI.Size = new System.Drawing.Size(192, 22);
-      this.DeleteQuestionTSMI.Text = "Удалить";
+      this.DeleteQuestionTSMI.Text = "РЈРґР°Р»РёС‚СЊ";
       this.DeleteQuestionTSMI.Click += new System.EventHandler(this.DeleteQuestionTSMI_Click);
       // 
       // toolStripSeparator5
@@ -2400,7 +2441,7 @@ namespace FAQ_Net
       this.SortAscTSMI.Image = global::FAQ_Net.Properties.Resources.sort_asc;
       this.SortAscTSMI.Name = "SortAscTSMI";
       this.SortAscTSMI.Size = new System.Drawing.Size(192, 22);
-      this.SortAscTSMI.Text = "Сортировка от &А до Я";
+      this.SortAscTSMI.Text = "РЎРѕСЂС‚РёСЂРѕРІРєР° РѕС‚ &Рђ РґРѕ РЇ";
       this.SortAscTSMI.Click += new System.EventHandler(this.SortAscTSMI_Click);
       // 
       // SortDescTSMI
@@ -2408,7 +2449,7 @@ namespace FAQ_Net
       this.SortDescTSMI.Image = global::FAQ_Net.Properties.Resources.sort_desc;
       this.SortDescTSMI.Name = "SortDescTSMI";
       this.SortDescTSMI.Size = new System.Drawing.Size(192, 22);
-      this.SortDescTSMI.Text = "Сортировка от &Я до А";
+      this.SortDescTSMI.Text = "РЎРѕСЂС‚РёСЂРѕРІРєР° РѕС‚ &РЇ РґРѕ Рђ";
       this.SortDescTSMI.Click += new System.EventHandler(this.SortDescTSMI_Click);
       // 
       // toolStripSeparator6
@@ -2420,14 +2461,14 @@ namespace FAQ_Net
       // 
       this.tsmiGridView.Name = "tsmiGridView";
       this.tsmiGridView.Size = new System.Drawing.Size(192, 22);
-      this.tsmiGridView.Text = "Сетка";
+      this.tsmiGridView.Text = "РЎРµС‚РєР°";
       this.tsmiGridView.Click += new System.EventHandler(this.tsmiGridView_Click);
       // 
       // tsmiListView
       // 
       this.tsmiListView.Name = "tsmiListView";
       this.tsmiListView.Size = new System.Drawing.Size(192, 22);
-      this.tsmiListView.Text = "Лист";
+      this.tsmiListView.Text = "Р›РёСЃС‚";
       this.tsmiListView.Click += new System.EventHandler(this.tsmiListView_Click);
       // 
       // richMenu
@@ -2455,7 +2496,7 @@ namespace FAQ_Net
       this.cutRichText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.cutRichText.Name = "cutRichText";
       this.cutRichText.Size = new System.Drawing.Size(218, 22);
-      this.cutRichText.Text = "Вы&резать";
+      this.cutRichText.Text = "Р’С‹&СЂРµР·Р°С‚СЊ";
       this.cutRichText.Click += new System.EventHandler(this.Cut_Click);
       // 
       // copyRichText
@@ -2465,7 +2506,7 @@ namespace FAQ_Net
       this.copyRichText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.copyRichText.Name = "copyRichText";
       this.copyRichText.Size = new System.Drawing.Size(218, 22);
-      this.copyRichText.Text = "&Копировать";
+      this.copyRichText.Text = "&РљРѕРїРёСЂРѕРІР°С‚СЊ";
       this.copyRichText.Click += new System.EventHandler(this.Copy_Click);
       // 
       // pasteRichText
@@ -2476,7 +2517,7 @@ namespace FAQ_Net
       this.pasteRichText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.pasteRichText.Name = "pasteRichText";
       this.pasteRichText.Size = new System.Drawing.Size(218, 22);
-      this.pasteRichText.Text = "&Вставить";
+      this.pasteRichText.Text = "&Р’СЃС‚Р°РІРёС‚СЊ";
       this.pasteRichText.Click += new System.EventHandler(this.Paste_Click);
       // 
       // sep_0
@@ -2491,7 +2532,7 @@ namespace FAQ_Net
       this.fontRichText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.fontRichText.Name = "fontRichText";
       this.fontRichText.Size = new System.Drawing.Size(218, 22);
-      this.fontRichText.Text = "&Шрифт...";
+      this.fontRichText.Text = "&РЁСЂРёС„С‚...";
       this.fontRichText.Click += new System.EventHandler(this.RichMenu_Click);
       // 
       // sep_1
@@ -2505,7 +2546,7 @@ namespace FAQ_Net
       this.superscriptRichText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.superscriptRichText.Name = "superscriptRichText";
       this.superscriptRichText.Size = new System.Drawing.Size(218, 22);
-      this.superscriptRichText.Text = "На&дстрочный символ (6)";
+      this.superscriptRichText.Text = "РќР°&РґСЃС‚СЂРѕС‡РЅС‹Р№ СЃРёРјРІРѕР» (6)";
       this.superscriptRichText.Click += new System.EventHandler(this.superscriptRichText_Click);
       // 
       // normalOffset
@@ -2514,7 +2555,7 @@ namespace FAQ_Net
       this.normalOffset.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.normalOffset.Name = "normalOffset";
       this.normalOffset.Size = new System.Drawing.Size(218, 22);
-      this.normalOffset.Text = "Обычный";
+      this.normalOffset.Text = "РћР±С‹С‡РЅС‹Р№";
       this.normalOffset.Click += new System.EventHandler(this.normalOffset_Click);
       // 
       // subscriptRichText
@@ -2523,7 +2564,7 @@ namespace FAQ_Net
       this.subscriptRichText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.subscriptRichText.Name = "subscriptRichText";
       this.subscriptRichText.Size = new System.Drawing.Size(218, 22);
-      this.subscriptRichText.Text = "П&одстрочный символ (-6)";
+      this.subscriptRichText.Text = "Рџ&РѕРґСЃС‚СЂРѕС‡РЅС‹Р№ СЃРёРјРІРѕР» (-6)";
       this.subscriptRichText.Click += new System.EventHandler(this.subscriptRichText_Click);
       // 
       // sep_2
@@ -2538,7 +2579,7 @@ namespace FAQ_Net
       this.printRichText.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.printRichText.Name = "printRichText";
       this.printRichText.Size = new System.Drawing.Size(218, 22);
-      this.printRichText.Text = "&Печать...";
+      this.printRichText.Text = "&РџРµС‡Р°С‚СЊ...";
       this.printRichText.Click += new System.EventHandler(this.RichMenu_Click);
       // 
       // splitContainer2
@@ -2616,6 +2657,7 @@ namespace FAQ_Net
       this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiSaveNodeSelect,
             this.tsmiReplaceFontControlToMenu,
+            this.tsmiSmoothScrollingDocument,
             this.tsmiDesignSettings});
       this.toolStripDropDownButton1.Image = global::FAQ_Net.Properties.Resources.settings2;
       this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -2627,14 +2669,14 @@ namespace FAQ_Net
       // 
       this.tsmiSaveNodeSelect.Name = "tsmiSaveNodeSelect";
       this.tsmiSaveNodeSelect.Size = new System.Drawing.Size(425, 22);
-      this.tsmiSaveNodeSelect.Text = "Запоминать переходы по разделам";
+      this.tsmiSaveNodeSelect.Text = "Р—Р°РїРѕРјРёРЅР°С‚СЊ РїРµСЂРµС…РѕРґС‹ РїРѕ СЂР°Р·РґРµР»Р°Рј";
       this.tsmiSaveNodeSelect.Click += new System.EventHandler(this.tsmiSaveNodeSelect_Click);
       // 
       // tsmiReplaceFontControlToMenu
       // 
       this.tsmiReplaceFontControlToMenu.Name = "tsmiReplaceFontControlToMenu";
       this.tsmiReplaceFontControlToMenu.Size = new System.Drawing.Size(425, 22);
-      this.tsmiReplaceFontControlToMenu.Text = "Переместить компоненты выбора шрифта и масштаба в меню";
+      this.tsmiReplaceFontControlToMenu.Text = "РџРµСЂРµРјРµСЃС‚РёС‚СЊ РєРѕРјРїРѕРЅРµРЅС‚С‹ РІС‹Р±РѕСЂР° С€СЂРёС„С‚Р° Рё РјР°СЃС€С‚Р°Р±Р° РІ РјРµРЅСЋ";
       this.tsmiReplaceFontControlToMenu.Click += new System.EventHandler(this.tsmiReplaceFontControlToMenu_Click);
       // 
       // tsmiDesignSettings
@@ -2642,14 +2684,14 @@ namespace FAQ_Net
       this.tsmiDesignSettings.Image = global::FAQ_Net.Properties.Resources.three_color_rectangle;
       this.tsmiDesignSettings.Name = "tsmiDesignSettings";
       this.tsmiDesignSettings.Size = new System.Drawing.Size(425, 22);
-      this.tsmiDesignSettings.Text = "Настройки внешнего вида";
+      this.tsmiDesignSettings.Text = "РќР°СЃС‚СЂРѕР№РєРё РІРЅРµС€РЅРµРіРѕ РІРёРґР°";
       this.tsmiDesignSettings.Click += new System.EventHandler(this.tsmiDesignSettings_Click);
       // 
       // CountQuestTitLbl
       // 
       this.CountQuestTitLbl.Name = "CountQuestTitLbl";
       this.CountQuestTitLbl.Size = new System.Drawing.Size(97, 15);
-      this.CountQuestTitLbl.Text = "Всего вопросов:";
+      this.CountQuestTitLbl.Text = "Р’СЃРµРіРѕ РІРѕРїСЂРѕСЃРѕРІ:";
       // 
       // CountQuestLbl
       // 
@@ -2663,7 +2705,7 @@ namespace FAQ_Net
       // 
       this.CountAnswTitLbl.Name = "CountAnswTitLbl";
       this.CountAnswTitLbl.Size = new System.Drawing.Size(92, 15);
-      this.CountAnswTitLbl.Text = "  Всего ответов:";
+      this.CountAnswTitLbl.Text = "  Р’СЃРµРіРѕ РѕС‚РІРµС‚РѕРІ:";
       // 
       // CountAnswLbl
       // 
@@ -2677,7 +2719,7 @@ namespace FAQ_Net
       // 
       this.CountCategoriesLbl.Name = "CountCategoriesLbl";
       this.CountCategoriesLbl.Size = new System.Drawing.Size(108, 15);
-      this.CountCategoriesLbl.Text = "  Кол-во разделов:";
+      this.CountCategoriesLbl.Text = "  РљРѕР»-РІРѕ СЂР°Р·РґРµР»РѕРІ:";
       this.CountCategoriesLbl.Visible = false;
       // 
       // CountCategoriesVal
@@ -2691,14 +2733,23 @@ namespace FAQ_Net
       // 
       this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
       this.toolStripStatusLabel3.Size = new System.Drawing.Size(217, 15);
-      this.toolStripStatusLabel3.Text = "  Фоновый статус выполнения задачи:";
+      this.toolStripStatusLabel3.Text = "  Р¤РѕРЅРѕРІС‹Р№ СЃС‚Р°С‚СѓСЃ РІС‹РїРѕР»РЅРµРЅРёСЏ Р·Р°РґР°С‡Рё:";
       // 
       // tsslStatus
       // 
       this.tsslStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
       this.tsslStatus.Name = "tsslStatus";
       this.tsslStatus.Size = new System.Drawing.Size(113, 15);
-      this.tsslStatus.Text = "Нет фоновых задач";
+      this.tsslStatus.Text = "РќРµС‚ С„РѕРЅРѕРІС‹С… Р·Р°РґР°С‡";
+      // 
+      // tsmiSmoothScrollingDocument
+      // 
+      this.tsmiSmoothScrollingDocument.Checked = true;
+      this.tsmiSmoothScrollingDocument.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.tsmiSmoothScrollingDocument.Name = "tsmiSmoothScrollingDocument";
+      this.tsmiSmoothScrollingDocument.Size = new System.Drawing.Size(425, 22);
+      this.tsmiSmoothScrollingDocument.Text = "РџР»Р°РІРЅС‹Р№ СЃРєСЂРѕР»Р»РёРЅРі РґРѕРєСѓРјРµРЅС‚Р°";
+      this.tsmiSmoothScrollingDocument.Click += new System.EventHandler(this.tsmiSmoothScrollingDocument_Click);
       // 
       // MainForm
       // 
@@ -2909,7 +2960,7 @@ namespace FAQ_Net
         private ToolStripMenuItem CreateSubcategoryTSMI;
         private ToolStripMenuItem LastQuestionsTSMI;
         private ToolStripMenuItem RefreshTSMI;
-        private ToolStripSeparator фToolStripMenuItem;
+        private ToolStripSeparator С„ToolStripMenuItem;
         private ToolStripMenuItem SearchTSMI;
         private ToolStripMenuItem ChangeNameCategoryTSMI;
         private TreeView TV1;
@@ -2927,11 +2978,11 @@ namespace FAQ_Net
         private DataGridViewTextBoxColumn JournalIdColumn;
         private DataGridViewTextBoxColumn JournalQuestionColumn;
         private DataGridViewTextBoxColumn JournalFavoriteDateColumn;
-        private ToolStripMenuItem кодировкаToolStripMenuItem;
+        private ToolStripMenuItem РєРѕРґРёСЂРѕРІРєР°ToolStripMenuItem;
         private ToolStripMenuItem ASCII_TSMI;
         private Label lblSearchDescription;
         private ToolStripMenuItem orange;
-        private ToolStripMenuItem тестToolStripMenuItem;
+        private ToolStripMenuItem С‚РµСЃС‚ToolStripMenuItem;
         private PulseButton.PulseButton BackBtn;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem SortAscTSMI;
@@ -2947,7 +2998,7 @@ namespace FAQ_Net
     private ToolStripDropDownButton tsddbInsertTable;
     private ToolStripMenuItem tsmiTable;
     private ToolStripMenuItem tsmiAddTable;
-    private ToolStripMenuItem справкаToolStripMenuItem;
+    private ToolStripMenuItem СЃРїСЂР°РІРєР°ToolStripMenuItem;
     private ToolStripMenuItem tsmiAboutProgram;
     private ToolStripMenuItem tsmiDictionary;
     private SplitContainer splitContainer2;
@@ -2976,7 +3027,6 @@ namespace FAQ_Net
     private ToolStripStatusLabel CountCategoriesVal;
     private ToolStripStatusLabel toolStripStatusLabel3;
     private ToolStripStatusLabel tsslStatus;
-    private Label SelectedPathLbl;
     private ToolStripButton tsbAddImage;
     private Splitter splitter1;
     private ToolStripStatusLabel tsslCountCharsHeader;
@@ -2985,6 +3035,10 @@ namespace FAQ_Net
     private ToolStripButton printText;
     private ToolStripButton printPrevText;
     private ToolStripMenuItem tsmiReplaceFontControlToMenu;
+    private Label SelectedPathLbl;
+    private PulseButton.PulseButton searchDown;
+    private PulseButton.PulseButton searchUp;
+    private ToolStripMenuItem tsmiSmoothScrollingDocument;
   }
 
 }

@@ -33,5 +33,7 @@ namespace FAQ_Net
     public const string ICONS_DIR_NAME = "IconsDirName";
     public static string RtfToolStripName;
     public const string RTF_COMBOBOX_CONTROLS_REPLACE_TO_MENU = "ReplaceComboboxRtfControlsToMenu";
+    public static bool RtfSmoothScrolling = true;
+    public const string RTF_SMOOTH_SCROLLING = "SmoothScrollingRtfDocument";
   }
 }

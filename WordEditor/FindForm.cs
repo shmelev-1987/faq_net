@@ -283,7 +283,7 @@ namespace FAQ_Net
         /// Performs find operation based on selected Search options, and replace options.
         /// </summary>
         /// <param name="replaceOptions">Replaces each instance, or all instances, or none. (0=None; 1=Each; 2=All)</param>
-        private bool Find(byte replaceOptions, bool down)
+        private bool Find(byte replaceOptions, bool down, TextBox searchText, bool autoResetToStart = true)
         {
             bool done = false;
 
@@ -292,7 +292,7 @@ namespace FAQ_Net
               | (wholeWord.Checked ? RichTextBoxFinds.WholeWord : 0)
               | (down ? 0 : RichTextBoxFinds.Reverse);
 
-            if (replaceOptions == REPLACE_EACH && string.Compare(rtb.SelectedText, findText.Text, !matchCase.Checked) == 0)
+            if (replaceOptions == REPLACE_EACH && string.Compare(rtb.SelectedText, searchText.Text, !matchCase.Checked) == 0)
             {
                 // curPos = rtb.SelectionStart;
                 rtb.SelectedText = txbReplace.Text;
@@ -309,18 +309,29 @@ namespace FAQ_Net
                 {
                     startPos = 0;
                 }
-                curPos = rtb.Find(findText.Text, startPos, SearchOptions);
+                try
+                {
+                  curPos = rtb.Find(searchText.Text, startPos, SearchOptions);
+                }
+                catch(System.Exception ex)
+                {
+                  MessageBox.Show(ex.Message, "Ошибка поиска текста: " + searchText.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  return false;
+                }
                 if (curPos == -1)
                 {
-                    found = rtb.Text.IndexOf(findText.Text) > -1;
+                    found = rtb.Text.IndexOf(searchText.Text) > -1;
                     if (found)
                     {
                         if (replaceOptions == REPLACE_NONE)
                         {
+                          if (autoResetToStart)
+                          {
                             // Finished searching to the end.
                             // Automatically find next item back at the beginning.
                             startPos = 0;
-                            curPos = rtb.Find(findText.Text, startPos, SearchOptions);
+                            curPos = rtb.Find(searchText.Text, startPos, SearchOptions);
+                          }
                         }
                         else
                         {
@@ -338,7 +349,7 @@ namespace FAQ_Net
                         {
                             rtb.SelectedText = txbReplace.Text;
                         }
-                        curPos = rtb.Find(findText.Text, startPos, SearchOptions);
+                        curPos = rtb.Find(searchText.Text, startPos, SearchOptions);
                         //Find(REPLACE_NONE, down);
                         //rtb.Select(curPos, replaceText.TextLength);
                     }
@@ -346,7 +357,7 @@ namespace FAQ_Net
                     {
                         rtb.SelectedText = txbReplace.Text;
                         rtb.Select(curPos, txbReplace.TextLength);
-                        Find(REPLACE_ALL, down);
+                        Find(REPLACE_ALL, down, searchText);
                     }
                 }
             }
@@ -362,21 +373,32 @@ namespace FAQ_Net
                     startPos = 0;
                     endPos = rtb.TextLength;
                 }
-                curPos = rtb.Find(findText.Text, startPos, endPos, SearchOptions);
+                try
+                {
+                  curPos = rtb.Find(searchText.Text, startPos, endPos, SearchOptions);
+                }
+                catch(System.Exception ex)
+                {
+                  MessageBox.Show(ex.Message, "Ошибка поиска текста: " + searchText.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                  return false;
+                }
+                
                 if (curPos == -1 && found)
                 {
                     if (replaceOptions == REPLACE_NONE)
                     {
+                      if (autoResetToStart)
+                      {
                         // Finished searching to the end.
                         // Automatically find next item back at the beginning.
                         endPos = rtb.TextLength;
-                        curPos = rtb.Find(findText.Text, startPos, endPos, SearchOptions);
+                        curPos = rtb.Find(searchText.Text, startPos, endPos, SearchOptions);
+                      }
                     }
                     else
                     {
                         MessageBox.Show("Finished replacing text.", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-
                 }
                 else if (curPos > -1)
                 {
@@ -387,14 +409,14 @@ namespace FAQ_Net
                         {
                             rtb.SelectedText = txbReplace.Text;
                         }
-                        Find(REPLACE_NONE, down);
+                        Find(REPLACE_NONE, down, searchText);
                         //rtb.Select(curPos, replaceText.TextLength);
                     }
                     else if (replaceOptions == REPLACE_ALL)
                     {
                         rtb.SelectedText = txbReplace.Text;
                         rtb.Select(curPos, txbReplace.TextLength);
-                        Find(REPLACE_ALL, down);
+                        Find(REPLACE_ALL, down, searchText);
                     }
                 }
             }
@@ -417,19 +439,26 @@ namespace FAQ_Net
       //  MessageBox.Show(msg, System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, MessageBoxButtons.OK, MessageBoxIcon.Information);
       //}
       if (curPos == -1)
-        findText.BackColor = Color.LightCoral;
+        searchText.BackColor = Color.LightCoral;
       else
-        findText.BackColor = Color.White;
+        searchText.BackColor = Color.White;
       return (curPos != -1);
+    }
+
+    public bool FindNext(TextBox searchText, bool autoResetToStart, bool down)
+    {
+      bool result = false;
+      curPos = rtb.SelectionStart;
+      if (searchText.Text.Length > 0)
+      {
+        result = Find(REPLACE_NONE, down, searchText, autoResetToStart);
+      }
+      return result;
     }
 
         private void btnSearchDown_Click(object sender, System.EventArgs e)
         {
-            curPos = rtb.SelectionStart;
-            if (findText.Text.Length > 0)
-            {
-                Find(REPLACE_NONE, true);
-            }
+          FindNext(findText, true, true);
         }
 
         private void FindText_TextChanged(object sender, System.EventArgs e)
@@ -443,7 +472,7 @@ namespace FAQ_Net
             if (findText.Text.Length > 0)
             {
                 curPos = rtb.SelectionStart;
-                Find(REPLACE_EACH, true);
+                Find(REPLACE_EACH, true, findText);
             }
         }
 
@@ -467,7 +496,7 @@ namespace FAQ_Net
             curPos = rtb.SelectionStart;
             if (findText.Text.Length > 0)
             {
-                Find(REPLACE_NONE, false);
+                Find(REPLACE_NONE, false, findText);
             }
         }
 
