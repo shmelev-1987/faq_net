@@ -25,7 +25,7 @@ namespace GradientControls
     public MenuStripZ()
     {
       if (MenuColor1.Equals(Color.Empty))
-        MenuColor1 = Color.FromArgb(60,60,60);
+        MenuColor1 = Color.FromArgb(60, 60, 60);
       if (MenuColor2.Equals(Color.Empty))
         MenuColor2 = Color.FromArgb(20, 20, 20);
       if (MenuColor3.Equals(Color.Empty))

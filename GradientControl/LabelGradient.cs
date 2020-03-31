@@ -21,7 +21,7 @@ namespace GradientControls
     //public event EventChangeValue OnChangeValue;
 
     //private bool _growing;
-    
+
     //private void resizeLabel()
     //{
     //  if (_growing)

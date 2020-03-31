@@ -22,7 +22,7 @@ namespace FAQ_Net
       _listControl.Size = new System.Drawing.Size(890, 67);
       _listControl.TabIndex = 4;
       _listControl.UseCompatibleStateImageBehavior = false;
-      _listControl.View = System.Windows.Forms.View.List;      
+      _listControl.View = System.Windows.Forms.View.List;
 
       //_listControl.ShowCustomizeSection = false;
       //_listControl.Columns.Add(_questionColumn);
@@ -30,10 +30,10 @@ namespace FAQ_Net
       owner.Controls.Add(_listControl);
       _listControl.BringToFront();
       _listControl.Activation = ItemActivation.OneClick;
-      _listControl.BackColor = System.Drawing.Color.FromArgb(28,28,28);
+      _listControl.BackColor = System.Drawing.Color.FromArgb(28, 28, 28);
       _listControl.ForeColor = System.Drawing.Color.White;
       _listControl.ContextMenuStrip = contextMenuStrip;
-      
+
       _listControl.MouseDown += mf.listView1_MouseDown;
       _listControl.SelectedIndexChanged += mf.listView1_SelectedIndexChanged;
     }

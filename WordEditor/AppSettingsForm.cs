@@ -524,7 +524,7 @@ namespace FAQ_Net
                   }
                   else
                   if (parseType == ParseType.LoadFromControl)
-                    AddPropertyIfNotExists(VISIBLE_BUTTON+"."+ toolStripItem.Name, toolStripItem.Visible, VISIBLE_BUTTON);
+                    AddPropertyIfNotExists(VISIBLE_BUTTON + "." + toolStripItem.Name, toolStripItem.Visible, VISIBLE_BUTTON);
                 }
               }
             }
@@ -686,7 +686,7 @@ namespace FAQ_Net
       }
       return result;
     }
-    
+
     private void SaveDesignSetting(Control cntrl, string value)
     {
       _xmlSettings.SetSetting(string.Format("{0}_{1}", cntrl.Tag.ToString(), BACK_COLOR_PROP_NAME), value);
@@ -959,7 +959,7 @@ namespace FAQ_Net
           tssbStyleIcons.DropDownItems.Add("По-умолчанию").Name = DEFAULT_ICONS_MENU_NAME;
           foreach (string dir in System.IO.Directory.GetDirectories(_iconsDir))
           {
-            tssbStyleIcons.DropDownItems.Add(dir.Substring(dir.LastIndexOf(System.IO.Path.DirectorySeparatorChar)+1));
+            tssbStyleIcons.DropDownItems.Add(dir.Substring(dir.LastIndexOf(System.IO.Path.DirectorySeparatorChar) + 1));
             //foreach (string file in System.IO.Directory.GetFiles(dir, "*.png"))
             //{
             //  switch (System.IO.Path.GetFileNameWithoutExtension(file))
@@ -1253,7 +1253,7 @@ namespace FAQ_Net
       }
       if (successApply)
       {
-        foreach(ToolStripMenuItem item in tssbStyleIcons.DropDownItems)
+        foreach (ToolStripMenuItem item in tssbStyleIcons.DropDownItems)
         {
           item.Enabled = true;
         }

@@ -43,12 +43,12 @@ namespace FAQ_Net
 
     private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
     {
-      object sourceCntrl = ((System.Windows.Forms.ContextMenuStrip) sender).SourceControl;
+      object sourceCntrl = ((System.Windows.Forms.ContextMenuStrip)sender).SourceControl;
       if (sourceCntrl == linkLabel1)
         _copyText = linkLabel1.Text;
       if (sourceCntrl == rtbAboutApplication)
       {
-        if (rtbAboutApplication.SelectedText.Length >0)
+        if (rtbAboutApplication.SelectedText.Length > 0)
           _copyText = rtbAboutApplication.SelectedText;
         else
           _copyText = rtbAboutApplication.Text;

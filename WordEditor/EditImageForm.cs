@@ -27,7 +27,7 @@ namespace FAQ_Net
         int formWidth = this.Width;
         int formHeight = this.Height;
         tscmbScaleImagePersent_SelectedIndexChanged(null, null);
-        if (_sourceImage.Width + 19> formWidth)
+        if (_sourceImage.Width + 19 > formWidth)
           this.Width = _sourceImage.Width + 19;
         if (_sourceImage.Height + 45 > formHeight)
           this.Height = _sourceImage.Height + 45;

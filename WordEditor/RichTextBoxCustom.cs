@@ -6,11 +6,11 @@ using System.Security.Permissions;
 using System.Text;
 
 namespace FAQ_Net
-{   
-    public delegate void ZoomChangedEventHandler(object sender, ZoomChangedEventArgs e);
+{
+  public delegate void ZoomChangedEventHandler(object sender, ZoomChangedEventArgs e);
 
-    public class RichTextBoxCustom : RichTextBox
-    {
+  public class RichTextBoxCustom : RichTextBox
+  {
 
     #region Код необходим для того, чтобы корректно обрабатывались RFT-таблицы (как в Word, чтобы данные оставались внутри ячеек таблицы)
 
@@ -58,76 +58,76 @@ namespace FAQ_Net
       }
     }
 
-        /// <summary>
-        /// Occurs when the zoom factor changes.
-        /// </summary>
-        public event ZoomChangedEventHandler ZoomChanged;
-        private const int EM_SETZOOM = 1024 + 225;
-        private const int WM_MOUSEWHEEL = 522;
-        //private const int EM_STREAMIN = 0x449; // ID события загрузки RTF-документа
-        private const int WM_CHAR = 0x102;
-        private float _ZoomFactor = 1;
-        private const int WM_HSCROLL = 0x114;
-        private const int WM_VSCROLL = 0x115;
-        private const int SB_LINEDOWN = 1;
-        private const int SB_LINEUP = 0;
-        private const int SB_THUMBTRACK = 5;
-       
-       
-        protected virtual void OnZoomChanged(ZoomChangedEventArgs e)
-        {
-            if (ZoomChanged != null)
-            {
-                if (this._ZoomFactor != this.ZoomFactor)
-                {
-                    this._ZoomFactor = e.ZoomFactor;
-                    ZoomChanged(this, e);
-                }
-            }
-        }
+    /// <summary>
+    /// Occurs when the zoom factor changes.
+    /// </summary>
+    public event ZoomChangedEventHandler ZoomChanged;
+    private const int EM_SETZOOM = 1024 + 225;
+    private const int WM_MOUSEWHEEL = 522;
+    //private const int EM_STREAMIN = 0x449; // ID события загрузки RTF-документа
+    private const int WM_CHAR = 0x102;
+    private float _ZoomFactor = 1;
+    private const int WM_HSCROLL = 0x114;
+    private const int WM_VSCROLL = 0x115;
+    private const int SB_LINEDOWN = 1;
+    private const int SB_LINEUP = 0;
+    private const int SB_THUMBTRACK = 5;
 
-        protected override void WndProc(ref Message m)
+
+    protected virtual void OnZoomChanged(ZoomChangedEventArgs e)
+    {
+      if (ZoomChanged != null)
+      {
+        if (this._ZoomFactor != this.ZoomFactor)
         {
-            // Если было нажатие сочетания клавиш Ctrl+Space, то прерываем обработку, чтобы не добавлялся пробел
-            if (Constants.CtrlSpaceEntered && m.Msg == WM_CHAR)
-            {
-              Constants.CtrlSpaceEntered = false;
-              return;
-            }
-            // ДЛЯ ОТЛАДКИ
-            //using (System.IO.StreamWriter sw = new System.IO.StreamWriter(@"d:\MyDocuments\2019\log.log", true))
-            //{
-            //  sw.WriteLine(string.Format("{0}\t{1}", DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss"), m.ToString()));
-            //  sw.Close();
-            //}
-            switch (m.Msg)
-            {
-                case EM_SETZOOM:
-                case WM_MOUSEWHEEL:
-                    if (!Constants.RtfSmoothScrolling
-                    && (m.WParam == (IntPtr)4287102976 /* Scroll down */ || m.WParam == (IntPtr)7864320 /* Scroll up */))
-                     ScrollWithoutSmooth(ref m);
-                    else
-                    {
-                      base.WndProc(ref m);
-                      OnZoomChanged(new ZoomChangedEventArgs(this.ZoomFactor));
-                    }
-                    break;
-                //case WM_VSCROLL:
-                //    if (!Constants.RtfSmoothScrolling && ((uint)m.WParam & 0xFF) == SB_THUMBTRACK)
-                //      ScrollWithoutSmooth(ref m);
-                //    else
-                //      base.WndProc(ref m);
-                //    break;
-                default:
-                    base.WndProc(ref m);
-                    break;
-             //case EM_STREAMIN:
-             //  if (OnQuestionChanged != null)
-             //    OnQuestionChanged();
-             //  break;
-            }
+          this._ZoomFactor = e.ZoomFactor;
+          ZoomChanged(this, e);
         }
+      }
+    }
+
+    protected override void WndProc(ref Message m)
+    {
+      // Если было нажатие сочетания клавиш Ctrl+Space, то прерываем обработку, чтобы не добавлялся пробел
+      if (Constants.CtrlSpaceEntered && m.Msg == WM_CHAR)
+      {
+        Constants.CtrlSpaceEntered = false;
+        return;
+      }
+      // ДЛЯ ОТЛАДКИ
+      //using (System.IO.StreamWriter sw = new System.IO.StreamWriter(@"d:\MyDocuments\2019\log.log", true))
+      //{
+      //  sw.WriteLine(string.Format("{0}\t{1}", DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss"), m.ToString()));
+      //  sw.Close();
+      //}
+      switch (m.Msg)
+      {
+        case EM_SETZOOM:
+        case WM_MOUSEWHEEL:
+          if (!Constants.RtfSmoothScrolling
+          && (m.WParam == (IntPtr)4287102976 /* Scroll down */ || m.WParam == (IntPtr)7864320 /* Scroll up */))
+            ScrollWithoutSmooth(ref m);
+          else
+          {
+            base.WndProc(ref m);
+            OnZoomChanged(new ZoomChangedEventArgs(this.ZoomFactor));
+          }
+          break;
+        //case WM_VSCROLL:
+        //    if (!Constants.RtfSmoothScrolling && ((uint)m.WParam & 0xFF) == SB_THUMBTRACK)
+        //      ScrollWithoutSmooth(ref m);
+        //    else
+        //      base.WndProc(ref m);
+        //    break;
+        default:
+          base.WndProc(ref m);
+          break;
+          //case EM_STREAMIN:
+          //  if (OnQuestionChanged != null)
+          //    OnQuestionChanged();
+          //  break;
+      }
+    }
 
     #region Insert Image
 
@@ -673,20 +673,19 @@ namespace FAQ_Net
     #endregion
   }
 
-    public class ZoomChangedEventArgs : EventArgs
+  public class ZoomChangedEventArgs : EventArgs
+  {
+    private readonly float zoomFactor;
+
+    public ZoomChangedEventArgs(float Zoom_Factor)
     {
-        private readonly float zoomFactor;
-
-        public ZoomChangedEventArgs(float Zoom_Factor)
-        {
-            zoomFactor = Zoom_Factor;
-        }
-
-        // Gets the current zoom factor.
-        public float ZoomFactor
-        {
-            get { return zoomFactor; }
-        }
+      zoomFactor = Zoom_Factor;
     }
 
+    // Gets the current zoom factor.
+    public float ZoomFactor
+    {
+      get { return zoomFactor; }
+    }
+  }
 }

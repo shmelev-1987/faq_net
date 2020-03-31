@@ -3,22 +3,22 @@ using System.Drawing;
 
 namespace FAQ_Net
 {
-    class FindForm : UserControl
-    {
-        // Components:
-        private PulseButton.PulseButton btnSearchDown;
-        private CheckBox wholeWord;
-        private CheckBox matchCase;
-        private int curPos = -1;
-        private int startPos;
-        private int endPos;
-        private bool found;
-        //
-        private const byte REPLACE_NONE = 0;
-        private const byte REPLACE_EACH = 1;
-        private const byte REPLACE_ALL = 2;
-        private PulseButton.PulseButton cancel;
-        private PulseButton.PulseButton btnSearchUp;
+  class FindForm : UserControl
+  {
+    // Components:
+    private PulseButton.PulseButton btnSearchDown;
+    private CheckBox wholeWord;
+    private CheckBox matchCase;
+    private int curPos = -1;
+    private int startPos;
+    private int endPos;
+    private bool found;
+    //
+    private const byte REPLACE_NONE = 0;
+    private const byte REPLACE_EACH = 1;
+    private const byte REPLACE_ALL = 2;
+    private PulseButton.PulseButton cancel;
+    private PulseButton.PulseButton btnSearchUp;
     private TextBox txbReplace;
     private Label lblReplace;
     private PulseButton.PulseButton btnReplaceAll;
@@ -31,20 +31,20 @@ namespace FAQ_Net
     public GradientControls.PanelGradient panelGradient;
     public RichTextBox rtb;
 
-        /// <summary>
-        /// Quick down and dirty search form. This was made
-        /// from an empty code file, so this form has no
-        /// .designer file.
-        /// </summary>
-        /// <param name="RtbToSearch">RichTextBox to search.</param>
-        public FindForm(ref RichTextBoxCustom richTextBox)
-        {
-          rtb = richTextBox;
-          InitializeComponent();
-        }
+    /// <summary>
+    /// Quick down and dirty search form. This was made
+    /// from an empty code file, so this form has no
+    /// .designer file.
+    /// </summary>
+    /// <param name="RtbToSearch">RichTextBox to search.</param>
+    public FindForm(ref RichTextBoxCustom richTextBox)
+    {
+      rtb = richTextBox;
+      InitializeComponent();
+    }
 
-        private void InitializeComponent()
-        {
+    private void InitializeComponent()
+    {
       this.btnSearchDown = new PulseButton.PulseButton();
       this.wholeWord = new System.Windows.Forms.CheckBox();
       this.matchCase = new System.Windows.Forms.CheckBox();
@@ -279,147 +279,147 @@ namespace FAQ_Net
 
     }
 
-        /// <summary>
-        /// Performs find operation based on selected Search options, and replace options.
-        /// </summary>
-        /// <param name="replaceOptions">Replaces each instance, or all instances, or none. (0=None; 1=Each; 2=All)</param>
-        private bool Find(byte replaceOptions, bool down, TextBox searchText, bool autoResetToStart = true)
+    /// <summary>
+    /// Performs find operation based on selected Search options, and replace options.
+    /// </summary>
+    /// <param name="replaceOptions">Replaces each instance, or all instances, or none. (0=None; 1=Each; 2=All)</param>
+    private bool Find(byte replaceOptions, bool down, TextBox searchText, bool autoResetToStart = true)
+    {
+      bool done = false;
+
+      // Задать опции поиска
+      RichTextBoxFinds SearchOptions = (matchCase.Checked ? RichTextBoxFinds.MatchCase : 0)
+        | (wholeWord.Checked ? RichTextBoxFinds.WholeWord : 0)
+        | (down ? 0 : RichTextBoxFinds.Reverse);
+
+      if (replaceOptions == REPLACE_EACH && string.Compare(rtb.SelectedText, searchText.Text, !matchCase.Checked) == 0)
+      {
+        // curPos = rtb.SelectionStart;
+        rtb.SelectedText = txbReplace.Text;
+        // rtb.Select(curPos, replaceText.TextLength); 
+        done = true;
+      }
+      if (down)
+      {
+        if (curPos > -1 && curPos < rtb.TextLength)
         {
-            bool done = false;
-
-            // Задать опции поиска
-            RichTextBoxFinds SearchOptions = (matchCase.Checked ? RichTextBoxFinds.MatchCase : 0)
-              | (wholeWord.Checked ? RichTextBoxFinds.WholeWord : 0)
-              | (down ? 0 : RichTextBoxFinds.Reverse);
-
-            if (replaceOptions == REPLACE_EACH && string.Compare(rtb.SelectedText, searchText.Text, !matchCase.Checked) == 0)
+          startPos = curPos + 1;
+        }
+        else
+        {
+          startPos = 0;
+        }
+        try
+        {
+          curPos = rtb.Find(searchText.Text, startPos, SearchOptions);
+        }
+        catch (System.Exception ex)
+        {
+          MessageBox.Show(ex.Message, "Ошибка поиска текста: " + searchText.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return false;
+        }
+        if (curPos == -1)
+        {
+          found = rtb.Text.IndexOf(searchText.Text) > -1;
+          if (found)
+          {
+            if (replaceOptions == REPLACE_NONE)
             {
-                // curPos = rtb.SelectionStart;
-                rtb.SelectedText = txbReplace.Text;
-                // rtb.Select(curPos, replaceText.TextLength); 
-                done = true;
-            }
-            if (down)
-            {
-                if (curPos > -1 && curPos < rtb.TextLength)
-                {
-                    startPos = curPos + 1;
-                }
-                else
-                {
-                    startPos = 0;
-                }
-                try
-                {
-                  curPos = rtb.Find(searchText.Text, startPos, SearchOptions);
-                }
-                catch(System.Exception ex)
-                {
-                  MessageBox.Show(ex.Message, "Ошибка поиска текста: " + searchText.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                  return false;
-                }
-                if (curPos == -1)
-                {
-                    found = rtb.Text.IndexOf(searchText.Text) > -1;
-                    if (found)
-                    {
-                        if (replaceOptions == REPLACE_NONE)
-                        {
-                          if (autoResetToStart)
-                          {
-                            // Finished searching to the end.
-                            // Automatically find next item back at the beginning.
-                            startPos = 0;
-                            curPos = rtb.Find(searchText.Text, startPos, SearchOptions);
-                          }
-                        }
-                        else
-                        {
-                            MessageBox.Show("Finished replacing text.", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                }
-                else if (curPos > -1)
-                {
-                    found = true;
-                    // Replace text if not already done and replace each specified.
-                    if (replaceOptions == REPLACE_EACH)
-                    {
-                        if (!done)
-                        {
-                            rtb.SelectedText = txbReplace.Text;
-                        }
-                        curPos = rtb.Find(searchText.Text, startPos, SearchOptions);
-                        //Find(REPLACE_NONE, down);
-                        //rtb.Select(curPos, replaceText.TextLength);
-                    }
-                    else if (replaceOptions == REPLACE_ALL)
-                    {
-                        rtb.SelectedText = txbReplace.Text;
-                        rtb.Select(curPos, txbReplace.TextLength);
-                        Find(REPLACE_ALL, down, searchText);
-                    }
-                }
+              if (autoResetToStart)
+              {
+                // Finished searching to the end.
+                // Automatically find next item back at the beginning.
+                startPos = 0;
+                curPos = rtb.Find(searchText.Text, startPos, SearchOptions);
+              }
             }
             else
             {
-                if (curPos > 0)
-                {
-                    startPos = 0;
-                    endPos = curPos;
-                }
-                else
-                {
-                    startPos = 0;
-                    endPos = rtb.TextLength;
-                }
-                try
-                {
-                  curPos = rtb.Find(searchText.Text, startPos, endPos, SearchOptions);
-                }
-                catch(System.Exception ex)
-                {
-                  MessageBox.Show(ex.Message, "Ошибка поиска текста: " + searchText.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                  return false;
-                }
-                
-                if (curPos == -1 && found)
-                {
-                    if (replaceOptions == REPLACE_NONE)
-                    {
-                      if (autoResetToStart)
-                      {
-                        // Finished searching to the end.
-                        // Automatically find next item back at the beginning.
-                        endPos = rtb.TextLength;
-                        curPos = rtb.Find(searchText.Text, startPos, endPos, SearchOptions);
-                      }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Finished replacing text.", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                else if (curPos > -1)
-                {
-                    found = true;
-                    if (replaceOptions == REPLACE_EACH)
-                    {
-                        if (!done)
-                        {
-                            rtb.SelectedText = txbReplace.Text;
-                        }
-                        Find(REPLACE_NONE, down, searchText);
-                        //rtb.Select(curPos, replaceText.TextLength);
-                    }
-                    else if (replaceOptions == REPLACE_ALL)
-                    {
-                        rtb.SelectedText = txbReplace.Text;
-                        rtb.Select(curPos, txbReplace.TextLength);
-                        Find(REPLACE_ALL, down, searchText);
-                    }
-                }
+              MessageBox.Show("Finished replacing text.", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+          }
+        }
+        else if (curPos > -1)
+        {
+          found = true;
+          // Replace text if not already done and replace each specified.
+          if (replaceOptions == REPLACE_EACH)
+          {
+            if (!done)
+            {
+              rtb.SelectedText = txbReplace.Text;
+            }
+            curPos = rtb.Find(searchText.Text, startPos, SearchOptions);
+            //Find(REPLACE_NONE, down);
+            //rtb.Select(curPos, replaceText.TextLength);
+          }
+          else if (replaceOptions == REPLACE_ALL)
+          {
+            rtb.SelectedText = txbReplace.Text;
+            rtb.Select(curPos, txbReplace.TextLength);
+            Find(REPLACE_ALL, down, searchText);
+          }
+        }
+      }
+      else
+      {
+        if (curPos > 0)
+        {
+          startPos = 0;
+          endPos = curPos;
+        }
+        else
+        {
+          startPos = 0;
+          endPos = rtb.TextLength;
+        }
+        try
+        {
+          curPos = rtb.Find(searchText.Text, startPos, endPos, SearchOptions);
+        }
+        catch (System.Exception ex)
+        {
+          MessageBox.Show(ex.Message, "Ошибка поиска текста: " + searchText.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return false;
+        }
+
+        if (curPos == -1 && found)
+        {
+          if (replaceOptions == REPLACE_NONE)
+          {
+            if (autoResetToStart)
+            {
+              // Finished searching to the end.
+              // Automatically find next item back at the beginning.
+              endPos = rtb.TextLength;
+              curPos = rtb.Find(searchText.Text, startPos, endPos, SearchOptions);
+            }
+          }
+          else
+          {
+            MessageBox.Show("Finished replacing text.", System.Reflection.Assembly.GetExecutingAssembly().GetName().Name, MessageBoxButtons.OK, MessageBoxIcon.Information);
+          }
+        }
+        else if (curPos > -1)
+        {
+          found = true;
+          if (replaceOptions == REPLACE_EACH)
+          {
+            if (!done)
+            {
+              rtb.SelectedText = txbReplace.Text;
+            }
+            Find(REPLACE_NONE, down, searchText);
+            //rtb.Select(curPos, replaceText.TextLength);
+          }
+          else if (replaceOptions == REPLACE_ALL)
+          {
+            rtb.SelectedText = txbReplace.Text;
+            rtb.Select(curPos, txbReplace.TextLength);
+            Find(REPLACE_ALL, down, searchText);
+          }
+        }
+      }
       //if (!found)
       //{
       //  rtb.SelectionLength = 0;
@@ -456,54 +456,54 @@ namespace FAQ_Net
       return result;
     }
 
-        private void btnSearchDown_Click(object sender, System.EventArgs e)
-        {
-          FindNext(findText, true, true);
-        }
+    private void btnSearchDown_Click(object sender, System.EventArgs e)
+    {
+      FindNext(findText, true, true);
+    }
 
-        private void FindText_TextChanged(object sender, System.EventArgs e)
-        {
-            curPos = -1;
-            found = false;
-        }
+    private void FindText_TextChanged(object sender, System.EventArgs e)
+    {
+      curPos = -1;
+      found = false;
+    }
 
-        private void btnReplace_Click(object sender, System.EventArgs e)
-        {
-            if (findText.Text.Length > 0)
-            {
-                curPos = rtb.SelectionStart;
-                Find(REPLACE_EACH, true, findText);
-            }
-        }
+    private void btnReplace_Click(object sender, System.EventArgs e)
+    {
+      if (findText.Text.Length > 0)
+      {
+        curPos = rtb.SelectionStart;
+        Find(REPLACE_EACH, true, findText);
+      }
+    }
 
-        private void replaceAll_Click(object sender, System.EventArgs e)
-        {
-            
-        }
+    private void replaceAll_Click(object sender, System.EventArgs e)
+    {
 
-        private void replaceText_Enter(object sender, System.EventArgs e)
-        {
-             btnSearchDown.TabStop = true;
-        }
+    }
 
-        private void findButton_Enter(object sender, System.EventArgs e)
-        {
-            cancel.TabStop = true;
-        }
+    private void replaceText_Enter(object sender, System.EventArgs e)
+    {
+      btnSearchDown.TabStop = true;
+    }
 
-        private void btnSearchUp_Click(object sender, System.EventArgs e)
-        {
-            curPos = rtb.SelectionStart;
-            if (findText.Text.Length > 0)
-            {
-                Find(REPLACE_NONE, false, findText);
-            }
-        }
+    private void findButton_Enter(object sender, System.EventArgs e)
+    {
+      cancel.TabStop = true;
+    }
 
-        private void cancel_Click(object sender, System.EventArgs e)
-        {
-            this.Hide();
-        }
+    private void btnSearchUp_Click(object sender, System.EventArgs e)
+    {
+      curPos = rtb.SelectionStart;
+      if (findText.Text.Length > 0)
+      {
+        Find(REPLACE_NONE, false, findText);
+      }
+    }
+
+    private void cancel_Click(object sender, System.EventArgs e)
+    {
+      this.Hide();
+    }
 
     private void rbReplace_CheckedChanged(object sender, System.EventArgs e)
     {

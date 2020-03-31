@@ -37,7 +37,7 @@ namespace WaitWnd
         loadthread = new Thread(new ParameterizedThreadStart(LoadingProcessEx));
         loadthread.Start(parent);
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
         FAQ_Net.G.AddRowToLog("Не запускается фоновая форма ожидания Show(parent)", ex.Message);
       }
@@ -53,7 +53,7 @@ namespace WaitWnd
           loadthread = null;
         }
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
         FAQ_Net.G.AddRowToLog("Не закрывается фоновая форма ожидания", ex.Message);
       }

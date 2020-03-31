@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 
 namespace GradientControls
 {
-  public class TabControlGradient: TabControl, IGradientControl
+  public class TabControlGradient : TabControl, IGradientControl
   {
     private Color _backColorBottom;
     private GradientEnums.FillColorMode _fillColorType;

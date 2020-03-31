@@ -22,15 +22,15 @@ namespace FAQ_Net
       _idColumn.HeaderText = "ID-вопроса";
 
       _questionColumn = new DataGridViewTextBoxColumn();
-      _questionColumn.ValueType = typeof (string);
+      _questionColumn.ValueType = typeof(string);
       //_questionColumn.ColumnName = "question";
       _questionColumn.HeaderText = "Вопрос";
 
       _createDateColumn = new DataGridViewTextBoxColumn();
-      _createDateColumn.ValueType = typeof (DateTime);
+      _createDateColumn.ValueType = typeof(DateTime);
       _createDateColumn.CellTemplate.Style.Format = "dd.MM.yyyy HH:mm:ss";
       _createDateColumn.Width = 110;
-       //"create_date"
+      //"create_date"
       _createDateColumn.HeaderText = "Дата создания";
 
       _modifDateColumn = new DataGridViewTextBoxColumn();

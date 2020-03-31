@@ -22,7 +22,7 @@ namespace FAQ_Net
 
       StringBuilder sringTableRtf = new StringBuilder();
       StringBuilder tableRowRtf = new StringBuilder();
-      
+
       sringTableRtf.Append(@"{\rtf1 ");
 
       for (int j = 0; j < countColumns; j++)
