@@ -35,7 +35,7 @@ namespace FAQ_Net
     private int rightMarginMouseX;
     private Font selFnt;
     private ColorTable highlightColor;
-    private HorizontalAlignment selAlign;
+    private TextAlign selAlign;
     //private bool saved = true;
     private string appFolder = @"\Word_Editor\";
     private string currentFile = "";
@@ -76,6 +76,7 @@ namespace FAQ_Net
     public bool ModalDialogForSelectQuestion = false;
     private int _currentQuestionId = 0;
     private IntellisenseUserControl _intellisenseUserControl;
+    private bool _clickDownBullet = false;
 
     #region Конструкторы / Constructors
     public MainForm()
@@ -269,11 +270,13 @@ namespace FAQ_Net
     {
       set
       {
+        Image result = value;
         if (value == null)
-          saveFile.Image = global::FAQ_Net.Properties.Resources.SaveSml;
-        else
-          saveFile.Image = value;
-        saveFile.ImageScaling = ToolStripItemImageScaling.None;
+          result = global::FAQ_Net.Properties.Resources.SaveSml;
+        saveFile.Image
+          = save.Image = result;
+        saveFile.ImageScaling
+          = save.ImageScaling = ToolStripItemImageScaling.None;
       }
     }
 
@@ -518,20 +521,20 @@ namespace FAQ_Net
       }
     }
 
-    ///// <summary>
-    ///// Задать иконку "Выровнять текст по ширине"
-    ///// </summary>
-    //public Image ImageAlignJustify
-    //{
-    //  set
-    //  {
-    //    if (value == null)
-    //      alignJustify.Image = global::FAQ_Net.Properties.Resources.JustifySml;
-    //    else
-    //      alignJustify.Image = value;
-    //    alignJustify.ImageScaling = ToolStripItemImageScaling.None;
-    //  }
-    //}
+    /// <summary>
+    /// Задать иконку "Выровнять текст по ширине"
+    /// </summary>
+    public Image ImageAlignJustify
+    {
+      set
+      {
+        Image result = value;
+        if (value == null)
+          result = global::FAQ_Net.Properties.Resources.JustifySml;
+        alignJustify.Image = result;
+        alignJustify.ImageScaling = ToolStripItemImageScaling.None;
+      }
+    }
 
     /// <summary>
     /// Задать иконку "Межстрочный интервал"
@@ -1252,10 +1255,10 @@ namespace FAQ_Net
       }
       // Set alignment controls.
       selAlign = richText.SelectionAlignment;
-      alignCenter.Checked = (selAlign == HorizontalAlignment.Center);
-      alignLeft.Checked = (selAlign == HorizontalAlignment.Left);
-      alignRight.Checked = (selAlign == HorizontalAlignment.Right);
-      //alignJustify.Checked = false;
+      alignCenter.Checked = (selAlign == TextAlign.Center);
+      alignLeft.Checked = (selAlign == TextAlign.Left);
+      alignRight.Checked = (selAlign == TextAlign.Right);
+      alignJustify.Checked = (selAlign == TextAlign.Justify);
       // Change right indent as needed.
       setFormRightIndent();
     }
@@ -1449,7 +1452,7 @@ namespace FAQ_Net
 
     private void Tools_Click(object sender, EventArgs e)
     {
-      switch (((ToolStripButton)sender).Name)
+      switch (((ToolStripItem)sender).Name)
       {
         //case "newFile":
         //    newForm.PerformClick();
@@ -1498,31 +1501,45 @@ namespace FAQ_Net
         case "alignLeft":
           alignCenter.Checked = false;
           alignRight.Checked = false;
-          //alignJustify.Checked = false;
-          richText.SelectionAlignment = HorizontalAlignment.Left;
+          alignJustify.Checked = false;
+          richText.SelectionAlignment = TextAlign.Left;
           break;
         case "alignCenter":
           alignLeft.Checked = false;
           alignRight.Checked = false;
-          //alignJustify.Checked = false;
-          richText.SelectionAlignment = HorizontalAlignment.Center;
+          alignJustify.Checked = false;
+          richText.SelectionAlignment = TextAlign.Center;
           break;
         case "alignRight":
           alignLeft.Checked = false;
           alignCenter.Checked = false;
-          //alignJustify.Checked = false;
-          richText.SelectionAlignment = HorizontalAlignment.Right;
+          alignJustify.Checked = false;
+          richText.SelectionAlignment = TextAlign.Right;
           break;
-        // Этот код не работает по непонятным причинам, поэтому кнопка "выравнивания по ширине" скрыта
-        // скорее всего это связано с отсутствием свойства HorizontalAlignment.Justify в .NET
-        //case "alignJustify":
-        //    alignLeft.Checked = false;
-        //    alignCenter.Checked = false;
-        //    alignRight.Checked = false;
-        //    richText_KeyDown(alignJustify, new KeyEventArgs(Keys.Control | Keys.J));                    
-        //    break;
+          // Этот код не работает по непонятным причинам, поэтому кнопка "выравнивания по ширине" скрыта
+          // скорее всего это связано с отсутствием свойства HorizontalAlignment.Justify в .NET
+        case "alignJustify":
+          alignLeft.Checked = false;
+          alignCenter.Checked = false;
+          alignRight.Checked = false;
+          richText.SelectionAlignment = TextAlign.Justify;
+          break;
         case "bullet":
+        case "tsmiNormalBullet":
+          if (!_clickDownBullet)
+          {
+            //richText.SelectionIndent = 50; // отступ слева
+            bullet.Checked = !bullet.Checked;
+            richText.SelectionBullet = bullet.Checked;
+            if (richText.SelectionBullet)
+              richText.BulletType = RichTextBoxCustom.AdvRichTextBulletType.Normal;
+          }
+          _clickDownBullet = false;
+          break;
+        case "tsmiNumberBullet":
           richText.SelectionBullet = bullet.Checked;
+          richText.BulletType = RichTextBoxCustom.AdvRichTextBulletType.Number;
+          richText.BulletStyle = RichTextBoxCustom.AdvRichTextBulletStyle.RightParenthesis;
           break;
       }
     }
@@ -3421,16 +3438,7 @@ namespace FAQ_Net
             break;
           case Keys.J:
             // Выравнивание текста по ширине
-            const string JUSTIFIED_ALIGN_RTF = "\\pard\\qj";
-            if (richText.SelectedRtf.Length == 0)
-              richText.SelectedRtf = @"{\rtf1\qj}";
-            else
-              richText.SelectedRtf = richText.SelectedRtf
-                .Replace("\\pard\\f0", JUSTIFIED_ALIGN_RTF)
-                .Replace("\\pard\\cf1", JUSTIFIED_ALIGN_RTF)
-                .Replace("\\pard\\ql", JUSTIFIED_ALIGN_RTF)
-                .Replace("\\pard\\qr", JUSTIFIED_ALIGN_RTF)
-                .Replace("\\pard\\qc", JUSTIFIED_ALIGN_RTF);
+            richText.SelectionAlignment = TextAlign.Justify;
             break;
           case Keys.F8:
             richText.ReadOnly = true;
@@ -3741,7 +3749,7 @@ namespace FAQ_Net
             this.alignLeft,
             this.alignCenter,
             this.alignRight,
-            //this.alignJustify,
+            this.alignJustify,
             this.lineSpacing,
             this.sep7,
             this.bullet,
@@ -3829,6 +3837,11 @@ namespace FAQ_Net
       tsmiSmoothScrollingDocument.Checked = !tsmiSmoothScrollingDocument.Checked;
       _settingsXml.SetSetting(Constants.RTF_SMOOTH_SCROLLING, tsmiSmoothScrollingDocument.Checked.ToString());
       Constants.RtfSmoothScrolling = tsmiSmoothScrollingDocument.Checked;
+    }
+
+    private void bullet_DropDownOpening(object sender, EventArgs e)
+    {
+      _clickDownBullet = true;
     }
   }
 }

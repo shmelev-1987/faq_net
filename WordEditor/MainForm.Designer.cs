@@ -29,19 +29,16 @@ namespace FAQ_Net
         private void InitializeComponent()
         {
       this.components = new System.ComponentModel.Container();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      this.TabControl = new GradientControls.TabControlGradient();
-      this.CategoriesTP = new GradientControls.TabPageGradient();
-      this.TV1 = new System.Windows.Forms.TreeView();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
       this.CategoriesContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.CreateQuestionTSMI = new System.Windows.Forms.ToolStripMenuItem();
       this.CreateCategoryTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,46 +52,6 @@ namespace FAQ_Net
       this.SearchTSMI = new System.Windows.Forms.ToolStripMenuItem();
       this.ChangeNameCategoryTSMI = new System.Windows.Forms.ToolStripMenuItem();
       this.CreateBackupTSMI = new System.Windows.Forms.ToolStripMenuItem();
-      this.statusStrip2 = new GradientControls.StatusStripGradient();
-      this.CountSubcategoryLbl = new System.Windows.Forms.ToolStripStatusLabel();
-      this.CountSubcategoryVal = new System.Windows.Forms.ToolStripStatusLabel();
-      this.SearchPanel = new System.Windows.Forms.Panel();
-      this.SearchCategoryBtn = new PulseButton.PulseButton();
-      this.SearchCategoryCmbBox = new System.Windows.Forms.ComboBox();
-      this.toolStrip1 = new GradientControls.ToolStripGradient();
-      this.CreateQuestionTSB = new System.Windows.Forms.ToolStripButton();
-      this.CreateCategoryTSB = new System.Windows.Forms.ToolStripButton();
-      this.CreateSubcategoryTSB = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-      this.RefreshTSB = new System.Windows.Forms.ToolStripButton();
-      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-      this.CollapseAllTSB = new System.Windows.Forms.ToolStripButton();
-      this.ExpandAllNodesTSB = new System.Windows.Forms.ToolStripButton();
-      this.SearchTP = new GradientControls.TabPageGradient();
-      this.DGVResultSearch = new System.Windows.Forms.DataGridView();
-      this.id_content_search = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.QuestionSearchColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.SearchFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.panel1 = new System.Windows.Forms.Panel();
-      this.searchUp = new PulseButton.PulseButton();
-      this.searchDown = new PulseButton.PulseButton();
-      this.SearchTxtBox = new System.Windows.Forms.TextBox();
-      this.lblSearchDescription = new System.Windows.Forms.Label();
-      this.SearchAnswRB = new System.Windows.Forms.RadioButton();
-      this.SearchQuestRB = new System.Windows.Forms.RadioButton();
-      this.SearchAllRB = new System.Windows.Forms.RadioButton();
-      this.SearchBtn = new PulseButton.PulseButton();
-      this.label1 = new System.Windows.Forms.Label();
-      this.FavoritesTP = new GradientControls.TabPageGradient();
-      this.FavoriteDGV = new System.Windows.Forms.DataGridView();
-      this.Favorites_id_content = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.Favorites_question = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.FavoritesFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.JournalTP = new GradientControls.TabPageGradient();
-      this.JournalDGV = new System.Windows.Forms.DataGridView();
-      this.JournalIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.JournalQuestionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.JournalFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
       this.statusStrip3 = new GradientControls.StatusStripGradient();
       this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -105,7 +62,6 @@ namespace FAQ_Net
       this.tsslCountCharsHeader = new System.Windows.Forms.ToolStripStatusLabel();
       this.tsslCountCharsValue = new System.Windows.Forms.ToolStripStatusLabel();
       this.toolsTop = new GradientControls.ToolStripGradient();
-      this.openFile = new System.Windows.Forms.ToolStripButton();
       this.saveFile = new System.Windows.Forms.ToolStripButton();
       this.sep0 = new System.Windows.Forms.ToolStripSeparator();
       this.printText = new System.Windows.Forms.ToolStripButton();
@@ -132,12 +88,15 @@ namespace FAQ_Net
       this.alignLeft = new System.Windows.Forms.ToolStripButton();
       this.alignCenter = new System.Windows.Forms.ToolStripButton();
       this.alignRight = new System.Windows.Forms.ToolStripButton();
+      this.alignJustify = new System.Windows.Forms.ToolStripButton();
       this.lineSpacing = new System.Windows.Forms.ToolStripSplitButton();
       this.lineSpace1 = new System.Windows.Forms.ToolStripMenuItem();
       this.lineSpace1pt5 = new System.Windows.Forms.ToolStripMenuItem();
       this.lineSpace2 = new System.Windows.Forms.ToolStripMenuItem();
       this.sep7 = new System.Windows.Forms.ToolStripSeparator();
-      this.bullet = new System.Windows.Forms.ToolStripButton();
+      this.bullet = new GradientControls.ToolStripSplitCheckButton();
+      this.tsmiNormalBullet = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiNumberBullet = new System.Windows.Forms.ToolStripMenuItem();
       this.selectColor = new System.Windows.Forms.ToolStripSplitButton();
       this.colors = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.black = new System.Windows.Forms.ToolStripMenuItem();
@@ -218,12 +177,6 @@ namespace FAQ_Net
       this.tsmiAddTable = new System.Windows.Forms.ToolStripMenuItem();
       this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiAboutProgram = new System.Windows.Forms.ToolStripMenuItem();
-      this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-      this.btnSelectQuestion = new PulseButton.PulseButton();
-      this.BackBtn = new PulseButton.PulseButton();
-      this.btnNextQuestion = new PulseButton.PulseButton();
-      this.SelectedPathLbl = new System.Windows.Forms.Label();
-      this.panel3 = new GradientControls.PanelGradient();
       this.QuestionsCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.AddQuestionTSMI = new System.Windows.Forms.ToolStripMenuItem();
       this.ShowAnswerTSMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -248,14 +201,61 @@ namespace FAQ_Net
       this.sep_2 = new System.Windows.Forms.ToolStripSeparator();
       this.printRichText = new System.Windows.Forms.ToolStripMenuItem();
       this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+      this.BackBtn = new PulseButton.PulseButton();
+      this.btnNextQuestion = new PulseButton.PulseButton();
       this.splitContainer2 = new System.Windows.Forms.SplitContainer();
       this.splitter1 = new System.Windows.Forms.Splitter();
+      this.panel3 = new GradientControls.PanelGradient();
+      this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+      this.btnSelectQuestion = new PulseButton.PulseButton();
+      this.SelectedPathLbl = new System.Windows.Forms.Label();
       this.splitter2 = new System.Windows.Forms.Splitter();
+      this.TabControl = new GradientControls.TabControlGradient();
+      this.CategoriesTP = new GradientControls.TabPageGradient();
+      this.TV1 = new System.Windows.Forms.TreeView();
+      this.statusStrip2 = new GradientControls.StatusStripGradient();
+      this.CountSubcategoryLbl = new System.Windows.Forms.ToolStripStatusLabel();
+      this.CountSubcategoryVal = new System.Windows.Forms.ToolStripStatusLabel();
+      this.SearchPanel = new System.Windows.Forms.Panel();
+      this.SearchCategoryBtn = new PulseButton.PulseButton();
+      this.SearchCategoryCmbBox = new System.Windows.Forms.ComboBox();
+      this.toolStrip1 = new GradientControls.ToolStripGradient();
+      this.CreateQuestionTSB = new System.Windows.Forms.ToolStripButton();
+      this.CreateCategoryTSB = new System.Windows.Forms.ToolStripButton();
+      this.CreateSubcategoryTSB = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+      this.RefreshTSB = new System.Windows.Forms.ToolStripButton();
+      this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+      this.CollapseAllTSB = new System.Windows.Forms.ToolStripButton();
+      this.ExpandAllNodesTSB = new System.Windows.Forms.ToolStripButton();
+      this.SearchTP = new GradientControls.TabPageGradient();
+      this.DGVResultSearch = new System.Windows.Forms.DataGridView();
+      this.id_content_search = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.QuestionSearchColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.SearchFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.panel1 = new System.Windows.Forms.Panel();
+      this.searchUp = new PulseButton.PulseButton();
+      this.searchDown = new PulseButton.PulseButton();
+      this.SearchTxtBox = new System.Windows.Forms.TextBox();
+      this.lblSearchDescription = new System.Windows.Forms.Label();
+      this.SearchAnswRB = new System.Windows.Forms.RadioButton();
+      this.SearchQuestRB = new System.Windows.Forms.RadioButton();
+      this.SearchAllRB = new System.Windows.Forms.RadioButton();
+      this.SearchBtn = new PulseButton.PulseButton();
+      this.label1 = new System.Windows.Forms.Label();
+      this.FavoritesTP = new GradientControls.TabPageGradient();
+      this.FavoriteDGV = new System.Windows.Forms.DataGridView();
+      this.Favorites_id_content = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.Favorites_question = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.FavoritesFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.JournalTP = new GradientControls.TabPageGradient();
+      this.JournalDGV = new System.Windows.Forms.DataGridView();
       this.panel4 = new System.Windows.Forms.Panel();
       this.status = new GradientControls.StatusStripGradient();
       this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
       this.tsmiSaveNodeSelect = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiReplaceFontControlToMenu = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiSmoothScrollingDocument = new System.Windows.Forms.ToolStripMenuItem();
       this.tsmiDesignSettings = new System.Windows.Forms.ToolStripMenuItem();
       this.CountQuestTitLbl = new System.Windows.Forms.ToolStripStatusLabel();
       this.CountQuestLbl = new System.Windows.Forms.ToolStripStatusLabel();
@@ -265,10 +265,27 @@ namespace FAQ_Net
       this.CountCategoriesVal = new System.Windows.Forms.ToolStripStatusLabel();
       this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
       this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
-      this.tsmiSmoothScrollingDocument = new System.Windows.Forms.ToolStripMenuItem();
+      this.openFile = new System.Windows.Forms.ToolStripButton();
+      this.JournalIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.JournalQuestionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.JournalFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.CategoriesContextMenu.SuspendLayout();
+      this.splitContainer1.Panel1.SuspendLayout();
+      this.splitContainer1.Panel2.SuspendLayout();
+      this.splitContainer1.SuspendLayout();
+      this.statusStrip3.SuspendLayout();
+      this.statusStrip1.SuspendLayout();
+      this.toolsTop.SuspendLayout();
+      this.colors.SuspendLayout();
+      this.menuTop.SuspendLayout();
+      this.QuestionsCMS.SuspendLayout();
+      this.richMenu.SuspendLayout();
+      this.splitContainer2.Panel1.SuspendLayout();
+      this.splitContainer2.SuspendLayout();
+      this.panel3.SuspendLayout();
+      this.tableLayoutPanel1.SuspendLayout();
       this.TabControl.SuspendLayout();
       this.CategoriesTP.SuspendLayout();
-      this.CategoriesContextMenu.SuspendLayout();
       this.statusStrip2.SuspendLayout();
       this.SearchPanel.SuspendLayout();
       this.toolStrip1.SuspendLayout();
@@ -279,78 +296,9 @@ namespace FAQ_Net
       ((System.ComponentModel.ISupportInitialize)(this.FavoriteDGV)).BeginInit();
       this.JournalTP.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.JournalDGV)).BeginInit();
-      this.splitContainer1.Panel1.SuspendLayout();
-      this.splitContainer1.Panel2.SuspendLayout();
-      this.splitContainer1.SuspendLayout();
-      this.statusStrip3.SuspendLayout();
-      this.statusStrip1.SuspendLayout();
-      this.toolsTop.SuspendLayout();
-      this.colors.SuspendLayout();
-      this.menuTop.SuspendLayout();
-      this.tableLayoutPanel1.SuspendLayout();
-      this.panel3.SuspendLayout();
-      this.QuestionsCMS.SuspendLayout();
-      this.richMenu.SuspendLayout();
-      this.splitContainer2.Panel1.SuspendLayout();
-      this.splitContainer2.SuspendLayout();
       this.panel4.SuspendLayout();
       this.status.SuspendLayout();
       this.SuspendLayout();
-      // 
-      // TabControl
-      // 
-      this.TabControl.BackColorBottom = System.Drawing.Color.Empty;
-      this.TabControl.Controls.Add(this.CategoriesTP);
-      this.TabControl.Controls.Add(this.SearchTP);
-      this.TabControl.Controls.Add(this.FavoritesTP);
-      this.TabControl.Controls.Add(this.JournalTP);
-      this.TabControl.Dock = System.Windows.Forms.DockStyle.Left;
-      this.TabControl.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-      this.TabControl.Location = new System.Drawing.Point(0, 0);
-      this.TabControl.Name = "TabControl";
-      this.TabControl.SelectedIndex = 0;
-      this.TabControl.Size = new System.Drawing.Size(238, 402);
-      this.TabControl.TabIndex = 2;
-      this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
-      // 
-      // CategoriesTP
-      // 
-      this.CategoriesTP.BackColor = System.Drawing.SystemColors.Control;
-      this.CategoriesTP.BackColorBottom = System.Drawing.Color.Empty;
-      this.CategoriesTP.Controls.Add(this.TV1);
-      this.CategoriesTP.Controls.Add(this.statusStrip2);
-      this.CategoriesTP.Controls.Add(this.SearchPanel);
-      this.CategoriesTP.Controls.Add(this.toolStrip1);
-      this.CategoriesTP.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-      this.CategoriesTP.Location = new System.Drawing.Point(4, 22);
-      this.CategoriesTP.Name = "CategoriesTP";
-      this.CategoriesTP.Padding = new System.Windows.Forms.Padding(3);
-      this.CategoriesTP.Size = new System.Drawing.Size(230, 376);
-      this.CategoriesTP.TabIndex = 0;
-      this.CategoriesTP.Text = "Разделы";
-      // 
-      // TV1
-      // 
-      this.TV1.AllowDrop = true;
-      this.TV1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(220)))));
-      this.TV1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.TV1.ContextMenuStrip = this.CategoriesContextMenu;
-      this.TV1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.TV1.HideSelection = false;
-      this.TV1.Location = new System.Drawing.Point(3, 73);
-      this.TV1.Name = "TV1";
-      this.TV1.PathSeparator = " :: ";
-      this.TV1.Size = new System.Drawing.Size(224, 278);
-      this.TV1.TabIndex = 4;
-      this.TV1.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TV1_AfterExpand);
-      this.TV1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.TV1_ItemDrag);
-      this.TV1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV1_AfterSelect);
-      this.TV1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TV1_NodeMouseClick);
-      this.TV1.DragDrop += new System.Windows.Forms.DragEventHandler(this.TV1_DragDrop);
-      this.TV1.DragEnter += new System.Windows.Forms.DragEventHandler(this.TV1_DragEnter);
-      this.TV1.DragOver += new System.Windows.Forms.DragEventHandler(this.TV1_DragOver);
-      this.TV1.DragLeave += new System.EventHandler(this.TV1_DragLeave);
-      this.TV1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TV1_MouseDown);
       // 
       // CategoriesContextMenu
       // 
@@ -456,542 +404,6 @@ namespace FAQ_Net
       this.CreateBackupTSMI.Text = "Создать резервную копию БД";
       this.CreateBackupTSMI.Click += new System.EventHandler(this.CreateBackupTSMI_Click);
       // 
-      // statusStrip2
-      // 
-      this.statusStrip2.BackColor = System.Drawing.SystemColors.Control;
-      this.statusStrip2.BackColorBottom = System.Drawing.Color.Empty;
-      this.statusStrip2.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-      this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CountSubcategoryLbl,
-            this.CountSubcategoryVal});
-      this.statusStrip2.Location = new System.Drawing.Point(3, 351);
-      this.statusStrip2.Name = "statusStrip2";
-      this.statusStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-      this.statusStrip2.Size = new System.Drawing.Size(224, 22);
-      this.statusStrip2.TabIndex = 3;
-      this.statusStrip2.Text = "statusStrip2";
-      // 
-      // CountSubcategoryLbl
-      // 
-      this.CountSubcategoryLbl.Margin = new System.Windows.Forms.Padding(3, 3, 0, 2);
-      this.CountSubcategoryLbl.Name = "CountSubcategoryLbl";
-      this.CountSubcategoryLbl.Size = new System.Drawing.Size(148, 17);
-      this.CountSubcategoryLbl.Text = "Количество подразделов:";
-      // 
-      // CountSubcategoryVal
-      // 
-      this.CountSubcategoryVal.Name = "CountSubcategoryVal";
-      this.CountSubcategoryVal.Size = new System.Drawing.Size(13, 17);
-      this.CountSubcategoryVal.Text = "0";
-      // 
-      // SearchPanel
-      // 
-      this.SearchPanel.Controls.Add(this.SearchCategoryBtn);
-      this.SearchPanel.Controls.Add(this.SearchCategoryCmbBox);
-      this.SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
-      this.SearchPanel.Location = new System.Drawing.Point(3, 28);
-      this.SearchPanel.Name = "SearchPanel";
-      this.SearchPanel.Size = new System.Drawing.Size(224, 45);
-      this.SearchPanel.TabIndex = 2;
-      this.SearchPanel.Visible = false;
-      // 
-      // SearchCategoryBtn
-      // 
-      this.SearchCategoryBtn.ButtonColorBottom = System.Drawing.Color.LightCoral;
-      this.SearchCategoryBtn.ButtonColorTop = System.Drawing.Color.MistyRose;
-      this.SearchCategoryBtn.CornerRadius = 5;
-      this.SearchCategoryBtn.Dock = System.Windows.Forms.DockStyle.Top;
-      this.SearchCategoryBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.SearchCategoryBtn.Location = new System.Drawing.Point(0, 21);
-      this.SearchCategoryBtn.Name = "SearchCategoryBtn";
-      this.SearchCategoryBtn.PulseSpeed = 0.3F;
-      this.SearchCategoryBtn.PulseWidth = 1;
-      this.SearchCategoryBtn.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
-      this.SearchCategoryBtn.Size = new System.Drawing.Size(224, 23);
-      this.SearchCategoryBtn.TabIndex = 1;
-      this.SearchCategoryBtn.Text = "Найти";
-      this.SearchCategoryBtn.UseVisualStyleBackColor = true;
-      this.SearchCategoryBtn.Click += new System.EventHandler(this.SearchCategoryBtn_Click);
-      // 
-      // SearchCategoryCmbBox
-      // 
-      this.SearchCategoryCmbBox.Dock = System.Windows.Forms.DockStyle.Top;
-      this.SearchCategoryCmbBox.FormattingEnabled = true;
-      this.SearchCategoryCmbBox.Location = new System.Drawing.Point(0, 0);
-      this.SearchCategoryCmbBox.Name = "SearchCategoryCmbBox";
-      this.SearchCategoryCmbBox.Size = new System.Drawing.Size(224, 21);
-      this.SearchCategoryCmbBox.TabIndex = 0;
-      this.SearchCategoryCmbBox.Text = "---Поиск по разделам---";
-      // 
-      // toolStrip1
-      // 
-      this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
-      this.toolStrip1.BackColorBottom = System.Drawing.Color.Empty;
-      this.toolStrip1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-      this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-      this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CreateQuestionTSB,
-            this.CreateCategoryTSB,
-            this.CreateSubcategoryTSB,
-            this.toolStripSeparator3,
-            this.RefreshTSB,
-            this.toolStripSeparator4,
-            this.CollapseAllTSB,
-            this.ExpandAllNodesTSB});
-      this.toolStrip1.Location = new System.Drawing.Point(3, 3);
-      this.toolStrip1.Name = "toolStrip1";
-      this.toolStrip1.Size = new System.Drawing.Size(224, 25);
-      this.toolStrip1.TabIndex = 0;
-      this.toolStrip1.Text = "toolStrip1";
-      // 
-      // CreateQuestionTSB
-      // 
-      this.CreateQuestionTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.CreateQuestionTSB.Enabled = false;
-      this.CreateQuestionTSB.Image = global::FAQ_Net.Properties.Resources.NewSml;
-      this.CreateQuestionTSB.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.CreateQuestionTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.CreateQuestionTSB.Name = "CreateQuestionTSB";
-      this.CreateQuestionTSB.Size = new System.Drawing.Size(23, 22);
-      this.CreateQuestionTSB.Text = "Создание вопроса";
-      this.CreateQuestionTSB.Click += new System.EventHandler(this.CreateQuestionTSB_Click);
-      // 
-      // CreateCategoryTSB
-      // 
-      this.CreateCategoryTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.CreateCategoryTSB.Image = global::FAQ_Net.Properties.Resources.Folder;
-      this.CreateCategoryTSB.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.CreateCategoryTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.CreateCategoryTSB.Name = "CreateCategoryTSB";
-      this.CreateCategoryTSB.Size = new System.Drawing.Size(23, 22);
-      this.CreateCategoryTSB.Text = "Добавить раздел";
-      this.CreateCategoryTSB.Click += new System.EventHandler(this.CreateCategory_Click);
-      // 
-      // CreateSubcategoryTSB
-      // 
-      this.CreateSubcategoryTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.CreateSubcategoryTSB.Enabled = false;
-      this.CreateSubcategoryTSB.Image = global::FAQ_Net.Properties.Resources.NewFolder2;
-      this.CreateSubcategoryTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.CreateSubcategoryTSB.Name = "CreateSubcategoryTSB";
-      this.CreateSubcategoryTSB.Size = new System.Drawing.Size(23, 22);
-      this.CreateSubcategoryTSB.Text = "Добавить подраздел";
-      this.CreateSubcategoryTSB.Click += new System.EventHandler(this.CreateSubcategoryTSB_Click);
-      // 
-      // toolStripSeparator3
-      // 
-      this.toolStripSeparator3.Name = "toolStripSeparator3";
-      this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-      // 
-      // RefreshTSB
-      // 
-      this.RefreshTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.RefreshTSB.Image = global::FAQ_Net.Properties.Resources.Refresh;
-      this.RefreshTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.RefreshTSB.Name = "RefreshTSB";
-      this.RefreshTSB.Size = new System.Drawing.Size(23, 22);
-      this.RefreshTSB.Text = "Обновить";
-      this.RefreshTSB.Click += new System.EventHandler(this.RefreshTSB_Click);
-      // 
-      // toolStripSeparator4
-      // 
-      this.toolStripSeparator4.Name = "toolStripSeparator4";
-      this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-      // 
-      // CollapseAllTSB
-      // 
-      this.CollapseAllTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.CollapseAllTSB.Image = global::FAQ_Net.Properties.Resources.collapse;
-      this.CollapseAllTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.CollapseAllTSB.Name = "CollapseAllTSB";
-      this.CollapseAllTSB.Size = new System.Drawing.Size(23, 22);
-      this.CollapseAllTSB.Text = "Свернуть все узлы";
-      this.CollapseAllTSB.Click += new System.EventHandler(this.CollapseAllTSB_Click);
-      // 
-      // ExpandAllNodesTSB
-      // 
-      this.ExpandAllNodesTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.ExpandAllNodesTSB.Image = global::FAQ_Net.Properties.Resources.expand;
-      this.ExpandAllNodesTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.ExpandAllNodesTSB.Name = "ExpandAllNodesTSB";
-      this.ExpandAllNodesTSB.Size = new System.Drawing.Size(23, 22);
-      this.ExpandAllNodesTSB.Text = "Развернуть все узлы";
-      this.ExpandAllNodesTSB.Click += new System.EventHandler(this.ExpandAllNodesTSB_Click);
-      // 
-      // SearchTP
-      // 
-      this.SearchTP.BackColor = System.Drawing.SystemColors.Control;
-      this.SearchTP.BackColorBottom = System.Drawing.Color.Empty;
-      this.SearchTP.Controls.Add(this.DGVResultSearch);
-      this.SearchTP.Controls.Add(this.panel1);
-      this.SearchTP.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-      this.SearchTP.Location = new System.Drawing.Point(4, 22);
-      this.SearchTP.Name = "SearchTP";
-      this.SearchTP.Padding = new System.Windows.Forms.Padding(3);
-      this.SearchTP.Size = new System.Drawing.Size(230, 376);
-      this.SearchTP.TabIndex = 1;
-      this.SearchTP.Text = "Поиск";
-      // 
-      // DGVResultSearch
-      // 
-      this.DGVResultSearch.AllowUserToAddRows = false;
-      this.DGVResultSearch.AllowUserToResizeRows = false;
-      dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.DGVResultSearch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-      this.DGVResultSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.DGVResultSearch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id_content_search,
-            this.QuestionSearchColumn,
-            this.SearchFavoriteDateColumn});
-      dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.DGVResultSearch.DefaultCellStyle = dataGridViewCellStyle11;
-      this.DGVResultSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.DGVResultSearch.EnableHeadersVisualStyles = false;
-      this.DGVResultSearch.Location = new System.Drawing.Point(3, 128);
-      this.DGVResultSearch.MultiSelect = false;
-      this.DGVResultSearch.Name = "DGVResultSearch";
-      this.DGVResultSearch.ReadOnly = true;
-      dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.DGVResultSearch.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
-      this.DGVResultSearch.RowHeadersVisible = false;
-      this.DGVResultSearch.Size = new System.Drawing.Size(224, 245);
-      this.DGVResultSearch.TabIndex = 5;
-      this.DGVResultSearch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVResultSearch_CellClick);
-      // 
-      // id_content_search
-      // 
-      this.id_content_search.DataPropertyName = "id_content";
-      this.id_content_search.HeaderText = "id_content";
-      this.id_content_search.Name = "id_content_search";
-      this.id_content_search.ReadOnly = true;
-      this.id_content_search.Visible = false;
-      // 
-      // QuestionSearchColumn
-      // 
-      this.QuestionSearchColumn.DataPropertyName = "question";
-      this.QuestionSearchColumn.HeaderText = "Результаты";
-      this.QuestionSearchColumn.Name = "QuestionSearchColumn";
-      this.QuestionSearchColumn.ReadOnly = true;
-      // 
-      // SearchFavoriteDateColumn
-      // 
-      this.SearchFavoriteDateColumn.DataPropertyName = "favorite_date";
-      this.SearchFavoriteDateColumn.HeaderText = "favorite_date";
-      this.SearchFavoriteDateColumn.Name = "SearchFavoriteDateColumn";
-      this.SearchFavoriteDateColumn.ReadOnly = true;
-      this.SearchFavoriteDateColumn.Visible = false;
-      // 
-      // panel1
-      // 
-      this.panel1.Controls.Add(this.searchUp);
-      this.panel1.Controls.Add(this.searchDown);
-      this.panel1.Controls.Add(this.SearchTxtBox);
-      this.panel1.Controls.Add(this.lblSearchDescription);
-      this.panel1.Controls.Add(this.SearchAnswRB);
-      this.panel1.Controls.Add(this.SearchQuestRB);
-      this.panel1.Controls.Add(this.SearchAllRB);
-      this.panel1.Controls.Add(this.SearchBtn);
-      this.panel1.Controls.Add(this.label1);
-      this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-      this.panel1.Location = new System.Drawing.Point(3, 3);
-      this.panel1.Name = "panel1";
-      this.panel1.Size = new System.Drawing.Size(224, 125);
-      this.panel1.TabIndex = 4;
-      // 
-      // searchUp
-      // 
-      this.searchUp.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
-      this.searchUp.ButtonColorTop = System.Drawing.Color.LightCyan;
-      this.searchUp.CornerRadius = 5;
-      this.searchUp.Enabled = false;
-      this.searchUp.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.searchUp.Location = new System.Drawing.Point(181, 93);
-      this.searchUp.Name = "searchUp";
-      this.searchUp.PulseSpeed = 0.3F;
-      this.searchUp.PulseWidth = 1;
-      this.searchUp.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
-      this.searchUp.Size = new System.Drawing.Size(15, 25);
-      this.searchUp.TabIndex = 12;
-      this.searchUp.Text = "↑";
-      this.searchUp.UseVisualStyleBackColor = true;
-      this.searchUp.Click += new System.EventHandler(this.searchUp_Click);
-      // 
-      // searchDown
-      // 
-      this.searchDown.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
-      this.searchDown.ButtonColorTop = System.Drawing.Color.LightCyan;
-      this.searchDown.CornerRadius = 5;
-      this.searchDown.Enabled = false;
-      this.searchDown.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.searchDown.Location = new System.Drawing.Point(160, 93);
-      this.searchDown.Name = "searchDown";
-      this.searchDown.PulseSpeed = 0.3F;
-      this.searchDown.PulseWidth = 1;
-      this.searchDown.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
-      this.searchDown.Size = new System.Drawing.Size(15, 25);
-      this.searchDown.TabIndex = 11;
-      this.searchDown.Text = "↓";
-      this.searchDown.UseVisualStyleBackColor = true;
-      this.searchDown.Click += new System.EventHandler(this.searchDown_Click);
-      // 
-      // SearchTxtBox
-      // 
-      this.SearchTxtBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.SearchTxtBox.Location = new System.Drawing.Point(3, 21);
-      this.SearchTxtBox.Name = "SearchTxtBox";
-      this.SearchTxtBox.Size = new System.Drawing.Size(218, 20);
-      this.SearchTxtBox.TabIndex = 1;
-      this.SearchTxtBox.TextChanged += new System.EventHandler(this.SearchTxtBox_TextChanged);
-      this.SearchTxtBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchTxtBox_KeyPress);
-      // 
-      // lblSearchDescription
-      // 
-      this.lblSearchDescription.AutoSize = true;
-      this.lblSearchDescription.ForeColor = System.Drawing.Color.Red;
-      this.lblSearchDescription.Location = new System.Drawing.Point(13, 42);
-      this.lblSearchDescription.Name = "lblSearchDescription";
-      this.lblSearchDescription.Size = new System.Drawing.Size(198, 26);
-      this.lblSearchDescription.TabIndex = 10;
-      this.lblSearchDescription.Text = "|| - ИЛИ, &&&& - И, пробел - разделитель,\r\n% - любые символы";
-      this.lblSearchDescription.FontChanged += new System.EventHandler(this.lblSearchDescription_FontChanged);
-      // 
-      // SearchAnswRB
-      // 
-      this.SearchAnswRB.AutoSize = true;
-      this.SearchAnswRB.Location = new System.Drawing.Point(148, 70);
-      this.SearchAnswRB.Name = "SearchAnswRB";
-      this.SearchAnswRB.Size = new System.Drawing.Size(73, 17);
-      this.SearchAnswRB.TabIndex = 9;
-      this.SearchAnswRB.Text = "в ответах";
-      this.SearchAnswRB.UseVisualStyleBackColor = true;
-      // 
-      // SearchQuestRB
-      // 
-      this.SearchQuestRB.AutoSize = true;
-      this.SearchQuestRB.Location = new System.Drawing.Point(59, 70);
-      this.SearchQuestRB.Name = "SearchQuestRB";
-      this.SearchQuestRB.Size = new System.Drawing.Size(92, 17);
-      this.SearchQuestRB.TabIndex = 8;
-      this.SearchQuestRB.Text = "в заголовках";
-      this.SearchQuestRB.UseVisualStyleBackColor = true;
-      // 
-      // SearchAllRB
-      // 
-      this.SearchAllRB.AutoSize = true;
-      this.SearchAllRB.Checked = true;
-      this.SearchAllRB.Location = new System.Drawing.Point(4, 70);
-      this.SearchAllRB.Name = "SearchAllRB";
-      this.SearchAllRB.Size = new System.Drawing.Size(56, 17);
-      this.SearchAllRB.TabIndex = 7;
-      this.SearchAllRB.TabStop = true;
-      this.SearchAllRB.Text = "Везде";
-      this.SearchAllRB.UseVisualStyleBackColor = true;
-      // 
-      // SearchBtn
-      // 
-      this.SearchBtn.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
-      this.SearchBtn.ButtonColorTop = System.Drawing.Color.LightCyan;
-      this.SearchBtn.CornerRadius = 5;
-      this.SearchBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.SearchBtn.Location = new System.Drawing.Point(74, 93);
-      this.SearchBtn.Name = "SearchBtn";
-      this.SearchBtn.PulseSpeed = 0.3F;
-      this.SearchBtn.PulseWidth = 1;
-      this.SearchBtn.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
-      this.SearchBtn.Size = new System.Drawing.Size(77, 25);
-      this.SearchBtn.TabIndex = 4;
-      this.SearchBtn.Text = "Поиск";
-      this.SearchBtn.UseVisualStyleBackColor = true;
-      this.SearchBtn.Click += new System.EventHandler(this.SearchBtn_Click);
-      // 
-      // label1
-      // 
-      this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(5, 6);
-      this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(61, 13);
-      this.label1.TabIndex = 0;
-      this.label1.Text = "Что ищем:";
-      // 
-      // FavoritesTP
-      // 
-      this.FavoritesTP.BackColor = System.Drawing.SystemColors.Control;
-      this.FavoritesTP.BackColorBottom = System.Drawing.Color.Empty;
-      this.FavoritesTP.Controls.Add(this.FavoriteDGV);
-      this.FavoritesTP.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-      this.FavoritesTP.Location = new System.Drawing.Point(4, 22);
-      this.FavoritesTP.Name = "FavoritesTP";
-      this.FavoritesTP.Padding = new System.Windows.Forms.Padding(3);
-      this.FavoritesTP.Size = new System.Drawing.Size(230, 376);
-      this.FavoritesTP.TabIndex = 2;
-      this.FavoritesTP.Text = "Избранное";
-      // 
-      // FavoriteDGV
-      // 
-      this.FavoriteDGV.AllowUserToAddRows = false;
-      this.FavoriteDGV.AllowUserToResizeRows = false;
-      dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.FavoriteDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
-      this.FavoriteDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.FavoriteDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Favorites_id_content,
-            this.Favorites_question,
-            this.FavoritesFavoriteDateColumn});
-      dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.FavoriteDGV.DefaultCellStyle = dataGridViewCellStyle14;
-      this.FavoriteDGV.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.FavoriteDGV.EnableHeadersVisualStyles = false;
-      this.FavoriteDGV.Location = new System.Drawing.Point(3, 3);
-      this.FavoriteDGV.MultiSelect = false;
-      this.FavoriteDGV.Name = "FavoriteDGV";
-      this.FavoriteDGV.ReadOnly = true;
-      dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.FavoriteDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
-      this.FavoriteDGV.RowHeadersVisible = false;
-      this.FavoriteDGV.Size = new System.Drawing.Size(224, 370);
-      this.FavoriteDGV.TabIndex = 6;
-      this.FavoriteDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FavoriteDGV_CellClick);
-      // 
-      // Favorites_id_content
-      // 
-      this.Favorites_id_content.DataPropertyName = "id_content";
-      this.Favorites_id_content.HeaderText = "id_content";
-      this.Favorites_id_content.Name = "Favorites_id_content";
-      this.Favorites_id_content.ReadOnly = true;
-      this.Favorites_id_content.Visible = false;
-      // 
-      // Favorites_question
-      // 
-      this.Favorites_question.DataPropertyName = "question";
-      this.Favorites_question.HeaderText = "Результаты";
-      this.Favorites_question.Name = "Favorites_question";
-      this.Favorites_question.ReadOnly = true;
-      // 
-      // FavoritesFavoriteDateColumn
-      // 
-      this.FavoritesFavoriteDateColumn.DataPropertyName = "favorite_date";
-      this.FavoritesFavoriteDateColumn.HeaderText = "favorite_date";
-      this.FavoritesFavoriteDateColumn.Name = "FavoritesFavoriteDateColumn";
-      this.FavoritesFavoriteDateColumn.ReadOnly = true;
-      this.FavoritesFavoriteDateColumn.Visible = false;
-      // 
-      // JournalTP
-      // 
-      this.JournalTP.BackColor = System.Drawing.SystemColors.Control;
-      this.JournalTP.BackColorBottom = System.Drawing.Color.Empty;
-      this.JournalTP.Controls.Add(this.JournalDGV);
-      this.JournalTP.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-      this.JournalTP.Location = new System.Drawing.Point(4, 22);
-      this.JournalTP.Name = "JournalTP";
-      this.JournalTP.Padding = new System.Windows.Forms.Padding(3);
-      this.JournalTP.Size = new System.Drawing.Size(230, 376);
-      this.JournalTP.TabIndex = 3;
-      this.JournalTP.Text = "Журнал";
-      // 
-      // JournalDGV
-      // 
-      this.JournalDGV.AllowUserToAddRows = false;
-      this.JournalDGV.AllowUserToResizeRows = false;
-      dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.JournalDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
-      this.JournalDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.JournalDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.JournalIdColumn,
-            this.JournalQuestionColumn,
-            this.JournalFavoriteDateColumn});
-      dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-      dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-      dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.JournalDGV.DefaultCellStyle = dataGridViewCellStyle17;
-      this.JournalDGV.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.JournalDGV.EnableHeadersVisualStyles = false;
-      this.JournalDGV.Location = new System.Drawing.Point(3, 3);
-      this.JournalDGV.MultiSelect = false;
-      this.JournalDGV.Name = "JournalDGV";
-      this.JournalDGV.ReadOnly = true;
-      dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-      dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-      dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-      dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-      dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-      this.JournalDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
-      this.JournalDGV.RowHeadersVisible = false;
-      this.JournalDGV.Size = new System.Drawing.Size(224, 370);
-      this.JournalDGV.TabIndex = 7;
-      this.JournalDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.JournalDGV_CellClick);
-      // 
-      // JournalIdColumn
-      // 
-      this.JournalIdColumn.DataPropertyName = "id_content";
-      this.JournalIdColumn.HeaderText = "id_content";
-      this.JournalIdColumn.Name = "JournalIdColumn";
-      this.JournalIdColumn.ReadOnly = true;
-      this.JournalIdColumn.Visible = false;
-      // 
-      // JournalQuestionColumn
-      // 
-      this.JournalQuestionColumn.DataPropertyName = "question";
-      this.JournalQuestionColumn.HeaderText = "Результаты";
-      this.JournalQuestionColumn.Name = "JournalQuestionColumn";
-      this.JournalQuestionColumn.ReadOnly = true;
-      // 
-      // JournalFavoriteDateColumn
-      // 
-      this.JournalFavoriteDateColumn.DataPropertyName = "favorite_date";
-      this.JournalFavoriteDateColumn.HeaderText = "favorite_date";
-      this.JournalFavoriteDateColumn.Name = "JournalFavoriteDateColumn";
-      this.JournalFavoriteDateColumn.ReadOnly = true;
-      this.JournalFavoriteDateColumn.Visible = false;
-      // 
       // splitContainer1
       // 
       this.splitContainer1.BackColor = System.Drawing.Color.Transparent;
@@ -1012,7 +424,7 @@ namespace FAQ_Net
       this.splitContainer1.Panel2.Controls.Add(this.toolsTop);
       this.splitContainer1.Panel2.Controls.Add(this.menuTop);
       this.splitContainer1.Panel2.Leave += new System.EventHandler(this.splitContainer1_Panel2_Leave);
-      this.splitContainer1.Size = new System.Drawing.Size(698, 368);
+      this.splitContainer1.Size = new System.Drawing.Size(749, 368);
       this.splitContainer1.SplitterDistance = 93;
       this.splitContainer1.TabIndex = 29;
       // 
@@ -1026,7 +438,7 @@ namespace FAQ_Net
             this.CountQuestionsVal});
       this.statusStrip3.Location = new System.Drawing.Point(0, 69);
       this.statusStrip3.Name = "statusStrip3";
-      this.statusStrip3.Size = new System.Drawing.Size(696, 22);
+      this.statusStrip3.Size = new System.Drawing.Size(747, 22);
       this.statusStrip3.TabIndex = 2;
       this.statusStrip3.Text = "statusStrip3";
       // 
@@ -1054,7 +466,7 @@ namespace FAQ_Net
             this.tsslCountCharsValue});
       this.statusStrip1.Location = new System.Drawing.Point(0, 247);
       this.statusStrip1.Name = "statusStrip1";
-      this.statusStrip1.Size = new System.Drawing.Size(696, 22);
+      this.statusStrip1.Size = new System.Drawing.Size(747, 22);
       this.statusStrip1.TabIndex = 13;
       this.statusStrip1.Text = "statusStrip1";
       // 
@@ -1090,7 +502,6 @@ namespace FAQ_Net
       this.toolsTop.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
       this.toolsTop.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
       this.toolsTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openFile,
             this.saveFile,
             this.sep0,
             this.printText,
@@ -1117,6 +528,7 @@ namespace FAQ_Net
             this.alignLeft,
             this.alignCenter,
             this.alignRight,
+            this.alignJustify,
             this.lineSpacing,
             this.sep7,
             this.bullet,
@@ -1129,20 +541,8 @@ namespace FAQ_Net
       this.toolsTop.Location = new System.Drawing.Point(0, 24);
       this.toolsTop.Name = "toolsTop";
       this.toolsTop.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-      this.toolsTop.Size = new System.Drawing.Size(696, 28);
+      this.toolsTop.Size = new System.Drawing.Size(747, 28);
       this.toolsTop.TabIndex = 6;
-      // 
-      // openFile
-      // 
-      this.openFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.openFile.Image = global::FAQ_Net.Properties.Resources.OpenSml;
-      this.openFile.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-      this.openFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-      this.openFile.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
-      this.openFile.Name = "openFile";
-      this.openFile.Size = new System.Drawing.Size(23, 24);
-      this.openFile.ToolTipText = "Открыть";
-      this.openFile.Click += new System.EventHandler(this.Tools_Click);
       // 
       // saveFile
       // 
@@ -1455,9 +855,24 @@ namespace FAQ_Net
       this.alignRight.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.alignRight.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.alignRight.Name = "alignRight";
-      this.alignRight.Size = new System.Drawing.Size(23, 20);
+      this.alignRight.Size = new System.Drawing.Size(23, 24);
       this.alignRight.ToolTipText = "Выровнять текст по правому краю";
       this.alignRight.Click += new System.EventHandler(this.Tools_Click);
+      // 
+      // alignJustify
+      // 
+      this.alignJustify.Checked = true;
+      this.alignJustify.CheckOnClick = true;
+      this.alignJustify.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.alignJustify.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.alignJustify.Image = global::FAQ_Net.Properties.Resources.JustifySml;
+      this.alignJustify.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.alignJustify.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.alignJustify.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+      this.alignJustify.Name = "alignJustify";
+      this.alignJustify.Size = new System.Drawing.Size(23, 24);
+      this.alignJustify.ToolTipText = "Выровнять текст по ширине";
+      this.alignJustify.Click += new System.EventHandler(this.Tools_Click);
       // 
       // lineSpacing
       // 
@@ -1470,7 +885,7 @@ namespace FAQ_Net
       this.lineSpacing.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.lineSpacing.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.lineSpacing.Name = "lineSpacing";
-      this.lineSpacing.Size = new System.Drawing.Size(33, 22);
+      this.lineSpacing.Size = new System.Drawing.Size(33, 25);
       this.lineSpacing.ToolTipText = "Межстрочный интервал (1)";
       this.lineSpacing.ButtonClick += new System.EventHandler(this.lineSpacing_ButtonClick);
       // 
@@ -1505,18 +920,34 @@ namespace FAQ_Net
       // 
       // bullet
       // 
-      this.bullet.Checked = true;
-      this.bullet.CheckOnClick = true;
-      this.bullet.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.bullet.Checked = false;
       this.bullet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.bullet.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiNormalBullet,
+            this.tsmiNumberBullet});
       this.bullet.Image = global::FAQ_Net.Properties.Resources.Bullets;
       this.bullet.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
       this.bullet.ImageTransparentColor = System.Drawing.Color.Magenta;
       this.bullet.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
       this.bullet.Name = "bullet";
-      this.bullet.Size = new System.Drawing.Size(23, 20);
-      this.bullet.ToolTipText = "Маркеры";
+      this.bullet.Size = new System.Drawing.Size(32, 20);
+      this.bullet.ToolTipText = "Маркеры (Ctrl+Shift+L)";
+      this.bullet.DropDownOpening += new System.EventHandler(this.bullet_DropDownOpening);
       this.bullet.Click += new System.EventHandler(this.Tools_Click);
+      // 
+      // tsmiNormalBullet
+      // 
+      this.tsmiNormalBullet.Name = "tsmiNormalBullet";
+      this.tsmiNormalBullet.Size = new System.Drawing.Size(209, 22);
+      this.tsmiNormalBullet.Text = "Маркированный список";
+      this.tsmiNormalBullet.Click += new System.EventHandler(this.Tools_Click);
+      // 
+      // tsmiNumberBullet
+      // 
+      this.tsmiNumberBullet.Name = "tsmiNumberBullet";
+      this.tsmiNumberBullet.Size = new System.Drawing.Size(209, 22);
+      this.tsmiNumberBullet.Text = "Нумерованный список";
+      this.tsmiNumberBullet.Click += new System.EventHandler(this.Tools_Click);
       // 
       // selectColor
       // 
@@ -1774,7 +1205,7 @@ namespace FAQ_Net
       this.menuTop.MenuColor4 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
       this.menuTop.MenuColor7 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(90)))), ((int)(((byte)(90)))));
       this.menuTop.Name = "menuTop";
-      this.menuTop.Size = new System.Drawing.Size(696, 24);
+      this.menuTop.Size = new System.Drawing.Size(747, 24);
       this.menuTop.TabIndex = 5;
       // 
       // file
@@ -2273,118 +1704,6 @@ namespace FAQ_Net
       this.tsmiAboutProgram.Text = "О программе";
       this.tsmiAboutProgram.Click += new System.EventHandler(this.tsmiAboutProgram_Click);
       // 
-      // tableLayoutPanel1
-      // 
-      this.tableLayoutPanel1.AutoSize = true;
-      this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-      this.tableLayoutPanel1.ColumnCount = 4;
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-      this.tableLayoutPanel1.Controls.Add(this.btnSelectQuestion, 3, 0);
-      this.tableLayoutPanel1.Controls.Add(this.BackBtn, 0, 0);
-      this.tableLayoutPanel1.Controls.Add(this.btnNextQuestion, 1, 0);
-      this.tableLayoutPanel1.Controls.Add(this.SelectedPathLbl, 2, 0);
-      this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-      this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-      this.tableLayoutPanel1.RowCount = 1;
-      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-      this.tableLayoutPanel1.Size = new System.Drawing.Size(698, 30);
-      this.tableLayoutPanel1.TabIndex = 35;
-      // 
-      // btnSelectQuestion
-      // 
-      this.btnSelectQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.btnSelectQuestion.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.btnSelectQuestion.ButtonColorBottom = System.Drawing.Color.Gold;
-      this.btnSelectQuestion.ButtonColorTop = System.Drawing.SystemColors.Info;
-      this.btnSelectQuestion.CornerRadius = 5;
-      this.btnSelectQuestion.Enabled = false;
-      this.btnSelectQuestion.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-      this.btnSelectQuestion.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.btnSelectQuestion.Location = new System.Drawing.Point(601, 3);
-      this.btnSelectQuestion.Name = "btnSelectQuestion";
-      this.btnSelectQuestion.NumberOfPulses = 1;
-      this.btnSelectQuestion.PulseSpeed = 0.3F;
-      this.btnSelectQuestion.PulseWidth = 1;
-      this.btnSelectQuestion.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
-      this.btnSelectQuestion.Size = new System.Drawing.Size(94, 24);
-      this.btnSelectQuestion.TabIndex = 33;
-      this.btnSelectQuestion.Text = "Выбрать вопрос";
-      this.btnSelectQuestion.UseVisualStyleBackColor = false;
-      this.btnSelectQuestion.Visible = false;
-      this.btnSelectQuestion.Click += new System.EventHandler(this.btnSelectQuestion_Click);
-      // 
-      // BackBtn
-      // 
-      this.BackBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.BackBtn.ButtonColorBottom = System.Drawing.Color.Yellow;
-      this.BackBtn.ButtonColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-      this.BackBtn.CornerRadius = 5;
-      this.BackBtn.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-      this.BackBtn.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.BackBtn.Image = global::FAQ_Net.Properties.Resources.arrow_left;
-      this.BackBtn.Location = new System.Drawing.Point(3, 3);
-      this.BackBtn.Name = "BackBtn";
-      this.BackBtn.PulseSpeed = 0.3F;
-      this.BackBtn.PulseWidth = 1;
-      this.BackBtn.Size = new System.Drawing.Size(26, 25);
-      this.BackBtn.TabIndex = 32;
-      this.toolTip.SetToolTip(this.BackBtn, "Назад");
-      this.BackBtn.UseVisualStyleBackColor = false;
-      this.BackBtn.Visible = false;
-      this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
-      // 
-      // btnNextQuestion
-      // 
-      this.btnNextQuestion.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-      this.btnNextQuestion.ButtonColorBottom = System.Drawing.Color.Yellow;
-      this.btnNextQuestion.ButtonColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-      this.btnNextQuestion.CornerRadius = 5;
-      this.btnNextQuestion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.btnNextQuestion.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-      this.btnNextQuestion.ForeColor = System.Drawing.SystemColors.ControlText;
-      this.btnNextQuestion.Image = global::FAQ_Net.Properties.Resources.arrow_right;
-      this.btnNextQuestion.Location = new System.Drawing.Point(35, 3);
-      this.btnNextQuestion.Name = "btnNextQuestion";
-      this.btnNextQuestion.PulseSpeed = 0.3F;
-      this.btnNextQuestion.PulseWidth = 1;
-      this.btnNextQuestion.Size = new System.Drawing.Size(26, 25);
-      this.btnNextQuestion.TabIndex = 34;
-      this.toolTip.SetToolTip(this.btnNextQuestion, "Вперед");
-      this.btnNextQuestion.UseVisualStyleBackColor = false;
-      this.btnNextQuestion.Visible = false;
-      this.btnNextQuestion.Click += new System.EventHandler(this.btnNextQuestion_Click);
-      // 
-      // SelectedPathLbl
-      // 
-      this.SelectedPathLbl.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.SelectedPathLbl.Location = new System.Drawing.Point(67, 0);
-      this.SelectedPathLbl.Name = "SelectedPathLbl";
-      this.SelectedPathLbl.Size = new System.Drawing.Size(528, 31);
-      this.SelectedPathLbl.TabIndex = 35;
-      this.SelectedPathLbl.Text = "Последние добавленные вопросы";
-      this.SelectedPathLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.SelectedPathLbl.DragEnter += new System.Windows.Forms.DragEventHandler(this.SelectedPathLbl_DragEnter);
-      this.SelectedPathLbl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SelectedPathLbl_MouseDown);
-      // 
-      // panel3
-      // 
-      this.panel3.BackColor = System.Drawing.Color.Black;
-      this.panel3.BackColorBottom = System.Drawing.Color.DimGray;
-      this.panel3.Controls.Add(this.tableLayoutPanel1);
-      this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-      this.panel3.FillColorType = GradientControls.GradientEnums.FillColorMode.Gradient;
-      this.panel3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-      this.panel3.ForeColor = System.Drawing.Color.White;
-      this.panel3.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-      this.panel3.Location = new System.Drawing.Point(242, 0);
-      this.panel3.Name = "panel3";
-      this.panel3.Size = new System.Drawing.Size(698, 30);
-      this.panel3.TabIndex = 33;
-      // 
       // QuestionsCMS
       // 
       this.QuestionsCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2582,6 +1901,47 @@ namespace FAQ_Net
       this.printRichText.Text = "&Печать...";
       this.printRichText.Click += new System.EventHandler(this.RichMenu_Click);
       // 
+      // BackBtn
+      // 
+      this.BackBtn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.BackBtn.ButtonColorBottom = System.Drawing.Color.Yellow;
+      this.BackBtn.ButtonColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+      this.BackBtn.CornerRadius = 5;
+      this.BackBtn.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+      this.BackBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.BackBtn.Image = global::FAQ_Net.Properties.Resources.arrow_left;
+      this.BackBtn.Location = new System.Drawing.Point(3, 3);
+      this.BackBtn.Name = "BackBtn";
+      this.BackBtn.PulseSpeed = 0.3F;
+      this.BackBtn.PulseWidth = 1;
+      this.BackBtn.Size = new System.Drawing.Size(26, 25);
+      this.BackBtn.TabIndex = 32;
+      this.toolTip.SetToolTip(this.BackBtn, "Назад");
+      this.BackBtn.UseVisualStyleBackColor = false;
+      this.BackBtn.Visible = false;
+      this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click);
+      // 
+      // btnNextQuestion
+      // 
+      this.btnNextQuestion.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.btnNextQuestion.ButtonColorBottom = System.Drawing.Color.Yellow;
+      this.btnNextQuestion.ButtonColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+      this.btnNextQuestion.CornerRadius = 5;
+      this.btnNextQuestion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.btnNextQuestion.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+      this.btnNextQuestion.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.btnNextQuestion.Image = global::FAQ_Net.Properties.Resources.arrow_right;
+      this.btnNextQuestion.Location = new System.Drawing.Point(35, 3);
+      this.btnNextQuestion.Name = "btnNextQuestion";
+      this.btnNextQuestion.PulseSpeed = 0.3F;
+      this.btnNextQuestion.PulseWidth = 1;
+      this.btnNextQuestion.Size = new System.Drawing.Size(26, 25);
+      this.btnNextQuestion.TabIndex = 34;
+      this.toolTip.SetToolTip(this.btnNextQuestion, "Вперед");
+      this.btnNextQuestion.UseVisualStyleBackColor = false;
+      this.btnNextQuestion.Visible = false;
+      this.btnNextQuestion.Click += new System.EventHandler(this.btnNextQuestion_Click);
+      // 
       // splitContainer2
       // 
       this.splitContainer2.BackColor = System.Drawing.SystemColors.Window;
@@ -2597,8 +1957,8 @@ namespace FAQ_Net
       this.splitContainer2.Panel1.Controls.Add(this.panel3);
       this.splitContainer2.Panel1.Controls.Add(this.splitter2);
       this.splitContainer2.Panel1.Controls.Add(this.TabControl);
-      this.splitContainer2.Size = new System.Drawing.Size(1187, 402);
-      this.splitContainer2.SplitterDistance = 940;
+      this.splitContainer2.Size = new System.Drawing.Size(1238, 402);
+      this.splitContainer2.SplitterDistance = 991;
       this.splitContainer2.TabIndex = 9;
       // 
       // splitter1
@@ -2607,9 +1967,80 @@ namespace FAQ_Net
       this.splitter1.Dock = System.Windows.Forms.DockStyle.Top;
       this.splitter1.Location = new System.Drawing.Point(242, 30);
       this.splitter1.Name = "splitter1";
-      this.splitter1.Size = new System.Drawing.Size(698, 4);
+      this.splitter1.Size = new System.Drawing.Size(749, 4);
       this.splitter1.TabIndex = 31;
       this.splitter1.TabStop = false;
+      // 
+      // panel3
+      // 
+      this.panel3.BackColor = System.Drawing.Color.Black;
+      this.panel3.BackColorBottom = System.Drawing.Color.DimGray;
+      this.panel3.Controls.Add(this.tableLayoutPanel1);
+      this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+      this.panel3.FillColorType = GradientControls.GradientEnums.FillColorMode.Gradient;
+      this.panel3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.panel3.ForeColor = System.Drawing.Color.White;
+      this.panel3.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+      this.panel3.Location = new System.Drawing.Point(242, 0);
+      this.panel3.Name = "panel3";
+      this.panel3.Size = new System.Drawing.Size(749, 30);
+      this.panel3.TabIndex = 33;
+      // 
+      // tableLayoutPanel1
+      // 
+      this.tableLayoutPanel1.AutoSize = true;
+      this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+      this.tableLayoutPanel1.ColumnCount = 4;
+      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+      this.tableLayoutPanel1.Controls.Add(this.btnSelectQuestion, 3, 0);
+      this.tableLayoutPanel1.Controls.Add(this.BackBtn, 0, 0);
+      this.tableLayoutPanel1.Controls.Add(this.btnNextQuestion, 1, 0);
+      this.tableLayoutPanel1.Controls.Add(this.SelectedPathLbl, 2, 0);
+      this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+      this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+      this.tableLayoutPanel1.RowCount = 1;
+      this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+      this.tableLayoutPanel1.Size = new System.Drawing.Size(749, 30);
+      this.tableLayoutPanel1.TabIndex = 35;
+      // 
+      // btnSelectQuestion
+      // 
+      this.btnSelectQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.btnSelectQuestion.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+      this.btnSelectQuestion.ButtonColorBottom = System.Drawing.Color.Gold;
+      this.btnSelectQuestion.ButtonColorTop = System.Drawing.SystemColors.Info;
+      this.btnSelectQuestion.CornerRadius = 5;
+      this.btnSelectQuestion.Enabled = false;
+      this.btnSelectQuestion.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+      this.btnSelectQuestion.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.btnSelectQuestion.Location = new System.Drawing.Point(652, 3);
+      this.btnSelectQuestion.Name = "btnSelectQuestion";
+      this.btnSelectQuestion.NumberOfPulses = 1;
+      this.btnSelectQuestion.PulseSpeed = 0.3F;
+      this.btnSelectQuestion.PulseWidth = 1;
+      this.btnSelectQuestion.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
+      this.btnSelectQuestion.Size = new System.Drawing.Size(94, 24);
+      this.btnSelectQuestion.TabIndex = 33;
+      this.btnSelectQuestion.Text = "Выбрать вопрос";
+      this.btnSelectQuestion.UseVisualStyleBackColor = false;
+      this.btnSelectQuestion.Visible = false;
+      this.btnSelectQuestion.Click += new System.EventHandler(this.btnSelectQuestion_Click);
+      // 
+      // SelectedPathLbl
+      // 
+      this.SelectedPathLbl.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.SelectedPathLbl.Location = new System.Drawing.Point(67, 0);
+      this.SelectedPathLbl.Name = "SelectedPathLbl";
+      this.SelectedPathLbl.Size = new System.Drawing.Size(579, 31);
+      this.SelectedPathLbl.TabIndex = 35;
+      this.SelectedPathLbl.Text = "Последние добавленные вопросы";
+      this.SelectedPathLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.SelectedPathLbl.DragEnter += new System.Windows.Forms.DragEventHandler(this.SelectedPathLbl_DragEnter);
+      this.SelectedPathLbl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SelectedPathLbl_MouseDown);
       // 
       // splitter2
       // 
@@ -2619,6 +2050,574 @@ namespace FAQ_Net
       this.splitter2.TabIndex = 30;
       this.splitter2.TabStop = false;
       // 
+      // TabControl
+      // 
+      this.TabControl.BackColorBottom = System.Drawing.Color.Empty;
+      this.TabControl.Controls.Add(this.CategoriesTP);
+      this.TabControl.Controls.Add(this.SearchTP);
+      this.TabControl.Controls.Add(this.FavoritesTP);
+      this.TabControl.Controls.Add(this.JournalTP);
+      this.TabControl.Dock = System.Windows.Forms.DockStyle.Left;
+      this.TabControl.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.TabControl.Location = new System.Drawing.Point(0, 0);
+      this.TabControl.Name = "TabControl";
+      this.TabControl.SelectedIndex = 0;
+      this.TabControl.Size = new System.Drawing.Size(238, 402);
+      this.TabControl.TabIndex = 2;
+      this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
+      // 
+      // CategoriesTP
+      // 
+      this.CategoriesTP.BackColor = System.Drawing.SystemColors.Control;
+      this.CategoriesTP.BackColorBottom = System.Drawing.Color.Empty;
+      this.CategoriesTP.Controls.Add(this.TV1);
+      this.CategoriesTP.Controls.Add(this.statusStrip2);
+      this.CategoriesTP.Controls.Add(this.SearchPanel);
+      this.CategoriesTP.Controls.Add(this.toolStrip1);
+      this.CategoriesTP.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.CategoriesTP.Location = new System.Drawing.Point(4, 22);
+      this.CategoriesTP.Name = "CategoriesTP";
+      this.CategoriesTP.Padding = new System.Windows.Forms.Padding(3);
+      this.CategoriesTP.Size = new System.Drawing.Size(230, 376);
+      this.CategoriesTP.TabIndex = 0;
+      this.CategoriesTP.Text = "Разделы";
+      // 
+      // TV1
+      // 
+      this.TV1.AllowDrop = true;
+      this.TV1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(220)))));
+      this.TV1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.TV1.ContextMenuStrip = this.CategoriesContextMenu;
+      this.TV1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.TV1.HideSelection = false;
+      this.TV1.Location = new System.Drawing.Point(3, 73);
+      this.TV1.Name = "TV1";
+      this.TV1.PathSeparator = " :: ";
+      this.TV1.Size = new System.Drawing.Size(224, 278);
+      this.TV1.TabIndex = 4;
+      this.TV1.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TV1_AfterExpand);
+      this.TV1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.TV1_ItemDrag);
+      this.TV1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TV1_AfterSelect);
+      this.TV1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TV1_NodeMouseClick);
+      this.TV1.DragDrop += new System.Windows.Forms.DragEventHandler(this.TV1_DragDrop);
+      this.TV1.DragEnter += new System.Windows.Forms.DragEventHandler(this.TV1_DragEnter);
+      this.TV1.DragOver += new System.Windows.Forms.DragEventHandler(this.TV1_DragOver);
+      this.TV1.DragLeave += new System.EventHandler(this.TV1_DragLeave);
+      this.TV1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TV1_MouseDown);
+      // 
+      // statusStrip2
+      // 
+      this.statusStrip2.BackColor = System.Drawing.SystemColors.Control;
+      this.statusStrip2.BackColorBottom = System.Drawing.Color.Empty;
+      this.statusStrip2.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CountSubcategoryLbl,
+            this.CountSubcategoryVal});
+      this.statusStrip2.Location = new System.Drawing.Point(3, 351);
+      this.statusStrip2.Name = "statusStrip2";
+      this.statusStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+      this.statusStrip2.Size = new System.Drawing.Size(224, 22);
+      this.statusStrip2.TabIndex = 3;
+      this.statusStrip2.Text = "statusStrip2";
+      // 
+      // CountSubcategoryLbl
+      // 
+      this.CountSubcategoryLbl.Margin = new System.Windows.Forms.Padding(3, 3, 0, 2);
+      this.CountSubcategoryLbl.Name = "CountSubcategoryLbl";
+      this.CountSubcategoryLbl.Size = new System.Drawing.Size(148, 17);
+      this.CountSubcategoryLbl.Text = "Количество подразделов:";
+      // 
+      // CountSubcategoryVal
+      // 
+      this.CountSubcategoryVal.Name = "CountSubcategoryVal";
+      this.CountSubcategoryVal.Size = new System.Drawing.Size(13, 17);
+      this.CountSubcategoryVal.Text = "0";
+      // 
+      // SearchPanel
+      // 
+      this.SearchPanel.Controls.Add(this.SearchCategoryBtn);
+      this.SearchPanel.Controls.Add(this.SearchCategoryCmbBox);
+      this.SearchPanel.Dock = System.Windows.Forms.DockStyle.Top;
+      this.SearchPanel.Location = new System.Drawing.Point(3, 28);
+      this.SearchPanel.Name = "SearchPanel";
+      this.SearchPanel.Size = new System.Drawing.Size(224, 45);
+      this.SearchPanel.TabIndex = 2;
+      this.SearchPanel.Visible = false;
+      // 
+      // SearchCategoryBtn
+      // 
+      this.SearchCategoryBtn.ButtonColorBottom = System.Drawing.Color.LightCoral;
+      this.SearchCategoryBtn.ButtonColorTop = System.Drawing.Color.MistyRose;
+      this.SearchCategoryBtn.CornerRadius = 5;
+      this.SearchCategoryBtn.Dock = System.Windows.Forms.DockStyle.Top;
+      this.SearchCategoryBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.SearchCategoryBtn.Location = new System.Drawing.Point(0, 21);
+      this.SearchCategoryBtn.Name = "SearchCategoryBtn";
+      this.SearchCategoryBtn.PulseSpeed = 0.3F;
+      this.SearchCategoryBtn.PulseWidth = 1;
+      this.SearchCategoryBtn.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
+      this.SearchCategoryBtn.Size = new System.Drawing.Size(224, 23);
+      this.SearchCategoryBtn.TabIndex = 1;
+      this.SearchCategoryBtn.Text = "Найти";
+      this.SearchCategoryBtn.UseVisualStyleBackColor = true;
+      this.SearchCategoryBtn.Click += new System.EventHandler(this.SearchCategoryBtn_Click);
+      // 
+      // SearchCategoryCmbBox
+      // 
+      this.SearchCategoryCmbBox.Dock = System.Windows.Forms.DockStyle.Top;
+      this.SearchCategoryCmbBox.FormattingEnabled = true;
+      this.SearchCategoryCmbBox.Location = new System.Drawing.Point(0, 0);
+      this.SearchCategoryCmbBox.Name = "SearchCategoryCmbBox";
+      this.SearchCategoryCmbBox.Size = new System.Drawing.Size(224, 21);
+      this.SearchCategoryCmbBox.TabIndex = 0;
+      this.SearchCategoryCmbBox.Text = "---Поиск по разделам---";
+      // 
+      // toolStrip1
+      // 
+      this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
+      this.toolStrip1.BackColorBottom = System.Drawing.Color.Empty;
+      this.toolStrip1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+      this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CreateQuestionTSB,
+            this.CreateCategoryTSB,
+            this.CreateSubcategoryTSB,
+            this.toolStripSeparator3,
+            this.RefreshTSB,
+            this.toolStripSeparator4,
+            this.CollapseAllTSB,
+            this.ExpandAllNodesTSB});
+      this.toolStrip1.Location = new System.Drawing.Point(3, 3);
+      this.toolStrip1.Name = "toolStrip1";
+      this.toolStrip1.Size = new System.Drawing.Size(224, 25);
+      this.toolStrip1.TabIndex = 0;
+      this.toolStrip1.Text = "toolStrip1";
+      // 
+      // CreateQuestionTSB
+      // 
+      this.CreateQuestionTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.CreateQuestionTSB.Enabled = false;
+      this.CreateQuestionTSB.Image = global::FAQ_Net.Properties.Resources.NewSml;
+      this.CreateQuestionTSB.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.CreateQuestionTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.CreateQuestionTSB.Name = "CreateQuestionTSB";
+      this.CreateQuestionTSB.Size = new System.Drawing.Size(23, 22);
+      this.CreateQuestionTSB.Text = "Создание вопроса";
+      this.CreateQuestionTSB.Click += new System.EventHandler(this.CreateQuestionTSB_Click);
+      // 
+      // CreateCategoryTSB
+      // 
+      this.CreateCategoryTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.CreateCategoryTSB.Image = global::FAQ_Net.Properties.Resources.Folder;
+      this.CreateCategoryTSB.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.CreateCategoryTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.CreateCategoryTSB.Name = "CreateCategoryTSB";
+      this.CreateCategoryTSB.Size = new System.Drawing.Size(23, 22);
+      this.CreateCategoryTSB.Text = "Добавить раздел";
+      this.CreateCategoryTSB.Click += new System.EventHandler(this.CreateCategory_Click);
+      // 
+      // CreateSubcategoryTSB
+      // 
+      this.CreateSubcategoryTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.CreateSubcategoryTSB.Enabled = false;
+      this.CreateSubcategoryTSB.Image = global::FAQ_Net.Properties.Resources.NewFolder2;
+      this.CreateSubcategoryTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.CreateSubcategoryTSB.Name = "CreateSubcategoryTSB";
+      this.CreateSubcategoryTSB.Size = new System.Drawing.Size(23, 22);
+      this.CreateSubcategoryTSB.Text = "Добавить подраздел";
+      this.CreateSubcategoryTSB.Click += new System.EventHandler(this.CreateSubcategoryTSB_Click);
+      // 
+      // toolStripSeparator3
+      // 
+      this.toolStripSeparator3.Name = "toolStripSeparator3";
+      this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+      // 
+      // RefreshTSB
+      // 
+      this.RefreshTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.RefreshTSB.Image = global::FAQ_Net.Properties.Resources.Refresh;
+      this.RefreshTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.RefreshTSB.Name = "RefreshTSB";
+      this.RefreshTSB.Size = new System.Drawing.Size(23, 22);
+      this.RefreshTSB.Text = "Обновить";
+      this.RefreshTSB.Click += new System.EventHandler(this.RefreshTSB_Click);
+      // 
+      // toolStripSeparator4
+      // 
+      this.toolStripSeparator4.Name = "toolStripSeparator4";
+      this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+      // 
+      // CollapseAllTSB
+      // 
+      this.CollapseAllTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.CollapseAllTSB.Image = global::FAQ_Net.Properties.Resources.collapse;
+      this.CollapseAllTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.CollapseAllTSB.Name = "CollapseAllTSB";
+      this.CollapseAllTSB.Size = new System.Drawing.Size(23, 22);
+      this.CollapseAllTSB.Text = "Свернуть все узлы";
+      this.CollapseAllTSB.Click += new System.EventHandler(this.CollapseAllTSB_Click);
+      // 
+      // ExpandAllNodesTSB
+      // 
+      this.ExpandAllNodesTSB.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.ExpandAllNodesTSB.Image = global::FAQ_Net.Properties.Resources.expand;
+      this.ExpandAllNodesTSB.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.ExpandAllNodesTSB.Name = "ExpandAllNodesTSB";
+      this.ExpandAllNodesTSB.Size = new System.Drawing.Size(23, 22);
+      this.ExpandAllNodesTSB.Text = "Развернуть все узлы";
+      this.ExpandAllNodesTSB.Click += new System.EventHandler(this.ExpandAllNodesTSB_Click);
+      // 
+      // SearchTP
+      // 
+      this.SearchTP.BackColor = System.Drawing.SystemColors.Control;
+      this.SearchTP.BackColorBottom = System.Drawing.Color.Empty;
+      this.SearchTP.Controls.Add(this.DGVResultSearch);
+      this.SearchTP.Controls.Add(this.panel1);
+      this.SearchTP.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.SearchTP.Location = new System.Drawing.Point(4, 22);
+      this.SearchTP.Name = "SearchTP";
+      this.SearchTP.Padding = new System.Windows.Forms.Padding(3);
+      this.SearchTP.Size = new System.Drawing.Size(230, 376);
+      this.SearchTP.TabIndex = 1;
+      this.SearchTP.Text = "Поиск";
+      // 
+      // DGVResultSearch
+      // 
+      this.DGVResultSearch.AllowUserToAddRows = false;
+      this.DGVResultSearch.AllowUserToResizeRows = false;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.DGVResultSearch.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      this.DGVResultSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.DGVResultSearch.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id_content_search,
+            this.QuestionSearchColumn,
+            this.SearchFavoriteDateColumn});
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.DGVResultSearch.DefaultCellStyle = dataGridViewCellStyle2;
+      this.DGVResultSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.DGVResultSearch.EnableHeadersVisualStyles = false;
+      this.DGVResultSearch.Location = new System.Drawing.Point(3, 128);
+      this.DGVResultSearch.MultiSelect = false;
+      this.DGVResultSearch.Name = "DGVResultSearch";
+      this.DGVResultSearch.ReadOnly = true;
+      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.DGVResultSearch.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+      this.DGVResultSearch.RowHeadersVisible = false;
+      this.DGVResultSearch.Size = new System.Drawing.Size(224, 245);
+      this.DGVResultSearch.TabIndex = 5;
+      this.DGVResultSearch.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVResultSearch_CellClick);
+      // 
+      // id_content_search
+      // 
+      this.id_content_search.DataPropertyName = "id_content";
+      this.id_content_search.HeaderText = "id_content";
+      this.id_content_search.Name = "id_content_search";
+      this.id_content_search.ReadOnly = true;
+      this.id_content_search.Visible = false;
+      // 
+      // QuestionSearchColumn
+      // 
+      this.QuestionSearchColumn.DataPropertyName = "question";
+      this.QuestionSearchColumn.HeaderText = "Результаты";
+      this.QuestionSearchColumn.Name = "QuestionSearchColumn";
+      this.QuestionSearchColumn.ReadOnly = true;
+      // 
+      // SearchFavoriteDateColumn
+      // 
+      this.SearchFavoriteDateColumn.DataPropertyName = "favorite_date";
+      this.SearchFavoriteDateColumn.HeaderText = "favorite_date";
+      this.SearchFavoriteDateColumn.Name = "SearchFavoriteDateColumn";
+      this.SearchFavoriteDateColumn.ReadOnly = true;
+      this.SearchFavoriteDateColumn.Visible = false;
+      // 
+      // panel1
+      // 
+      this.panel1.Controls.Add(this.searchUp);
+      this.panel1.Controls.Add(this.searchDown);
+      this.panel1.Controls.Add(this.SearchTxtBox);
+      this.panel1.Controls.Add(this.lblSearchDescription);
+      this.panel1.Controls.Add(this.SearchAnswRB);
+      this.panel1.Controls.Add(this.SearchQuestRB);
+      this.panel1.Controls.Add(this.SearchAllRB);
+      this.panel1.Controls.Add(this.SearchBtn);
+      this.panel1.Controls.Add(this.label1);
+      this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+      this.panel1.Location = new System.Drawing.Point(3, 3);
+      this.panel1.Name = "panel1";
+      this.panel1.Size = new System.Drawing.Size(224, 125);
+      this.panel1.TabIndex = 4;
+      // 
+      // searchUp
+      // 
+      this.searchUp.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.searchUp.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.searchUp.CornerRadius = 5;
+      this.searchUp.Enabled = false;
+      this.searchUp.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.searchUp.Location = new System.Drawing.Point(181, 93);
+      this.searchUp.Name = "searchUp";
+      this.searchUp.PulseSpeed = 0.3F;
+      this.searchUp.PulseWidth = 1;
+      this.searchUp.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
+      this.searchUp.Size = new System.Drawing.Size(15, 25);
+      this.searchUp.TabIndex = 12;
+      this.searchUp.Text = "↑";
+      this.searchUp.UseVisualStyleBackColor = true;
+      this.searchUp.Click += new System.EventHandler(this.searchUp_Click);
+      // 
+      // searchDown
+      // 
+      this.searchDown.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.searchDown.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.searchDown.CornerRadius = 5;
+      this.searchDown.Enabled = false;
+      this.searchDown.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.searchDown.Location = new System.Drawing.Point(160, 93);
+      this.searchDown.Name = "searchDown";
+      this.searchDown.PulseSpeed = 0.3F;
+      this.searchDown.PulseWidth = 1;
+      this.searchDown.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
+      this.searchDown.Size = new System.Drawing.Size(15, 25);
+      this.searchDown.TabIndex = 11;
+      this.searchDown.Text = "↓";
+      this.searchDown.UseVisualStyleBackColor = true;
+      this.searchDown.Click += new System.EventHandler(this.searchDown_Click);
+      // 
+      // SearchTxtBox
+      // 
+      this.SearchTxtBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.SearchTxtBox.Location = new System.Drawing.Point(3, 21);
+      this.SearchTxtBox.Name = "SearchTxtBox";
+      this.SearchTxtBox.Size = new System.Drawing.Size(218, 20);
+      this.SearchTxtBox.TabIndex = 1;
+      this.SearchTxtBox.TextChanged += new System.EventHandler(this.SearchTxtBox_TextChanged);
+      this.SearchTxtBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SearchTxtBox_KeyPress);
+      // 
+      // lblSearchDescription
+      // 
+      this.lblSearchDescription.AutoSize = true;
+      this.lblSearchDescription.ForeColor = System.Drawing.Color.Red;
+      this.lblSearchDescription.Location = new System.Drawing.Point(13, 42);
+      this.lblSearchDescription.Name = "lblSearchDescription";
+      this.lblSearchDescription.Size = new System.Drawing.Size(198, 26);
+      this.lblSearchDescription.TabIndex = 10;
+      this.lblSearchDescription.Text = "|| - ИЛИ, &&&& - И, пробел - разделитель,\r\n% - любые символы";
+      this.lblSearchDescription.FontChanged += new System.EventHandler(this.lblSearchDescription_FontChanged);
+      // 
+      // SearchAnswRB
+      // 
+      this.SearchAnswRB.AutoSize = true;
+      this.SearchAnswRB.Location = new System.Drawing.Point(148, 70);
+      this.SearchAnswRB.Name = "SearchAnswRB";
+      this.SearchAnswRB.Size = new System.Drawing.Size(73, 17);
+      this.SearchAnswRB.TabIndex = 9;
+      this.SearchAnswRB.Text = "в ответах";
+      this.SearchAnswRB.UseVisualStyleBackColor = true;
+      // 
+      // SearchQuestRB
+      // 
+      this.SearchQuestRB.AutoSize = true;
+      this.SearchQuestRB.Location = new System.Drawing.Point(59, 70);
+      this.SearchQuestRB.Name = "SearchQuestRB";
+      this.SearchQuestRB.Size = new System.Drawing.Size(92, 17);
+      this.SearchQuestRB.TabIndex = 8;
+      this.SearchQuestRB.Text = "в заголовках";
+      this.SearchQuestRB.UseVisualStyleBackColor = true;
+      // 
+      // SearchAllRB
+      // 
+      this.SearchAllRB.AutoSize = true;
+      this.SearchAllRB.Checked = true;
+      this.SearchAllRB.Location = new System.Drawing.Point(4, 70);
+      this.SearchAllRB.Name = "SearchAllRB";
+      this.SearchAllRB.Size = new System.Drawing.Size(56, 17);
+      this.SearchAllRB.TabIndex = 7;
+      this.SearchAllRB.TabStop = true;
+      this.SearchAllRB.Text = "Везде";
+      this.SearchAllRB.UseVisualStyleBackColor = true;
+      // 
+      // SearchBtn
+      // 
+      this.SearchBtn.ButtonColorBottom = System.Drawing.Color.LightSkyBlue;
+      this.SearchBtn.ButtonColorTop = System.Drawing.Color.LightCyan;
+      this.SearchBtn.CornerRadius = 5;
+      this.SearchBtn.ForeColor = System.Drawing.SystemColors.ControlText;
+      this.SearchBtn.Location = new System.Drawing.Point(74, 93);
+      this.SearchBtn.Name = "SearchBtn";
+      this.SearchBtn.PulseSpeed = 0.3F;
+      this.SearchBtn.PulseWidth = 1;
+      this.SearchBtn.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
+      this.SearchBtn.Size = new System.Drawing.Size(77, 25);
+      this.SearchBtn.TabIndex = 4;
+      this.SearchBtn.Text = "Поиск";
+      this.SearchBtn.UseVisualStyleBackColor = true;
+      this.SearchBtn.Click += new System.EventHandler(this.SearchBtn_Click);
+      // 
+      // label1
+      // 
+      this.label1.AutoSize = true;
+      this.label1.Location = new System.Drawing.Point(5, 6);
+      this.label1.Name = "label1";
+      this.label1.Size = new System.Drawing.Size(61, 13);
+      this.label1.TabIndex = 0;
+      this.label1.Text = "Что ищем:";
+      // 
+      // FavoritesTP
+      // 
+      this.FavoritesTP.BackColor = System.Drawing.SystemColors.Control;
+      this.FavoritesTP.BackColorBottom = System.Drawing.Color.Empty;
+      this.FavoritesTP.Controls.Add(this.FavoriteDGV);
+      this.FavoritesTP.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.FavoritesTP.Location = new System.Drawing.Point(4, 22);
+      this.FavoritesTP.Name = "FavoritesTP";
+      this.FavoritesTP.Padding = new System.Windows.Forms.Padding(3);
+      this.FavoritesTP.Size = new System.Drawing.Size(230, 376);
+      this.FavoritesTP.TabIndex = 2;
+      this.FavoritesTP.Text = "Избранное";
+      // 
+      // FavoriteDGV
+      // 
+      this.FavoriteDGV.AllowUserToAddRows = false;
+      this.FavoriteDGV.AllowUserToResizeRows = false;
+      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.FavoriteDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+      this.FavoriteDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.FavoriteDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Favorites_id_content,
+            this.Favorites_question,
+            this.FavoritesFavoriteDateColumn});
+      dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.FavoriteDGV.DefaultCellStyle = dataGridViewCellStyle5;
+      this.FavoriteDGV.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.FavoriteDGV.EnableHeadersVisualStyles = false;
+      this.FavoriteDGV.Location = new System.Drawing.Point(3, 3);
+      this.FavoriteDGV.MultiSelect = false;
+      this.FavoriteDGV.Name = "FavoriteDGV";
+      this.FavoriteDGV.ReadOnly = true;
+      dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.FavoriteDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+      this.FavoriteDGV.RowHeadersVisible = false;
+      this.FavoriteDGV.Size = new System.Drawing.Size(224, 370);
+      this.FavoriteDGV.TabIndex = 6;
+      this.FavoriteDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FavoriteDGV_CellClick);
+      // 
+      // Favorites_id_content
+      // 
+      this.Favorites_id_content.DataPropertyName = "id_content";
+      this.Favorites_id_content.HeaderText = "id_content";
+      this.Favorites_id_content.Name = "Favorites_id_content";
+      this.Favorites_id_content.ReadOnly = true;
+      this.Favorites_id_content.Visible = false;
+      // 
+      // Favorites_question
+      // 
+      this.Favorites_question.DataPropertyName = "question";
+      this.Favorites_question.HeaderText = "Результаты";
+      this.Favorites_question.Name = "Favorites_question";
+      this.Favorites_question.ReadOnly = true;
+      // 
+      // FavoritesFavoriteDateColumn
+      // 
+      this.FavoritesFavoriteDateColumn.DataPropertyName = "favorite_date";
+      this.FavoritesFavoriteDateColumn.HeaderText = "favorite_date";
+      this.FavoritesFavoriteDateColumn.Name = "FavoritesFavoriteDateColumn";
+      this.FavoritesFavoriteDateColumn.ReadOnly = true;
+      this.FavoritesFavoriteDateColumn.Visible = false;
+      // 
+      // JournalTP
+      // 
+      this.JournalTP.BackColor = System.Drawing.SystemColors.Control;
+      this.JournalTP.BackColorBottom = System.Drawing.Color.Empty;
+      this.JournalTP.Controls.Add(this.JournalDGV);
+      this.JournalTP.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
+      this.JournalTP.Location = new System.Drawing.Point(4, 22);
+      this.JournalTP.Name = "JournalTP";
+      this.JournalTP.Padding = new System.Windows.Forms.Padding(3);
+      this.JournalTP.Size = new System.Drawing.Size(230, 376);
+      this.JournalTP.TabIndex = 3;
+      this.JournalTP.Text = "Журнал";
+      // 
+      // JournalDGV
+      // 
+      this.JournalDGV.AllowUserToAddRows = false;
+      this.JournalDGV.AllowUserToResizeRows = false;
+      dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.JournalDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+      this.JournalDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.JournalDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.JournalIdColumn,
+            this.JournalQuestionColumn,
+            this.JournalFavoriteDateColumn});
+      dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.JournalDGV.DefaultCellStyle = dataGridViewCellStyle8;
+      this.JournalDGV.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.JournalDGV.EnableHeadersVisualStyles = false;
+      this.JournalDGV.Location = new System.Drawing.Point(3, 3);
+      this.JournalDGV.MultiSelect = false;
+      this.JournalDGV.Name = "JournalDGV";
+      this.JournalDGV.ReadOnly = true;
+      dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+      dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+      dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+      this.JournalDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+      this.JournalDGV.RowHeadersVisible = false;
+      this.JournalDGV.Size = new System.Drawing.Size(224, 370);
+      this.JournalDGV.TabIndex = 7;
+      this.JournalDGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.JournalDGV_CellClick);
+      // 
       // panel4
       // 
       this.panel4.Controls.Add(this.splitContainer2);
@@ -2626,7 +2625,7 @@ namespace FAQ_Net
       this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
       this.panel4.Location = new System.Drawing.Point(0, 0);
       this.panel4.Name = "panel4";
-      this.panel4.Size = new System.Drawing.Size(1187, 422);
+      this.panel4.Size = new System.Drawing.Size(1238, 422);
       this.panel4.TabIndex = 11;
       // 
       // status
@@ -2648,7 +2647,7 @@ namespace FAQ_Net
       this.status.Location = new System.Drawing.Point(0, 402);
       this.status.Name = "status";
       this.status.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-      this.status.Size = new System.Drawing.Size(1187, 20);
+      this.status.Size = new System.Drawing.Size(1238, 20);
       this.status.TabIndex = 11;
       // 
       // toolStripDropDownButton1
@@ -2678,6 +2677,15 @@ namespace FAQ_Net
       this.tsmiReplaceFontControlToMenu.Size = new System.Drawing.Size(425, 22);
       this.tsmiReplaceFontControlToMenu.Text = "Переместить компоненты выбора шрифта и масштаба в меню";
       this.tsmiReplaceFontControlToMenu.Click += new System.EventHandler(this.tsmiReplaceFontControlToMenu_Click);
+      // 
+      // tsmiSmoothScrollingDocument
+      // 
+      this.tsmiSmoothScrollingDocument.Checked = true;
+      this.tsmiSmoothScrollingDocument.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.tsmiSmoothScrollingDocument.Name = "tsmiSmoothScrollingDocument";
+      this.tsmiSmoothScrollingDocument.Size = new System.Drawing.Size(425, 22);
+      this.tsmiSmoothScrollingDocument.Text = "Плавный скроллинг документа";
+      this.tsmiSmoothScrollingDocument.Click += new System.EventHandler(this.tsmiSmoothScrollingDocument_Click);
       // 
       // tsmiDesignSettings
       // 
@@ -2742,19 +2750,45 @@ namespace FAQ_Net
       this.tsslStatus.Size = new System.Drawing.Size(113, 15);
       this.tsslStatus.Text = "Нет фоновых задач";
       // 
-      // tsmiSmoothScrollingDocument
+      // openFile
       // 
-      this.tsmiSmoothScrollingDocument.Checked = true;
-      this.tsmiSmoothScrollingDocument.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.tsmiSmoothScrollingDocument.Name = "tsmiSmoothScrollingDocument";
-      this.tsmiSmoothScrollingDocument.Size = new System.Drawing.Size(425, 22);
-      this.tsmiSmoothScrollingDocument.Text = "Плавный скроллинг документа";
-      this.tsmiSmoothScrollingDocument.Click += new System.EventHandler(this.tsmiSmoothScrollingDocument_Click);
+      this.openFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+      this.openFile.Image = global::FAQ_Net.Properties.Resources.OpenSml;
+      this.openFile.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+      this.openFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+      this.openFile.Margin = new System.Windows.Forms.Padding(0, 2, 0, 2);
+      this.openFile.Name = "openFile";
+      this.openFile.Size = new System.Drawing.Size(23, 24);
+      this.openFile.ToolTipText = "Открыть";
+      this.openFile.Click += new System.EventHandler(this.Tools_Click);
+      // 
+      // JournalIdColumn
+      // 
+      this.JournalIdColumn.DataPropertyName = "id_content";
+      this.JournalIdColumn.HeaderText = "id_content";
+      this.JournalIdColumn.Name = "JournalIdColumn";
+      this.JournalIdColumn.ReadOnly = true;
+      this.JournalIdColumn.Visible = false;
+      // 
+      // JournalQuestionColumn
+      // 
+      this.JournalQuestionColumn.DataPropertyName = "question";
+      this.JournalQuestionColumn.HeaderText = "Результаты";
+      this.JournalQuestionColumn.Name = "JournalQuestionColumn";
+      this.JournalQuestionColumn.ReadOnly = true;
+      // 
+      // JournalFavoriteDateColumn
+      // 
+      this.JournalFavoriteDateColumn.DataPropertyName = "favorite_date";
+      this.JournalFavoriteDateColumn.HeaderText = "favorite_date";
+      this.JournalFavoriteDateColumn.Name = "JournalFavoriteDateColumn";
+      this.JournalFavoriteDateColumn.ReadOnly = true;
+      this.JournalFavoriteDateColumn.Visible = false;
       // 
       // MainForm
       // 
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(60)))), ((int)(((byte)(150)))));
-      this.ClientSize = new System.Drawing.Size(1187, 422);
+      this.ClientSize = new System.Drawing.Size(1238, 422);
       this.Controls.Add(this.panel4);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MinimumSize = new System.Drawing.Size(200, 400);
@@ -2764,23 +2798,7 @@ namespace FAQ_Net
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
       this.Load += new System.EventHandler(this.MainForm_Load);
       this.Resize += new System.EventHandler(this.MainForm_Resize);
-      this.TabControl.ResumeLayout(false);
-      this.CategoriesTP.ResumeLayout(false);
-      this.CategoriesTP.PerformLayout();
       this.CategoriesContextMenu.ResumeLayout(false);
-      this.statusStrip2.ResumeLayout(false);
-      this.statusStrip2.PerformLayout();
-      this.SearchPanel.ResumeLayout(false);
-      this.toolStrip1.ResumeLayout(false);
-      this.toolStrip1.PerformLayout();
-      this.SearchTP.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.DGVResultSearch)).EndInit();
-      this.panel1.ResumeLayout(false);
-      this.panel1.PerformLayout();
-      this.FavoritesTP.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.FavoriteDGV)).EndInit();
-      this.JournalTP.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.JournalDGV)).EndInit();
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel1.PerformLayout();
       this.splitContainer1.Panel2.ResumeLayout(false);
@@ -2795,13 +2813,29 @@ namespace FAQ_Net
       this.colors.ResumeLayout(false);
       this.menuTop.ResumeLayout(false);
       this.menuTop.PerformLayout();
-      this.tableLayoutPanel1.ResumeLayout(false);
-      this.panel3.ResumeLayout(false);
-      this.panel3.PerformLayout();
       this.QuestionsCMS.ResumeLayout(false);
       this.richMenu.ResumeLayout(false);
       this.splitContainer2.Panel1.ResumeLayout(false);
       this.splitContainer2.ResumeLayout(false);
+      this.panel3.ResumeLayout(false);
+      this.panel3.PerformLayout();
+      this.tableLayoutPanel1.ResumeLayout(false);
+      this.TabControl.ResumeLayout(false);
+      this.CategoriesTP.ResumeLayout(false);
+      this.CategoriesTP.PerformLayout();
+      this.statusStrip2.ResumeLayout(false);
+      this.statusStrip2.PerformLayout();
+      this.SearchPanel.ResumeLayout(false);
+      this.toolStrip1.ResumeLayout(false);
+      this.toolStrip1.PerformLayout();
+      this.SearchTP.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.DGVResultSearch)).EndInit();
+      this.panel1.ResumeLayout(false);
+      this.panel1.PerformLayout();
+      this.FavoritesTP.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.FavoriteDGV)).EndInit();
+      this.JournalTP.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.JournalDGV)).EndInit();
       this.panel4.ResumeLayout(false);
       this.status.ResumeLayout(false);
       this.status.PerformLayout();
@@ -2858,7 +2892,6 @@ namespace FAQ_Net
         private ToolStripMenuItem yellow;
         private ToolStripMenuItem blue;
         private ToolStripSplitButton selectColor;
-        private ToolStripButton bullet;
         private ToolStripMenuItem saveAs;
         private ContextMenuStrip richMenu;
         private ToolStripMenuItem cutRichText;
@@ -2975,9 +3008,6 @@ namespace FAQ_Net
         private DataGridViewTextBoxColumn Favorites_id_content;
         private DataGridViewTextBoxColumn Favorites_question;
         private DataGridViewTextBoxColumn FavoritesFavoriteDateColumn;
-        private DataGridViewTextBoxColumn JournalIdColumn;
-        private DataGridViewTextBoxColumn JournalQuestionColumn;
-        private DataGridViewTextBoxColumn JournalFavoriteDateColumn;
         private ToolStripMenuItem кодировкаToolStripMenuItem;
         private ToolStripMenuItem ASCII_TSMI;
         private Label lblSearchDescription;
@@ -3039,6 +3069,13 @@ namespace FAQ_Net
     private PulseButton.PulseButton searchDown;
     private PulseButton.PulseButton searchUp;
     private ToolStripMenuItem tsmiSmoothScrollingDocument;
+    private GradientControls.ToolStripSplitCheckButton bullet;
+    private ToolStripMenuItem tsmiNormalBullet;
+    private ToolStripMenuItem tsmiNumberBullet;
+    private DataGridViewTextBoxColumn JournalIdColumn;
+    private DataGridViewTextBoxColumn JournalQuestionColumn;
+    private DataGridViewTextBoxColumn JournalFavoriteDateColumn;
+    private ToolStripButton alignJustify;
   }
 
 }

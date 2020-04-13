@@ -671,6 +671,316 @@ namespace FAQ_Net
     }
 
     #endregion
+
+    #region BULLETING
+
+    // Source code from: https://www.codeproject.com/Articles/18878/RichTextBox-with-Search-Line-Numbering-Bulleting-P
+
+    [StructLayout(LayoutKind.Sequential)]
+    private class PARAFORMAT2
+    {
+      public int cbSize;
+      public int dwMask;
+      public short wNumbering;
+      public short wReserved;
+      public int dxStartIndent;
+      public int dxRightIndent;
+      public int dxOffset;
+      public short wAlignment;
+      public short cTabCount;
+      [MarshalAs(UnmanagedType.ByValArray, SizeConst = 0x20)]
+      public int[] rgxTabs;
+
+      public int dySpaceBefore; // Vertical spacing before para
+      public int dySpaceAfter; // Vertical spacing after para
+      public int dyLineSpacing; // Line spacing depending on Rule
+      public short sStyle; // Style handle
+      public byte bLineSpacingRule; // Rule for line spacing (see tom.doc)
+      public byte bOutlineLevel; // Outline Level
+      public short wShadingWeight; // Shading in hundredths of a per cent
+      public short wShadingStyle; // Byte 0: style, nib 2: cfpat, 3: cbpat
+      public short wNumberingStart; // Starting value for numbering
+      public short wNumberingStyle; // Alignment, Roman/Arabic, (), ), ., etc.
+      public short wNumberingTab; // Space bet 1st indent and 1st-line text
+      public short wBorderSpace; // Border-text spaces (nbl/bdr in pts)
+      public short wBorderWidth; // Pen widths (nbl/bdr in half twips)
+      public short wBorders; // Border styles (nibble/border)
+
+      public PARAFORMAT2()
+      {
+        this.cbSize = Marshal.SizeOf(typeof(PARAFORMAT2));
+      }
+    }
+
+    #region PARAFORMAT MASK VALUES
+    // PARAFORMAT mask values
+    private const uint PFM_STARTINDENT = 0x00000001;
+    private const uint PFM_RIGHTINDENT = 0x00000002;
+    private const uint PFM_OFFSET = 0x00000004;
+    private const uint PFM_ALIGNMENT = 0x00000008;
+    private const uint PFM_TABSTOPS = 0x00000010;
+    private const uint PFM_NUMBERING = 0x00000020;
+    private const uint PFM_OFFSETINDENT = 0x80000000;
+
+    // PARAFORMAT 2.0 masks and effects
+    private const uint PFM_SPACEBEFORE = 0x00000040;
+    private const uint PFM_SPACEAFTER = 0x00000080;
+    private const uint PFM_LINESPACING = 0x00000100;
+    private const uint PFM_STYLE = 0x00000400;
+    private const uint PFM_BORDER = 0x00000800; // (*)
+    private const uint PFM_SHADING = 0x00001000; // (*)
+    private const uint PFM_NUMBERINGSTYLE = 0x00002000; // RE 3.0
+    private const uint PFM_NUMBERINGTAB = 0x00004000; // RE 3.0
+    private const uint PFM_NUMBERINGSTART = 0x00008000; // RE 3.0
+
+    private const uint PFM_RTLPARA = 0x00010000;
+    private const uint PFM_KEEP = 0x00020000; // (*)
+    private const uint PFM_KEEPNEXT = 0x00040000; // (*)
+    private const uint PFM_PAGEBREAKBEFORE = 0x00080000; // (*)
+    private const uint PFM_NOLINENUMBER = 0x00100000; // (*)
+    private const uint PFM_NOWIDOWCONTROL = 0x00200000; // (*)
+    private const uint PFM_DONOTHYPHEN = 0x00400000; // (*)
+    private const uint PFM_SIDEBYSIDE = 0x00800000; // (*)
+    private const uint PFM_TABLE = 0x40000000; // RE 3.0
+    private const uint PFM_TEXTWRAPPINGBREAK = 0x20000000; // RE 3.0
+    private const uint PFM_TABLEROWDELIMITER = 0x10000000; // RE 4.0
+
+    // The following three properties are read only
+    private const uint PFM_COLLAPSED = 0x01000000; // RE 3.0
+    private const uint PFM_OUTLINELEVEL = 0x02000000; // RE 3.0
+    private const uint PFM_BOX = 0x04000000; // RE 3.0
+    private const uint PFM_RESERVED2 = 0x08000000; // RE 4.0
+
+    public enum AdvRichTextBulletType
+    {
+      Normal = 1,
+      Number = 2,
+      LowerCaseLetter = 3,
+      UpperCaseLetter = 4,
+      LowerCaseRoman = 5,
+      UpperCaseRoman = 6
+    }
+
+    public enum AdvRichTextBulletStyle
+    {
+      RightParenthesis = 0x000,
+      DoubleParenthesis = 0x100,
+      Period = 0x200,
+      Plain = 0x300,
+      NoNumber = 0x400
+    }
+    #endregion
+
+    [DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+    private static extern IntPtr SendMessage(HandleRef hWnd, int msg, int wParam, [In, Out, MarshalAs(UnmanagedType.LPStruct)] PARAFORMAT2 lParam);
+
+    private AdvRichTextBulletType _BulletType = AdvRichTextBulletType.Number;
+    private AdvRichTextBulletStyle _BulletStyle = AdvRichTextBulletStyle.Period;
+    private short _BulletNumberStart = 1;
+
+
+    public AdvRichTextBulletType BulletType
+    {
+      get { return _BulletType; }
+      set
+      {
+        _BulletType = value;
+        NumberedBullet(true);
+      }
+    }
+    public AdvRichTextBulletStyle BulletStyle
+    {
+      get { return _BulletStyle; }
+      set
+      {
+        _BulletStyle = value;
+        NumberedBullet(true);
+      }
+    }
+    public void NumberedBullet(bool TurnOn)
+    {
+      PARAFORMAT2 paraformat1 = new PARAFORMAT2();
+      paraformat1.dwMask = (int)(PFM_NUMBERING | PFM_OFFSET | PFM_NUMBERINGSTART | PFM_NUMBERINGSTYLE | PFM_NUMBERINGTAB);
+      if (!TurnOn)
+      {
+        paraformat1.wNumbering = 0;
+        paraformat1.dxOffset = 0;
+      }
+      else
+      {
+        paraformat1.wNumbering = (short)_BulletType;
+        paraformat1.dxOffset = this.BulletIndent;
+        paraformat1.wNumberingStyle = (short)_BulletStyle;
+        paraformat1.wNumberingStart = _BulletNumberStart;
+        paraformat1.wNumberingTab = 500;
+      }
+      SendMessage(new System.Runtime.InteropServices.HandleRef(this, this.Handle), 0x447, 0, paraformat1);
+    }
+
+    #endregion BULLETING
+
+    #region BeginUpdate(), EndUpdate()
+    // Source code: http://geekswithblogs.net/pvidler/archive/2003/10/15/182.aspx
+    private int updating = 0;
+    private int oldEventMask = 0;
+
+    /// <summary>
+    /// Maintains performance while updating.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// It is recommended to call this method before doing
+    /// any major updates that you do not wish the user to
+    /// see. Remember to call EndUpdate when you are finished
+    /// with the update. Nested calls are supported.
+    /// </para>
+    /// <para>
+    /// Calling this method will prevent redrawing. It will
+    /// also setup the event mask of the underlying richedit
+    /// control so that no events are sent.
+    /// </para>
+    /// </remarks>
+    public void BeginUpdate()
+    {
+      // Deal with nested calls.
+      ++updating;
+
+      if (updating > 1)
+        return;
+
+      // Prevent the control from raising any events.
+      oldEventMask = SendMessage(new HandleRef(this, Handle),
+                                  EM_SETEVENTMASK, 0, 0);
+
+      // Prevent the control from redrawing itself.
+      SendMessage(new HandleRef(this, Handle),
+                   WM_SETREDRAW, 0, 0);
+    }
+
+    /// <summary>
+    /// Resumes drawing and event handling.
+    /// </summary>
+    /// <remarks>
+    /// This method should be called every time a call is made
+    /// made to BeginUpdate. It resets the event mask to it's
+    /// original value and enables redrawing of the control.
+    /// </remarks>
+    public void EndUpdate()
+    {
+      // Deal with nested calls.
+      --updating;
+
+      if (updating > 0)
+        return;
+
+      // Allow the control to redraw itself.
+      SendMessage(new HandleRef(this, Handle),
+                   WM_SETREDRAW, 1, 0);
+
+      // Allow the control to raise event messages.
+      SendMessage(new HandleRef(this, Handle),
+                   EM_SETEVENTMASK, 0, oldEventMask);
+    }
+    #endregion BeginUpdate(), EndUpdate()
+
+    #region Justify TextAlign
+    // Source code: http://geekswithblogs.net/pvidler/archive/2003/10/15/182.aspx
+    // Constants from the Platform SDK.
+    private const int EM_SETEVENTMASK = 1073;
+    private const int EM_GETPARAFORMAT = 1085;
+    private const int EM_SETPARAFORMAT = 1095;
+    private const int EM_SETTYPOGRAPHYOPTIONS = 1226;
+    private const int WM_SETREDRAW = 11;
+    private const int TO_ADVANCEDTYPOGRAPHY = 1;
+    private const int SCF_SELECTION = 1;
+
+    // It makes no difference if we use PARAFORMAT or
+    // PARAFORMAT2 here, so I have opted for PARAFORMAT2.
+    [StructLayout(LayoutKind.Sequential)]
+    private struct PARAFORMAT
+    {
+      public int cbSize;
+      public uint dwMask;
+      public short wNumbering;
+      public short wReserved;
+      public int dxStartIndent;
+      public int dxRightIndent;
+      public int dxOffset;
+      public short wAlignment;
+      public short cTabCount;
+      [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+      public int[] rgxTabs;
+
+      // PARAFORMAT2 from here onwards.
+      public int dySpaceBefore;
+      public int dySpaceAfter;
+      public int dyLineSpacing;
+      public short sStyle;
+      public byte bLineSpacingRule;
+      public byte bOutlineLevel;
+      public short wShadingWeight;
+      public short wShadingStyle;
+      public short wNumberingStart;
+      public short wNumberingStyle;
+      public short wNumberingTab;
+      public short wBorderSpace;
+      public short wBorderWidth;
+      public short wBorders;
+    }
+
+    /// <summary>
+    /// Gets or sets the alignment to apply to the current
+    /// selection or insertion point.
+    /// </summary>
+    /// <remarks>
+    /// Replaces the SelectionAlignment from
+    /// <see cref="RichTextBox"/>.
+    /// </remarks>
+    public new TextAlign SelectionAlignment
+    {
+      get
+      {
+        PARAFORMAT fmt = new PARAFORMAT();
+        fmt.cbSize = Marshal.SizeOf(fmt);
+
+        // Get the alignment.
+        SendMessage(new HandleRef(this, Handle),
+                     EM_GETPARAFORMAT,
+                     SCF_SELECTION, ref fmt);
+
+        // Default to Left align.
+        if ((fmt.dwMask & PFM_ALIGNMENT) == 0)
+          return TextAlign.Left;
+
+        return (TextAlign)fmt.wAlignment;
+      }
+
+      set
+      {
+        PARAFORMAT fmt = new PARAFORMAT();
+        fmt.cbSize = Marshal.SizeOf(fmt);
+        fmt.dwMask = PFM_ALIGNMENT;
+        fmt.wAlignment = (short)value;
+
+        // Set the alignment.
+        SendMessage(new HandleRef(this, Handle),
+                     EM_SETPARAFORMAT,
+                     SCF_SELECTION, ref fmt);
+      }
+    }
+
+    [DllImport("user32", CharSet = CharSet.Auto)]
+    private static extern int SendMessage(HandleRef hWnd,
+                                           int msg,
+                                           int wParam,
+                                           int lParam);
+
+    [DllImport("user32", CharSet = CharSet.Auto)]
+    private static extern int SendMessage(HandleRef hWnd,
+                                           int msg,
+                                           int wParam,
+                                           ref PARAFORMAT lp);
+    #endregion Justify TextAlign
   }
 
   public class ZoomChangedEventArgs : EventArgs
@@ -687,5 +997,32 @@ namespace FAQ_Net
     {
       get { return zoomFactor; }
     }
+  }
+
+  /// <summary>
+  /// Specifies how text in a <see cref="AdvRichTextBox"/> is
+  /// horizontally aligned.
+  /// </summary>
+  public enum TextAlign
+  {
+    /// <summary>
+    /// The text is aligned to the left.
+    /// </summary>
+    Left = 1,
+
+    /// <summary>
+    /// The text is aligned to the right.
+    /// </summary>
+    Right = 2,
+
+    /// <summary>
+    /// The text is aligned in the center.
+    /// </summary>
+    Center = 3,
+
+    /// <summary>
+    /// The text is justified.
+    /// </summary>
+    Justify = 4
   }
 }

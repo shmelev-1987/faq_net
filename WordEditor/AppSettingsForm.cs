@@ -1171,9 +1171,9 @@ namespace FAQ_Net
             case "align_right":
               mf.ImageAlignRight = Image.FromFile(file);
               break;
-            //case "align_justify":
-            //  mf.ImageAlignJustify = Image.FromFile(file);
-            //  break;
+            case "align_justify":
+              mf.ImageAlignJustify = Image.FromFile(file);
+              break;
             case "line_spacing":
               mf.ImageLineSpacing = Image.FromFile(file);
               break;
