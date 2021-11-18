@@ -45,12 +45,12 @@ namespace SharedLibrary
       try
       {
         SettingsXmlDoc.Load(_settingsXML);
-        return Decrypt(SettingsXmlDoc.SelectSingleNode("//root/SettingString[@KeyName='" + KeyName + "']").Attributes["KeyValue"].Value);
+        string xpathNode = "//root/SettingString[@KeyName='" + KeyName + "']";
+        if (SettingsXmlDoc.SelectSingleNode(xpathNode) != null)
+          return Decrypt(SettingsXmlDoc.SelectSingleNode(xpathNode).Attributes["KeyValue"].Value);
       }
-      catch (Exception)
-      {
-        return defaultValue;
-      }
+      catch (Exception) { }
+      return defaultValue;
     }
 
     public int GetSettingAsInt(string keyName, int defaultValue)
