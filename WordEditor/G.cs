@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.IO;
 
 namespace FAQ_Net
 {
@@ -22,7 +24,7 @@ namespace FAQ_Net
     //}
     //#endregion Ограничение времени работы с приложением
 
-    public static string CurDir = Application.ExecutablePath.Substring(0, Application.ExecutablePath.LastIndexOf("\\") + 1);    //Текущий каталог приложения
+    public static string CurDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);    //Текущий каталог приложения
     private static SQLiteConnection SQLiteConn = new SQLiteConnection(); //Строка соединения SQLite
     private static SQLiteDataReader SQLite_DR;
     public static System.Data.DataTable DT;
@@ -34,6 +36,7 @@ namespace FAQ_Net
         MaxIdVopros = 0;
 
     public static List<Question> QuestionList = new List<Question>();
+    private static object _lockWrite = new object();
 
     public static string ConvertEncoding(string Str, int FromEncoding, int ToEncoding)
     {
@@ -44,24 +47,85 @@ namespace FAQ_Net
       return toEncoding.GetString(bytes);
     }
 
-    #region Добавить запись в лог-файл (log.xml)
-    public static void AddRowToLog(string Operation, string Result)
+    /// <summary>
+    /// Добавить запись в лог-файл (log.txt)
+    /// </summary>
+    /// <param name="operation">Наименование операции</param>
+    /// <param name="result">Результат</param>
+    public static void AddRowToLog(string operation, string result)
     {
-      if (!System.IO.File.Exists("log.txt"))
-        System.IO.File.Create("log.txt").Close();
-      System.IO.FileInfo log = new System.IO.FileInfo(CurDir + "log.txt");
-      if (log.Length > 204800)
+      lock (_lockWrite)
       {
-        if (!System.IO.Directory.Exists(CurDir + "logs"))
-          System.IO.Directory.CreateDirectory(CurDir + "logs");
-        System.IO.File.Move(CurDir + "log.txt", CurDir + "logs\\" + "log" + DateTime.Now.ToString(" yyyy-MM-dd HH-mm-ss ff") + ".txt");
+        string logsDir = Path.Combine(G.CurDir, "logs");
+        if (!Directory.Exists(logsDir))
+          Directory.CreateDirectory(logsDir);
+
+        string logFileName = Path.Combine(logsDir, "log.txt");
+        int maxLogSize = 204800;
+        if (maxLogSize > 0)
+        {
+          if (!System.IO.File.Exists(logFileName))
+            System.IO.File.Create(logFileName).Close();
+
+          // Если файл больше макимального размера, то писать в новый файл.
+          // Старый лог файл переименовывается
+          FileInfo log = new FileInfo(logFileName);
+          if (log.Length > maxLogSize)
+          {
+            using (StreamWriter logWriter = new StreamWriter(logFileName, true, Encoding.GetEncoding(65001)))
+            {
+              logWriter.Close();
+              string logFileExt = Path.GetExtension(logFileName);
+              string histFileName = string.Format("{0} {1:yyyy-MM-dd HH-mm-ss ff}{2}"
+                , Path.Combine(Path.GetDirectoryName(logFileName), Path.GetFileNameWithoutExtension(logFileName))
+                , DateTime.Now
+                , logFileExt
+                );
+              try
+              {
+                File.Move(logFileName, histFileName);
+
+                // Удалить старые логи, оставив последние 5 файлов
+                DirectoryInfo dirInfo = new DirectoryInfo(logsDir);
+                FileInfo[] logFileInfos = dirInfo.GetFiles("*" + logFileExt);
+                const int MAX_COUNT_FILES_NOT_DELETED = 5;
+                if (logFileInfos.Length > MAX_COUNT_FILES_NOT_DELETED)
+                {
+                  // Сортировка файлов по дате последнего изменения
+                  Array.Sort(logFileInfos,
+                      new Comparison<FileInfo>(delegate (FileInfo f, FileInfo f2)
+                      {
+                        return f.LastWriteTime.CompareTo(f2.LastWriteTime);
+                      }));
+                  // Удалить старые файлы
+                  for (int i = 0; i < logFileInfos.Length - MAX_COUNT_FILES_NOT_DELETED; i++)
+                  {
+                    try
+                    {
+                      File.Delete(logFileInfos[i].FullName);
+                    }
+                    catch (Exception) { }
+                  }
+                }
+              }
+              catch (Exception) { }
+            }
+          }
+
+        }
+        try
+        {
+          using (System.IO.StreamWriter logWriter = new System.IO.StreamWriter(logFileName, true, Encoding.GetEncoding(65001)))
+          {
+            logWriter.WriteLine(string.Format("{0:dd.MM.yyyy HH:mm:ss}\t{1}\t{2}\t{3}\t{4}"
+              , DateTime.Now, operation, result, Environment.MachineName, SystemInformation.UserName));
+            logWriter.Close();
+            logWriter.Dispose();
+          }
+        }
+        catch (Exception) { }
       }
-      System.IO.StreamWriter LogWriter = new System.IO.StreamWriter(CurDir + "log.txt", true, System.Text.Encoding.GetEncoding(65001));
-      LogWriter.WriteLine(DateTime.Now.ToString("dd.MM.yyyy HH:mm") + "\t" + Operation + "\t" + Result + "\t" + Environment.MachineName + "\t" + SystemInformation.UserName);
-      LogWriter.Close();
-      LogWriter.Dispose();
     }
-    #endregion Добавить выполненный запрос в лог-файл (log.xml)
 
     public static bool CreateBackup(Form parentForm, out string err)
     {
@@ -70,8 +134,8 @@ namespace FAQ_Net
       MainApp.WaitForm.Show(parentForm);
       try
       {
-        string NewFileDB = G.CurDir + "FAQ_" + DateTime.Now.ToString("yyyyMMdd_HH_mm") + ".sqlite";
-        System.IO.File.Copy(G.CurDir + "FAQ.sqlite", NewFileDB, true);
+        string NewFileDB = Path.Combine(G.CurDir, string.Format("FAQ_{0:yyyyMMdd_HH_mm}.sqlite", DateTime.Now));
+        System.IO.File.Copy(Path.Combine(G.CurDir, "FAQ.sqlite"), NewFileDB, true);
 
         //System.Threading.Thread t = new System.Threading.Thread();
         SQLiteConnection SQLiteConnBackup = new SQLiteConnection();
@@ -84,7 +148,8 @@ namespace FAQ_Net
         SQLiteConnBackup.Close();
         SQLiteConnBackup.Dispose();
         MainApp.WaitForm.Close();
-        OpenExplorerWithSelect(NewFileDB);
+        G.Explorer.OpenFolderAndSelectFiles(G.CurDir, new string[] { NewFileDB });
+        //OpenExplorerWithSelect(NewFileDB);
         result = true;
       }
       catch (Exception ex)
@@ -98,7 +163,8 @@ namespace FAQ_Net
 
     public static bool ExecSQLiteQuery(string SqlQuery)
     {
-      if (System.IO.File.Exists(G.CurDir + "FAQ.sqlite"))
+      string dbFileName = Path.Combine(G.CurDir, "FAQ.sqlite");
+      if (File.Exists(dbFileName))
       {
         //CheckTime();
         try
@@ -107,7 +173,7 @@ namespace FAQ_Net
           {
             try
             {
-              SQLiteConn.ConnectionString = "Data Source=" + G.CurDir + "FAQ.sqlite;Version=3;";
+              SQLiteConn.ConnectionString = string.Format("Data Source={0};Version=3;", dbFileName);
               SQLiteConn.Open();
             }
             catch (Exception ex)
@@ -514,6 +580,127 @@ namespace FAQ_Net
       }
       if (System.IO.Directory.Exists(fileName))
         System.Diagnostics.Process.Start("explorer.exe", fileName);
+    }
+
+    public class Explorer
+    {
+      [DllImport("shell32.dll", ExactSpelling = true)]
+      public static extern int SHOpenFolderAndSelectItems(
+        IntPtr pidlFolder,
+        uint cidl,
+        [In, MarshalAs(UnmanagedType.LPArray)] IntPtr[] apidl,
+        uint dwFlags);
+
+      [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+      public static extern IntPtr ILCreateFromPath([MarshalAs(UnmanagedType.LPTStr)] string pszPath);
+
+      [ComImport]
+      [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+      [Guid("000214F9-0000-0000-C000-000000000046")]
+      public interface IShellLinkW
+      {
+        [PreserveSig]
+        int GetPath(StringBuilder pszFile, int cch, [In, Out] ref WIN32_FIND_DATAW pfd, uint fFlags);
+
+        [PreserveSig]
+        int GetIDList([Out] out IntPtr ppidl);
+
+        [PreserveSig]
+        int SetIDList([In] ref IntPtr pidl);
+
+        [PreserveSig]
+        int GetDescription(StringBuilder pszName, int cch);
+
+        [PreserveSig]
+        int SetDescription([MarshalAs(UnmanagedType.LPWStr)] string pszName);
+
+        [PreserveSig]
+        int GetWorkingDirectory(StringBuilder pszDir, int cch);
+
+        [PreserveSig]
+        int SetWorkingDirectory([MarshalAs(UnmanagedType.LPWStr)] string pszDir);
+
+        [PreserveSig]
+        int GetArguments(StringBuilder pszArgs, int cch);
+
+        [PreserveSig]
+        int SetArguments([MarshalAs(UnmanagedType.LPWStr)] string pszArgs);
+
+        [PreserveSig]
+        int GetHotkey([Out] out ushort pwHotkey);
+
+        [PreserveSig]
+        int SetHotkey(ushort wHotkey);
+
+        [PreserveSig]
+        int GetShowCmd([Out] out int piShowCmd);
+
+        [PreserveSig]
+        int SetShowCmd(int iShowCmd);
+
+        [PreserveSig]
+        int GetIconLocation(StringBuilder pszIconPath, int cch, [Out] out int piIcon);
+
+        [PreserveSig]
+        int SetIconLocation([MarshalAs(UnmanagedType.LPWStr)] string pszIconPath, int iIcon);
+
+        [PreserveSig]
+        int SetRelativePath([MarshalAs(UnmanagedType.LPWStr)] string pszPathRel, uint dwReserved);
+
+        [PreserveSig]
+        int Resolve(IntPtr hwnd, uint fFlags);
+
+        [PreserveSig]
+        int SetPath([MarshalAs(UnmanagedType.LPWStr)] string pszFile);
+      }
+
+      [Serializable, StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode), BestFitMapping(false)]
+      public struct WIN32_FIND_DATAW
+      {
+        public uint dwFileAttributes;
+        public FILETIME ftCreationTime;
+        public FILETIME ftLastAccessTime;
+        public FILETIME ftLastWriteTime;
+        public uint nFileSizeHigh;
+        public uint nFileSizeLow;
+        public uint dwReserved0;
+        public uint dwReserved1;
+
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+        public string cFileName;
+
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 14)]
+        public string cAlternateFileName;
+      }
+
+      /// <summary>
+      /// Открыть папку в Проводнике с несколькими выделенными файлами
+      /// </summary>
+      /// <param name="folder">Имя каталога</param>
+      /// <param name="filesToSelect">Полные имена файлов</param>
+      public static void OpenFolderAndSelectFiles(string folder, params string[] filesToSelect)
+      {
+        IntPtr dir = ILCreateFromPath(folder);
+
+        var filesToSelectIntPtrs = new IntPtr[filesToSelect.Length];
+        for (int i = 0; i < filesToSelect.Length; i++)
+        {
+          filesToSelectIntPtrs[i] = ILCreateFromPath(filesToSelect[i]);
+        }
+
+        SHOpenFolderAndSelectItems(dir, (uint)filesToSelect.Length, filesToSelectIntPtrs, 0);
+        ReleaseComObject(dir);
+        ReleaseComObject(filesToSelectIntPtrs);
+      }
+
+      private static void ReleaseComObject(params object[] comObjs)
+      {
+        foreach (object obj in comObjs)
+        {
+          if (obj != null && Marshal.IsComObject(obj))
+            Marshal.ReleaseComObject(obj);
+        }
+      }
     }
   }
 }

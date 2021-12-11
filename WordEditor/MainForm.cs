@@ -865,8 +865,8 @@ namespace FAQ_Net
 
       if (TransitionDT.Columns.Count == 0)
       {
-        TransitionDT.Columns.Add("type", typeof(Int16));
-        TransitionDT.Columns.Add("id", typeof(String));
+        TransitionDT.Columns.Add("type", typeof(byte));
+        TransitionDT.Columns.Add("id", typeof(string));
         TransitionDT.Columns.Add("TN", typeof(TreeNode));
         TransitionDT.Rows.Add(0, "", null);
       }
@@ -963,30 +963,43 @@ namespace FAQ_Net
     {
       try
       {
-        System.Net.WebClient webCli = new System.Net.WebClient();
-        using (Stream stream = webCli.OpenRead("https://raw.githubusercontent.com/shmelev-1987/faq_net/master/WordEditor/LastUpdateInfo.xml"))
+        string lastUpdateInfo = "http://x93744i3.bget.ru/faq_net_update/last_update_info.xml";
+        string xmlUpdateText = WebRequest(lastUpdateInfo, "application/xml");
+        System.Xml.XmlDocument xmlDocUpdate = new System.Xml.XmlDocument();
+        xmlDocUpdate.LoadXml(xmlUpdateText);
+        Version lastVersion = new Version(xmlDocUpdate.SelectSingleNode("//VersionConfig/LastVersion").InnerText);
+        Version notShowNewsVer = _settingsXml.GetSettingAsVersion(UpdateUserControl.NOT_SHOW_UPDATE_VERSION);
+        if (lastVersion > System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
+         && lastVersion != notShowNewsVer)
         {
-          using (StreamReader reader = new StreamReader(stream))
-          {
-            string xmlUpdateText = reader.ReadToEnd();
-            System.Xml.XmlDocument xmlDocUpdate = new System.Xml.XmlDocument();
-            xmlDocUpdate.LoadXml(xmlUpdateText);
-            Version lastVersion = new Version(xmlDocUpdate.SelectSingleNode("//VersionConfig/LastVersion").InnerText);
-            if (lastVersion > System.Reflection.Assembly.GetExecutingAssembly().GetName().Version)
-            {
-              // Отобразить информацию о новой версии
-              UpdateUserControl updateUserControl = new UpdateUserControl();
-              updateUserControl.UpdateInfoText = xmlDocUpdate.SelectSingleNode("//VersionConfig/LatestChanges").InnerText.Replace("\n", Environment.NewLine);
-              updateUserControl.DownloadReleaseUrl = "https://github.com/shmelev-1987/faq_net/releases";
-              updateUserControl.Width = Convert.ToInt32(xmlDocUpdate.SelectSingleNode("//VersionConfig/Width").InnerText);
-              updateUserControl.Height = Convert.ToInt32(xmlDocUpdate.SelectSingleNode("//VersionConfig/Height").InnerText);
-              updateUserControl.Parent = this;
-              updateUserControl.BringToFront();
-            }
-          }
+          // Отобразить информацию о новой версии
+          UpdateUserControl updateUserControl = new UpdateUserControl();
+          updateUserControl.LastVersion = lastVersion;
+          updateUserControl.UpdateInfoText = xmlDocUpdate.SelectSingleNode("//VersionConfig/LatestChanges").InnerText.Replace("\n", Environment.NewLine);
+          updateUserControl.DownloadReleaseUrl = "http://x93744i3.bget.ru/faq_net_update/donate_ru.html";
+          updateUserControl.Width = Convert.ToInt32(xmlDocUpdate.SelectSingleNode("//VersionConfig/Width").InnerText);
+          updateUserControl.Height = Convert.ToInt32(xmlDocUpdate.SelectSingleNode("//VersionConfig/Height").InnerText);
+          updateUserControl.Parent = this;
+          updateUserControl.BringToFront();
         }
       }
       catch (Exception) { }
+    }
+
+    private string WebRequest(string urlAddress, string contentType)
+    {
+      System.Net.WebClient webCli = new System.Net.WebClient();
+      webCli.Headers.Add(System.Net.HttpRequestHeader.ContentType, contentType);
+      webCli.Headers.Add(System.Net.HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0");
+      
+      //string lastUpdateInfo = string.Format("http://x93744i3.bget.ru/importexportdatasql_update/last_update_info_{0}.xml", LocaleSettingXml.Language);
+      using (Stream stream = webCli.OpenRead(urlAddress))
+      {
+        using (StreamReader reader = new StreamReader(stream))
+        {
+          return reader.ReadToEnd();
+        }
+      }
     }
 
     private void InitializeUserControls()
@@ -1885,6 +1898,24 @@ namespace FAQ_Net
               }
             }
             browserProcess.Dispose();
+          }
+          if (e.LinkText.StartsWith("file:"))
+          {
+            string fileNameOrDirectory = e.LinkText.Substring(5);
+            try
+            {
+              fileNameOrDirectory = System.Web.HttpUtility.UrlDecode(fileNameOrDirectory);
+              if (File.Exists(fileNameOrDirectory))
+                System.Diagnostics.Process.Start(fileNameOrDirectory);
+              else
+              if (Directory.Exists(fileNameOrDirectory))
+                G.Explorer.OpenFolderAndSelectFiles(fileNameOrDirectory, new string[] { });
+            }
+            catch (Exception ex)
+            {
+              MessageBox.Show(string.Format("Ошибка запуска файла или папки:\n{0}:\n\n{1}", fileNameOrDirectory, ex.Message), "Ошибка открытия файла или папки", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+            }
           }
           else
             MessageBox.Show("URL-адрес должен начинаться с 'http:' или 'https:'", "Неверный URL", MessageBoxButtons.OK,
@@ -3134,7 +3165,7 @@ namespace FAQ_Net
     {
       btnNextQuestion.Visible = true;
       btnNextQuestion.BackColor = SelectedPathLbl.BackColor;
-      CurTransitionRow -= 1;
+      CurTransitionRow--;
       if (CurTransitionRow == 0)
         BackBtn.Visible = false;
       //else
@@ -3142,17 +3173,17 @@ namespace FAQ_Net
       //BackBtn.Visible = false;
       //SelectedPathLbl.Text = listView1.Tag.ToString();
 
-      switch (TransitionDT.Rows[CurTransitionRow]["type"].ToString())
+      switch ((byte)TransitionDT.Rows[CurTransitionRow]["type"])
       {
-        case "0":
+        case 0:
           TV1.SelectedNode = null;
           LastQuestions();    //Последние добавленные вопросы
           break;
-        case "1":
+        case 1:
           //TV1.SelectedNode = (TreeNode)TransitionDT.Rows[CurTransitionRow]["TN"];
           NodeSelect((TreeNode)TransitionDT.Rows[CurTransitionRow]["TN"]);
           break;
-        case "2":
+        case 2:
           TV1.SelectedNode = null;
           GetQuestionAndAnswer(TransitionDT.Rows[CurTransitionRow]["id"].ToString());
           break;
@@ -3190,11 +3221,9 @@ namespace FAQ_Net
       _settingsXml.SetSetting(Constants.LAST_SORTING, SortOrder.Descending.ToString());
     }
 
-    private void AddRowInHistory(int type)
+    private void AddRowInHistory(byte type)
     {
-      //int i = TransitionDT.Rows.Count;
       while (CurTransitionRow + 1 < TransitionDT.Rows.Count)
-      //for (int i = CurTransitionRow + 1; i < TransitionDT.Rows.Count; i++)
       {
         TransitionDT.Rows.RemoveAt(TransitionDT.Rows.Count - 1);
         btnNextQuestion.Visible = false;
@@ -3202,17 +3231,32 @@ namespace FAQ_Net
       switch (type)
       {
         case 0: // последние добавленные вопросы
-          TransitionDT.Rows.Add(type, "", null);
+          CurTransitionRow++;
+          TransitionDT.Rows.Add(type, string.Empty, null);
           break;
-        case 1: // TreeNode
-          TransitionDT.Rows.Add(type, TV1.SelectedNode.Tag.ToString(), TV1.SelectedNode);
+        case 1: // TreeNode          
+          // НЕ УБИРАТЬ ЭТО УСЛОВИЕ!
+          // Если убрать это условие, то в истории начинают дублироваться записи. При чем в режиме DEBUG в Visual Studio, если установлена
+          // точка останова внутри этого метода, то дублей не наблюдается
+          if ((byte)TransitionDT.Rows[CurTransitionRow]["type"] != type
+           || TransitionDT.Rows[CurTransitionRow]["id"].ToString() != TV1.SelectedNode.Tag.ToString())
+          {
+            CurTransitionRow++;
+            TransitionDT.Rows.Add(type, TV1.SelectedNode.Tag.ToString(), TV1.SelectedNode);
+          }
           break;
         case 2: // Вопрос
-          TransitionDT.Rows.Add(type, ID_ContentTSSL.Text, null);
+                // НЕ УБИРАТЬ ЭТО УСЛОВИЕ!
+                // Если убрать это условие, то в истории начинают дублироваться записи. При чем в режиме DEBUG в Visual Studio, если установлена
+                // точка останова внутри этого метода, то дублей не наблюдается
+          if ((byte)TransitionDT.Rows[CurTransitionRow]["type"] != type
+             || TransitionDT.Rows[CurTransitionRow]["id"].ToString() != ID_ContentTSSL.Text)
+          {
+            CurTransitionRow++;
+            TransitionDT.Rows.Add(type, ID_ContentTSSL.Text, null);
+          }
           break;
       }
-
-      CurTransitionRow += 1;
       BackBtn.Visible = true;
       BackBtn.BackColor = SelectedPathLbl.BackColor;
     }
@@ -3635,27 +3679,30 @@ namespace FAQ_Net
 
     private void btnNextQuestion_Click(object sender, EventArgs e)
     {
-      CurTransitionRow += 1;
-      if (TransitionDT.Rows.Count == CurTransitionRow + 1)
+      int nextTransitionRow = CurTransitionRow + 1;
+
+      if (TransitionDT.Rows.Count == nextTransitionRow + 1)
       {
         btnNextQuestion.Visible = false;
         BackBtn.Visible = true;
         BackBtn.BackColor = SelectedPathLbl.BackColor;
       }
 
-      switch (TransitionDT.Rows[CurTransitionRow]["type"].ToString())
+      switch ((byte)TransitionDT.Rows[nextTransitionRow]["type"])
       {
-        case "0":
+        case 0:
           TV1.SelectedNode = null;
           LastQuestions();    //Последние добавленные вопросы
           break;
-        case "1":
+        case 1:
           //TV1.SelectedNode = (TreeNode)TransitionDT.Rows[CurTransitionRow]["TN"];
-          NodeSelect((TreeNode)TransitionDT.Rows[CurTransitionRow]["TN"]);
+          NodeSelect((TreeNode)TransitionDT.Rows[nextTransitionRow]["TN"]);
+          CurTransitionRow++;
           break;
-        case "2":
+        case 2:
           TV1.SelectedNode = null;
-          GetQuestionAndAnswer(TransitionDT.Rows[CurTransitionRow]["id"].ToString());
+          GetQuestionAndAnswer(TransitionDT.Rows[nextTransitionRow]["id"].ToString());
+          CurTransitionRow++;
           break;
       }
     }
@@ -3842,6 +3889,41 @@ namespace FAQ_Net
     private void bullet_DropDownOpening(object sender, EventArgs e)
     {
       _clickDownBullet = true;
+    }
+
+    private void tsmiCreateFileUrl_Click(object sender, EventArgs e)
+    {
+      using (OpenFileDialog ofd = new OpenFileDialog())
+      {
+        ofd.Multiselect = true;
+        ofd.Title = "Создать ссылку(и) на файл(ы)";
+        if (ofd.ShowDialog() == DialogResult.OK)
+        {
+          if (ofd.FileNames.Length == 1)
+            richText.SelectedText = GetFileUrl(ofd.FileNames[0]);
+          else
+          {
+            StringBuilder sb = new StringBuilder();
+            foreach (string fileName in ofd.FileNames)
+              sb.AppendLine(GetFileUrl(fileName));
+            richText.SelectedText = sb.ToString();
+          }
+        }
+      }
+    }
+
+    private void tsmiCreateFolderUrl_Click(object sender, EventArgs e)
+    {
+      using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+      {
+        if (fbd.ShowDialog() == DialogResult.OK)
+          richText.SelectedText = GetFileUrl(fbd.SelectedPath);
+      }
+    }
+
+    private string GetFileUrl(string fileNameOrFolder)
+    {
+      return string.Format("file:{0}", fileNameOrFolder.Replace(" ", "%20"));
     }
   }
 }

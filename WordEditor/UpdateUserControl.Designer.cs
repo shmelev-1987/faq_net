@@ -32,6 +32,7 @@
       this.btnGoToUpdateUrl = new System.Windows.Forms.Button();
       this.btnCancel = new System.Windows.Forms.Button();
       this.txbUpdateInfo = new System.Windows.Forms.TextBox();
+      this.chkNotShowUpdate = new System.Windows.Forms.CheckBox();
       this.SuspendLayout();
       // 
       // lblHeader
@@ -59,7 +60,7 @@
       this.btnGoToUpdateUrl.Name = "btnGoToUpdateUrl";
       this.btnGoToUpdateUrl.Size = new System.Drawing.Size(162, 23);
       this.btnGoToUpdateUrl.TabIndex = 59;
-      this.btnGoToUpdateUrl.Text = "Скачать обновление";
+      this.btnGoToUpdateUrl.Text = "Подробнее";
       this.btnGoToUpdateUrl.UseVisualStyleBackColor = false;
       this.btnGoToUpdateUrl.Click += new System.EventHandler(this.btnGoToUpdateUrl_Click);
       // 
@@ -88,14 +89,28 @@
       this.txbUpdateInfo.Location = new System.Drawing.Point(4, 31);
       this.txbUpdateInfo.Multiline = true;
       this.txbUpdateInfo.Name = "txbUpdateInfo";
-      this.txbUpdateInfo.Size = new System.Drawing.Size(327, 155);
+      this.txbUpdateInfo.Size = new System.Drawing.Size(327, 132);
       this.txbUpdateInfo.TabIndex = 62;
+      // 
+      // chkNotShowUpdate
+      // 
+      this.chkNotShowUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.chkNotShowUpdate.AutoSize = true;
+      this.chkNotShowUpdate.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+      this.chkNotShowUpdate.Location = new System.Drawing.Point(4, 169);
+      this.chkNotShowUpdate.Name = "chkNotShowUpdate";
+      this.chkNotShowUpdate.Size = new System.Drawing.Size(284, 17);
+      this.chkNotShowUpdate.TabIndex = 64;
+      this.chkNotShowUpdate.Text = "Больше не показывать обновления этой версии";
+      this.chkNotShowUpdate.UseVisualStyleBackColor = true;
+      this.chkNotShowUpdate.CheckedChanged += new System.EventHandler(this.chkNotShowUpdate_CheckedChanged);
       // 
       // UpdateUserControl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.Gold;
+      this.Controls.Add(this.chkNotShowUpdate);
       this.Controls.Add(this.txbUpdateInfo);
       this.Controls.Add(this.btnCancel);
       this.Controls.Add(this.btnGoToUpdateUrl);
@@ -114,5 +129,6 @@
     private System.Windows.Forms.Button btnGoToUpdateUrl;
     private System.Windows.Forms.Button btnCancel;
     private System.Windows.Forms.TextBox txbUpdateInfo;
+    private System.Windows.Forms.CheckBox chkNotShowUpdate;
   }
 }

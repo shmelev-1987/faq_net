@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FAQ_Net")]
-[assembly: AssemblyCopyright("Copyright ©  2013-2019")]
+[assembly: AssemblyCopyright("Copyright ©  2013-2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,6 +30,6 @@ using System.Resources;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("2.11.0.0")]
-[assembly: AssemblyFileVersion("2.11.0.0")]
+[assembly: AssemblyVersion("2.11.1.0")]
+[assembly: AssemblyFileVersion("2.11.1.0")]
 [assembly: NeutralResourcesLanguageAttribute("ru")]

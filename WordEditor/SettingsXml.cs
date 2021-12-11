@@ -73,6 +73,17 @@ namespace SharedLibrary
       return defaultValue;
     }
 
+    public Version GetSettingAsVersion(string keyName)
+    {
+      Version ver = new Version();
+      try
+      {
+        ver = new Version(GetSetting(keyName));
+      }
+      catch (Exception) { }
+      return ver;
+    }
+
     private void LoadXml()
     {
       if (!System.IO.File.Exists(_settingsXML))

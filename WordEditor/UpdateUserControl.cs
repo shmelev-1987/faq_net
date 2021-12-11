@@ -7,6 +7,8 @@ namespace FAQ_Net
   public partial class UpdateUserControl : UserControl
   {
     private string _downloadReleaseUrl;
+    private Version _lastVersion = new Version();
+    public const string NOT_SHOW_UPDATE_VERSION = "NotShowUpdateVer";
 
     public UpdateUserControl()
     {
@@ -21,6 +23,11 @@ namespace FAQ_Net
     public string DownloadReleaseUrl
     {
       set { _downloadReleaseUrl = value; }
+    }
+
+    public Version LastVersion
+    {
+      set { _lastVersion = value; }
     }
 
     private void btnGoToUpdateUrl_Click(object sender, EventArgs e)
@@ -86,6 +93,13 @@ namespace FAQ_Net
     private void btnCancel_Click(object sender, EventArgs e)
     {
       this.Dispose();
+    }
+
+    private void chkNotShowUpdate_CheckedChanged(object sender, EventArgs e)
+    {
+      if (chkNotShowUpdate.Checked)
+        MainForm._settingsXml.SetSetting(NOT_SHOW_UPDATE_VERSION
+          , chkNotShowUpdate.Checked ? _lastVersion.ToString() : new Version(0, 0, 0, 0).ToString());
     }
   }
 }

@@ -269,6 +269,9 @@ namespace FAQ_Net
       this.JournalIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.JournalQuestionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.JournalFavoriteDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.tsmiCreateUrl = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiCreateFileUrl = new System.Windows.Forms.ToolStripMenuItem();
+      this.tsmiCreateFolderUrl = new System.Windows.Forms.ToolStripMenuItem();
       this.CategoriesContextMenu.SuspendLayout();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
@@ -1677,7 +1680,7 @@ namespace FAQ_Net
             this.tsmiAddTable});
       this.tsmiTable.ForeColor = System.Drawing.Color.White;
       this.tsmiTable.Name = "tsmiTable";
-      this.tsmiTable.Size = new System.Drawing.Size(66, 20);
+      this.tsmiTable.Size = new System.Drawing.Size(65, 20);
       this.tsmiTable.Text = "Таблица";
       this.tsmiTable.Visible = false;
       // 
@@ -1797,6 +1800,7 @@ namespace FAQ_Net
             this.copyRichText,
             this.pasteRichText,
             this.sep_0,
+            this.tsmiCreateUrl,
             this.fontRichText,
             this.sep_1,
             this.superscriptRichText,
@@ -1805,7 +1809,7 @@ namespace FAQ_Net
             this.sep_2,
             this.printRichText});
       this.richMenu.Name = "RichMenu";
-      this.richMenu.Size = new System.Drawing.Size(219, 198);
+      this.richMenu.Size = new System.Drawing.Size(219, 242);
       this.richMenu.Opening += new System.ComponentModel.CancelEventHandler(this.richMenu_Opening);
       // 
       // cutRichText
@@ -2747,7 +2751,7 @@ namespace FAQ_Net
       // 
       this.tsslStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
       this.tsslStatus.Name = "tsslStatus";
-      this.tsslStatus.Size = new System.Drawing.Size(113, 15);
+      this.tsslStatus.Size = new System.Drawing.Size(114, 15);
       this.tsslStatus.Text = "Нет фоновых задач";
       // 
       // openFile
@@ -2784,6 +2788,29 @@ namespace FAQ_Net
       this.JournalFavoriteDateColumn.Name = "JournalFavoriteDateColumn";
       this.JournalFavoriteDateColumn.ReadOnly = true;
       this.JournalFavoriteDateColumn.Visible = false;
+      // 
+      // tsmiCreateUrl
+      // 
+      this.tsmiCreateUrl.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCreateFileUrl,
+            this.tsmiCreateFolderUrl});
+      this.tsmiCreateUrl.Name = "tsmiCreateUrl";
+      this.tsmiCreateUrl.Size = new System.Drawing.Size(218, 22);
+      this.tsmiCreateUrl.Text = "Создать ссылку";
+      // 
+      // tsmiCreateFileUrl
+      // 
+      this.tsmiCreateFileUrl.Name = "tsmiCreateFileUrl";
+      this.tsmiCreateFileUrl.Size = new System.Drawing.Size(180, 22);
+      this.tsmiCreateFileUrl.Text = "на файл(ы)";
+      this.tsmiCreateFileUrl.Click += new System.EventHandler(this.tsmiCreateFileUrl_Click);
+      // 
+      // tsmiCreateFolderUrl
+      // 
+      this.tsmiCreateFolderUrl.Name = "tsmiCreateFolderUrl";
+      this.tsmiCreateFolderUrl.Size = new System.Drawing.Size(180, 22);
+      this.tsmiCreateFolderUrl.Text = "на каталог";
+      this.tsmiCreateFolderUrl.Click += new System.EventHandler(this.tsmiCreateFolderUrl_Click);
       // 
       // MainForm
       // 
@@ -3076,6 +3103,9 @@ namespace FAQ_Net
     private DataGridViewTextBoxColumn JournalQuestionColumn;
     private DataGridViewTextBoxColumn JournalFavoriteDateColumn;
     private ToolStripButton alignJustify;
+    private ToolStripMenuItem tsmiCreateUrl;
+    private ToolStripMenuItem tsmiCreateFileUrl;
+    private ToolStripMenuItem tsmiCreateFolderUrl;
   }
 
 }
