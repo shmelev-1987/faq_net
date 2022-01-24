@@ -846,6 +846,7 @@ namespace FAQ_Net
       ReloadStyleSettings(_settingsXml);
 
       TabControl.Width = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, TabControl.Width);
+	  MainForm_Resize(null, null);
 
       string lastViewSetting = _settingsXml.GetSetting(Constants.LAST_VIEW);
       if (lastViewSetting == _questionListViewControl.ToString())
@@ -3136,7 +3137,10 @@ namespace FAQ_Net
       if (richText == null)
         return;
       if (this.Width - TabControl.Width - 50 > 50)
-        richText.RightMargin = this.Width - TabControl.Width - 50;
+      {
+        richText.RightMargin = this.Width - TabControl.Width - 55;
+        richText.Refresh();
+      }
       else
         richText.RightMargin = 20;
     }
@@ -3924,6 +3928,11 @@ namespace FAQ_Net
     private string GetFileUrl(string fileNameOrFolder)
     {
       return string.Format("file:{0}", fileNameOrFolder.Replace(" ", "%20"));
+    }
+
+    private void splitter2_SplitterMoved(object sender, SplitterEventArgs e)
+    {
+      MainForm_Resize(sender, e);
     }
   }
 }

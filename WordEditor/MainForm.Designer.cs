@@ -2053,6 +2053,7 @@ namespace FAQ_Net
       this.splitter2.Size = new System.Drawing.Size(4, 402);
       this.splitter2.TabIndex = 30;
       this.splitter2.TabStop = false;
+	  this.splitter2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter2_SplitterMoved);
       // 
       // TabControl
       // 

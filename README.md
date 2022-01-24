@@ -69,7 +69,10 @@ FAQ Net — программа для заметок, написанная по�
 Приложение FAQ Net можно применять людям различных профессий и статусов. Рекомендуется использовать приложение для заметок FAQ Net: программистам, студентам и преподавателям.
 
 Скачать Windows приложение FAQ Net (бесплатно):
-  - x64 https://yadi.sk/d/sq3g4NOD3Zt7ZY
-  - x86 https://yadi.sk/d/NKXeyUWH3Zt8PQ
+  - x64 .NET Framework 2.0: https://yadi.sk/d/sq3g4NOD3Zt7ZY
+  - x86 .NET Framework 2.0: https://yadi.sk/d/NKXeyUWH3Zt8PQ
+
+  - x64 .NET Framework 4.5: https://yadi.sk/d/CxY0aRGo1dmeSA
+  - x86 .NET Framework 4.5: https://yadi.sk/d/ELyU4wt6ByDdJg
 
 [Группа ВКонтакте](https://vk.com/faq_net_free_soft)
