@@ -72,7 +72,7 @@ FAQ Net — программа для заметок, написанная по�
   - x64 .NET Framework 2.0: https://yadi.sk/d/sq3g4NOD3Zt7ZY
   - x86 .NET Framework 2.0: https://yadi.sk/d/NKXeyUWH3Zt8PQ
 
-  - x64 .NET Framework 4.5: https://yadi.sk/d/CxY0aRGo1dmeSA
-  - x86 .NET Framework 4.5: https://yadi.sk/d/ELyU4wt6ByDdJg
+  - x64 .NET Framework 4.5: https://yadi.sk/d/ELyU4wt6ByDdJg
+  - x86 .NET Framework 4.5: https://yadi.sk/d/CxY0aRGo1dmeSA
 
 [Группа ВКонтакте](https://vk.com/faq_net_free_soft)
