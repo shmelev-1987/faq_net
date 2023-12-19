@@ -16,29 +16,34 @@ namespace FAQ_Net
 
     public QuestionDgvControl(Control owner, ContextMenuStrip contextMenuStrip, MainForm mf)
     {
+      // id_content
       _idColumn = new DataGridViewTextBoxColumn();
       _idColumn.ValueType = typeof(int);
       _idColumn.Visible = false;
       _idColumn.HeaderText = "ID-вопроса";
+      _idColumn.Name = "id_content";
 
+      // question
       _questionColumn = new DataGridViewTextBoxColumn();
       _questionColumn.ValueType = typeof(string);
-      //_questionColumn.ColumnName = "question";
       _questionColumn.HeaderText = "Вопрос";
+      _questionColumn.Name = "question";
 
+      // create_date
       _createDateColumn = new DataGridViewTextBoxColumn();
       _createDateColumn.ValueType = typeof(DateTime);
       _createDateColumn.CellTemplate.Style.Format = "dd.MM.yyyy HH:mm:ss";
       _createDateColumn.Width = 110;
-      //"create_date"
       _createDateColumn.HeaderText = "Дата создания";
+      _createDateColumn.Name = "create_date";
 
+      // modif_date
       _modifDateColumn = new DataGridViewTextBoxColumn();
       _modifDateColumn.ValueType = typeof(DateTime);
       _modifDateColumn.CellTemplate.Style.Format = "dd.MM.yyyy HH:mm:ss";
       _modifDateColumn.Width = 110;
-      //"create_date"
       _modifDateColumn.HeaderText = "Дата изменения";
+      _modifDateColumn.Name = "modif_date";
 
       _dgvControl = new DataGridView();
       _dgvControl.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -61,6 +66,11 @@ namespace FAQ_Net
       _dgvControl.BringToFront();
       _dgvControl.ContextMenuStrip = contextMenuStrip;
       _dgvControl.MouseDown += mf.listView1_MouseDown;
+
+      string sortedColumnName = MainForm._settingsXml.GetSetting(Constants.LAST_SORTING_DATAGRIDVIEW_COLUMNNAME, _questionColumn.Name);
+      System.ComponentModel.ListSortDirection sortOrder = (System.ComponentModel.ListSortDirection)MainForm._settingsXml.GetSettingAsInt(Constants.LAST_SORTING_DATAGRIDVIEW, (int)System.ComponentModel.ListSortDirection.Ascending);
+      _dgvControl.Sort(_dgvControl.Columns[sortedColumnName]
+                , sortOrder);
       //_listControl.RowFocusChanged += (Application.OpenForms[0] as MainForm).listView1_SelectedIndexChanged;
     }
 
@@ -135,22 +145,22 @@ namespace FAQ_Net
       }
     }
 
-    public SortOrder Sorting
-    {
-      set
-      {
-        if (value == SortOrder.None)
-          _dgvControl.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-        else
-        if (value == SortOrder.Ascending)
-          _dgvControl.Sort(_dgvControl.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
-        else
-        if (value == SortOrder.Descending)
-        {
-          _dgvControl.Sort(_dgvControl.Columns[1], System.ComponentModel.ListSortDirection.Descending);
-        }
-      }
-    }
+    //public SortOrder Sorting
+    //{
+    //  set
+    //  {
+    //    if (value == SortOrder.None)
+    //      _dgvControl.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+    //    else
+    //    if (value == SortOrder.Ascending)
+    //      _dgvControl.Sort(_dgvControl.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
+    //    else
+    //    if (value == SortOrder.Descending)
+    //    {
+    //      _dgvControl.Sort(_dgvControl.Columns[1], System.ComponentModel.ListSortDirection.Descending);
+    //    }
+    //  }
+    //}
 
     public void RemoveFirstSelectedItem()
     {
@@ -171,6 +181,13 @@ namespace FAQ_Net
     public DataGridView DgvControl
     {
       get { return _dgvControl; }
+    }
+
+    public void SaveSortedColumn()
+    {
+      MainForm._settingsXml.SetSetting(Constants.LAST_SORTING_DATAGRIDVIEW_COLUMNNAME, _dgvControl.SortedColumn.Name);
+      System.ComponentModel.ListSortDirection listSortDirection = (System.ComponentModel.ListSortDirection)Convert.ToByte((byte)_dgvControl.SortOrder) - 1;
+      MainForm._settingsXml.SetSetting(Constants.LAST_SORTING_DATAGRIDVIEW, Convert.ToByte(listSortDirection).ToString());
     }
   }
 }

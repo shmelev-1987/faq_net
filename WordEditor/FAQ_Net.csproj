@@ -110,6 +110,11 @@
       <DependentUpon>EditImageForm.cs</DependentUpon>
     </Compile>
     <Compile Include="EnumString.cs" />
+    <Compile Include="Sql\SqlQueries.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlQueries.resx</DependentUpon>
+    </Compile>
     <Compile Include="ToolTipDictionary\DictionaryEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +177,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditImageForm.resx">
       <DependentUpon>EditImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sql\SqlQueries.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SqlQueries.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolTipDictionary\DictionaryEditor.resx">
       <DependentUpon>DictionaryEditor.cs</DependentUpon>

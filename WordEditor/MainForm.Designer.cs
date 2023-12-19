@@ -316,29 +316,30 @@ namespace FAQ_Net
             this.SearchTSMI,
             this.ChangeNameCategoryTSMI,
             this.CreateBackupTSMI});
+      this.CategoriesContextMenu.Font = new System.Drawing.Font("Segoe UI", 11F);
       this.CategoriesContextMenu.Name = "CategoriesContextMenu";
-      this.CategoriesContextMenu.Size = new System.Drawing.Size(259, 208);
+      this.CategoriesContextMenu.Size = new System.Drawing.Size(315, 250);
       this.CategoriesContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.CategoriesContextMenu_Opening);
       // 
       // CreateQuestionTSMI
       // 
-      this.CreateQuestionTSMI.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+      this.CreateQuestionTSMI.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
       this.CreateQuestionTSMI.Name = "CreateQuestionTSMI";
-      this.CreateQuestionTSMI.Size = new System.Drawing.Size(258, 22);
+      this.CreateQuestionTSMI.Size = new System.Drawing.Size(314, 24);
       this.CreateQuestionTSMI.Text = "Добавить вопрос";
       this.CreateQuestionTSMI.Click += new System.EventHandler(this.CreateQuestionTSB_Click);
       // 
       // CreateCategoryTSMI
       // 
       this.CreateCategoryTSMI.Name = "CreateCategoryTSMI";
-      this.CreateCategoryTSMI.Size = new System.Drawing.Size(258, 22);
+      this.CreateCategoryTSMI.Size = new System.Drawing.Size(314, 24);
       this.CreateCategoryTSMI.Text = "Добавить раздел";
       this.CreateCategoryTSMI.Click += new System.EventHandler(this.CreateCategory_Click);
       // 
       // CreateSubcategoryTSMI
       // 
       this.CreateSubcategoryTSMI.Name = "CreateSubcategoryTSMI";
-      this.CreateSubcategoryTSMI.Size = new System.Drawing.Size(258, 22);
+      this.CreateSubcategoryTSMI.Size = new System.Drawing.Size(314, 24);
       this.CreateSubcategoryTSMI.Text = "Добавить подраздел";
       this.CreateSubcategoryTSMI.Click += new System.EventHandler(this.CreateSubcategoryTSB_Click);
       // 
@@ -348,13 +349,13 @@ namespace FAQ_Net
             this.DelRazdelTSMI,
             this.DelRazdelWithReplaceTSMI});
       this.DelRazdelMainTSMI.Name = "DelRazdelMainTSMI";
-      this.DelRazdelMainTSMI.Size = new System.Drawing.Size(258, 22);
+      this.DelRazdelMainTSMI.Size = new System.Drawing.Size(314, 24);
       this.DelRazdelMainTSMI.Text = "Удалить раздел";
       // 
       // DelRazdelTSMI
       // 
       this.DelRazdelTSMI.Name = "DelRazdelTSMI";
-      this.DelRazdelTSMI.Size = new System.Drawing.Size(314, 22);
+      this.DelRazdelTSMI.Size = new System.Drawing.Size(384, 24);
       this.DelRazdelTSMI.Text = "вместе с содержимым";
       this.DelRazdelTSMI.Click += new System.EventHandler(this.DelRazdelTSMI_Click);
       // 
@@ -368,12 +369,12 @@ namespace FAQ_Net
       // фToolStripMenuItem
       // 
       this.фToolStripMenuItem.Name = "фToolStripMenuItem";
-      this.фToolStripMenuItem.Size = new System.Drawing.Size(255, 6);
+      this.фToolStripMenuItem.Size = new System.Drawing.Size(311, 6);
       // 
       // LastQuestionsTSMI
       // 
       this.LastQuestionsTSMI.Name = "LastQuestionsTSMI";
-      this.LastQuestionsTSMI.Size = new System.Drawing.Size(258, 22);
+      this.LastQuestionsTSMI.Size = new System.Drawing.Size(314, 24);
       this.LastQuestionsTSMI.Text = "Последние добавления";
       this.LastQuestionsTSMI.Click += new System.EventHandler(this.LastQuestionsTSMI_Click);
       // 
@@ -381,21 +382,21 @@ namespace FAQ_Net
       // 
       this.RefreshTSMI.Image = global::FAQ_Net.Properties.Resources.Refresh;
       this.RefreshTSMI.Name = "RefreshTSMI";
-      this.RefreshTSMI.Size = new System.Drawing.Size(258, 22);
+      this.RefreshTSMI.Size = new System.Drawing.Size(314, 24);
       this.RefreshTSMI.Text = "Обновить список";
       this.RefreshTSMI.Click += new System.EventHandler(this.RefreshTSB_Click);
       // 
       // SearchTSMI
       // 
       this.SearchTSMI.Name = "SearchTSMI";
-      this.SearchTSMI.Size = new System.Drawing.Size(258, 22);
+      this.SearchTSMI.Size = new System.Drawing.Size(314, 24);
       this.SearchTSMI.Text = "Поиск";
       this.SearchTSMI.Click += new System.EventHandler(this.SearchTSMI_Click);
       // 
       // ChangeNameCategoryTSMI
       // 
       this.ChangeNameCategoryTSMI.Name = "ChangeNameCategoryTSMI";
-      this.ChangeNameCategoryTSMI.Size = new System.Drawing.Size(258, 22);
+      this.ChangeNameCategoryTSMI.Size = new System.Drawing.Size(314, 24);
       this.ChangeNameCategoryTSMI.Text = "Изменить наименование раздела";
       this.ChangeNameCategoryTSMI.Click += new System.EventHandler(this.ChangeNameCategoryTSMI_Click);
       // 
@@ -403,7 +404,7 @@ namespace FAQ_Net
       // 
       this.CreateBackupTSMI.Image = global::FAQ_Net.Properties.Resources.SaveSml;
       this.CreateBackupTSMI.Name = "CreateBackupTSMI";
-      this.CreateBackupTSMI.Size = new System.Drawing.Size(258, 22);
+      this.CreateBackupTSMI.Size = new System.Drawing.Size(314, 24);
       this.CreateBackupTSMI.Text = "Создать резервную копию БД";
       this.CreateBackupTSMI.Click += new System.EventHandler(this.CreateBackupTSMI_Click);
       // 
@@ -1720,49 +1721,50 @@ namespace FAQ_Net
             this.toolStripSeparator6,
             this.tsmiGridView,
             this.tsmiListView});
+      this.QuestionsCMS.Font = new System.Drawing.Font("Segoe UI", 11F);
       this.QuestionsCMS.Name = "QuestionsCMS";
-      this.QuestionsCMS.Size = new System.Drawing.Size(193, 192);
+      this.QuestionsCMS.Size = new System.Drawing.Size(227, 208);
       this.QuestionsCMS.Opening += new System.ComponentModel.CancelEventHandler(this.QuestionsCMS_Opening);
       // 
       // AddQuestionTSMI
       // 
       this.AddQuestionTSMI.Name = "AddQuestionTSMI";
-      this.AddQuestionTSMI.Size = new System.Drawing.Size(192, 22);
+      this.AddQuestionTSMI.Size = new System.Drawing.Size(226, 24);
       this.AddQuestionTSMI.Text = "Добавить";
       this.AddQuestionTSMI.Click += new System.EventHandler(this.CreateQuestionTSB_Click);
       // 
       // ShowAnswerTSMI
       // 
-      this.ShowAnswerTSMI.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+      this.ShowAnswerTSMI.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
       this.ShowAnswerTSMI.Name = "ShowAnswerTSMI";
-      this.ShowAnswerTSMI.Size = new System.Drawing.Size(192, 22);
+      this.ShowAnswerTSMI.Size = new System.Drawing.Size(226, 24);
       this.ShowAnswerTSMI.Text = "Посмотреть";
       this.ShowAnswerTSMI.Click += new System.EventHandler(this.ShowAnswerTSMI_Click);
       // 
       // EditQuestionTSMI
       // 
       this.EditQuestionTSMI.Name = "EditQuestionTSMI";
-      this.EditQuestionTSMI.Size = new System.Drawing.Size(192, 22);
+      this.EditQuestionTSMI.Size = new System.Drawing.Size(226, 24);
       this.EditQuestionTSMI.Text = "Изменить";
       this.EditQuestionTSMI.Click += new System.EventHandler(this.EditQuestionTSMI_Click);
       // 
       // DeleteQuestionTSMI
       // 
       this.DeleteQuestionTSMI.Name = "DeleteQuestionTSMI";
-      this.DeleteQuestionTSMI.Size = new System.Drawing.Size(192, 22);
+      this.DeleteQuestionTSMI.Size = new System.Drawing.Size(226, 24);
       this.DeleteQuestionTSMI.Text = "Удалить";
       this.DeleteQuestionTSMI.Click += new System.EventHandler(this.DeleteQuestionTSMI_Click);
       // 
       // toolStripSeparator5
       // 
       this.toolStripSeparator5.Name = "toolStripSeparator5";
-      this.toolStripSeparator5.Size = new System.Drawing.Size(189, 6);
+      this.toolStripSeparator5.Size = new System.Drawing.Size(223, 6);
       // 
       // SortAscTSMI
       // 
       this.SortAscTSMI.Image = global::FAQ_Net.Properties.Resources.sort_asc;
       this.SortAscTSMI.Name = "SortAscTSMI";
-      this.SortAscTSMI.Size = new System.Drawing.Size(192, 22);
+      this.SortAscTSMI.Size = new System.Drawing.Size(226, 24);
       this.SortAscTSMI.Text = "Сортировка от &А до Я";
       this.SortAscTSMI.Click += new System.EventHandler(this.SortAscTSMI_Click);
       // 
@@ -1770,7 +1772,7 @@ namespace FAQ_Net
       // 
       this.SortDescTSMI.Image = global::FAQ_Net.Properties.Resources.sort_desc;
       this.SortDescTSMI.Name = "SortDescTSMI";
-      this.SortDescTSMI.Size = new System.Drawing.Size(192, 22);
+      this.SortDescTSMI.Size = new System.Drawing.Size(226, 24);
       this.SortDescTSMI.Text = "Сортировка от &Я до А";
       this.SortDescTSMI.Click += new System.EventHandler(this.SortDescTSMI_Click);
       // 
@@ -1782,14 +1784,14 @@ namespace FAQ_Net
       // tsmiGridView
       // 
       this.tsmiGridView.Name = "tsmiGridView";
-      this.tsmiGridView.Size = new System.Drawing.Size(192, 22);
+      this.tsmiGridView.Size = new System.Drawing.Size(226, 24);
       this.tsmiGridView.Text = "Сетка";
       this.tsmiGridView.Click += new System.EventHandler(this.tsmiGridView_Click);
       // 
       // tsmiListView
       // 
       this.tsmiListView.Name = "tsmiListView";
-      this.tsmiListView.Size = new System.Drawing.Size(192, 22);
+      this.tsmiListView.Size = new System.Drawing.Size(226, 24);
       this.tsmiListView.Text = "Лист";
       this.tsmiListView.Click += new System.EventHandler(this.tsmiListView_Click);
       // 

@@ -290,60 +290,66 @@ namespace FAQ_Net
     }
     #endregion Процедура выполнения запроса Select c выводом результата в ComboBox
 
-    private static int GetCountNodesFromText(string TN_Text)
-    {
-      try
-      {
-        TN_Text = TN_Text.Substring(TN_Text.LastIndexOf("(") + 1);
-        return Convert.ToInt32(TN_Text.Remove(TN_Text.Length - 1));
-      }
-      catch (Exception)
-      {
-        return 0;
-      }
-    }
+    //private static int GetCountNodesFromText(string TN_Text)
+    //{
+    //  try
+    //  {
+    //    TN_Text = TN_Text.Substring(TN_Text.LastIndexOf("(") + 1);
+    //    return Convert.ToInt32(TN_Text.Remove(TN_Text.Length - 1));
+    //  }
+    //  catch (Exception)
+    //  {
+    //    return 0;
+    //  }
+    //}
 
     #region Процедура заполнения разделов
-    public static void GetTreeNodes(TreeView TV, TreeNode TN, bool ReloadTreeNode)
+    public static void GetTreeNodes(TreeView TV, TreeNode TN, bool reloadTreeNode, bool onlyAddQuestions = false
+      , string sortedColumnName = "question", string sort = "ASC")
     {
+      const string ID_CATEGORY = "id_category";
+      const string NAME_CATEGORY = "name_category";
+      const string COUNT_CHILD = "count_child";
+      const string NULL = "null";
       if (TN == null)
       {
         TV.Nodes.Clear();
         //Вывод корневых узлов
-        ExecSQLiteQuery("SELECT * FROM category WHERE parent_category is null ORDER BY name_category");
+        ExecSQLiteQuery(Sql.SqlQueries.SelectRootCategories);
         foreach (System.Data.DataRow row in DT.Rows)
         {
-          TN = TV.Nodes.Add(row["id_category"].ToString(), row["name_category"].ToString());
-          TN.Tag = row["count_child"].ToString();
-          if (row["count_child"].ToString() != "0")
-            TN.Nodes.Add("null", "null");   //Пустой узел, для возможности развертывания
+          TN = TV.Nodes.Add(row[ID_CATEGORY].ToString(), row[NAME_CATEGORY].ToString());
+          TN.Tag = row[COUNT_CHILD].ToString();
+          if ((long)row[COUNT_CHILD] != 0)
+            TN.Nodes.Add(NULL, NULL);   //Пустой узел, для возможности развертывания
         }
       }
       else
       {
+        if (onlyAddQuestions)
+        {
+          return;
+        }
         //Перезагрузить узел
-        if (ReloadTreeNode)
+        if (reloadTreeNode)
         {
           //Для обновления узла удаляем все дочерние узлы для срабатывания следующего условия (TN.Nodes.Count == 0)
           while (TN.Nodes.Count > 0)
             TN.Nodes.RemoveAt(0);
         }
         if (TN.Nodes.Count == 0 ||
-            (TN.Nodes.Count == 1 && TN.Nodes[0].Name == "null"))
+            (TN.Nodes.Count == 1 && TN.Nodes[0].Name == NULL))
         {
-          ExecSQLiteQuery(
-              "SELECT * " +
-              "FROM category " +
-              "WHERE parent_category='" + TN.Name.Replace("'", "''") + "' ORDER BY name_category");
+          // Добавление подразделов
+          ExecSQLiteQuery(string.Format(Sql.SqlQueries.SelectSubCategories
+            , TN.Name.Replace("'", "''")));
           foreach (System.Data.DataRow row in DT.Rows)
           {
             //Добавляем дочерний узел
-            TreeNode TNChild = TN.Nodes.Add(
-                row["id_category"].ToString(),
-                row["name_category"].ToString());
-            TNChild.Tag = row["count_child"].ToString();
-            if (row["count_child"].ToString() != "0")
-              TNChild.Nodes.Add("null", "null");   //Пустой дочерний узел, для возможности развертывания
+            TreeNode TNChild = TN.Nodes.Add(row[ID_CATEGORY].ToString(), row[NAME_CATEGORY].ToString());
+            TNChild.Tag = row[COUNT_CHILD].ToString();
+            if ((long)row[COUNT_CHILD] != 0)
+              TNChild.Nodes.Add(NULL, NULL);   //Пустой дочерний узел, для возможности развертывания
           }
           TN.Tag = DT.Rows.Count.ToString();
         }
@@ -414,10 +420,10 @@ namespace FAQ_Net
     public static DialogResult InputBox(string title, string promptText, ref string value)
     {
       Form form = new Form();
-      Label label = new Label();
-      TextBox textBox = new TextBox();
-      PulseButton.PulseButton buttonOk = new PulseButton.PulseButton();
-      PulseButton.PulseButton buttonCancel = new PulseButton.PulseButton();
+      Label label = new Label() { Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular) };
+      TextBox textBox = new TextBox() { Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular) };
+      PulseButton.PulseButton buttonOk = new PulseButton.PulseButton() { Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular) };
+      PulseButton.PulseButton buttonCancel = new PulseButton.PulseButton() { Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular) };
       buttonOk.ShapeType = PulseButton.PulseButton.Shape.Rectangle;
       buttonOk.BackColor = System.Drawing.SystemColors.Control;
       buttonOk.ButtonColorTop = System.Drawing.Color.GreenYellow;
@@ -438,23 +444,23 @@ namespace FAQ_Net
       buttonOk.Text = "OK";
       //buttonOk.Image = FAQ_Net.Properties.Resources.OK;
       buttonOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      buttonCancel.Text = "Cancel";
+      buttonCancel.Text = "Отмена";
       //buttonCancel.Image = FAQ_Net.Properties.Resources.No;
       buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
       buttonOk.DialogResult = DialogResult.OK;
       buttonCancel.DialogResult = DialogResult.Cancel;
 
-      label.SetBounds(5, 5, 370, 13);
-      textBox.SetBounds(5, 25, 370, 20);
-      buttonOk.SetBounds(100, 50, 80, 25);
-      buttonCancel.SetBounds(220, 50, 80, 25);
+      label.SetBounds(5, 5, 510, 13);
+      textBox.SetBounds(5, 35, 510, 20);
+      buttonOk.SetBounds(170, 70, 80, 25);
+      buttonCancel.SetBounds(280, 70, 80, 25);
 
       label.AutoSize = true;
-      textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+      textBox.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right;
       buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
       buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
-      form.ClientSize = new System.Drawing.Size(380, 80);
+      form.ClientSize = new System.Drawing.Size(520, 100);
       form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
       //form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
       form.FormBorderStyle = FormBorderStyle.FixedDialog;

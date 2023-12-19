@@ -843,10 +843,10 @@ namespace FAQ_Net
         _intellisenseUserControl.BringToFront();
       }
 
+      // Загрузить тему (стиль)
       ReloadStyleSettings(_settingsXml);
 
       TabControl.Width = _settingsXml.GetSettingAsInt(Constants.MAIN_SPLITTER_DISTANCE, TabControl.Width);
-	  MainForm_Resize(null, null);
 
       string lastViewSetting = _settingsXml.GetSetting(Constants.LAST_VIEW);
       if (lastViewSetting == _questionListViewControl.ToString())
@@ -875,7 +875,7 @@ namespace FAQ_Net
       //DGVQuestions.Columns["QuestionsColumn"].Width = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width - MainSC.SplitterDistance - 50;
 
       LastQuestions();                  //Вывод последних добавленных вопросов
-      string lastSortingSetting = _settingsXml.GetSetting(Constants.LAST_SORTING);
+      string lastSortingSetting = _settingsXml.GetSetting(Constants.LAST_SORTING_LIST_VIEW);
       if (lastSortingSetting == SortOrder.Descending.ToString())
         SortDescTSMI_Click(sender, e);
       else
@@ -885,7 +885,9 @@ namespace FAQ_Net
       splitContainer1.Panel2Collapsed = true;
       //splitContainer1.SplitterDistance = 5;
       //Загружаем разделы нулевого уровня
-      G.GetTreeNodes(TV1, null, false);
+      G.GetTreeNodes(TV1, null, false, default
+        , (Constants.QuestionView == Constants.ViewQuestion.Grid) ? _questionDgvControl.DgvControl.SortedColumn.Name : default
+        , (Constants.QuestionView == Constants.ViewQuestion.Grid) ? ((_questionDgvControl.DgvControl.SortOrder == SortOrder.Descending) ? "DESC" : default) : default);
       RefreshCountQuestAndAnswers();    //Вывести кол-во ответов и вопросов
                                         // Set/Get form's size and location values.
       if (formWidth > 0 && formHeight > 0)
@@ -1530,8 +1532,6 @@ namespace FAQ_Net
           alignJustify.Checked = false;
           richText.SelectionAlignment = TextAlign.Right;
           break;
-          // Этот код не работает по непонятным причинам, поэтому кнопка "выравнивания по ширине" скрыта
-          // скорее всего это связано с отсутствием свойства HorizontalAlignment.Justify в .NET
         case "alignJustify":
           alignLeft.Checked = false;
           alignCenter.Checked = false;
@@ -1900,6 +1900,7 @@ namespace FAQ_Net
             }
             browserProcess.Dispose();
           }
+          else
           if (e.LinkText.StartsWith("file:"))
           {
             string fileNameOrDirectory = e.LinkText.Substring(5);
@@ -1919,14 +1920,14 @@ namespace FAQ_Net
             }
           }
           else
-            MessageBox.Show("URL-адрес должен начинаться с 'http:' или 'https:'", "Неверный URL", MessageBoxButtons.OK,
+            MessageBox.Show("Поддерживаются ссылки которые начинаются с 'http:', 'https:' или 'file:'", "Неизвестная ссылка", MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
 
         }
       }
       catch (Exception ex)
       {
-        MessageBox.Show("Error: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show("Ошибка: " + ex.ToString(), "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
     }
 
@@ -2337,10 +2338,14 @@ namespace FAQ_Net
 
         CreateQuestionTSB.Enabled =
             CreateSubcategoryTSB.Enabled = true;
-        //string RazdelId = G.ConvertEncoding(e.Node.Name, 65001, 20127);
         string orderBySql = " ORDER BY question ASC";
         if (lastOrderByDesc)
           orderBySql = " ORDER BY question DESC";
+        if (Constants.QuestionView == Constants.ViewQuestion.Grid
+         && _questionDgvControl.DgvControl.SortedColumn != null)
+        {
+          orderBySql = string.Format(" ORDER BY {0} {1}", _questionDgvControl.DgvControl.SortedColumn.Name, _questionDgvControl.DgvControl.SortOrder == SortOrder.Ascending ? "ASC" : "DESC");
+        }
         G.ExecSQLiteQuery("SELECT id_content,id_category,question,create_date,modif_date,favorite_date FROM vopros WHERE id_category=" + TN.Name + orderBySql);
         _questionListControl.AddQuestionsIntoListControl(false);  //Добавить список вопросов
                                                                   //DGVQuestions.DataSource = G.DT;
@@ -2407,7 +2412,10 @@ namespace FAQ_Net
     {
       if (e.Node.Nodes[0].Name == "null")
         e.Node.Nodes.Clear();
-      G.GetTreeNodes(TV1, e.Node, false);
+      G.GetTreeNodes(TV1, e.Node, false, default
+        , (Constants.QuestionView == Constants.ViewQuestion.Grid) ? _questionDgvControl.DgvControl.SortedColumn.Name : default
+        , (Constants.QuestionView == Constants.ViewQuestion.Grid) ? ((_questionDgvControl.DgvControl.SortOrder == SortOrder.Descending) ? "DESC" : default) : default
+        );
     }
 
     private void CreateQuestionTSB_Click(object sender, EventArgs e)
@@ -2486,7 +2494,9 @@ namespace FAQ_Net
     private void RefreshTSB_Click(object sender, EventArgs e)
     {
       //Вывод корневых узлов
-      G.GetTreeNodes(TV1, null, false);
+      G.GetTreeNodes(TV1, null, false, default
+        , (Constants.QuestionView == Constants.ViewQuestion.Grid) ? _questionDgvControl.DgvControl.SortedColumn.Name : default
+        , (Constants.QuestionView == Constants.ViewQuestion.Grid) ? ((_questionDgvControl.DgvControl.SortOrder == SortOrder.Descending) ? "DESC" : default) : default);
     }
 
     #region Вывод выбранного вопроса с ответом
@@ -2713,15 +2723,15 @@ namespace FAQ_Net
     {
       if (TV1.SelectedNode != null)
       {
-        string Category = TV1.SelectedNode.Text;
-        if (G.InputBox("Редактирование раздела", "Наименование раздела", ref Category) == DialogResult.OK)
+        string name = TV1.SelectedNode.Text;
+        if (G.InputBox("Переименование раздела", "Наименование раздела", ref name) == DialogResult.OK)
         {
           //Category = G.ConvertEncoding(Category,65001,20127);
           if (G.ExecSQLiteQuery(
               "UPDATE category " +
-              "SET name_category='" + Category + "' " +
+              "SET name_category='" + name + "' " +
               "WHERE id_category='" + TV1.SelectedNode.Name.Replace("'", "''") + "'"))
-            TV1.SelectedNode.Text = Category;
+            TV1.SelectedNode.Text = name;
         }
       }
       else
@@ -2776,6 +2786,8 @@ namespace FAQ_Net
 
       // Retrieve the node at the drop location.
       TreeNode targetNode = TV1.GetNodeAt(targetPoint);
+      if (targetNode == null)
+        return;
 
       if (StartNode != null &&
           targetNode != null)
@@ -2789,7 +2801,10 @@ namespace FAQ_Net
         {
           // If it is a move operation, remove the node from its current 
           // location and add it to the node at the drop location.
-          if (MessageBox.Show("Переместить раздел '" + draggedNode.Text + "' в '" + targetNode.Text + "'?", "Подтверждения перемещения раздела", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+          string text = string.Format("Переместить раздел \"{0}\" в раздел \"{1}\"?"
+            , draggedNode.Text, targetNode.Text);
+          string caption = "Подтверждения перемещения раздела";
+          if (MessageBox.Show(text, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
           {
             StringBuilder sbSql = new StringBuilder();
             sbSql.AppendLine(string.Format("UPDATE category SET parent_category='{0}' WHERE id_category='{1}';"
@@ -2813,7 +2828,7 @@ namespace FAQ_Net
           ResetTNDragOver(false);  //Сброс назначенного узла
       }
       else
-          if (!DGVQuestionsDrag)
+      if (!DGVQuestionsDrag)
       {
         if (MessageBox.Show("Переместить вопрос '" + SelectedPathLbl.Text + "' в раздел '" + targetNode.Text + "'?", "Подтверждения перемещения вопроса", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
         {
@@ -2905,8 +2920,8 @@ namespace FAQ_Net
       // Retrieve the node at the drop location.
       TreeNode TN = TV1.GetNodeAt(targetPoint);
 
-      if (TNDragOver != TN &&
-          TN != null)
+      if (TNDragOver != TN
+       && TN != null)
       {
         if (TNDragOver != null)
           TNDragOver.BackColor = TV1.BackColor;
@@ -2967,7 +2982,13 @@ namespace FAQ_Net
       {
         if (e.Clicks == 2)
         {
-          G.Question = SelectedPathLbl.Text;
+          if (SelectedPathLbl.Text.IndexOf(TV1.PathSeparator) >= 0)
+          {
+            G.ExecSQLiteQuery(string.Format("select question from vopros where id_content='{0}'", ID_ContentTSSL.Text.Replace("'", "''")));
+            G.Question = G.DT.Rows[0][0].ToString();
+          }
+          else
+            G.Question = SelectedPathLbl.Text;
           if (G.InputBox("Редактирование вопроса", "Наименование вопроса", ref G.Question) == DialogResult.OK)
           {
             //G.Question = G.ConvertEncoding(G.Question,65001,20127);
@@ -3044,6 +3065,9 @@ namespace FAQ_Net
       ShowAnswerTSMI.Enabled = (_questionListControl.CountItemsSelected == 1);
       EditQuestionTSMI.Enabled = (_questionListControl.CountItemsSelected == 1);
       DeleteQuestionTSMI.Enabled = (_questionListControl.CountItemsSelected == 1);
+      SortAscTSMI.Visible
+        = SortDescTSMI.Visible
+        = toolStripSeparator5.Visible = (Constants.QuestionView == Constants.ViewQuestion.List);
       //QuestionsCMS.Enabled = (listView1.SelectedItems.Count == 1);
     }
 
@@ -3161,6 +3185,22 @@ namespace FAQ_Net
           DGVQuestionsDrag = true;
           StartNode = null;
           DoDragDrop(SelectedPathLbl.Text, DragDropEffects.Copy);
+          if (Constants.QuestionView == Constants.ViewQuestion.Grid)
+          {
+            // Включение пользовательской сортировки внутри DataGridView
+            DataGridView dgvQuestions = _questionDgvControl.DgvControl;
+            System.Windows.Forms.DataGridView.HitTestInfo hti = dgvQuestions.HitTest(e.X, e.Y);
+            if (hti.RowIndex == -1 && hti.ColumnIndex >= 0)
+            {
+              // column header click
+              dgvQuestions.Sort(dgvQuestions.Columns[hti.ColumnIndex]
+                , (dgvQuestions.SortOrder == SortOrder.None)
+                ? System.ComponentModel.ListSortDirection.Ascending
+                : (dgvQuestions.SortOrder == SortOrder.Ascending) ? System.ComponentModel.ListSortDirection.Descending
+                : System.ComponentModel.ListSortDirection.Ascending);
+              _questionDgvControl.SaveSortedColumn();
+            }
+          }
         }
       }
     }
@@ -3212,8 +3252,11 @@ namespace FAQ_Net
       lastOrderByDesc = false;
       SortAscTSMI.Visible = false;
       SortDescTSMI.Visible = true;
-      _questionListControl.Sorting = SortOrder.Ascending;
-      _settingsXml.SetSetting(Constants.LAST_SORTING, SortOrder.Ascending.ToString());
+      if (Constants.QuestionView == Constants.ViewQuestion.List)
+      {
+        _questionListViewControl.Sorting = SortOrder.Ascending;
+        _settingsXml.SetSetting(Constants.LAST_SORTING_LIST_VIEW, SortOrder.Ascending.ToString());
+      }
     }
 
     private void SortDescTSMI_Click(object sender, EventArgs e)
@@ -3221,8 +3264,11 @@ namespace FAQ_Net
       lastOrderByDesc = true;
       SortAscTSMI.Visible = true;
       SortDescTSMI.Visible = false;
-      _questionListControl.Sorting = SortOrder.Descending;
-      _settingsXml.SetSetting(Constants.LAST_SORTING, SortOrder.Descending.ToString());
+      if (Constants.QuestionView == Constants.ViewQuestion.List)
+      {
+        _questionListViewControl.Sorting = SortOrder.Descending;
+        _settingsXml.SetSetting(Constants.LAST_SORTING_LIST_VIEW, SortOrder.Descending.ToString());
+      }
     }
 
     private void AddRowInHistory(byte type)
@@ -3238,7 +3284,7 @@ namespace FAQ_Net
           CurTransitionRow++;
           TransitionDT.Rows.Add(type, string.Empty, null);
           break;
-        case 1: // TreeNode          
+        case 1: // TreeNode
           // НЕ УБИРАТЬ ЭТО УСЛОВИЕ!
           // Если убрать это условие, то в истории начинают дублироваться записи. При чем в режиме DEBUG в Visual Studio, если установлена
           // точка останова внутри этого метода, то дублей не наблюдается
@@ -3321,7 +3367,7 @@ namespace FAQ_Net
     {
       CreateQuestionTSMI.Enabled =
           CreateSubcategoryTSMI.Enabled =
-          DelRazdelMainTSMI.Enabled =
+          DelRazdelMainTSMI.Visible =
           ChangeNameCategoryTSMI.Enabled =
           (TV1.SelectedNode != null);
     }
@@ -3396,7 +3442,9 @@ namespace FAQ_Net
           G.ExecSQLiteQuery("UPDATE vopros SET id_category='" + TV1.SelectedNode.Name.Replace("'", "''") + "' WHERE id_category='" + TN_ReplaceRazdel.Name.Replace("'", "''") + "'") &&
           G.ExecSQLiteQuery("DELETE FROM category WHERE id_category='" + TN_ReplaceRazdel.Name.Replace("'", "''") + "'"))
       {
-        G.GetTreeNodes(TV1, TV1.SelectedNode, true);    //Перезагрузка узлов
+        G.GetTreeNodes(TV1, TV1.SelectedNode, true, default
+          , (Constants.QuestionView == Constants.ViewQuestion.Grid) ? _questionDgvControl.DgvControl.SortedColumn.Name : default
+          , (Constants.QuestionView == Constants.ViewQuestion.Grid) ? ((_questionDgvControl.DgvControl.SortOrder == SortOrder.Descending) ? "DESC" : default) : default);    //Перезагрузка узлов
         NodeSelect(TV1.SelectedNode);
         CountSubcategoryVal.Text = TV1.SelectedNode.Nodes.Count.ToString();
         TN_ReplaceRazdel.Remove();
@@ -3435,6 +3483,7 @@ namespace FAQ_Net
       _settingsXml.SetSetting(Constants.LAST_VIEW, _questionListControl.ToString());
       tsmiGridView.Checked = true;
       tsmiListView.Checked = false;
+      Constants.QuestionView = Constants.ViewQuestion.Grid;
     }
 
     private void tsmiListView_Click(object sender, EventArgs e)
@@ -3446,6 +3495,7 @@ namespace FAQ_Net
       _settingsXml.SetSetting(Constants.LAST_VIEW, _questionListControl.ToString());
       tsmiGridView.Checked = false;
       tsmiListView.Checked = true;
+      Constants.QuestionView = Constants.ViewQuestion.List;
     }
 
     private void richMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)

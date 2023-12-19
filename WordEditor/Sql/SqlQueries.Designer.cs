@@ -22,14 +22,14 @@ namespace FAQ_Net.Sql {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CreateTable {
+    internal class SqlQueries {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CreateTable() {
+        internal SqlQueries() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace FAQ_Net.Sql {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FAQ_Net.Sql.CreateTable", typeof(CreateTable).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FAQ_Net.Sql.SqlQueries", typeof(SqlQueries).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,59 +61,20 @@ namespace FAQ_Net.Sql {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CREATE TABLE category (
-        ///  id_category INTEGER PRIMARY KEY NOT NULL DEFAULT (null),
-        ///  name_category VARCHAR NOT NULL,
-        ///  parent_category INTEGER DEFAULT (null),
-        ///  count_child INTEGER NOT NULL  DEFAULT 0).
+        ///   Looks up a localized string similar to SELECT id_category, name_category, count_child FROM category WHERE parent_category is null ORDER BY name_category.
         /// </summary>
-        internal static string category {
+        internal static string SelectRootCategories {
             get {
-                return ResourceManager.GetString("category", resourceCulture);
+                return ResourceManager.GetString("SelectRootCategories", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CREATE TABLE otvet (
-        ///  id_content INTEGER PRIMARY KEY NOT NULL,
-        ///  answer_txt VARCHAR DEFAULT (null),
-        ///  answer_rtf VARCHAR DEFAULT (null),
-        ///  create_date DATETIME DEFAULT (CURRENT_TIMESTAMP),
-        ///  modif_date DATETIME).
+        ///   Looks up a localized string similar to SELECT id_category, name_category, count_child FROM category WHERE parent_category=&apos;{0}&apos; ORDER BY name_category.
         /// </summary>
-        internal static string otvet {
+        internal static string SelectSubCategories {
             get {
-                return ResourceManager.GetString("otvet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CREATE TABLE vopros (
-        ///  id_content INTEGER PRIMARY KEY NOT NULL,
-        ///  id_category INTEGER NOT NULL,
-        ///  question VARCHAR NOT NULL,
-        ///  create_date DATETIME DEFAULT (CURRENT_TIMESTAMP),
-        ///  modif_date DATETIME,
-        ///  favorite_date DATETIME).
-        /// </summary>
-        internal static string vopros {
-            get {
-                return ResourceManager.GetString("vopros", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CREATE TABLE word_tooltip (
-        ///  id_content INTEGER NOT NULL,   /* Если id_content=0, то это общая всплывающая подсказка */
-        ///  word VARCHAR NOT NULL,         /* Слово, на которое выводится подсказка */
-        ///  tooltip_type INTEGER NOT NULL, /* Тип всплывающей подсказки: 0 - со ссылкой на внутренний документ, 1 - со ссылкой на интернет-ресурс, 2 - статическая подсказка */
-        ///  comment VARCHAR NOT NULL,      /* Текст подсказки */
-        ///  url_adr VARCHAR NULL,          /* URL-адрес */
-        ///  group_name VARCHAR NULL,       /* Им [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string word_tooltip {
-            get {
-                return ResourceManager.GetString("word_tooltip", resourceCulture);
+                return ResourceManager.GetString("SelectSubCategories", resourceCulture);
             }
         }
     }

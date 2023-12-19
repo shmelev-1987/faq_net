@@ -17,7 +17,10 @@ namespace FAQ_Net
 
     public const string id_content = "id_content";
     public const string LAST_VIEW = "last_view";
-    public const string LAST_SORTING = "last_sorting";
+    public static ViewQuestion QuestionView;
+    public const string LAST_SORTING_LIST_VIEW = "LastSortingListView";
+    public const string LAST_SORTING_DATAGRIDVIEW = "LastSortingDataGridView";
+    public const string LAST_SORTING_DATAGRIDVIEW_COLUMNNAME = "LastSortingDataGridViewColumnName";
     public const string MAIN_SPLITTER_DISTANCE = "MainSplitterDistance";
     public const string SAVE_SECTION_NODE_SELECT = "SaveSectionNodeSelect";
 
@@ -35,5 +38,11 @@ namespace FAQ_Net
     public const string RTF_COMBOBOX_CONTROLS_REPLACE_TO_MENU = "ReplaceComboboxRtfControlsToMenu";
     public static bool RtfSmoothScrolling = true;
     public const string RTF_SMOOTH_SCROLLING = "SmoothScrollingRtfDocument";
+
+    internal enum ViewQuestion : byte
+    {
+      List = 0,
+      Grid = 1,
+    }
   }
 }

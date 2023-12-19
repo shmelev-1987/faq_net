@@ -16,7 +16,6 @@ namespace FAQ_Net
     void ClearItems();
     void AddItem(Question question);
     void AddQuestionsIntoListControl(bool isUseGlobalQuestionList);
-    SortOrder Sorting { set; }
 
     void RemoveFirstSelectedItem();
     int SelectedIndex { get; }
