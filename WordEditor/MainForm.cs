@@ -940,7 +940,9 @@ namespace FAQ_Net
       t.IsBackground = true;
       t.Priority = System.Threading.ThreadPriority.Highest;
       t.Start();
-      CheckUpdate();
+      System.Threading.Thread checkUpdateThread = new System.Threading.Thread(CheckUpdate);
+      checkUpdateThread.IsBackground = true;
+      checkUpdateThread.Start();
 
       //SetRoundedShape(TV1, 30);
       //SetRoundedShape(DGVResultSearch, 30);
